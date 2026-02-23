@@ -21,10 +21,15 @@ DET=0
 TEST=1 
 ALL=0  
 
-DATASET='/home/dbr/Escritorio/TFG/cnn21/oitaven_river.raw'
-GT='/home/dbr/Escritorio/TFG/cnn21/oitaven_river.pgm'
-SEG='/home/dbr/Escritorio/TFG/cnn21/seg_oitaven_wp.raw'
-CENTER='/home/dbr/Escritorio/TFG/cnn21/seg_oitaven_wp_centers.raw'
+#Rutas de archivos
+#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
+#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
+#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
+#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 #-----------------------------------------------------------------
 # FUNCIONES DE LECTURA (Sin cambios)

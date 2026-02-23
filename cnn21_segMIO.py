@@ -37,13 +37,13 @@ ALL=0  # testar 0-solo ground-truth, 1-todo
 
 #Rutas de archivos
 #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven_river.raw'
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
 #GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven_river.pgm'
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
 #SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/seg_oitaven_wp.raw'
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
 #CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/seg_oitaven_wp_centers.raw'
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
 # DATASET='/home/amo/profile.raw'
@@ -70,15 +70,18 @@ def read_raw(fichero):
 
   #Se leen todos los datos contenidos en el dataset (un total de B*H*V enteros de 32 bits)
   #Se saltan los primeros 12 bytes correspondientes a la cabecera B,H,V
-  datos=np.fromfile(fichero,count=B*H*V,offset=3*4,dtype=np.int32)
+  datos=np.fromfile(fichero,count=B*H*V,offset=3*4,dtype=np.int32).astype(np.float32)
   #Se imprime información sobre el dataset leído
   print('Lectura del dataset*********')
   print('* Leyendo dataset:',fichero)
   print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
   print('  Píxeles leídos:',len(datos))
-  # esta red no necesita realmente normalizar
+
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
-  datos=preprocessing.minmax_scale(datos)
+  d_min = datos.min()
+  d_max = datos.max()
+  datos -= d_min
+  datos /= (d_max - d_min)
   print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
@@ -749,11 +752,11 @@ def main(exp):
   N1=B          # dimension de entrada (bandas)
   D1=2          # decimacion, por defecto 2 (el factor de salto del MaxPool, la ventana de pooling) 
   H1=sizex      # lado patches entrada, por defecto 32 (sizex=sizey) (Tamaño inicial del parche 32x32)
-  N2=16         # dimension de salida (seleccionada), por defecto 16. Número de mapas de rasgos
+  N2=32         # dimension de salida (seleccionada), por defecto 16. Número de mapas de rasgos
   H2=int(H1/D1) # lado patches salida (calculada), por defecto 16 (sizex=sizey) (El tamaño de los patches al salir (16 x 16))
 
   # 5.2. capa conv.2, parametros de entrada N2,H2 vienen dados por la capa anterior
-  N3=32         # dimension de salida (seleccionada), por defecto 32. Número de mapas de rasgos, en este caso el doble que en la primera capa para buscar muchos más rasgos complejos
+  N3=64         # dimension de salida (seleccionada), por defecto 32. Número de mapas de rasgos, en este caso el doble que en la primera capa para buscar muchos más rasgos complejos
   D2=2          # decimacion, por defecto 2 (el factor de salto del MaxPool, la ventana de pooling) 
   H3=int(H2/D2) # lado patches salida (calculada), por defecto 16 (sizex=sizey) (El tamaño de los patches al salir (16 x 16))
     

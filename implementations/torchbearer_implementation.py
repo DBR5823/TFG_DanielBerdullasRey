@@ -81,6 +81,9 @@ class FMix(FMixBase, Callback):
         x2 = (1 - mask) * x[index]
         self.index = index
         self.lam = lam
+        
+        #Añadimos el almacenamiento de la máscara generada para poder visualizarla
+        self.mask = mask
         return x1 + x2
 
     def loss(self, use_bce=False):

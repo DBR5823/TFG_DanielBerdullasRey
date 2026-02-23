@@ -25,28 +25,32 @@ from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 
-from implementations.torchbearer_implementation import FMix
 
+
+from concurrent.futures import ProcessPoolExecutor
+
+import torch.multiprocessing as mp
+
+import itertools
+
+import sys
 
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
-EPOCHS=100 # EPOCHS de entrenamiente del clasificador, default=100 (ÉPOCAS DE ENTRENAMIENTO DEL CLASIFICADOR SOBRE LAS MUESTRAS)
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
-BATCH=100  # batch_size, defecto 100 
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
 AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
-TEST=1 # 0-validacion, 1-test
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
 #Rutas de archivos
 #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven_river.raw'
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
 #GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven_river.pgm'
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
 #SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/seg_oitaven_wp.raw'
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
 #CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/seg_oitaven_wp_centers.raw'
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
 # DATASET='/home/amo/profile.raw'
@@ -73,16 +77,19 @@ def read_raw(fichero):
 
   #Se leen todos los datos contenidos en el dataset (un total de B*H*V enteros de 32 bits)
   #Se saltan los primeros 12 bytes correspondientes a la cabecera B,H,V
-  datos=np.fromfile(fichero,count=B*H*V,offset=3*4,dtype=np.int32)
+  datos=np.fromfile(fichero,count=B*H*V,offset=3*4,dtype=np.int32).astype(np.float32)
   #Se imprime información sobre el dataset leído
-  print('Lectura del dataset*********')
-  print('* Leyendo dataset:',fichero)
-  print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
-  print('  Píxeles leídos:',len(datos))
+  #print('Lectura del dataset*********')
+  #print('* Leyendo dataset:',fichero)
+  #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
+  #print('  Píxeles leídos:',len(datos))
   # esta red no necesita realmente normalizar
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
-  datos=preprocessing.minmax_scale(datos)
-  print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
+  d_min = datos.min()
+  d_max = datos.max()
+  datos -= d_min
+  datos /= (d_max - d_min)
+  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -105,10 +112,10 @@ def read_seg(fichero):
   datos=np.fromfile(fichero,count=H*V,offset=2*4,dtype=np.uint32)
   
   #Se imprime información sobre el fichero de segmentación leído
-  print('Lectura del fichero de segmentación*********')
-  print('* Read segmentation:',fichero)
-  print('  H (anchura):',H,'V (altura):',V)
-  print('  Píxeles leídos:',len(datos))
+  #print('Lectura del fichero de segmentación*********')
+  #print('* Read segmentation:',fichero)
+  #print('  H (anchura):',H,'V (altura):',V)
+  #print('  Píxeles leídos:',len(datos))
 
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
@@ -129,64 +136,15 @@ def read_seg_centers(fichero):
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
 
   #Se imprime información sobre el fichero de centros de segmentos leído
-  print('Lectura del fichero de centros de la segmentación*********')
-  print('* Read centers:',fichero)
-  print('  H (anchura):',H,'V (altura):',V,'nseg (número de segmentos)',nseg)
-  print('  Elementos leídos:',len(datos))
+  #print('Lectura del fichero de centros de la segmentación*********')
+  #print('* Read centers:',fichero)
+  #print('  H (anchura):',H,'V (altura):',V,'nseg (número de segmentos)',nseg)
+  #print('  Elementos leídos:',len(datos))
 
   #Devolvemos los datos sobre los centros de los segmentos junto a al anchura, la altura y el número de segmentos
   return(datos,H,V,nseg)
 
 
-#Función que permite guardar el mapa de clasificación final en un nuevo fichero
-def save_raw(output,H,V,B,filename):
-  #Tratamos de abrir el fichero en modo escritura binaria
-  try:
-    f=open(filename,"wb")
-  except IOError:
-    print('No puedo abrir ',filename)
-    exit(0)
-  else:
-    #Se crea un array con los datos sobre el número de bandas (B), el número de píxeles de anchura (H) y el número de píxeles de altura (V), los cuales son enteros de 32 bits
-    sizes=np.array([B,H,V], dtype=np.uint32)
-    #Se transforman los datos desde el cubo de 3 dimensiones a una única fila y se desconectan lso datos d ela red neuronal de PyTorch con detach()
-    output=output.reshape(H*V*B).flatten().detach()
-    #Transformamos el tensor de PyTorch en un array de NumPy de enteros de 32 bits
-    output=output.numpy().astype(np.uint32)
-    #Pegamos la cabecera delante de los datos de la imagen
-    output=np.concatenate([sizes,output])
-    #Se vuelcan los datos en el fichero
-    output.tofile(f,format="%d")
-    f.close()
-    print('* Archivo raw guardado',filename)
-
-
-#Función que permite guardar el mapa de clasificación final en un nuevo fichero
-#Igual que la anterior pero lso datos se escriben uno a uno (más lento pero con control total)
-def save_raw_alternativo(output,H,V,B,filename):
-  try:
-    f=open(filename,"wb")
-  except IOError:
-    print('No puedo abrir ',filename)
-    exit(0)
-  else:
-    f.write(struct.pack('i',B))
-    f.write(struct.pack('i',H))
-    f.write(struct.pack('i',V))
-    output=output.reshape(H*V*B)
-    for i in range(H*V*B):
-      f.write(struct.pack('i',np.int32(output[i])))
-    f.close()
-    print('* Archivo raw guardado',filename)
-
-#Función que permite almacenar un patch concreto que estea siendo procesado
-def save_patch(datos,sizex,sizey,B,filename):
-  #Se mueven los datos a la RAM principal desde la VRAM
-  datos=datos.cpu()
-  #Se reorganizan los datos para poder ser almacenados en el formato usado en los ficheros de datos (alto, ancho, bandas) en lugar de (bandas, alto, ancho) usado por pytorch
-  datos=np.transpose(datos,(1,2,0))
-  #Se almacena el patch usando la función save_raw
-  save_raw(datos,sizex,sizey,B,filename)
 
 #Función que se encarga de leer el archivo que contiene los píxeles etiquetados
 def read_pgm(fichero):
@@ -222,31 +180,12 @@ def read_pgm(fichero):
       #Se emplea la función ord() para transformar el valor binario en el número entero que representa
       raster.append(ord(pgmf.read(1)))
     
-    print('* Read GT (fichero con los píxeles etiquetados):',fichero)
-    print('  H (anchura):',H,'V (altura):',V,'depth (profundidad de cada valor):',depth)
-    print('  Valores leídos:',len(raster))
+    #print('* Read GT (fichero con los píxeles etiquetados):',fichero)
+    #print('  H (anchura):',H,'V (altura):',V,'depth (profundidad de cada valor):',depth)
+    #print('  Valores leídos:',len(raster))
     return(raster,H,V)
 
 
-#Función que permite almacenar en un fichero PGM las predicciones realizadas por la red neuronal para cada píxel
-def save_pgm(output,H,V,nclases,filename):
-  #Abrimos el fichero en modo escritura binaria
-  try:
-    f=open(filename,"wb")
-  except IOError:
-    print('No puedo abrir ',filename)
-    exit(0)
-  else:
-    # f.write(b'P5\n')
-
-    #Se construye la cabecera del fichero PGM (nclases es el número de clases en total)
-    cadena='P5\n'+str(H)+' '+str(V)+'\n'+str(nclases)+'\n'
-    #Se elmacena la cabecera en bytes usando la codificación utf-8
-    f.write(bytes(cadena,'utf-8'))
-    #Se almacenan la clasificación de los píxeles
-    f.write(output)
-    f.close()
-    print('* Fichero de clasificación (pgm) guardado:',filename)
 
 #Función que obtiene un patch a partir de un píxel concreto (un centroide de un segmento), crea el patch alrededor del píxel dado.
 #Sizex y sizey establecen el tamaño del patch
@@ -267,13 +206,13 @@ def select_patch(datos,sizex,sizey,x,y):
 # Esta parte tarda mucho, mejor la preprocesamos en C
 #Esta función es la encargada de obtener el punto central de cada segmento de la imagen (es muy lento y no se usa)
 def seg_center(seg,H,V):
-  print('* Segment centers (tarda mucho)')
+  #print('* Segment centers (tarda mucho)')
   nseg=0
   #Se comprueba cuantos segmentos hay en total
   for i in range(H*V):
     if(seg[i]>nseg): nseg=seg[i]
   nseg=nseg+1
-  print('  Número de segmentos:',nseg)
+  #print('  Número de segmentos:',nseg)
   
   #Se crean 4 listas que almacenarán los límites de cada segmento (valor mínimo y máximo de cada segmento en X y en Y)
   xmin=[H*V]*nseg; xmax=[0]*nseg; 
@@ -298,7 +237,7 @@ def seg_center(seg,H,V):
 
 #Función que decide qué píxeles se emplearán para realizar el entrenamiento, cuales para la validación y cuáles para el test
 def select_training_samples_seg(truth,center,H,V,sizex,sizey,porcentaje):
-  print('* Seleccionar elementos para el entrenamiento')
+  #print('* Seleccionar elementos para el entrenamiento')
   
   # hacemos una lista con las clases, pero puede haber clases vacias
   nclases=0; nclases_no_vacias=0
@@ -307,7 +246,7 @@ def select_training_samples_seg(truth,center,H,V,sizex,sizey,porcentaje):
   #Recorremos el fichero con las etiquetas para saber cuántas clases hay en total
   for i in truth:
     if(i>nclases): nclases=i
-  print('  nclasses (Número de clases):',nclases)
+  #print('  nclasses (Número de clases):',nclases)
   lista=[0]*nclases;
   
   #Se crea una lista que almacenará los índices de los píxeles que pertenecen a la categoría asociada a esa lista
@@ -337,7 +276,7 @@ def select_training_samples_seg(truth,center,H,V,sizex,sizey,porcentaje):
   
 
   #Seleccionamos las muestras para los conjuntos de entrenamiento, validacion y test
-  print('  Clase  # :   total | train |   val |    test')
+  #print('  Clase  # :   total | train |   val |    test')
   train=[]; val=[]; test=[]
   #
   #Se realiza el reparto de elementos por cada clase
@@ -387,14 +326,14 @@ def select_training_samples_seg(truth,center,H,V,sizex,sizey,porcentaje):
       test.append(lista[i][j])
     
     #Se imprime un resumen sobre la repartición de los datos en los distintos conjuntos en función de la clase
-    print('  Class',f'{i+1:2d}',':',f'{len(lista[i]):7d}','|',f'{tot0:5d}','|',
-      f'{tot1:5d}','|',f'{len(lista[i])-tot0-tot1:7d}')
+    #print('  Class',f'{i+1:2d}',':',f'{len(lista[i]):7d}','|',f'{tot0:5d}','|',
+      #f'{tot1:5d}','|',f'{len(lista[i])-tot0-tot1:7d}')
     
   return(train,val,test,nclases,nclases_no_vacias)
 
 #Esta función selecciona todos los centros a pesar de que no posean una etiqueta asociada
 def select_all_samples_seg(center,H,V,sizex,sizey):
-  print('* Seleccionar todos los centroides')
+  #print('* Seleccionar todos los centroides')
   #Se calcula el rango de valores admitido para los centroides
   xmin=int(sizex/2); xmax=H-int(math.ceil(sizex/2))
   ymin=int(sizey/2); ymax=V-int(math.ceil(sizey/2))
@@ -498,7 +437,7 @@ class HyperDataset(Dataset):
 
 #Signal Handler que permite parar el entrenamiento y pasar a testear el modelo directamente
 def signal_handler(sig, frame):
-  print('\n* Ctrl+C. Exit training')
+  #print('\n* Ctrl+C. Exit training')
   global endTrain
   endTrain=True
 
@@ -512,55 +451,6 @@ def update_lr(optimizer,lr):
 
 # calcula los promedios de precisiones
 
-#Función que permite calcular los promedios y desviaciones de la precisión del modelo para cada clase a partir de los resultados de los diversos experimentos
-#OA es el Overall Accuracy, es la lista con el acierto total de cada experimento (Total aciertos en todas las clases / Total muestras de todas las clases)
-#AA es el Average Accuracy, es la lista con la media de aciertos de las clases de cada experimento (Sumatorio del porcentaje de acierto de cada clase / número de clases)
-#aa es la matriz donde cada fila tiene el acierto individual de cada clase por cada experimento (en porcentaje) (pixeles de la clase J clasificados correctamente/píxeles de la clase J)
-def accuracy_mean_deviation(OA,AA,aa):
-  #Número de experimentos realizados
-  n=len(OA)
-  #Número de clases
-  nclases=len(aa[0])
-  print('* Medias y desviaciones (%d exp):'%(n))
-
-  #Pasamos a calcular la media de Overall Accuracy y del Average Accuracy
-  OAm=0; AAm=0; aam=[0]*nclases;
-  #Recorremos todos los experimentos
-  for i in range(n):
-     #Sumamos el Overall Accuracy y el Average Accuracy de cada experimento
-     OAm+=OA[i]; AAm+=AA[i]
-
-     #Se recorren las clases (se empieza en 1 debido a que 0 es la clase asociada a lso datos sin etiqueta)
-     #Se suma el acierto en cada una de las clases
-     for j in range(1,nclases): aam[j]+=aa[i][j]
-
-  #Obtenemos el Overal Accuracy medio y el Average Accuracy medio
-  OAm/=n; AAm/=n
-
-  #Calculamos la media de aciertos para cada clase
-  for j in range(1,nclases): aam[j]/=n
-
-  # desviaciones, usamos la formula que divide entre (n-1)
-
-  #Pasamos a calcular la desviación usando la fórmula de desviación estándar muestral
-  OAd=0; AAd=0; aad=[0]*nclases
-  for i in range(n):
-     #Sumamos los cuadrados de las diferencias respecto a la media
-
-     #Aquí había un error: AAd+=(AA[i]-AAm)*(AA[i]-OAm), tendría que ser AAm en lugar de OAm ****************************************************************************************************************************************
-     OAd+=(OA[i]-OAm)*(OA[i]-OAm); AAd+=(AA[i]-AAm)*(AA[i]-AAm)
-
-     #Sumamos el cuadrado de las diferencias respecto a la media para cada clase
-     for j in range(1,nclases): aad[j]+=(aa[i][j]-aam[j])*(aa[i][j]-aam[j])
-
-  #Calculamos la desviación estándar del Overall Accuracy y del Average Accuracy
-  OAd=math.sqrt(OAd/(n-1)); AAd=math.sqrt(AAd/(n-1))
-
-  #Calculamos la desviación estándar por clase
-  for j in range(1,nclases): aad[j]=math.sqrt(aad[j]/(n-1))
-
-  for j in range(1,nclases): print('  Class %02d: %02.02f+%02.02f'%(j,aam[j],aad[j]))
-  print('  OA=%02.02f+%02.02f, AA=%02.02f+%02.02f'%(OAm,OAd,AAm,AAd))
 
 #-----------------------------------------------------------------
 # PYTORCH - NETWORK
@@ -637,19 +527,37 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft):
-  print('* CNN21 experimento: '+str(exp)+' *************************************************')
+def main(exp, data_bundle, TEST, EPOCHS, BATCH):
+  #Leemos los datos del data_bundle
+
+  # Datos y dimensiones originales
+  datos = data_bundle['datos']
+  H, V, B = data_bundle['H'], data_bundle['V'], data_bundle['B']
+  
+  # Ground Truth y dimensiones (H1, V1)
+  truth = data_bundle['truth']
+  H1, V1 = data_bundle['H1'], data_bundle['V1']
+  
+  # Segmentación y dimensiones (H2, V2)
+  seg = data_bundle['seg']
+  H2, V2 = data_bundle['H2'], data_bundle['V2']
+  
+  # Centros y dimensiones (H3, V3, nseg)
+  center = data_bundle['center']
+  H3, V3, nseg = data_bundle['H3'], data_bundle['V3'], data_bundle['nseg']
+
+
   #Tomamos la primera referencia temporal antes de realizar el entrenamiento
   time_start=time.time()
 
   # 1. Device configuration
   #Comprobamos si el sistema tiene una gráfica compatible con CUDA disponible, si es así se pasa a usar la GPU para entrenar y ejecutar el modelo
   cuda=True if torch.cuda.is_available() else False
-  print('* cuda:',cuda)
+  #print('* cuda:',cuda)
   device=torch.device('cuda' if cuda else 'cpu')
   #Si la biblioteca cuDNN está disponible se activan las optimizaciones 
   if torch.backends.cudnn.is_available():
-    print('* Activando CUDNN')
+    #print('* Activando CUDNN')
     torch.backends.cudnn.enabled=True
     
     #Aquí ponía beBhmark en lugar de benchmark*******************************************************************************************************************************************
@@ -676,28 +584,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
       torch.backends.cudnn.deterministic=True
       torch.backends.cudnn.benchmark=False
 
-  # 2. Load datos
-
-  #Cargamos los datos en crudo (la imagen original)
-  #En datos se guardan todos los píxeles y sus bandas
-  #H = ancho
-  #V = Alto
-  #B = Número de bandas
-  (datos,H,V,B)=read_raw(DATASET)
-
-  #Cargamos el Grount Truth, el cual tentrá un ancho H1 y un alto V1
-  (truth,H1,V1)=read_pgm(GT)
-
-  #Cargamos la segmentación de los píxeles, el cual tendrá un ancho H2 y un alto V2
-  (seg,H2,V2)=read_seg(SEG)
-
-  # necesitamos los datos en band-vector para hacer convoluciones
-
-  #Reordenamos los datos para que puedan ser empleados en las redes neuronales de PyTorch, pasamos las bandas de la posición 2 a la posición 0
-  #Al cargar los datos vienen con la forma V,H,B
-  #Con el transpose los pasamos a B,V,H
-  datos=np.transpose(datos,(2,0,1))
-
   # durante la ejecucion de la red vamos a coger patches de tamano cuadrado
 
   #Los patches serán de 32x32 píxeles
@@ -705,10 +591,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
 
   # 3. Selection training,testing sets
 
-  # (center,nseg)=seg_center(seg,H,V) # lento, mejor lo cargamos hecho
 
-  #Cargamos las coordenadas de los centros de los segmentos
-  (center,H3,V3,nseg)=read_seg_centers(CENTER)
 
   #Seleccionamos los conjuntos de entrenamiento, validación y test según lo especificado.
   #La función devuelve los índices de los centros de segmentos que van a cada conjunto en base a la proporción indicada para cada conjunto mediante el parámetro SAMPLES
@@ -716,9 +599,9 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
   dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey)
-  print('  - train dataset:',len(dataset_train))
+  #print('  - train dataset:',len(dataset_train))
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
-  print('  - test dataset:',len(dataset_test))
+  #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
@@ -735,7 +618,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
     dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey)
-    print('  - val dataset:',len(dataset_val))
+    #print('  - val dataset:',len(dataset_val))
     #Creamos el dataloader que se usará durante la validación de la red neuronal
     #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
     val_loader=DataLoader(dataset_val,batch_size,shuffle=False)
@@ -752,11 +635,11 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
   N1=B          # dimension de entrada (bandas)
   D1=2          # decimacion, por defecto 2 (el factor de salto del MaxPool, la ventana de pooling) 
   H1=sizex      # lado patches entrada, por defecto 32 (sizex=sizey) (Tamaño inicial del parche 32x32)
-  N2=16         # dimension de salida (seleccionada), por defecto 16. Número de mapas de rasgos
+  N2=32         # dimension de salida (seleccionada), por defecto 16. Número de mapas de rasgos
   H2=int(H1/D1) # lado patches salida (calculada), por defecto 16 (sizex=sizey) (El tamaño de los patches al salir (16 x 16))
 
   # 5.2. capa conv.2, parametros de entrada N2,H2 vienen dados por la capa anterior
-  N3=32         # dimension de salida (seleccionada), por defecto 32. Número de mapas de rasgos, en este caso el doble que en la primera capa para buscar muchos más rasgos complejos
+  N3=64         # dimension de salida (seleccionada), por defecto 32. Número de mapas de rasgos, en este caso el doble que en la primera capa para buscar muchos más rasgos complejos
   D2=2          # decimacion, por defecto 2 (el factor de salto del MaxPool, la ventana de pooling) 
   H3=int(H2/D2) # lado patches salida (calculada), por defecto 16 (sizex=sizey) (El tamaño de los patches al salir (16 x 16))
     
@@ -767,8 +650,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
   #Generamos la red y la cargamos en la CPU o GPU (si es compatible con CUDA)
   model=CNN21(N1,N2,N3,N4,N5,D1,D2).to(device)
 
-  # Inicializamos FMix para patches de 32x32 (sizex x sizey)
-  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
   # 6. Loss, optimizer, and scheduler
 
@@ -803,7 +684,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
 
   # 7. Train the model
   #Pasamos a realizar el entrenamiento del modelo
-  print('* Entrenamiento CNN21, experimento.%d'%(exp))
   #Configuramos la variable que permite parar el entrenamiento
   global endTrain
   endTrain=False
@@ -822,30 +702,18 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
     
     #Recorremos los patches (inputs) junto a sus etiquetas (labels) del conjunto de entrenamiento, recorremos batches de patches, es decir 1 conjunto de patches en cada iteración, por tanto en cada iteración se procesan BATCH_SIZE patches
     for i,(inputs,labels) in enumerate(train_loader):
-      # podria guardar los patches
-      # for j in range(len(labels)):
-      #    save_patch(inputs[j],sizex,sizey,B,"/tmp/patch-"+str(j)+".raw")
-      #    vutils.save_image(inputs[j,[2,1,0],:,:],"/tmp/patch-"+str(j)+".png")
 
       # 7.1. Cogemos muestras para entrenar
       #Cargamos los datos y sus etiquetas en la GPU (o se dejan en la CPU)
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      # --- INTEGRACIÓN FMIX ---
-      # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-      inputs_mixed = fmix_util(inputs) 
-      lam = fmix_util.lam         # El peso de la mezcla
-      indices = fmix_util.index   # Los índices de las imágenes mezcladas
       
       # 7.2. Forward pass
       #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      #Usando las imágenes mezcladas
-      outputs = model(inputs_mixed)
-
+      outputs=model(inputs)
       #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-      # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-      loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+      loss=criterion(outputs,labels)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -862,42 +730,35 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
 
     # si tenemos validacion usamos estas muestras, si no el propio train
     
-    #Realizamos la validación cada 10 épocas y en la última época de todas
-    if(epoch%10==0 or epoch==EPOCHS-1):
-      #Si el conjunto de validación no está vacío se pasa a evaluar su rendimiento sobre el mismo
-      if(len(val)>0):
-        #Ponemos la red en modo evaluación para poder realizar la evaluación (evitando que se actualicen estadísticas internas asociadas al entrenamiento de la misma)
+    #Realizamos la validación en la última época de todas
+    if(epoch == EPOCHS - 1):
+      if(len(val) > 0):
         model.eval()
-        #Creamos la lista para guardar los errores (losses) y los aciertos (acces)
-        losses=[]
-        acces=[]
-        
-        #Recorremos batches de patches de validación, es decir 1 conjunto de patches en cada iteración, por tanto en cada iteración se procesan BATCH_SIZE patches
-        for i,(inputs,labels) in enumerate(val_loader):
-          #Cargamos los patches y sus etiquetas
-          inputs=inputs.to(device)
-          labels=labels.to(device)
+        # Inicializamos contadores por clase para la validación
+        val_class_correct = [0] * (nclases + 1)
+        val_class_total = [0] * (nclases + 1)
           
-          #Realizamos las predicciones
-          outputs=model(inputs)
-          #Calculamos el error asociado a cada predicción
-          loss=criterion(outputs,labels)
-
-          #Calculamos el accuracy, si la clase predicha (la de probabilidad más alta) coincide con la real se suma 1, si no es así se suma 0 y se saca el promedio de acierto sobre los patches
-          #Accuracy=Aciertos/totalPruebas
-          acc=torch.mean((outputs.argmax(dim=-1) == labels).float())
-
-          #Guardamos los errores y el accuracy
-          losses.append(loss.item())
-          acces.append(acc.item())
+        with torch.no_grad():
+          for i, (inputs, labels) in enumerate(val_loader):
+            inputs, labels = inputs.to(device), labels.to(device)
+            outputs = model(inputs)
+            _, predicted = torch.max(outputs, 1)
+            
+            # Llenamos los contadores por cada muestra del batch
+            for j in range(len(labels)):
+              real_class = labels[j].item() + 1 # +1 porque restaste 1 en el Dataset
+              val_class_total[real_class] += 1
+              if predicted[j] == labels[j]:
+                val_class_correct[real_class] += 1
         
-
-        #Imprimimos por pantalla el resumen de la validación, mostrando la media de las pérdidas (errores) y aciertos (accuracy) obtenidos en cada uno de los batches.
-        print ('  Validación Epoch: %3d/%d, Val. Loss: %.4f, Acc: %.4f'
-          %(epoch,EPOCHS,sum(losses)/len(losses),sum(acces)/len(acces)))
-      else: 
-        #Si no hay conjunto de validación simplemente se informa de la pérdida que tuvo la red el ultimo batch de entrenamiento
-        print ('  Entrenamiento Epoch: %3d/%d, Train Loss: %.4f'%(epoch,EPOCHS,loss.item()))
+        # Calculamos el AA de validación
+        val_accuracies = []
+        for c in range(1, nclases + 1):
+          if val_class_total[c] > 0:
+            val_accuracies.append(100 * val_class_correct[c] / val_class_total[c])
+        
+        current_val_aa = sum(val_accuracies) / len(val_accuracies) if val_accuracies else 0
+        
 
     # Decay learning rate (lo decrementamos cconforme aumentan las iteraciones)
     #Si ADA==1 se realiza el descenso manual del learning rate cada 20 épocas, donde se divide el learning rate a la mitad y se le comunica este cambio al optimizer
@@ -908,10 +769,11 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
     if(endTrain): break
 
   #Si no está activado el flag de testeo la función devuelve directamente la media del accuracy asociado al conjunto de validación obtenido en la validación de la última época de entrenamiento
-  if(TEST==0): return(sum(acces)/len(acces))
+  if(TEST==0): 
+    return current_val_aa
 
   # 8. Test the model
-  print('* Test FINAL SOBRE CONJUNTO DE TEST CNN21, exp.%d'%(exp))
+  #print('* Test FINAL SOBRE CONJUNTO DE TEST CNN21, exp.%d'%(exp))
   #Creamos el mapa de salida de clasificación de los píxeles con todo 0
   output=np.zeros(H*V,dtype=np.uint8) # mapa de salida de pixels
 
@@ -950,10 +812,10 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
       #Aumentamos la variable total con tantas posiciones como patches se hayan procesado en la iteración actual
       total+=labels.size(0)
       #Cada vez que se han clasificado 2000 patches se imprime por pantalla el progreso del testeo
-      if(total%2000==0): print('  Testeando: %6d/%d'%(total,len(dataset_test)))
+      #if(total%2000==0): #print('  Testeando: %6d/%d'%(total,len(dataset_test)))
 
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
-  print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
+  #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
   #Recorremos todos los píxeles del output
   #Buscamos a que segmento pertenece el píxel actual seg[i]
   #Buscamos cual es el píxel central del segmento al que pertenece el píxel actual center[seg[i]]
@@ -977,12 +839,12 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
     if(output[center[i]]==truth[center[i]]): correct=correct+1
   #Calculamos el accuracy 
   acc=100*correct/total;
-  print('* Accuracy (Overall Accuracy) a nivel de segmentos: %.02f'%(acc))
+  #print('* Accuracy (Overall Accuracy) a nivel de segmentos: %.02f'%(acc))
 
   # 10. precisiones a nivel de pixel
   #Realizamos el cálculo de la precisión a nivel de píxel
   
-  #Creamos lso contadores y listas necesarias para calcular el overall accuracy y el average accuracy
+  #Creamos los contadores y listas necesarias para calcular el overall accuracy y el average accuracy
   correct=0; total=0; AA=0; OA=0
   #Se suma 1 al número de clases debido a que se debe añadir la clase 0
   class_correct=[0]*(nclases+1)
@@ -1013,133 +875,138 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
   
   #Calculamos el Overall Accuracy y el Average Accuracy (dividiendo entre nclase_no_vacias para no dividir por clases que no están en el conjunto de test)
   OA=100*correct/total; AA=AA/nclases_no_vacias 
-  print('* Accuracy (a nivel de pixels) exp.%d:'%(exp))
   
-  #Imprimimos el accuracy asociado a cada clase
-  for i in range(1,nclases+1): print('  Clase %02d: %02.02f'%(i,class_aa[i]))
-  #Imprimimos el Overall Accuracy a nivel de píxeles y el Average Accuracy a nivel de píxeles
-  print('* Accuracy (a nivel de pixels) exp.%d, OA (Overall Accuracy)=%02.02f, AA (Average Accuracy)=%02.02f'%(exp,OA,AA))
-  print('  total pixeles test:',total,'pixeles correctos:',correct)
-
-  # guardamos la salida de la clasificación sobre el conjunto de test
-  save_pgm(output,H,V,nclases,'/home/dbr/Escritorio/TFG/cnn21'+str(exp)+'.pgm')
-  
-  #Guardamos el modelo (los pesos y los sesgos que han sido aprendidos), de esta manera se puede ejecutar el modelo sin tener que volver a entrenarlo antes
-  torch.save(model.state_dict(),'/tmp/model_cnn21-'+str(exp)+'.ckpt')
 
   #Tomamos la referencia de tiempo final del experimento completo
   time_end=time.time()
-  #Imprimimos por pantalla el tiempo de ejecución total, junto al learning rate y el batch size
-  print('* Execution time: %.0f s'%(time_end-time_start))
-  print('  lr:',lr,'BATCH:',batch_size)
-  print('FIN DEL EXPERIMENTO**********************************************************')
 
-
-  # 11. AHORA CLASIFICAMOS TODO (MENOS UN PEQUENO REBORDE)
-  #Si el flag ALL está activado pasamos a clasificar la imagen completa usando el modelo que acabamos de entrenar.
-  if(ALL==True):
-    #Seleccionamos todos los centros de segmentos aunque no tengan una etiqueta asociada
-    test_all=select_all_samples_seg(center,H,V,sizex,sizey)
-    
-    #Creamos el dataset de la clase HyperAllDataset que contendrá todos los píxeles de la imagen
-    dataset_all_test=HyperAllDataset(datos,test_all,H,V,sizex,sizey)
-
-    #Creamos el dataloader que otorgará los patches asociados a los centroides de manera ordenada
-    test_all_loader=DataLoader(dataset_all_test,batch_size,shuffle=False)
-
-    output=np.zeros(H*V,dtype=np.uint8) # mapa de salida de pixels
-    
-    # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
-    #Ponemos el modelo en modo evaluación
-    model.eval()
-
-    #Evitamos que se almacene el grafo asociado a los gradientes empleado durante el entrenamiento, de esta manera aceleramos los cálculos y reducimos el consumo de memoria
-    with torch.no_grad():
-      correct=0; total=0;
-      
-      #Recorremos los batches (compuestos por grupos de patches) que conforman la imagen
-      for inputs in test_all_loader:
-        #Cargamos los datos en memoria
-        inputs=inputs.to(device)
-        #labels=labels.to(device)
-        
-        #Realizamos la clasificación de los patches empleando la red
-        outputs=model(inputs)
-        #Obtenemos la clasificación final (la clase predicha es la q tenga mayor valor)
-        (_,predicted)=torch.max(outputs.data,1)
-        
-        #Copiamos los resultados a la RAM
-        predicted_cpu=predicted.cpu()
-
-        #Recorremos cada una de las predicciones que se han realizado (los centroides clasificados)
-        for i in range(len(predicted_cpu)):
-          #La red devuelve las clases empezando en 0, por tanto sumamos 1, pues el 0 lo reservamos para zonas sin clasificar o sin datos
-          #Se guarda la predicción de cada patch en la posición asociada al centro de segmento que se tomó para realizarlo (la posición del píxel se encuentra en test_all)
-          #Se usa la variable total para llevar la cuenta de los patches que ya han sido procesados, para así estar en la posición correcta del vector de test_all
-          #De esta manera vamos rellenando el mapa de clasificación con los segmentos de test_all
-          output[test_all[total+i]]=np.uint8(predicted_cpu[i]+1)
-        
-        #Aumentamos la variable total con tantas posiciones como patches se hayan procesado en la iteración actual
-        total+=inputs.size(0)
-
-        #Cada 5000 píxeles se muestra el progreso por pantalla
-        if(total%5000==0): print('  Test ALL: %6d/%d'%(total,len(dataset_all_test)))
-    
-    print('* Generando classif.map (all)')
-    #Recorremos todos los píxeles de la imagen y les ponemos la clase que fue predicha para el centroide del segmento al que pertenecen
-    for i in range(H*V): output[i]=output[center[seg[i]]]
-    # guardamos la salida
-    save_pgm(output,H,V,nclases,'/home/amo/output_cnn21_all-'+str(exp)+'.pgm')
+  print("ACABÓ LA PRUEBA")
 
   #Finalizamos el main Devolviendo el Overall Accuracy del modelo, el Average Accuracy y el accuracy asociado a cada clase presente en el conjunto de test
-  return(OA,AA,class_aa)
+  return( OA, AA, class_aa)
 
+
+
+
+def run_combination(params_with_data):
+    params, data_bundle = params_with_data
+    e, b= params
+    
+    val_acc_list = []
+
+    print(f" Evaluando: Epochs={e}, Batch={b}")
+    sys.stdout.flush()
+
+    for exp in range(1):
+        res = main(exp, data_bundle,0, e,b)
+        # Maneja si main devuelve una tupla o un solo valor según TEST
+        v_acc = res[0] if isinstance(res, tuple) else res
+        val_acc_list.append(v_acc)
+
+    print(f" Fin evaluación: Epochs={e}, Batch={b} *************************")
+    sys.stdout.flush()
+    
+    return {'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+
+
+def run_final_eval(args):
+    exp_idx, epochs, batch, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, data_bundle, 1, epochs, batch)
+    return oa, aa, class_aa
 
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
-if __name__=='__main__':
-  # --- CONFIGURACIÓN DEL GRID SEARCH ---
-  alphas = [0.5, 1.0, 1.5]            # Valores de alpha a probar
-  decays = [2.0, 3.0, 4.0]            # Valores de decay_power a probar
-  softs  = [0.0, 0.1]                 # Valores de max_soft a probar
+if __name__ == '__main__':
+    # IMPORTANTE para PyTorch + Multiprocessing
+    try:
+        mp.set_start_method('spawn', force=True)
+    except RuntimeError:
+        pass
+    
+    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    print("Cargando datos en memoria principal...")
+    (datos_raw, H, V, B) = read_raw(DATASET)
+    (truth, H1, V1) = read_pgm(GT)
+    (seg, H2, V2) = read_seg(SEG)
+    (center, H3, V3, nseg) = read_seg_centers(CENTER)
 
-  resultados_finales = []
+    #Reordenamos y preparamos el tensor, dejándolo ordenado en memoria
+    datos_tensor = datos_raw.permute(2, 0, 1).contiguous()
 
-  print(f"Grid Search: Probando {len(alphas)*len(decays)*len(softs)} combinaciones totales.")
-  for a in alphas:
-    for d in decays:
-      for s in softs:
-        print(f"******************************Probando combinación: Alpha={a}, Decay={d}, Soft={s}******************************")
-        oa_list=[]
-        aa_list=[]
+    #Liberamos la memoria asociada a los datos leídos y que ya fueron copiados y transformados en la línea anterior
+    del datos_raw
 
-        for exp in range(EXP):
-            # Ejecutamos el main con la configuración actual
-            oa, aa, _ = main(exp, fmix_alpha=a, fmix_decay=d, fmix_soft=s)
-            oa_list.append(oa)
-            aa_list.append(aa)
+    #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
+    datos_tensor.share_memory_()
 
-        # Calculamos promedios de los 5 experimentos
-        mean_oa = np.mean(oa_list)
-        std_oa = np.std(oa_list)
-        mean_aa = np.mean(aa_list)
-        # Guardamos la info de esta combinación
-        res = {
-            'alpha': a, 'decay': d, 'soft': s,
-            'mean_oa': mean_oa, 'std_oa': std_oa, 'mean_aa': mean_aa
-        }
-        resultados_finales.append(res)
+    # Creamos el bundle
+    data_bundle = {
+        'datos': datos_tensor,
+        'H': H, 'V': V, 'B': B,
+        'truth': truth, 'H1': H1, 'V1': V1,
+        'seg': seg, 'H2': H2, 'V2': V2,
+        'center': center, 'H3': H3, 'V3': V3,
+        'nseg': nseg
+    }
 
-    # --- RESULTADOS FINALES ---
-    # Ordenar por el mejor OA medio
-    resultados_finales.sort(key=lambda x: x['mean_oa'], reverse=True)
-    mejor = resultados_finales[0]
+    # 2. CONFIGURACIÓN DEL GRID SEARCH
+    epochs= [200]
+    batches = [100]
 
-    print("\n" + "="*50)
-    print("🏆 ¡BÚSQUEDA FINALIZADA!")
-    print(f"La mejor combinación es: Alpha={mejor['alpha']}, Decay={mejor['decay']}, Soft={mejor['soft']}")
-    print(f"OA Promedio: {mejor['mean_oa']:.2f}%")
-    print("="*50)
+    combinaciones = list(itertools.product(epochs, batches))
+
+    tareas = [(comb, data_bundle) for comb in combinaciones]
+    
+    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+
+    #Ejecutamos el grid search con 6 procesos
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        resultados_finales = list(executor.map(run_combination, tareas))
+
+    #RESULTADOS DEL GRID SEARCH
+    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+    mejor_config = resultados_finales[0]
+
+    # 3. EVALUACIÓN FINAL PARALELIZADA
+    print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
+    
+    
+    # Especificamos los parámetros asociados a la mejor configuración
+    tareas_finales = [
+        (i, mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
+        for i in range(EXP)
+    ]
+    
+    #Ejecutamos el test final con 5 procesos
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        resultados_test = list(executor.map(run_final_eval, tareas_finales))
+
+    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    final_oa_list = [res[0] for res in resultados_test]
+    final_aa_list = [res[1] for res in resultados_test]
+    class_aa_matrix = np.array([res[2] for res in resultados_test]) 
+
+    m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
+    m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
+    m_class = np.mean(class_aa_matrix, axis=0)
+    s_class = np.std(class_aa_matrix, axis=0, ddof=1)
+
+    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    print("\n" + "="*60)
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
+    print("="*60)
+    print(f"Mejor Configuración: Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
+    print("-" * 60)
+    
+    print(f"ACCURACY POR CLASE:")
+    for j in range(1, len(m_class)): 
+        if m_class[j] > 0 or s_class[j] > 0:
+            print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
+
+    print("-" * 60)
+    print(f"OA Final: {m_oa:.2f}% ± {s_oa:.2f}%")
+    print(f"AA Final: {m_aa:.2f}% ± {s_aa:.2f}%")
+    print("="*60)
 
     
     

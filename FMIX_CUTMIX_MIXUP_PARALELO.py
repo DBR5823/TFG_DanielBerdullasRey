@@ -35,8 +35,6 @@ import itertools
 
 import sys
 
-import os
-
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
@@ -44,8 +42,15 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
-
-
+#Rutas de archivos
+#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
+#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
+#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
+#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
 # DATASET='/home/amo/profile.raw'
@@ -359,7 +364,7 @@ class HyperAllDataset(Dataset):
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
     self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()])
+      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()],)
 
   #Función para devolver el número de instancias del dataset
   def __len__(self):
@@ -447,7 +452,6 @@ def update_lr(optimizer,lr):
 # calcula los promedios de precisiones
 
 
-
 #-----------------------------------------------------------------
 # PYTORCH - NETWORK
 #-----------------------------------------------------------------
@@ -518,6 +522,41 @@ class CNN21(nn.Module):
 
     #Se devuelven las puntuaciones de clases asociadas al patch que ha sido analizado
     return out
+
+
+def apply_mixup(inputs, labels, alpha=1.0):
+    '''Mezcla lineal de dos imágenes: x = L*x1 + (1-L)*x2'''
+    lam = np.random.beta(alpha, alpha) if alpha > 0 else 1
+    index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
+    
+    mixed_x = lam * inputs + (1 - lam) * inputs[index, :]
+    return mixed_x, labels, labels[index], lam
+
+def apply_cutmix(inputs, labels, alpha=1.0):
+    '''Corta un rectángulo de una imagen y lo pega en otra'''
+    lam = np.random.beta(alpha, alpha)
+    index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
+    
+    # Calcular coordenadas del cuadro
+    W, H = inputs.size(2), inputs.size(3)
+    cut_rat = np.sqrt(1. - lam)
+    cut_w = int(W * cut_rat)
+    cut_h = int(H * cut_rat)
+    cx = np.random.randint(W)
+    cy = np.random.randint(H)
+
+    bbx1 = np.clip(cx - cut_w // 2, 0, W)
+    bby1 = np.clip(cy - cut_h // 2, 0, H)
+    bbx2 = np.clip(cx + cut_w // 2, 0, W)
+    bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+    inputs[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+    # Ajustar lambda según el área real cortada
+    lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+    return inputs, labels, labels[index], lam
+
+
+
 
 #-----------------------------------------------------------------
 # PYTORCH - MAIN
@@ -706,20 +745,28 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      # --- INTEGRACIÓN FMIX ---
-      # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-      inputs_mixed = fmix_util(inputs) 
-      lam = fmix_util.lam         # El peso de la mezcla
-      indices = fmix_util.index   # Los índices de las imágenes mezcladas
+      # Decidimos qué técnica usar para este lote (33% cada una)
+      r = np.random.rand()
+      
+      if r < 0.33:
+          # --- USAR FMIX ---
+          inputs_mixed = fmix_util(inputs) 
+          lam = fmix_util.lam
+          target_a, target_b = labels, labels[fmix_util.index]
+      elif r < 0.66:
+          # --- USAR MIXUP ---
+          inputs_mixed, target_a, target_b, lam = apply_mixup(inputs, labels, alpha=1.0)
+      else:
+          # --- USAR CUTMIX ---
+          inputs_mixed, target_a, target_b, lam = apply_cutmix(inputs, labels, alpha=1.0)
+
+      
       
       # 7.2. Forward pass
       #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
       #Usando las imágenes mezcladas
       outputs = model(inputs_mixed)
-
-      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-      # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-      loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+      loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -929,87 +976,6 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
-
-    #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
-    if len(sys.argv)<2:
-      ficheroLeido="oitaven"
-      print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-      #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-      DATASET='datosEntrada/oitaven/oitaven_river.raw'
-      #GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-      GT='datosEntrada/oitaven/oitaven_river.pgm'
-      #SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-      SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
-      #CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-      CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
-    
-    else:
-      try:
-        opcion = int(sys.argv[1])
-      except ValueError:
-          print("Error: El argumento debe ser un número entero.")
-          sys.exit(1)
-      
-      match opcion:
-        case 1:
-          ficheroLeido="das_mestas"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/das_mestas/das_mestas_river.raw'
-          GT='datosEntrada/das_mestas/das_mestas_river.pgm'
-          SEG='datosEntrada/das_mestas/seg_mestas_wp.raw'
-          CENTER='datosEntrada/das_mestas/seg_mestas_wp_centers.raw'
-        case 2:
-          ficheroLeido="eiras_dam"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/eiras_dam/eiras_dam.raw'
-          GT='datosEntrada/eiras_dam/eiras_dam.pgm'
-          SEG='datosEntrada/eiras_dam/seg_eiras_wp.raw'
-          CENTER='datosEntrada/eiras_dam/seg_eiras_wp_centers.raw'
-        case 3:
-          ficheroLeido="ermidas_creek"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ermidas_creek/ermidas_creek.raw'
-          GT='datosEntrada/ermidas_creek/ermidas_creek.pgm'
-          SEG='datosEntrada/ermidas_creek/seg_ermidas_wp.raw'
-          CENTER='datosEntrada/ermidas_creek/seg_ermidas_wp_centers.raw'
-        case 4:
-          ficheroLeido="ferreiras_river"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ferreiras_river/ferreiras_river.raw'
-          GT='datosEntrada/ferreiras_river/ferreiras_river.pgm'
-          SEG='datosEntrada/ferreiras_river/seg_ferreiras_wp.raw'
-          CENTER='datosEntrada/ferreiras_river/seg_ferreiras_wp_centers.raw'
-        case 5:
-          ficheroLeido="mera_river"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/mera_river/mera_river.raw'
-          GT='datosEntrada/mera_river/mera_river.pgm'
-          SEG='datosEntrada/mera_river/seg_mera_wp.raw'
-          CENTER='datosEntrada/mera_river/seg_mera_wp_centers.raw'
-        case 6:
-          ficheroLeido="ulla"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ulla/ulla_river.raw'
-          GT='datosEntrada/ulla/ulla_river.pgm'
-          SEG='datosEntrada/ulla/seg_ulla_wp.raw'
-          CENTER='datosEntrada/ulla/seg_ulla_wp_centers.raw'
-        case 7:
-          ficheroLeido="xesta"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/xesta/xesta_basin.raw'
-          GT='datosEntrada/xesta/xesta_basin.pgm'
-          SEG='datosEntrada/xesta/seg_xesta_wp.raw'
-          CENTER='datosEntrada/xesta/seg_xesta_wp_centers.raw'
-        case _:
-          ficheroLeido="oitaven"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/oitaven/oitaven_river.raw'
-          GT='datosEntrada/oitaven/oitaven_river.pgm'
-          SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
-          CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
-      
-
-    
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
@@ -1037,10 +1003,10 @@ if __name__ == '__main__':
     }
 
     # 2. CONFIGURACIÓN DEL GRID SEARCH
-    alphas = [0.1,0.5,1.0,1.5]
-    decays = [1.0,2.0,3.0]
-    softs  = [0.0,0.5,1.0]
-    epochs= [200]
+    alphas = [0.15]
+    decays = [4.0]
+    softs  = [0.3]
+    epochs= [100]
     batches = [100]
 
     combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches))
@@ -1083,7 +1049,7 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
     print("="*60)
     print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
     print("-" * 60)
