@@ -20,7 +20,7 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader
+from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
@@ -34,6 +34,8 @@ import torch.multiprocessing as mp
 import itertools
 
 import sys
+
+from torch.utils.data import WeightedRandomSampler
 
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
@@ -544,7 +546,7 @@ def aplicar_cutmix(inputs, labels, alpha):
   bbx2 = np.clip(cx + cut_w // 2, 0, W)
   bby2 = np.clip(cy + cut_h // 2, 0, H)
 
-  # SOLUCIÓN: Clonar el tensor para no destruir los datos originales
+  # Clonar el tensor para no destruir los datos originales
   inputs_mixed = inputs.clone()
   
   # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
@@ -563,7 +565,7 @@ def aplicar_cutmix(inputs, labels, alpha):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
+def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -633,23 +635,27 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
   #La función devuelve los índices de los centros de segmentos que van a cada conjunto en base a la proporción indicada para cada conjunto mediante el parámetro SAMPLES
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,SAMPLES)
 
-  #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
+    #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
   dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey)
   #print('  - train dataset:',len(dataset_train))
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
+  #Número de hilos a usar para el dataloader
+  num_workers_dl = 0
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
-  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
+ 
+  train_loader=DataLoader(dataset_train,batch_size,shuffle=True, num_workers=num_workers_dl)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
-  test_loader=DataLoader(dataset_test,batch_size,shuffle=False)
+  test_loader=DataLoader(dataset_test,batch_size,shuffle=False, num_workers=num_workers_dl)
 
+  
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
@@ -744,15 +750,19 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=alpha)
+      if(random.random()<probabilidad):
+        inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=alpha)
+      
+        # 7.2. Forward pass
+        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+        #Usando las imágenes mezcladas
+        outputs = model(inputs_mixed)
+        loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
+      else:
+        outputs=model(inputs)
+        loss=criterion(outputs,labels)
 
       
-      
-      # 7.2. Forward pass
-      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      #Usando las imágenes mezcladas
-      outputs = model(inputs_mixed)
-      loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -929,28 +939,28 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, e, b= params
+    a, e, b, p= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}")
+    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, data_bundle,0, e,b)
+        res = main(exp, a, data_bundle,0, e, b, p)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b} *************************")
+    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+    return {'alpha': a, 'epochs':e,'batch':b ,'prob':p, 'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, epochs, batch, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch)
+    exp_idx, alpha, epochs, batch, prob, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob)
     return oa, aa, class_aa
 
 
@@ -1072,15 +1082,16 @@ if __name__ == '__main__':
     alphas = [0.1,0.3,0.5,0.7,1.0]
     epochs= [200]
     batches = [100]
+    probs=[0.2,0.5,0.7]
 
-    combinaciones = list(itertools.product(alphas, epochs, batches))
+    combinaciones = list(itertools.product(alphas, epochs, batches, probs))
 
     tareas = [(comb, data_bundle) for comb in combinaciones]
     
     print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
     #Ejecutamos el grid search con 5 procesos
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=3) as executor:
         resultados_finales = list(executor.map(run_combination, tareas))
 
     #RESULTADOS DEL GRID SEARCH
@@ -1093,12 +1104,12 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
+        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'],mejor_config['prob'],data_bundle) 
         for i in range(EXP)
     ]
     
     #Ejecutamos el test final con 5 procesos
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=3) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
@@ -1113,9 +1124,9 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

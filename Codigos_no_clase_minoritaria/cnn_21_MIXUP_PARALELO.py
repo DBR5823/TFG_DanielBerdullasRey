@@ -528,7 +528,7 @@ class CNN21(nn.Module):
 #Función que implementa la técnica de aumentado de datos Mixup, recibe el batch actual junto a las etiquetas asociadas a los píxeles
 #Realiza la mezcla siguiendo la fórmula x=L*x1+(1-L)*x2
 #Trabaja con patches completos, es decir se mezclan patches completos píxel a píxel
-def aplicar_mixup(inputs, labels, alpha=1.0):
+def aplicar_mixup(inputs, labels, alpha):
   #Se genera un número aleatorio entre 0 y 1 siguiendo una distribición beta, dependiendo de su valor se realizará la mezcla con distinta proporción de cada batch
   lam = np.random.beta(alpha, alpha) if alpha > 0 else 1
 
@@ -625,15 +625,18 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
+  #Número de hilos a usar para el dataloader
+  num_workers_dl = 0
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
-  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
+
+  train_loader=DataLoader(dataset_train,batch_size,shuffle=True, num_workers=num_workers_dl)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
-  test_loader=DataLoader(dataset_test,batch_size,shuffle=False)
+  test_loader=DataLoader(dataset_test,batch_size,shuffle=False, num_workers=num_workers_dl)
 
   # Si queremos validacion
   if(len(val)>0):
@@ -729,7 +732,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha=1.0)
+      inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha)
 
       
       
@@ -1097,7 +1100,7 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
     print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
     print("-" * 60)

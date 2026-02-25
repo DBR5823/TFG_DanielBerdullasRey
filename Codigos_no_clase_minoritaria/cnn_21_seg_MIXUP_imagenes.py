@@ -563,7 +563,7 @@ class CNN21(nn.Module):
 #Función que implementa la técnica de aumentado de datos Mixup, recibe el batch actual junto a las etiquetas asociadas a los píxeles
 #Realiza la mezcla siguiendo la fórmula x=L*x1+(1-L)*x2
 #Trabaja con patches completos, es decir se mezclan patches completos píxel a píxel
-def aplicar_mixup(inputs, labels, alpha=1.0):
+def aplicar_mixup(inputs, labels, alpha):
   #Se genera un número aleatorio entre 0 y 1 siguiendo una distribición beta, dependiendo de su valor se realizará la mezcla con distinta proporción de cada batch
   lam = np.random.beta(alpha, alpha) if alpha > 0 else 1
 
