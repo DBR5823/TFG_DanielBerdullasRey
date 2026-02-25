@@ -1,4 +1,4 @@
-********** Iniciando experimentos FMIX: 21:02:23 **********
+********** Iniciando experimentos FMIX: 19:36:32 **********
 Ejecutando: prueba inicial FMIX (sobre Oitaven)
 ********************Ejecutando prueba sobre el dataset oitaven ******************************
 Cargando datos en memoria principal...
@@ -10,64 +10,64 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
- Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
- Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
- Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
- Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
@@ -86,22 +86,22 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
 ============================================================
-Mejor Configuración: Alpha=0.5, Decay=2.0, Soft=0.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=1.5, Decay=2.0, Soft=0.5, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 95.74% ± 1.27%
-  Clase 02: 90.66% ± 3.51%
-  Clase 03: 86.86% ± 3.23%
-  Clase 04: 95.96% ± 2.58%
-  Clase 05: 95.35% ± 1.97%
-  Clase 06: 94.75% ± 0.63%
-  Clase 07: 96.41% ± 0.39%
-  Clase 08: 93.12% ± 0.75%
-  Clase 09: 99.30% ± 0.31%
-  Clase 10: 90.64% ± 1.52%
+  Clase 01: 97.41% ± 0.65%
+  Clase 02: 80.79% ± 1.42%
+  Clase 03: 80.95% ± 4.32%
+  Clase 04: 93.06% ± 3.14%
+  Clase 05: 88.22% ± 1.53%
+  Clase 06: 94.97% ± 0.95%
+  Clase 07: 96.57% ± 0.34%
+  Clase 08: 96.98% ± 0.26%
+  Clase 09: 99.53% ± 0.25%
+  Clase 10: 92.28% ± 1.00%
 ------------------------------------------------------------
-OA Final: 94.49% ± 0.20%
-AA Final: 93.88% ± 0.39%
+OA Final: 95.61% ± 0.16%
+AA Final: 92.08% ± 0.96%
 ============================================================
 ------------------------------------------
 Ejecutando prueba iteración: 1...
@@ -115,31 +115,31 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
@@ -162,15 +162,15 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
@@ -191,16 +191,16 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
 ============================================================
-Mejor Configuración: Alpha=1.5, Decay=3.0, Soft=0.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=0.5, Decay=2.0, Soft=0.0, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 78.29% ± 0.82%
-  Clase 07: 90.21% ± 0.55%
-  Clase 08: 98.88% ± 0.68%
-  Clase 10: 93.08% ± 0.38%
+  Clase 02: 70.19% ± 0.79%
+  Clase 07: 92.80% ± 0.37%
+  Clase 08: 95.16% ± 1.12%
+  Clase 10: 94.60% ± 0.38%
 ------------------------------------------------------------
-OA Final: 90.50% ± 0.17%
-AA Final: 90.11% ± 0.25%
+OA Final: 91.41% ± 0.08%
+AA Final: 88.18% ± 0.27%
 ============================================================
 Prueba iteracion 1 finalizada.
 ********************************************
@@ -216,8 +216,8 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
@@ -231,49 +231,49 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
@@ -291,22 +291,22 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
 ============================================================
-Mejor Configuración: Alpha=0.5, Decay=2.0, Soft=0.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=1.5, Decay=2.0, Soft=0.0, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 99.08% ± 0.28%
-  Clase 02: 90.35% ± 1.97%
-  Clase 03: 95.16% ± 1.99%
-  Clase 04: 98.55% ± 0.39%
-  Clase 05: 85.29% ± 3.75%
-  Clase 06: 99.67% ± 0.58%
-  Clase 07: 95.44% ± 1.19%
-  Clase 08: 95.28% ± 1.09%
-  Clase 09: 92.27% ± 3.19%
-  Clase 10: 89.55% ± 5.01%
+  Clase 01: 99.12% ± 0.21%
+  Clase 02: 85.35% ± 1.30%
+  Clase 03: 94.99% ± 2.61%
+  Clase 04: 96.49% ± 1.93%
+  Clase 05: 79.05% ± 6.75%
+  Clase 06: 89.07% ± 9.54%
+  Clase 07: 94.93% ± 0.98%
+  Clase 08: 98.86% ± 0.38%
+  Clase 09: 78.77% ± 1.94%
+  Clase 10: 91.72% ± 4.94%
 ------------------------------------------------------------
-OA Final: 95.81% ± 0.43%
-AA Final: 94.06% ± 0.87%
+OA Final: 97.08% ± 0.18%
+AA Final: 90.83% ± 1.67%
 ============================================================
 Prueba iteracion 2 finalizada.
 ********************************************
@@ -322,29 +322,29 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
@@ -361,24 +361,24 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
- Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
- Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
- Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
@@ -397,22 +397,22 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
 ============================================================
-Mejor Configuración: Alpha=1.0, Decay=3.0, Soft=1.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=0.5, Decay=3.0, Soft=0.5, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 95.31% ± 0.84%
-  Clase 02: 93.75% ± 2.11%
-  Clase 03: 94.18% ± 1.62%
-  Clase 04: 98.60% ± 0.19%
-  Clase 05: 98.20% ± 1.52%
-  Clase 06: 98.35% ± 1.18%
-  Clase 07: 97.85% ± 0.21%
-  Clase 08: 97.96% ± 0.39%
-  Clase 09: 99.33% ± 0.26%
-  Clase 10: 97.90% ± 0.22%
+  Clase 01: 93.89% ± 1.20%
+  Clase 02: 91.33% ± 1.29%
+  Clase 03: 92.46% ± 1.63%
+  Clase 04: 99.05% ± 0.22%
+  Clase 05: 94.25% ± 5.68%
+  Clase 06: 98.69% ± 0.66%
+  Clase 07: 99.36% ± 0.09%
+  Clase 08: 97.37% ± 0.70%
+  Clase 09: 98.10% ± 0.81%
+  Clase 10: 98.46% ± 0.28%
 ------------------------------------------------------------
-OA Final: 97.80% ± 0.13%
-AA Final: 97.14% ± 0.22%
+OA Final: 98.50% ± 0.10%
+AA Final: 96.30% ± 0.81%
 ============================================================
 Prueba iteracion 3 finalizada.
 ********************************************
@@ -427,31 +427,31 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
@@ -459,24 +459,24 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
@@ -503,18 +503,18 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
 ============================================================
-Mejor Configuración: Alpha=1.5, Decay=3.0, Soft=0.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 94.24% ± 0.32%
-  Clase 04: 98.76% ± 0.30%
-  Clase 07: 80.98% ± 0.75%
-  Clase 08: 97.49% ± 0.80%
-  Clase 09: 5.44% ± 5.49%
-  Clase 10: 92.70% ± 0.42%
+  Clase 02: 95.11% ± 0.16%
+  Clase 04: 97.30% ± 0.96%
+  Clase 07: 82.07% ± 0.50%
+  Clase 08: 88.68% ± 0.64%
+  Clase 09: 10.46% ± 6.78%
+  Clase 10: 94.30% ± 0.33%
 ------------------------------------------------------------
-OA Final: 90.91% ± 0.15%
-AA Final: 78.27% ± 1.06%
+OA Final: 91.82% ± 0.04%
+AA Final: 77.98% ± 1.10%
 ============================================================
 Prueba iteracion 4 finalizada.
 ********************************************
@@ -544,18 +544,18 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
@@ -568,8 +568,8 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
@@ -605,19 +605,19 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
 ============================================================
-Mejor Configuración: Alpha=0.1, Decay=1.0, Soft=0.0, Epoch=200, Batch=100
+Mejor Configuración: Alpha=1.5, Decay=1.0, Soft=0.5, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 88.97% ± 0.53%
-  Clase 04: 94.42% ± 0.73%
-  Clase 05: 75.08% ± 32.95%
-  Clase 06: 10.84% ± 7.97%
-  Clase 07: 86.91% ± 0.71%
-  Clase 08: 98.50% ± 0.66%
-  Clase 10: 93.29% ± 0.46%
+  Clase 02: 86.94% ± 0.21%
+  Clase 04: 89.21% ± 2.89%
+  Clase 05: 68.89% ± 30.79%
+  Clase 06: 46.73% ± 22.88%
+  Clase 07: 88.75% ± 0.49%
+  Clase 08: 96.70% ± 0.52%
+  Clase 10: 93.54% ± 0.33%
 ------------------------------------------------------------
-OA Final: 90.50% ± 0.11%
-AA Final: 78.29% ± 5.15%
+OA Final: 90.84% ± 0.04%
+AA Final: 81.54% ± 3.51%
 ============================================================
 Prueba iteracion 5 finalizada.
 ********************************************
@@ -638,16 +638,16 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
@@ -672,8 +672,8 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
- Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
@@ -684,8 +684,8 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
- Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
@@ -708,17 +708,17 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
 ============================================================
-Mejor Configuración: Alpha=0.1, Decay=2.0, Soft=0.5, Epoch=200, Batch=100
+Mejor Configuración: Alpha=0.1, Decay=1.0, Soft=1.0, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 99.54% ± 0.43%
-  Clase 04: 100.00% ± 0.00%
-  Clase 07: 99.55% ± 0.68%
-  Clase 08: 98.73% ± 0.38%
-  Clase 09: 97.25% ± 1.08%
+  Clase 02: 99.64% ± 0.40%
+  Clase 04: 96.77% ± 7.21%
+  Clase 07: 99.69% ± 0.68%
+  Clase 08: 99.18% ± 0.39%
+  Clase 09: 95.47% ± 2.83%
 ------------------------------------------------------------
-OA Final: 99.01% ± 0.11%
-AA Final: 99.01% ± 0.19%
+OA Final: 99.17% ± 0.13%
+AA Final: 98.15% ± 1.48%
 ============================================================
 Prueba iteracion 6 finalizada.
 ********************************************
@@ -747,17 +747,17 @@ Cargando datos en memoria principal...
  Evaluando: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.1, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=1.0, Soft=1.0, Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100
@@ -765,8 +765,8 @@ Cargando datos en memoria principal...
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=0.5, Decay=3.0, Soft=1.0, Epochs=200, Batch=100 *************************
  Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.0, Epochs=200, Batch=100 *************************
- Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=1.0, Soft=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0, Decay=1.0, Soft=0.5, Epochs=200, Batch=100 *************************
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100
  Evaluando: Alpha=1.0, Decay=2.0, Soft=1.0, Epochs=200, Batch=100
@@ -809,19 +809,19 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
 ============================================================
-Mejor Configuración: Alpha=0.1, Decay=3.0, Soft=0.5, Epoch=200, Batch=100
+Mejor Configuración: Alpha=0.1, Decay=3.0, Soft=1.0, Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 93.70% ± 1.22%
-  Clase 02: 83.81% ± 6.58%
-  Clase 03: 93.52% ± 0.16%
-  Clase 04: 96.45% ± 0.15%
-  Clase 07: 98.25% ± 0.23%
-  Clase 08: 98.10% ± 0.43%
+  Clase 01: 87.10% ± 4.35%
+  Clase 02: 75.02% ± 4.49%
+  Clase 03: 90.72% ± 0.48%
+  Clase 04: 94.49% ± 1.39%
+  Clase 07: 99.18% ± 0.11%
+  Clase 08: 98.00% ± 0.32%
 ------------------------------------------------------------
-OA Final: 98.04% ± 0.09%
-AA Final: 93.97% ± 1.05%
+OA Final: 98.57% ± 0.04%
+AA Final: 90.75% ± 1.11%
 ============================================================
 Prueba iteracion 7 finalizada.
 ********************************************
-********** Se han finalizado todas las pruebas: 23:42:13 **********
+********** Se han finalizado todas las pruebas: 22:18:17 **********

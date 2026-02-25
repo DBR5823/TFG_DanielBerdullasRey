@@ -20,7 +20,7 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader
+from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
@@ -599,12 +599,37 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
+  # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
+  class_counts = [0] * nclases
+  for ind in train:
+    # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
+    clase_real = truth[ind] - 1
+    class_counts[clase_real] += 1
+  
+  # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
+  class_weights = [1.0 / count if count > 0 else 0.0 for count in class_counts]
+
+  # 3. Asignamos el peso correspondiente a cada muestra individual
+  sample_weights = [0.0] * len(train)
+  for i, ind in enumerate(train):
+    clase_real = truth[ind] - 1
+    sample_weights[i] = class_weights[clase_real]
+
+  # 4. Creamos el Sampler de PyTorch
+  sample_weights_tensor = torch.DoubleTensor(sample_weights)
+  # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+  sampler = WeightedRandomSampler(
+    weights=sample_weights_tensor, 
+    num_samples=len(sample_weights_tensor), 
+    replacement=True
+  )
+
   # Dataloader
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
-  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
+  train_loader=DataLoader(dataset_train,batch_size,sampler=sampler)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento

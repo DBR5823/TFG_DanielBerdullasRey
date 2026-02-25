@@ -20,12 +20,12 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
+from torch.utils.data import Dataset,DataLoader
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 
-
+from implementations.torchbearer_implementation import FMix
 
 from concurrent.futures import ProcessPoolExecutor
 
@@ -42,6 +42,15 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
+#Rutas de archivos
+#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
+#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
+#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
+#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
 
@@ -76,13 +85,12 @@ def read_raw(fichero):
   #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
   #print('  Píxeles leídos:',len(datos))
   # esta red no necesita realmente normalizar
-
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
   d_min = datos.min()
   d_max = datos.max()
   datos -= d_min
   datos /= (d_max - d_min)
-
+  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -357,7 +365,7 @@ class HyperAllDataset(Dataset):
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
     self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()])
+      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()],)
 
   #Función para devolver el número de instancias del dataset
   def __len__(self):
@@ -516,11 +524,46 @@ class CNN21(nn.Module):
     #Se devuelven las puntuaciones de clases asociadas al patch que ha sido analizado
     return out
 
+
+
+def aplicar_cutmix(inputs, labels, alpha):
+  '''Corta un rectángulo de una imagen y lo pega en otra'''
+  lam = np.random.beta(alpha, alpha)
+  index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
+  
+  # Calcular coordenadas del cuadro
+  W, H = inputs.size(2), inputs.size(3)
+  cut_rat = np.sqrt(1. - lam)
+  cut_w = int(W * cut_rat)
+  cut_h = int(H * cut_rat)
+  cx = np.random.randint(W)
+  cy = np.random.randint(H)
+
+  bbx1 = np.clip(cx - cut_w // 2, 0, W)
+  bby1 = np.clip(cy - cut_h // 2, 0, H)
+  bbx2 = np.clip(cx + cut_w // 2, 0, W)
+  bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+  # SOLUCIÓN: Clonar el tensor para no destruir los datos originales
+  inputs_mixed = inputs.clone()
+  
+  # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+  inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+  
+  # Ajustar lambda según el área real cortada
+  lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+  
+  # Devolver el tensor modificado, dejando "inputs" intacto
+  return inputs_mixed, labels, labels[index], lam
+
+
+
+
 #-----------------------------------------------------------------
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH):
+def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -596,37 +639,12 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
-  # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
-  class_counts = [0] * nclases
-  for ind in train:
-    # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
-    clase_real = truth[ind] - 1
-    class_counts[clase_real] += 1
-  
-  # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
-  class_weights = [1.0 / count if count > 0 else 0.0 for count in class_counts]
-
-  # 3. Asignamos el peso correspondiente a cada muestra individual
-  sample_weights = [0.0] * len(train)
-  for i, ind in enumerate(train):
-    clase_real = truth[ind] - 1
-    sample_weights[i] = class_weights[clase_real]
-
-  # 4. Creamos el Sampler de PyTorch
-  sample_weights_tensor = torch.DoubleTensor(sample_weights)
-  # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
-  sampler = WeightedRandomSampler(
-    weights=sample_weights_tensor, 
-    num_samples=len(sample_weights_tensor), 
-    replacement=True
-  )
-
   # Dataloader
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
-  train_loader=DataLoader(dataset_train,batch_size,sampler=sampler)
+  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -726,12 +744,15 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
+      inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=alpha)
+
+      
       
       # 7.2. Forward pass
       #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      outputs=model(inputs)
-      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-      loss=criterion(outputs,labels)
+      #Usando las imágenes mezcladas
+      outputs = model(inputs_mixed)
+      loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -905,9 +926,31 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
 
 
 
+
+def run_combination(params_with_data):
+    params, data_bundle = params_with_data
+    a, e, b= params
+    
+    val_acc_list = []
+
+    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}")
+    sys.stdout.flush()
+
+    for exp in range(1):
+        res = main(exp, a, data_bundle,0, e,b)
+        # Maneja si main devuelve una tupla o un solo valor según TEST
+        v_acc = res[0] if isinstance(res, tuple) else res
+        val_acc_list.append(v_acc)
+
+    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b} *************************")
+    sys.stdout.flush()
+    
+    return {'alpha': a, 'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+
+
 def run_final_eval(args):
-    exp_idx, epochs, batch, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, data_bundle, 1, epochs, batch)
+    exp_idx, alpha, epochs, batch, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch)
     return oa, aa, class_aa
 
 
@@ -920,7 +963,8 @@ if __name__ == '__main__':
         pass
     
 
-    #Si no se ha indicado un número asociado a un dataset se ejecuta 
+
+    #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<2:
       ficheroLeido="oitaven"
       print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
@@ -1023,17 +1067,37 @@ if __name__ == '__main__':
         'center': center, 'H3': H3, 'V3': V3,
         'nseg': nseg
     }
+
+    # 2. CONFIGURACIÓN DEL GRID SEARCH
+    alphas = [0.1,0.3,0.5,0.7,1.0]
+    epochs= [200]
+    batches = [100]
+
+    combinaciones = list(itertools.product(alphas, epochs, batches))
+
+    tareas = [(comb, data_bundle) for comb in combinaciones]
+    
+    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+
+    #Ejecutamos el grid search con 5 procesos
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        resultados_finales = list(executor.map(run_combination, tareas))
+
+    #RESULTADOS DEL GRID SEARCH
+    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+    mejor_config = resultados_finales[0]
+
+    # 3. EVALUACIÓN FINAL PARALELIZADA
+    print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados al experimento
+    # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, 200,100 ,data_bundle) 
+        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
         for i in range(EXP)
     ]
-
-    print("Ejecutando test...")
     
-    #Ejecutamos el test con 5 procesos
+    #Ejecutamos el test final con 5 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
@@ -1051,7 +1115,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
     print("="*60)
-    print(f"Mejor Configuración: Epoch=200, Batch=100")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

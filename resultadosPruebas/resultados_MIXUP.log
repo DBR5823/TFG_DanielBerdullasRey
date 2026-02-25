@@ -1,0 +1,331 @@
+********** Iniciando experimentos MIXUP: 13:00:51 **********
+Ejecutando: prueba inicial MIXUP (sobre Oitaven)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.1, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.81% ± 0.30%
+  Clase 02: 71.80% ± 3.19%
+  Clase 03: 75.92% ± 3.19%
+  Clase 04: 84.05% ± 1.77%
+  Clase 05: 85.77% ± 1.94%
+  Clase 06: 91.26% ± 1.42%
+  Clase 07: 92.69% ± 0.56%
+  Clase 08: 95.27% ± 0.46%
+  Clase 09: 98.55% ± 0.56%
+  Clase 10: 86.32% ± 1.80%
+------------------------------------------------------------
+OA Final: 92.33% ± 0.27%
+AA Final: 87.94% ± 0.40%
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.5, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 71.17% ± 1.35%
+  Clase 07: 88.41% ± 0.27%
+  Clase 08: 95.29% ± 0.61%
+  Clase 10: 94.16% ± 0.34%
+------------------------------------------------------------
+OA Final: 89.36% ± 0.21%
+AA Final: 87.26% ± 0.41%
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.79% ± 0.06%
+  Clase 02: 76.69% ± 3.39%
+  Clase 03: 87.67% ± 2.45%
+  Clase 04: 92.29% ± 1.29%
+  Clase 05: 68.24% ± 3.07%
+  Clase 06: 77.12% ± 10.68%
+  Clase 07: 97.07% ± 0.73%
+  Clase 08: 93.54% ± 0.90%
+  Clase 09: 67.29% ± 5.01%
+  Clase 10: 21.00% ± 10.48%
+------------------------------------------------------------
+OA Final: 93.72% ± 0.55%
+AA Final: 78.07% ± 1.75%
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.5, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.11% ± 0.86%
+  Clase 02: 83.56% ± 2.19%
+  Clase 03: 84.20% ± 0.88%
+  Clase 04: 96.31% ± 0.66%
+  Clase 05: 89.75% ± 3.01%
+  Clase 06: 95.53% ± 1.39%
+  Clase 07: 98.13% ± 0.19%
+  Clase 08: 96.90% ± 0.71%
+  Clase 09: 96.44% ± 1.14%
+  Clase 10: 90.37% ± 1.49%
+------------------------------------------------------------
+OA Final: 95.97% ± 0.34%
+AA Final: 92.73% ± 0.32%
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.5, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.77% ± 0.22%
+  Clase 04: 96.44% ± 1.73%
+  Clase 07: 79.10% ± 0.40%
+  Clase 08: 94.41% ± 1.40%
+  Clase 09: 11.16% ± 8.53%
+  Clase 10: 91.86% ± 0.24%
+------------------------------------------------------------
+OA Final: 90.27% ± 0.11%
+AA Final: 77.96% ± 1.17%
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.5, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.70% ± 0.57%
+  Clase 04: 91.48% ± 1.67%
+  Clase 05: 32.71% ± 13.95%
+  Clase 06: 13.98% ± 14.31%
+  Clase 07: 84.91% ± 0.64%
+  Clase 08: 98.20% ± 0.29%
+  Clase 10: 92.72% ± 0.33%
+------------------------------------------------------------
+OA Final: 89.28% ± 0.18%
+AA Final: 71.67% ± 2.96%
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.1, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.08%
+  Clase 04: 98.21% ± 4.01%
+  Clase 07: 98.60% ± 1.27%
+  Clase 08: 97.76% ± 1.10%
+  Clase 09: 95.52% ± 3.37%
+------------------------------------------------------------
+OA Final: 98.20% ± 0.53%
+AA Final: 98.01% ± 1.10%
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (5 combinaciones) ---
+ Evaluando: Alpha=0.1, Epochs=200, Batch=100
+ Evaluando: Alpha=0.3, Epochs=200, Batch=100
+ Evaluando: Alpha=0.5, Epochs=200, Batch=100
+ Evaluando: Alpha=0.7, Epochs=200, Batch=100
+ Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100 *************************
+ Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100 *************************
+ Evaluando: Alpha=1.0, Epochs=200, Batch=100
+ Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+============================================================
+Mejor Configuración: Alpha=0.5, Epoch=200, Batch=100
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 89.92% ± 2.70%
+  Clase 02: 53.21% ± 6.51%
+  Clase 03: 89.08% ± 0.95%
+  Clase 04: 84.57% ± 2.21%
+  Clase 07: 96.62% ± 0.29%
+  Clase 08: 97.72% ± 0.40%
+------------------------------------------------------------
+OA Final: 96.44% ± 0.16%
+AA Final: 85.19% ± 1.57%
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas: 13:49:48 **********

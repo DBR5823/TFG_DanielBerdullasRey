@@ -20,12 +20,12 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
+from torch.utils.data import Dataset,DataLoader
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 
-
+from implementations.torchbearer_implementation import FMix
 
 from concurrent.futures import ProcessPoolExecutor
 
@@ -35,12 +35,15 @@ import itertools
 
 import sys
 
+import os
+
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
 AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
+
 
 
 
@@ -76,13 +79,12 @@ def read_raw(fichero):
   #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
   #print('  Píxeles leídos:',len(datos))
   # esta red no necesita realmente normalizar
-
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
   d_min = datos.min()
   d_max = datos.max()
   datos -= d_min
   datos /= (d_max - d_min)
-
+  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -445,6 +447,7 @@ def update_lr(optimizer,lr):
 # calcula los promedios de precisiones
 
 
+
 #-----------------------------------------------------------------
 # PYTORCH - NETWORK
 #-----------------------------------------------------------------
@@ -520,7 +523,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -596,37 +599,12 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
-  # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
-  class_counts = [0] * nclases
-  for ind in train:
-    # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
-    clase_real = truth[ind] - 1
-    class_counts[clase_real] += 1
-  
-  # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
-  class_weights = [1.0 / count if count > 0 else 0.0 for count in class_counts]
-
-  # 3. Asignamos el peso correspondiente a cada muestra individual
-  sample_weights = [0.0] * len(train)
-  for i, ind in enumerate(train):
-    clase_real = truth[ind] - 1
-    sample_weights[i] = class_weights[clase_real]
-
-  # 4. Creamos el Sampler de PyTorch
-  sample_weights_tensor = torch.DoubleTensor(sample_weights)
-  # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
-  sampler = WeightedRandomSampler(
-    weights=sample_weights_tensor, 
-    num_samples=len(sample_weights_tensor), 
-    replacement=True
-  )
-
   # Dataloader
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
-  train_loader=DataLoader(dataset_train,batch_size,sampler=sampler)
+  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -668,6 +646,8 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
   #Generamos la red y la cargamos en la CPU o GPU (si es compatible con CUDA)
   model=CNN21(N1,N2,N3,N4,N5,D1,D2).to(device)
 
+  # Inicializamos FMix para patches de 32x32 (sizex x sizey)
+  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
   # 6. Loss, optimizer, and scheduler
 
@@ -726,12 +706,20 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
+      # --- INTEGRACIÓN FMIX ---
+      # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
+      inputs_mixed = fmix_util(inputs) 
+      lam = fmix_util.lam         # El peso de la mezcla
+      indices = fmix_util.index   # Los índices de las imágenes mezcladas
       
       # 7.2. Forward pass
       #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      outputs=model(inputs)
+      #Usando las imágenes mezcladas
+      outputs = model(inputs_mixed)
+
       #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-      loss=criterion(outputs,labels)
+      # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
+      loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -905,9 +893,31 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH):
 
 
 
+
+def run_combination(params_with_data):
+    params, data_bundle = params_with_data
+    a, d, s, e, b= params
+    
+    val_acc_list = []
+
+    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}")
+    sys.stdout.flush()
+
+    for exp in range(1):
+        res = main(exp, a, d, s, data_bundle,0, e,b)
+        # Maneja si main devuelve una tupla o un solo valor según TEST
+        v_acc = res[0] if isinstance(res, tuple) else res
+        val_acc_list.append(v_acc)
+
+    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b} *************************")
+    sys.stdout.flush()
+    
+    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+
+
 def run_final_eval(args):
-    exp_idx, epochs, batch, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, data_bundle, 1, epochs, batch)
+    exp_idx, alpha, decay, soft, epochs, batch, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch)
     return oa, aa, class_aa
 
 
@@ -920,7 +930,7 @@ if __name__ == '__main__':
         pass
     
 
-    #Si no se ha indicado un número asociado a un dataset se ejecuta 
+    #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<2:
       ficheroLeido="oitaven"
       print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
@@ -997,6 +1007,8 @@ if __name__ == '__main__':
           GT='datosEntrada/oitaven/oitaven_river.pgm'
           SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
           CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
+      
+
     
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
@@ -1023,17 +1035,39 @@ if __name__ == '__main__':
         'center': center, 'H3': H3, 'V3': V3,
         'nseg': nseg
     }
+
+    # 2. CONFIGURACIÓN DEL GRID SEARCH
+    alphas = [0.1,0.5,1.0,1.5]
+    decays = [1.0,2.0,3.0]
+    softs  = [0.0,0.5,1.0]
+    epochs= [200]
+    batches = [100]
+
+    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches))
+
+    tareas = [(comb, data_bundle) for comb in combinaciones]
+    
+    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+
+    #Ejecutamos el grid search con 5 procesos
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        resultados_finales = list(executor.map(run_combination, tareas))
+
+    #RESULTADOS DEL GRID SEARCH
+    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+    mejor_config = resultados_finales[0]
+
+    # 3. EVALUACIÓN FINAL PARALELIZADA
+    print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados al experimento
+    # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, 200,100 ,data_bundle) 
+        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
         for i in range(EXP)
     ]
-
-    print("Ejecutando test...")
     
-    #Ejecutamos el test con 5 procesos
+    #Ejecutamos el test final con 5 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
@@ -1049,9 +1083,9 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Epoch=200, Batch=100")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
