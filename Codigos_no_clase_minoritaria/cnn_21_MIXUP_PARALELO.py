@@ -20,7 +20,7 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader
+from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
@@ -548,7 +548,7 @@ def aplicar_mixup(inputs, labels, alpha):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
+def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -732,15 +732,19 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha)
+      if(random.random()<probabilidad):
 
+        inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha)
+        
+        # 7.2. Forward pass
+        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+        #Usando las imágenes mezcladas
+        outputs = model(inputs_mixed)
+        loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
-      
-      # 7.2. Forward pass
-      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      #Usando las imágenes mezcladas
-      outputs = model(inputs_mixed)
-      loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
+      else:
+        outputs=model(inputs)
+        loss=criterion(outputs,labels)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -917,28 +921,28 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, e, b= params
+    a, e, b, p= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}")
+    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, data_bundle,0, e,b)
+        res = main(exp, a, data_bundle,0, e, b, p)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b} *************************")
+    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+    return {'alpha': a, 'epochs':e,'batch':b ,'prob':p ,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, epochs, batch, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch)
+    exp_idx, alpha, epochs, batch, prob,data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob)
     return oa, aa, class_aa
 
 
@@ -1059,15 +1063,16 @@ if __name__ == '__main__':
     alphas = [0.1,0.3,0.5,0.7,1.0]
     epochs= [200]
     batches = [100]
+    probs=[0.2,0.5,0.7]
 
-    combinaciones = list(itertools.product(alphas, epochs, batches))
+    combinaciones = list(itertools.product(alphas, epochs, batches, probs))
 
     tareas = [(comb, data_bundle) for comb in combinaciones]
     
     print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
     #Ejecutamos el grid search von 6 procesos
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=3) as executor:
         resultados_finales = list(executor.map(run_combination, tareas))
 
     #RESULTADOS DEL GRID SEARCH
@@ -1080,12 +1085,12 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
+        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'] ,data_bundle) 
         for i in range(EXP)
     ]
     
     #Ejecutamos el test final con 5 procesos
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=3) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
@@ -1102,7 +1107,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

@@ -523,7 +523,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -734,20 +734,26 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      # --- INTEGRACIÓN FMIX ---
-      # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-      inputs_mixed = fmix_util(inputs) 
-      lam = fmix_util.lam         # El peso de la mezcla
-      indices = fmix_util.index   # Los índices de las imágenes mezcladas
-      
-      # 7.2. Forward pass
-      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-      #Usando las imágenes mezcladas
-      outputs = model(inputs_mixed)
+      if(random.random()<probabilidad):
+        # --- INTEGRACIÓN FMIX ---
+        # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
+        inputs_mixed = fmix_util(inputs) 
+        lam = fmix_util.lam         # El peso de la mezcla
+        indices = fmix_util.index   # Los índices de las imágenes mezcladas
+        
+        # 7.2. Forward pass
+        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+        #Usando las imágenes mezcladas
+        outputs = model(inputs_mixed)
 
-      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-      # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-      loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+        #Comparamos las predicciones con las etiquetas reales y se calcula el error.
+        # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
+        loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+      
+      else:
+        outputs=model(inputs)
+        loss=criterion(outputs,labels)
+      
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -924,28 +930,28 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, d, s, e, b= params
+    a, d, s, e, b, p= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}")
+    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e,b)
+        res = main(exp, a, d, s, data_bundle,0, e, b, p)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b} *************************")
+    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
+    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, decay, soft, epochs, batch, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch)
+    exp_idx, alpha, decay, soft, epochs, batch, prob, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob)
     return oa, aa, class_aa
 
 
@@ -1066,13 +1072,14 @@ if __name__ == '__main__':
 
     # 2. CONFIGURACIÓN DEL GRID SEARCH
     alphas = [0.1,0.5,1.0,1.5]
-    decays = [1.0,2.0,3.0]
-    softs  = [0.0,0.5,1.0]
+    decays = [2.0,3.0]
+    softs  = [0.0,0.5]
     epochs= [200]
     batches = [100]
+    probs=[0.2,0.5,0.7]
 
 
-    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches))
+    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
 
     tareas = [(comb, data_bundle) for comb in combinaciones]
     
@@ -1092,7 +1099,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
+        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], data_bundle) 
         for i in range(EXP)
     ]
     
@@ -1114,7 +1121,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

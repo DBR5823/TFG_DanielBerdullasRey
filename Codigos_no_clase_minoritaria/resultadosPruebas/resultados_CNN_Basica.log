@@ -1,4 +1,4 @@
-********** Iniciando experimentos CNN Básica: 19:07:07 **********
+********** Iniciando experimentos CNN Básica: 12:56:36 **********
 Ejecutando: prueba inicial CNN Básica (sobre Oitaven)
 ********************Ejecutando prueba sobre el dataset oitaven ******************************
 Cargando datos en memoria principal...
@@ -10,24 +10,24 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 96.37% ± 0.83%
-  Clase 02: 80.98% ± 2.49%
-  Clase 03: 76.12% ± 4.48%
-  Clase 04: 89.69% ± 3.07%
-  Clase 05: 87.12% ± 3.21%
-  Clase 06: 90.89% ± 1.82%
-  Clase 07: 97.31% ± 0.30%
-  Clase 08: 95.99% ± 0.40%
-  Clase 09: 98.90% ± 0.65%
-  Clase 10: 93.18% ± 0.46%
+  Clase 01: 97.28% ± 0.59%
+  Clase 02: 80.29% ± 3.36%
+  Clase 03: 76.21% ± 2.36%
+  Clase 04: 89.32% ± 3.94%
+  Clase 05: 85.23% ± 2.87%
+  Clase 06: 91.93% ± 1.48%
+  Clase 07: 97.11% ± 0.26%
+  Clase 08: 96.08% ± 0.32%
+  Clase 09: 98.74% ± 0.54%
+  Clase 10: 92.90% ± 0.61%
 ------------------------------------------------------------
-OA Final: 95.51% ± 0.22%
-AA Final: 90.66% ± 0.73%
+OA Final: 95.42% ± 0.15%
+AA Final: 90.51% ± 0.97%
 ============================================================
 ------------------------------------------
 Ejecutando prueba iteración: 1...
@@ -41,18 +41,18 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 70.49% ± 0.48%
-  Clase 07: 91.08% ± 0.20%
-  Clase 08: 95.14% ± 0.15%
-  Clase 10: 94.63% ± 0.34%
+  Clase 02: 70.44% ± 1.15%
+  Clase 07: 91.19% ± 0.26%
+  Clase 08: 95.45% ± 0.81%
+  Clase 10: 94.77% ± 0.24%
 ------------------------------------------------------------
-OA Final: 90.68% ± 0.14%
-AA Final: 87.83% ± 0.18%
+OA Final: 90.79% ± 0.08%
+AA Final: 87.96% ± 0.29%
 ============================================================
 Prueba iteracion 1 finalizada.
 ********************************************
@@ -67,24 +67,24 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 99.28% ± 0.28%
-  Clase 02: 84.24% ± 2.94%
-  Clase 03: 94.52% ± 1.35%
-  Clase 04: 90.25% ± 4.52%
-  Clase 05: 68.29% ± 8.50%
-  Clase 06: 78.78% ± 14.80%
-  Clase 07: 95.58% ± 1.06%
-  Clase 08: 98.68% ± 0.12%
-  Clase 09: 78.26% ± 5.32%
-  Clase 10: 71.87% ± 25.30%
+  Clase 01: 99.00% ± 0.27%
+  Clase 02: 82.86% ± 3.42%
+  Clase 03: 92.85% ± 1.15%
+  Clase 04: 94.71% ± 2.57%
+  Clase 05: 78.13% ± 5.54%
+  Clase 06: 85.64% ± 12.03%
+  Clase 07: 95.65% ± 1.16%
+  Clase 08: 98.63% ± 0.36%
+  Clase 09: 77.99% ± 4.39%
+  Clase 10: 84.06% ± 8.61%
 ------------------------------------------------------------
-OA Final: 96.79% ± 0.12%
-AA Final: 85.97% ± 2.87%
+OA Final: 96.86% ± 0.17%
+AA Final: 88.95% ± 1.29%
 ============================================================
 Prueba iteracion 2 finalizada.
 ********************************************
@@ -99,24 +99,24 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 93.08% ± 1.57%
-  Clase 02: 88.30% ± 3.43%
-  Clase 03: 89.36% ± 2.84%
-  Clase 04: 98.53% ± 0.40%
-  Clase 05: 95.63% ± 2.64%
-  Clase 06: 97.82% ± 1.22%
-  Clase 07: 99.25% ± 0.12%
-  Clase 08: 97.59% ± 0.98%
-  Clase 09: 97.30% ± 1.39%
-  Clase 10: 98.59% ± 0.28%
+  Clase 01: 92.10% ± 1.61%
+  Clase 02: 91.83% ± 0.51%
+  Clase 03: 92.08% ± 2.17%
+  Clase 04: 98.14% ± 0.51%
+  Clase 05: 97.61% ± 1.94%
+  Clase 06: 97.97% ± 1.17%
+  Clase 07: 99.31% ± 0.09%
+  Clase 08: 97.28% ± 0.33%
+  Clase 09: 97.79% ± 0.47%
+  Clase 10: 98.31% ± 0.16%
 ------------------------------------------------------------
-OA Final: 98.27% ± 0.07%
-AA Final: 95.54% ± 0.59%
+OA Final: 98.31% ± 0.06%
+AA Final: 96.24% ± 0.57%
 ============================================================
 Prueba iteracion 3 finalizada.
 ********************************************
@@ -131,20 +131,20 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 94.29% ± 0.16%
-  Clase 04: 95.84% ± 1.12%
-  Clase 07: 80.23% ± 0.24%
-  Clase 08: 91.15% ± 1.60%
-  Clase 09: 6.68% ± 6.35%
-  Clase 10: 93.71% ± 0.20%
+  Clase 02: 94.29% ± 0.15%
+  Clase 04: 95.82% ± 2.04%
+  Clase 07: 79.87% ± 0.42%
+  Clase 08: 89.68% ± 0.79%
+  Clase 09: 10.19% ± 7.26%
+  Clase 10: 93.80% ± 0.22%
 ------------------------------------------------------------
-OA Final: 90.95% ± 0.12%
-AA Final: 76.98% ± 1.31%
+OA Final: 90.87% ± 0.14%
+AA Final: 77.28% ± 1.39%
 ============================================================
 Prueba iteracion 4 finalizada.
 ********************************************
@@ -159,21 +159,21 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 86.31% ± 0.31%
-  Clase 04: 85.72% ± 1.66%
-  Clase 05: 44.84% ± 28.78%
-  Clase 06: 7.16% ± 4.79%
-  Clase 07: 88.49% ± 0.24%
-  Clase 08: 96.31% ± 0.56%
-  Clase 10: 92.95% ± 0.09%
+  Clase 02: 86.67% ± 0.35%
+  Clase 04: 86.31% ± 4.00%
+  Clase 05: 48.53% ± 19.61%
+  Clase 06: 7.69% ± 4.21%
+  Clase 07: 88.26% ± 0.15%
+  Clase 08: 96.32% ± 0.17%
+  Clase 10: 93.24% ± 0.19%
 ------------------------------------------------------------
-OA Final: 90.37% ± 0.07%
-AA Final: 71.68% ± 4.13%
+OA Final: 90.46% ± 0.12%
+AA Final: 72.43% ± 2.51%
 ============================================================
 Prueba iteracion 5 finalizada.
 ********************************************
@@ -188,19 +188,19 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 99.79% ± 0.29%
-  Clase 04: 100.00% ± 0.00%
-  Clase 07: 99.05% ± 1.51%
-  Clase 08: 98.98% ± 0.86%
-  Clase 09: 92.29% ± 4.25%
+  Clase 02: 99.87% ± 0.21%
+  Clase 04: 98.21% ± 4.01%
+  Clase 07: 99.75% ± 0.26%
+  Clase 08: 98.94% ± 0.44%
+  Clase 09: 90.53% ± 5.94%
 ------------------------------------------------------------
-OA Final: 98.82% ± 0.69%
-AA Final: 98.02% ± 0.85%
+OA Final: 98.88% ± 0.37%
+AA Final: 97.46% ± 1.81%
 ============================================================
 Prueba iteracion 6 finalizada.
 ********************************************
@@ -215,21 +215,21 @@ ACABÓ LA PRUEBA
 ACABÓ LA PRUEBA
 
 ============================================================
-RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
 ============================================================
 Mejor Configuración: Epoch=200, Batch=100
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 85.07% ± 2.32%
-  Clase 02: 73.15% ± 2.52%
-  Clase 03: 90.58% ± 0.90%
-  Clase 04: 91.93% ± 1.86%
-  Clase 07: 99.08% ± 0.05%
-  Clase 08: 96.72% ± 0.52%
+  Clase 01: 86.84% ± 2.15%
+  Clase 02: 64.52% ± 4.30%
+  Clase 03: 90.05% ± 0.86%
+  Clase 04: 93.64% ± 2.24%
+  Clase 07: 99.01% ± 0.06%
+  Clase 08: 96.85% ± 0.44%
 ------------------------------------------------------------
-OA Final: 98.19% ± 0.08%
-AA Final: 89.42% ± 0.63%
+OA Final: 98.15% ± 0.12%
+AA Final: 88.49% ± 1.38%
 ============================================================
 Prueba iteracion 7 finalizada.
 ********************************************
-********** Se han finalizado todas las pruebas: 19:36:32 **********
+********** Se han finalizado todas las pruebas: 13:24:07 **********

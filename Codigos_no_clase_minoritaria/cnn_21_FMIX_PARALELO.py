@@ -35,6 +35,8 @@ import itertools
 
 import sys
 
+import os
+
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
@@ -42,15 +44,8 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
-#Rutas de archivos
-#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
-#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
-#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
-#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
+
+
 
 
 # DATASET='/home/amo/profile.raw'
@@ -364,7 +359,7 @@ class HyperAllDataset(Dataset):
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
     self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()],)
+      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()])
 
   #Función para devolver el número de instancias del dataset
   def __len__(self):
@@ -452,6 +447,7 @@ def update_lr(optimizer,lr):
 # calcula los promedios de precisiones
 
 
+
 #-----------------------------------------------------------------
 # PYTORCH - NETWORK
 #-----------------------------------------------------------------
@@ -523,32 +519,11 @@ class CNN21(nn.Module):
     #Se devuelven las puntuaciones de clases asociadas al patch que ha sido analizado
     return out
 
-
-
-#Función que implementa la técnica de aumentado de datos Mixup, recibe el batch actual junto a las etiquetas asociadas a los píxeles
-#Realiza la mezcla siguiendo la fórmula x=L*x1+(1-L)*x2
-#Trabaja con patches completos, es decir se mezclan patches completos píxel a píxel
-def aplicar_mixup(inputs, labels, alpha):
-  #Se genera un número aleatorio entre 0 y 1 siguiendo una distribición beta, dependiendo de su valor se realizará la mezcla con distinta proporción de cada batch
-  lam = np.random.beta(alpha, alpha) if alpha > 0 else 1
-
-  #Generamos na permutación aleatoria de los índices (se generan en la gráfica si se está usando cuda)
-  index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
-  
-  #Se realiza la mezcla de ambos patches
-  mixed_x = lam * inputs + (1 - lam) * inputs[index, :]
-
-  #Devolvemos los patches mezclados, las etiquetas originales de los patches y las etiquetas de los patches mezclados, además de el valor de la mezcla (lam)
-  return mixed_x, labels, labels[index], lam
-
-
-
-
 #-----------------------------------------------------------------
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -618,7 +593,6 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #La función devuelve los índices de los centros de segmentos que van a cada conjunto en base a la proporción indicada para cada conjunto mediante el parámetro SAMPLES
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,SAMPLES)
 
-  
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
   dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey)
   #print('  - train dataset:',len(dataset_train))
@@ -675,6 +649,8 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
   #Generamos la red y la cargamos en la CPU o GPU (si es compatible con CUDA)
   model=CNN21(N1,N2,N3,N4,N5,D1,D2).to(device)
 
+  # Inicializamos FMix para patches de 32x32 (sizex x sizey)
+  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
   # 6. Loss, optimizer, and scheduler
 
@@ -734,18 +710,25 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
       labels=labels.to(device)
 
       if(random.random()<probabilidad):
-
-        inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha)
+        # --- INTEGRACIÓN FMIX ---
+        # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
+        inputs_mixed = fmix_util(inputs) 
+        lam = fmix_util.lam         # El peso de la mezcla
+        indices = fmix_util.index   # Los índices de las imágenes mezcladas
         
         # 7.2. Forward pass
         #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
         #Usando las imágenes mezcladas
         outputs = model(inputs_mixed)
-        loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
+
+        #Comparamos las predicciones con las etiquetas reales y se calcula el error.
+        # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
+        loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
       
       else:
         outputs=model(inputs)
         loss=criterion(outputs,labels)
+      
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -922,28 +905,28 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, e, b, p= params
+    a, d, s, e, b, p= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}")
+    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, data_bundle,0, e, b, p)
+        res = main(exp, a, d, s, data_bundle,0, e, b, p)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p} *************************")
+    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'epochs':e,'batch':b ,'prob':p ,'mean_val_oa': np.mean(val_acc_list)}
+    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, epochs, batch, prob,data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob)
+    exp_idx, alpha, decay, soft, epochs, batch, prob, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob)
     return oa, aa, class_aa
 
 
@@ -1033,6 +1016,8 @@ if __name__ == '__main__':
           GT='datosEntrada/oitaven/oitaven_river.pgm'
           SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
           CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
+      
+
     
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
@@ -1061,18 +1046,21 @@ if __name__ == '__main__':
     }
 
     # 2. CONFIGURACIÓN DEL GRID SEARCH
-    alphas = [0.1,0.3,0.5,0.7,1.0]
+    alphas = [0.1,0.5,1.0,1.5]
+    decays = [2.0,3.0]
+    softs  = [0.0,0.5]
     epochs= [200]
     batches = [100]
     probs=[0.2,0.5,0.7]
 
-    combinaciones = list(itertools.product(alphas, epochs, batches, probs))
+
+    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
 
     tareas = [(comb, data_bundle) for comb in combinaciones]
     
     print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
-    #Ejecutamos el grid search von 6 procesos
+    #Ejecutamos el grid search con 5 procesos
     with ProcessPoolExecutor(max_workers=3) as executor:
         resultados_finales = list(executor.map(run_combination, tareas))
 
@@ -1086,7 +1074,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'] ,data_bundle) 
+        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], data_bundle) 
         for i in range(EXP)
     ]
     
@@ -1108,7 +1096,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

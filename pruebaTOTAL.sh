@@ -6,7 +6,7 @@ echo "Iniciando script 1..."
 #./pruebaCNN_Basica.sh
 
 echo "Script 1 finalizado. Iniciando script 2..."
-./pruebaFMIX.sh
+#./pruebaFMIX.sh
 
 
 echo "Script 2 finalizado. Iniciando script 3..."
