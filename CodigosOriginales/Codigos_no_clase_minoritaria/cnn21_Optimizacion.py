@@ -25,7 +25,7 @@ from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 
-from implementations.torchbearer_implementation import FMix
+
 
 from concurrent.futures import ProcessPoolExecutor
 
@@ -35,8 +35,6 @@ import itertools
 
 import sys
 
-import os,json
-
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
@@ -44,8 +42,15 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
-
-
+#Rutas de archivos
+#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
+DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
+#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
+GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
+#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
+SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
+#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
+CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
 # DATASET='/home/amo/profile.raw'
@@ -447,7 +452,6 @@ def update_lr(optimizer,lr):
 # calcula los promedios de precisiones
 
 
-
 #-----------------------------------------------------------------
 # PYTORCH - NETWORK
 #-----------------------------------------------------------------
@@ -523,7 +527,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -600,18 +604,15 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
-  #Número de hilos a usar para el dataloader
-  num_workers_dl = 0
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
- 
-  train_loader=DataLoader(dataset_train,batch_size,shuffle=True, num_workers=num_workers_dl)
+  train_loader=DataLoader(dataset_train,batch_size,shuffle=True)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
-  test_loader=DataLoader(dataset_test,batch_size,shuffle=False, num_workers=num_workers_dl)
+  test_loader=DataLoader(dataset_test,batch_size,shuffle=False)
 
   # Si queremos validacion
   if(len(val)>0):
@@ -649,8 +650,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Generamos la red y la cargamos en la CPU o GPU (si es compatible con CUDA)
   model=CNN21(N1,N2,N3,N4,N5,D1,D2).to(device)
 
-  # Inicializamos FMix para patches de 32x32 (sizex x sizey)
-  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
   # 6. Loss, optimizer, and scheduler
 
@@ -709,26 +708,12 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      if(random.random()<probabilidad):
-        # --- INTEGRACIÓN FMIX ---
-        # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-        inputs_mixed = fmix_util(inputs) 
-        lam = fmix_util.lam         # El peso de la mezcla
-        indices = fmix_util.index   # Los índices de las imágenes mezcladas
-        
-        # 7.2. Forward pass
-        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-        #Usando las imágenes mezcladas
-        outputs = model(inputs_mixed)
-
-        #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-        # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-        loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
       
-      else:
-        outputs=model(inputs)
-        loss=criterion(outputs,labels)
-      
+      # 7.2. Forward pass
+      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+      outputs=model(inputs)
+      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
+      loss=criterion(outputs,labels)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -905,28 +890,28 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, d, s, e, b, p= params
+    e, b= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}")
+    print(f" Evaluando: Epochs={e}, Batch={b}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p)
+        res = main(exp, data_bundle,0, e,b)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p} *************************")
+    print(f" Fin evaluación: Epochs={e}, Batch={b} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'mean_val_oa': np.mean(val_acc_list)}
+    return {'epochs':e,'batch':b ,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, decay, soft, epochs, batch, prob, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob)
+    exp_idx, epochs, batch, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, data_bundle, 1, epochs, batch)
     return oa, aa, class_aa
 
 
@@ -937,89 +922,6 @@ if __name__ == '__main__':
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
         pass
-    
-    archivoParametros = "hiperParametros_FMIX.json"
-    
-
-    #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
-    if len(sys.argv)<2:
-      ficheroLeido="oitaven"
-      print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-      #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-      DATASET='datosEntrada/oitaven/oitaven_river.raw'
-      #GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-      GT='datosEntrada/oitaven/oitaven_river.pgm'
-      #SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-      SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
-      #CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-      CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
-    
-    else:
-      try:
-        opcion = int(sys.argv[1])
-      except ValueError:
-          print("Error: El argumento debe ser un número entero.")
-          sys.exit(1)
-      
-      match opcion:
-        case 1:
-          ficheroLeido="das_mestas"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/das_mestas/das_mestas_river.raw'
-          GT='datosEntrada/das_mestas/das_mestas_river.pgm'
-          SEG='datosEntrada/das_mestas/seg_mestas_wp.raw'
-          CENTER='datosEntrada/das_mestas/seg_mestas_wp_centers.raw'
-        case 2:
-          ficheroLeido="eiras_dam"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/eiras_dam/eiras_dam.raw'
-          GT='datosEntrada/eiras_dam/eiras_dam.pgm'
-          SEG='datosEntrada/eiras_dam/seg_eiras_wp.raw'
-          CENTER='datosEntrada/eiras_dam/seg_eiras_wp_centers.raw'
-        case 3:
-          ficheroLeido="ermidas_creek"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ermidas_creek/ermidas_creek.raw'
-          GT='datosEntrada/ermidas_creek/ermidas_creek.pgm'
-          SEG='datosEntrada/ermidas_creek/seg_ermidas_wp.raw'
-          CENTER='datosEntrada/ermidas_creek/seg_ermidas_wp_centers.raw'
-        case 4:
-          ficheroLeido="ferreiras_river"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ferreiras_river/ferreiras_river.raw'
-          GT='datosEntrada/ferreiras_river/ferreiras_river.pgm'
-          SEG='datosEntrada/ferreiras_river/seg_ferreiras_wp.raw'
-          CENTER='datosEntrada/ferreiras_river/seg_ferreiras_wp_centers.raw'
-        case 5:
-          ficheroLeido="mera_river"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/mera_river/mera_river.raw'
-          GT='datosEntrada/mera_river/mera_river.pgm'
-          SEG='datosEntrada/mera_river/seg_mera_wp.raw'
-          CENTER='datosEntrada/mera_river/seg_mera_wp_centers.raw'
-        case 6:
-          ficheroLeido="ulla"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ulla/ulla_river.raw'
-          GT='datosEntrada/ulla/ulla_river.pgm'
-          SEG='datosEntrada/ulla/seg_ulla_wp.raw'
-          CENTER='datosEntrada/ulla/seg_ulla_wp_centers.raw'
-        case 7:
-          ficheroLeido="xesta"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/xesta/xesta_basin.raw'
-          GT='datosEntrada/xesta/xesta_basin.pgm'
-          SEG='datosEntrada/xesta/seg_xesta_wp.raw'
-          CENTER='datosEntrada/xesta/seg_xesta_wp_centers.raw'
-        case _:
-          ficheroLeido="oitaven"
-          print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/oitaven/oitaven_river.raw'
-          GT='datosEntrada/oitaven/oitaven_river.pgm'
-          SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
-          CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
-      
-
     
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
@@ -1047,46 +949,23 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
-    mejor_config=None
-    #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
-    if os.path.exists(archivoParametros):
-      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
-      with open(archivoParametros, 'r') as f:
-        mejor_config = json.load(f)
+    # 2. CONFIGURACIÓN DEL GRID SEARCH
+    epochs= [200]
+    batches = [100]
 
-    #Si no existe el fichero que contiene los hiperparámetros optimizados y nos encontramos ante el dataset oitaven pasamos a optimizarlos
-    if mejor_config is None:
-      if ficheroLeido!="oitaven":
-        print("ERROR: No hay parámetros optimizados almacenados")
-        sys.exit(1)
-      else:
+    combinaciones = list(itertools.product(epochs, batches))
 
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.5,1.0,1.5]
-        decays = [2.0,3.0]
-        softs  = [0.0,0.5]
-        epochs= [200]
-        batches = [100]
-        probs=[0.2,0.5,0.7]
+    tareas = [(comb, data_bundle) for comb in combinaciones]
+    
+    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
+    #Ejecutamos el grid search con 6 procesos
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        resultados_finales = list(executor.map(run_combination, tareas))
 
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
-
-        tareas = [(comb, data_bundle) for comb in combinaciones]
-        
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
-
-        #Ejecutamos el grid search con 5 procesos
-        with ProcessPoolExecutor(max_workers=3) as executor:
-            resultados_finales = list(executor.map(run_combination, tareas))
-
-        #RESULTADOS DEL GRID SEARCH
-        resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
-        mejor_config = resultados_finales[0]
-
-        #Almacenamos los hiperparámetros optimizados
-        with open(archivoParametros,'w') as f:
-          json.dump(mejor_config,f)
+    #RESULTADOS DEL GRID SEARCH
+    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+    mejor_config = resultados_finales[0]
 
     # 3. EVALUACIÓN FINAL PARALELIZADA
     print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
@@ -1094,12 +973,12 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], data_bundle) 
+        (i, mejor_config['epochs'],mejor_config['batch'] ,data_bundle) 
         for i in range(EXP)
     ]
     
     #Ejecutamos el test final con 5 procesos
-    with ProcessPoolExecutor(max_workers=3) as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
@@ -1114,9 +993,9 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
+    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST)")
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
+    print(f"Mejor Configuración: Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

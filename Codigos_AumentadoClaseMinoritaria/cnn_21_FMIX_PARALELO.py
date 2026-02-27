@@ -37,6 +37,8 @@ import sys
 
 import os
 
+import json
+
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
@@ -963,6 +965,8 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
+    #Archivo que contiene la mejor configuración de hiperparámetros
+    archivoParametros = "hiperParametros_FMIX.json"
 
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<2:
@@ -1070,28 +1074,47 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
-    # 2. CONFIGURACIÓN DEL GRID SEARCH
-    alphas = [0.1,0.5,1.0,1.5]
-    decays = [2.0,3.0]
-    softs  = [0.0,0.5]
-    epochs= [200]
-    batches = [100]
-    probs=[0.2,0.5,0.7]
+
+    mejor_config=None
+    #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
+    if os.path.exists(archivoParametros):
+      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
+      with open(archivoParametros, 'r') as f:
+        mejor_config = json.load(f)
+
+    #Si no existe el fichero que contiene los hiperparámetros optimizados y nos encontramos ante el dataset oitaven pasamos a optimizarlos
+    if mejor_config is None:
+      if ficheroLeido!="oitaven":
+        print("ERROR: No hay parámetros optimizados almacenados")
+        sys.exit(1)
+      else:
+        # 2. CONFIGURACIÓN DEL GRID SEARCH
+        alphas = [0.1,0.5,1.0,1.5]
+        decays = [2.0,3.0]
+        softs  = [0.0,0.5]
+        epochs= [200]
+        batches = [100]
+        probs=[0.2,0.5,0.7]
 
 
-    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
+        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
 
-    tareas = [(comb, data_bundle) for comb in combinaciones]
-    
-    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+        tareas = [(comb, data_bundle) for comb in combinaciones]
+        
+        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
-    #Ejecutamos el grid search con 5 procesos
-    with ProcessPoolExecutor(max_workers=3) as executor:
-        resultados_finales = list(executor.map(run_combination, tareas))
+        #Ejecutamos el grid search con 5 procesos
+        with ProcessPoolExecutor(max_workers=3) as executor:
+            resultados_finales = list(executor.map(run_combination, tareas))
 
-    #RESULTADOS DEL GRID SEARCH
-    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
-    mejor_config = resultados_finales[0]
+        #RESULTADOS DEL GRID SEARCH
+        resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+        mejor_config = resultados_finales[0]
+
+        #Almacenamos los hiperparámetros optimizados
+        with open(archivoParametros,'w') as f:
+          json.dump(mejor_config,f)
+
 
     # 3. EVALUACIÓN FINAL PARALELIZADA
     print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")

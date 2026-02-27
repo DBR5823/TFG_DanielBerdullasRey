@@ -20,7 +20,7 @@ import math, random, struct, signal, time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import Dataset,DataLoader
+from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
@@ -35,7 +35,7 @@ import itertools
 
 import sys
 
-import os,json
+import os
 
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
@@ -599,6 +599,31 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
+  # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
+  class_counts = [0] * nclases
+  for ind in train:
+    # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
+    clase_real = truth[ind] - 1
+    class_counts[clase_real] += 1
+  
+  # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
+  class_weights = [1.0/math.sqrt(count) if count > 0 else 0.0 for count in class_counts]
+
+  # 3. Asignamos el peso correspondiente a cada muestra individual
+  sample_weights = [0.0] * len(train)
+  for i, ind in enumerate(train):
+    clase_real = truth[ind] - 1
+    sample_weights[i] = class_weights[clase_real]
+
+  # 4. Creamos el Sampler de PyTorch
+  sample_weights_tensor = torch.DoubleTensor(sample_weights)
+  # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+  sampler = WeightedRandomSampler(
+    weights=sample_weights_tensor, 
+    num_samples=len(sample_weights_tensor), 
+    replacement=True
+  )
+
   # Dataloader
   #Número de hilos a usar para el dataloader
   num_workers_dl = 0
@@ -606,12 +631,12 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   batch_size=BATCH # defecto 100
   #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
   #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
- 
-  train_loader=DataLoader(dataset_train,batch_size,shuffle=True, num_workers=num_workers_dl)
+
+  train_loader=DataLoader(dataset_train,batch_size,sampler=sampler,num_workers=num_workers_dl)
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
-  test_loader=DataLoader(dataset_test,batch_size,shuffle=False, num_workers=num_workers_dl)
+  test_loader=DataLoader(dataset_test,batch_size,shuffle=False,num_workers=num_workers_dl)
 
   # Si queremos validacion
   if(len(val)>0):
@@ -938,8 +963,6 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
-    archivoParametros = "hiperParametros_FMIX.json"
-    
 
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<2:
@@ -1047,46 +1070,28 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
-    mejor_config=None
-    #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
-    if os.path.exists(archivoParametros):
-      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
-      with open(archivoParametros, 'r') as f:
-        mejor_config = json.load(f)
-
-    #Si no existe el fichero que contiene los hiperparámetros optimizados y nos encontramos ante el dataset oitaven pasamos a optimizarlos
-    if mejor_config is None:
-      if ficheroLeido!="oitaven":
-        print("ERROR: No hay parámetros optimizados almacenados")
-        sys.exit(1)
-      else:
-
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.5,1.0,1.5]
-        decays = [2.0,3.0]
-        softs  = [0.0,0.5]
-        epochs= [200]
-        batches = [100]
-        probs=[0.2,0.5,0.7]
+    # 2. CONFIGURACIÓN DEL GRID SEARCH
+    alphas = [0.1,0.5,1.0,1.5]
+    decays = [2.0,3.0]
+    softs  = [0.0,0.5]
+    epochs= [200]
+    batches = [100]
+    probs=[0.2,0.5,0.7]
 
 
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
+    combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
 
-        tareas = [(comb, data_bundle) for comb in combinaciones]
-        
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+    tareas = [(comb, data_bundle) for comb in combinaciones]
+    
+    print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
-        #Ejecutamos el grid search con 5 procesos
-        with ProcessPoolExecutor(max_workers=3) as executor:
-            resultados_finales = list(executor.map(run_combination, tareas))
+    #Ejecutamos el grid search con 5 procesos
+    with ProcessPoolExecutor(max_workers=3) as executor:
+        resultados_finales = list(executor.map(run_combination, tareas))
 
-        #RESULTADOS DEL GRID SEARCH
-        resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
-        mejor_config = resultados_finales[0]
-
-        #Almacenamos los hiperparámetros optimizados
-        with open(archivoParametros,'w') as f:
-          json.dump(mejor_config,f)
+    #RESULTADOS DEL GRID SEARCH
+    resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
+    mejor_config = resultados_finales[0]
 
     # 3. EVALUACIÓN FINAL PARALELIZADA
     print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")

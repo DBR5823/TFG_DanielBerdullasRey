@@ -1,0 +1,347 @@
+********** Iniciando experimentos FMIX: 17:47:36 **********
+Ejecutando: prueba inicial FMIX (sobre Oitaven)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (48 combinaciones) ---
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.1, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.1, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.2 *************************
+ Fin evaluación: Alpha=1.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.2 *************************
+ Evaluando: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.7 *************************
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5 *************************
+ Fin evaluación: Alpha=1.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.7 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.12% ± 1.09%
+  Clase 02: 86.97% ± 2.44%
+  Clase 03: 84.64% ± 2.78%
+  Clase 04: 94.34% ± 5.17%
+  Clase 05: 93.63% ± 1.17%
+  Clase 06: 94.43% ± 1.70%
+  Clase 07: 97.18% ± 0.41%
+  Clase 08: 96.05% ± 0.48%
+  Clase 09: 99.34% ± 0.36%
+  Clase 10: 92.45% ± 0.96%
+------------------------------------------------------------
+OA Final: 95.80% ± 0.21%
+AA Final: 93.51% ± 0.77%
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 72.57% ± 0.52%
+  Clase 07: 91.54% ± 0.29%
+  Clase 08: 97.09% ± 0.67%
+  Clase 10: 94.85% ± 0.16%
+------------------------------------------------------------
+OA Final: 91.24% ± 0.11%
+AA Final: 89.01% ± 0.08%
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.35% ± 0.15%
+  Clase 02: 85.61% ± 2.24%
+  Clase 03: 95.06% ± 1.83%
+  Clase 04: 97.98% ± 0.67%
+  Clase 05: 86.19% ± 7.56%
+  Clase 06: 98.94% ± 0.60%
+  Clase 07: 96.15% ± 0.68%
+  Clase 08: 98.15% ± 0.47%
+  Clase 09: 84.68% ± 5.15%
+  Clase 10: 86.53% ± 7.87%
+------------------------------------------------------------
+OA Final: 97.21% ± 0.16%
+AA Final: 92.86% ± 0.69%
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 94.90% ± 0.98%
+  Clase 02: 95.27% ± 1.55%
+  Clase 03: 89.93% ± 3.06%
+  Clase 04: 99.16% ± 0.28%
+  Clase 05: 97.27% ± 3.13%
+  Clase 06: 97.53% ± 1.10%
+  Clase 07: 98.92% ± 0.16%
+  Clase 08: 97.16% ± 0.25%
+  Clase 09: 97.17% ± 1.30%
+  Clase 10: 98.99% ± 0.34%
+------------------------------------------------------------
+OA Final: 98.34% ± 0.05%
+AA Final: 96.63% ± 0.19%
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.74% ± 0.09%
+  Clase 04: 98.06% ± 0.57%
+  Clase 07: 81.34% ± 0.53%
+  Clase 08: 94.71% ± 0.90%
+  Clase 09: 13.16% ± 6.60%
+  Clase 10: 94.12% ± 0.33%
+------------------------------------------------------------
+OA Final: 91.63% ± 0.12%
+AA Final: 79.36% ± 1.08%
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.67% ± 0.27%
+  Clase 04: 92.42% ± 1.50%
+  Clase 05: 67.04% ± 30.78%
+  Clase 06: 18.49% ± 21.90%
+  Clase 07: 88.09% ± 0.25%
+  Clase 08: 98.41% ± 0.35%
+  Clase 10: 93.68% ± 0.22%
+------------------------------------------------------------
+OA Final: 90.89% ± 0.09%
+AA Final: 77.97% ± 6.30%
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.86% ± 0.08%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 99.97% ± 0.04%
+  Clase 08: 98.94% ± 0.22%
+  Clase 09: 92.45% ± 2.83%
+------------------------------------------------------------
+OA Final: 99.06% ± 0.05%
+AA Final: 98.25% ± 0.54%
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde best_hyperparams_oitaven.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 91.93% ± 3.48%
+  Clase 02: 80.45% ± 1.96%
+  Clase 03: 92.23% ± 0.68%
+  Clase 04: 96.03% ± 1.20%
+  Clase 07: 98.93% ± 0.06%
+  Clase 08: 97.68% ± 0.11%
+------------------------------------------------------------
+OA Final: 98.40% ± 0.06%
+AA Final: 92.88% ± 0.65%
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas: 18:29:12 **********
