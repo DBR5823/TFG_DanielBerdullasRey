@@ -1093,10 +1093,13 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__=='__main__':
-  # --- CONFIGURACIÓN DEL GRID SEARCH ---
-  alphas = [1.0]            # Valores de alpha a probar
-  decays = [2.0]            # Valores de decay_power a probar
-  softs  = [0.0]                 # Valores de max_soft a probar
+
+  #Controla la intensidad de la mezcla (el peso de un patch sobre el otro)
+  alphas = [1.0]
+  #Controla la complejidad de la máscara, valores bajos dan lugar a máscaras muy fragmentadas y las altas a formas suaves         
+  decays = [2.0]
+  #Controla la transición entre los bordes, puede ser firme o difuminada, en este caso es firme           
+  softs  = [0.0]                 
 
   resultados_finales = []
 

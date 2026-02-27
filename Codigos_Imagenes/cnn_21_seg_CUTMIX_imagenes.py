@@ -53,6 +53,7 @@ SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
 CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
 
 
+
 # DATASET='/home/amo/profile.raw'
 # GT='/mnt/media/images/salinas_gt.pgm'
 # SEG='/home/amo/seg.raw'
@@ -101,6 +102,7 @@ def read_raw(fichero):
   #Devolvemos los datos junto a los valores de ancho, alto y número de bandas
   return(datos,H,V,B)
 
+
 #Función que permite guardar el mapa de clasificación final en un nuevo fichero
 def save_raw(output,H,V,B,filename):
   #Tratamos de abrir el fichero en modo escritura binaria
@@ -136,6 +138,7 @@ def save_patch(datos,sizex,sizey,B,filename):
   datos=np.transpose(datos,(1,2,0))
   #Se almacena el patch usando la función save_raw
   save_raw(datos,sizex,sizey,B,filename)
+
 
 #Función que se encarga de leer el fichero que contiene la segmentación de los píxeles del dataset(SEG)
 def read_seg(fichero):
@@ -560,21 +563,35 @@ class CNN21(nn.Module):
 
 
 
-#Función que implementa la técnica de aumentado de datos Mixup, recibe el batch actual junto a las etiquetas asociadas a los píxeles
-#Realiza la mezcla siguiendo la fórmula x=L*x1+(1-L)*x2
-#Trabaja con patches completos, es decir se mezclan patches completos píxel a píxel
-def aplicar_mixup(inputs, labels, alpha):
-  #Se genera un número aleatorio entre 0 y 1 siguiendo una distribición beta, dependiendo de su valor se realizará la mezcla con distinta proporción de cada batch
-  lam = np.random.beta(alpha, alpha) if alpha > 0 else 1
-
-  #Generamos na permutación aleatoria de los índices (se generan en la gráfica si se está usando cuda)
+def aplicar_cutmix(inputs, labels, alpha):
+  '''Corta un rectángulo de una imagen y lo pega en otra'''
+  lam = np.random.beta(alpha, alpha)
   index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
   
-  #Se realiza la mezcla de ambos patches
-  mixed_x = lam * inputs + (1 - lam) * inputs[index, :]
+  # Calcular coordenadas del cuadro
+  W, H = inputs.size(2), inputs.size(3)
+  cut_rat = np.sqrt(1. - lam)
+  cut_w = int(W * cut_rat)
+  cut_h = int(H * cut_rat)
+  cx = np.random.randint(W)
+  cy = np.random.randint(H)
 
-  #Devolvemos los patches mezclados, las etiquetas originales de los patches y las etiquetas de los patches mezclados, además de el valor de la mezcla (lam)
-  return mixed_x, labels, labels[index], lam, index
+  bbx1 = np.clip(cx - cut_w // 2, 0, W)
+  bby1 = np.clip(cy - cut_h // 2, 0, H)
+  bbx2 = np.clip(cx + cut_w // 2, 0, W)
+  bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+  # SOLUCIÓN: Clonar el tensor para no destruir los datos originales
+  inputs_mixed = inputs.clone()
+  
+  # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+  inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+  
+  # Ajustar lambda según el área real cortada
+  lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+  
+  # Devolver el tensor modificado, dejando "inputs" intacto
+  return inputs_mixed, labels, labels[index], lam, index
 
 
 
@@ -764,28 +781,27 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH):
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      # Obtenemos los mezclados Y los índices de la mezcla
-      inputs_mixed, target_a, target_b, lam, indices = aplicar_mixup(inputs, labels, alpha)
+      inputs_mixed, target_a, target_b, lam, indices = aplicar_cutmix(inputs, labels, alpha=alpha)
 
-      # LÓGICA DE GUARDADO: Solo en la primera época, primer lote, para 2 ejemplos
       if epoch == 0 and i == 0:
-        print(f"--> Guardando ejemplos de Mixup (Alpha={alpha})...")
+        print(f"--> Guardando ejemplos de CutMix (Alpha={alpha})...")
         for j in range(2): # Guardar 2 ejemplos
             idx_a = j            # Patch original A
             idx_b = indices[j]   # Patch original B (el que se mezcló con A)
                 
                 
             # 1. Guardar Patch A
-            save_patch(inputs[idx_a], sizex, sizey, B, f'figurasMIXUP/alpha_{alpha}_ex{j}_orig_A.raw')
+            save_patch(inputs[idx_a], sizex, sizey, B, f'figurasCUTMIX/alpha_{alpha}_ex{j}_orig_A.raw')
                 
             # 2. Guardar Patch B
-            save_patch(inputs[idx_b],sizex, sizey, B,  f'figurasMIXUP/alpha_{alpha}_ex{j}_orig_B.raw')
+            save_patch(inputs[idx_b],sizex, sizey, B,  f'figurasCUTMIX/alpha_{alpha}_ex{j}_orig_B.raw')
                 
             # 3. Guardar Resultado Mezclado
-            save_patch(inputs_mixed[j], sizex, sizey, B, f'figurasMIXUP/alpha_{alpha}_ex{j}_MIX.raw')
+            save_patch(inputs_mixed[j], sizex, sizey, B, f'figurasCUTMIX/alpha_{alpha}_ex{j}_MIX.raw')
 
         
-        print("Archivos de MIXUP guardados con éxito.")
+        print("Archivos de CUTMIX guardados con éxito.")
+      
       
       # 7.2. Forward pass
       #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
@@ -1028,7 +1044,8 @@ if __name__ == '__main__':
     }
 
     # 2. CONFIGURACIÓN DEL GRID SEARCH
-    #Ponemos un alpha muy elevado para que la mezcla sea mucho mayor para poder verla visualmente
+
+    #Alpha controla la proporción de la mezcla, con valores pequeños la probabilidad de que los cortes sean pequeños o grandes es la misma, con un alpha grande hacemos que las mezclas sean casi todas 50% de A y 50% de B
     alphas = [10]
     epochs= [200]
     batches = [100]
@@ -1039,7 +1056,7 @@ if __name__ == '__main__':
     
     print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
-    #Ejecutamos el grid search von 6 procesos
+    #Ejecutamos el grid search con 5 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_finales = list(executor.map(run_combination, tareas))
 
