@@ -7,7 +7,9 @@
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
 #SBATCH --time=20:00:00              #Duración estimada
 
+
 source /home/daniel.berdullas/TFG/venv/bin/activate
+
 
 echo "INICIO EXPERIMENTACIÓN COMPLETA: $(date +%T)"
 echo "Nodo de ejecución: $SLURM_NODELIST"
