@@ -1,7 +1,18 @@
 #!/bin/bash
-
+#SBATCH --job-name=EXP_TOTAL_DANIEL
+#SBATCH -w ctgpgpu5                  # Fuerza el nodo actual
+#SBATCH --gres=gpu:2                 # Reserva las 2 GPUs
+#SBATCH --partition=gpu              # Partición de GPUs del CITIUS
+#SBATCH --output=log_TOTAL_%j.out    # Archivo donde verás los "echo" y resultados
+#SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
+#SBATCH --time=12:00:00              #Duración estimada
 
 echo "INICIO EXPERIMENTACIÓN COMPLETA: $(date +%T)"
+echo "Nodo de ejecución: $SLURM_NODELIST"
+echo "GPUs asignadas: $CUDA_VISIBLE_DEVICES"
+
+echo "----------------------------------------"
+
 
 echo "Iniciando pruebas CNN_Basica..."
 ./pruebaCNN_Basica.sh
@@ -18,4 +29,5 @@ echo "Iniciando pruebas MIXUP..."
 ./pruebaMIXUP.sh
 
 
+echo "----------------------------------------"
 echo "FIN EXPERIMENTACIÓN COMPLETA: $(date +%T)"

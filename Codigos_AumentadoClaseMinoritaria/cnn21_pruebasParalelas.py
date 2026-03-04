@@ -520,7 +520,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -547,7 +547,11 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler):
   #Comprobamos si el sistema tiene una gráfica compatible con CUDA disponible, si es así se pasa a usar la GPU para entrenar y ejecutar el modelo
   cuda=True if torch.cuda.is_available() else False
   #print('* cuda:',cuda)
-  device=torch.device('cuda' if cuda else 'cpu')
+  #Asignamos la GPU según el gpu_id recibido en caso de tener una gpu disponible
+  if cuda:
+      device = torch.device(f'cuda:{gpu_id}')
+  else:
+      device = torch.device('cpu')
   #Si la biblioteca cuDNN está disponible se activan las optimizaciones 
   if torch.backends.cudnn.is_available():
     #print('* Activando CUDNN')
@@ -921,8 +925,8 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler):
 
 
 def run_final_eval(args):
-    exp_idx, epochs, batch, samp, data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch, samp)
+    gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
+    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
     return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
 
 
@@ -1052,14 +1056,14 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i, 200,100,usar_sampler,data_bundle) 
+        (i%2, i, 200,100,usar_sampler,data_bundle) 
         for i in range(EXP)
     ]
 
     print("Ejecutando test...")
     
     #Ejecutamos el test con 5 procesos
-    with ProcessPoolExecutor(max_workers=3) as executor:
+    with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
         # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS

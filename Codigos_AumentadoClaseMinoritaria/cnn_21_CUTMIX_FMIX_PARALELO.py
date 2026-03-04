@@ -520,12 +520,43 @@ class CNN21(nn.Module):
 
     #Se devuelven las puntuaciones de clases asociadas al patch que ha sido analizado
     return out
+  
+
+def aplicar_cutmix(inputs, labels, alpha):
+    '''Corta un rectángulo de una imagen y lo pega en otra'''
+    lam = np.random.beta(alpha, alpha)
+    index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
+
+    # Calcular coordenadas del cuadro
+    W, H = inputs.size(2), inputs.size(3)
+    cut_rat = np.sqrt(1. - lam)
+    cut_w = int(W * cut_rat)
+    cut_h = int(H * cut_rat)
+    cx = np.random.randint(W)
+    cy = np.random.randint(H)
+
+    bbx1 = np.clip(cx - cut_w // 2, 0, W)
+    bby1 = np.clip(cy - cut_h // 2, 0, H)
+    bbx2 = np.clip(cx + cut_w // 2, 0, W)
+    bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+    # Clonar el tensor para no destruir los datos originales
+    inputs_mixed = inputs.clone()
+
+    # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+    inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+
+    # Ajustar lambda según el área real cortada
+    lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+
+    # Devolver el tensor modificado, dejando "inputs" intacto
+    return inputs_mixed, labels, labels[index], lam
 
 #-----------------------------------------------------------------
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler, gpu_id=0):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST, EPOCHS, BATCH, probabilidad, probabilidad2,usar_sampler, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -552,13 +583,11 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Comprobamos si el sistema tiene una gráfica compatible con CUDA disponible, si es así se pasa a usar la GPU para entrenar y ejecutar el modelo
   cuda=True if torch.cuda.is_available() else False
   #print('* cuda:',cuda)
-  
   #Asignamos la GPU según el gpu_id recibido en caso de tener una gpu disponible
   if cuda:
       device = torch.device(f'cuda:{gpu_id}')
   else:
       device = torch.device('cpu')
-
   #Si la biblioteca cuDNN está disponible se activan las optimizaciones 
   if torch.backends.cudnn.is_available():
     #print('* Activando CUDNN')
@@ -751,22 +780,22 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       labels=labels.to(device)
 
       if(random.random()<probabilidad):
-        # --- INTEGRACIÓN FMIX ---
-        # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-        inputs_mixed = fmix_util(inputs) 
-        lam = fmix_util.lam         # El peso de la mezcla
-        indices = fmix_util.index   # Los índices de las imágenes mezcladas
-        
-        # 7.2. Forward pass
-        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-        #Usando las imágenes mezcladas
-        outputs = model(inputs_mixed)
-
-        #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-        # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-        loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+        # Se cumple la probabilidad principal, decidimos qué método usar:
+        if random.random() < probabilidad2:
+          # --- INTEGRACIÓN FMIX ---
+          inputs_mixed = fmix_util(inputs) 
+          lam = fmix_util.lam         
+          indices = fmix_util.index   
+          outputs = model(inputs_mixed)
+          loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
+        else:
+          # --- INTEGRACIÓN CUTMIX ---
+          inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=cutmix_alpha)
+          outputs = model(inputs_mixed)
+          loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       else:
+        #Sin aumentado
         outputs=model(inputs)
         loss=criterion(outputs,labels)
       
@@ -949,24 +978,24 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
 
 def run_combination(params_with_data):
-    gpu_id, params, data_bundle = params_with_data
-    a, d, s, e, b, p, samp= params
+    gpu_id,params, data_bundle = params_with_data
+    a_fmix, d, s, a_cmix,e, b, p, p2, samp= params
     
     val_acc_list = []
 
-    print(f"[GPU: {gpu_id}] Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
+    print(f"[GPU: {gpu_id}]  Evaluando: F_Alpha={a_fmix}, Decay={d}, Soft={s}, C_Alpha={a_cmix}, Epochs={e}, Batch={b}, Prob={p}, Prob2={p2}, Usar_sampler={samp}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp)
+        res = main(exp, a_fmix, d, s, data_bundle,0, e, b, p, p2, samp)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f"[GPU: {gpu_id}]  Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
+    print(f"[GPU: {gpu_id}]  Fin evaluación: F_Alpha={a_fmix}, Decay={d}, Soft={s}, C_Alpha={a_cmix}, Epochs={e}, Batch={b}, Prob={p}, Prob2={p2}, Usar_sampler={samp} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'sampler':samp,'mean_val_oa': np.mean(val_acc_list)}
+    return {'fmix_alpha': a_fmix, 'decay': d, 'soft': s, 'cutmix_alpha': a_cmix, 'epochs':e, 'batch':b, 'prob':p, 'prob2':p2, 'sampler':samp, 'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
@@ -1102,12 +1131,11 @@ if __name__ == '__main__':
     }
 
 
-    #Archivo que contiene la mejor configuración de hiperparámetros según se esté empleando el sampler o no
+    #Archivo que contiene la mejor configuración combinada
     if(usar_sampler==1):
-      
-      archivoParametros = "hiperParametros_FMIX_Con_Aumentado.json"
+      archivoParametros = "hiperParametros_FMIX_CUTMIX_Con_Aumentado.json"
     else:
-      archivoParametros = "hiperParametros_FMIX.json"
+      archivoParametros = "hiperParametros_FMIX_CUTMIX.json"
 
     mejor_config=None
     #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
@@ -1122,17 +1150,19 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados")
         sys.exit(1)
       else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.5,1.0,1.5, 2.0]
-        decays = [1.0, 2.0, 3.0, 4.0]
-        softs  = [0.0,0.2,0.5,1.0]
+        # 2. CONFIGURACIÓN DEL GRID SEARCH (Cuidado con poner muchos valores, ¡crece multiplicativamente!)
+        fmix_alphas = [0.1, 1.0]
+        decays = [2.0, 3.0]
+        softs  = [0.0]
+        cutmix_alphas = [0.1, 1.0]
         epochs= [200]
         batches = [100]
-        probs=[0.2,0.5,0.8,1.0]
+        probs=[0.2, 0.5, 0.7] # Probabilidad de aplicar mix
+        probs2=[0.3, 0.5, 0.7] # Probabilidad de que sea FMIX (en lugar de CUTMIX)
         sampler=[usar_sampler]
 
 
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs, sampler))
+        combinaciones = list(itertools.product(fmix_alphas, decays, softs, cutmix_alphas, epochs, batches, probs, probs2, sampler))
 
         tareas = [(i % 2, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
@@ -1157,7 +1187,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i%2, i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], mejor_config['sampler'],data_bundle) 
+        (i%2,i, mejor_config['fmix_alpha'], mejor_config['decay'], mejor_config['soft'], mejor_config['cutmix_alpha'], mejor_config['epochs'], mejor_config['batch'], mejor_config['prob'], mejor_config['prob2'], mejor_config['sampler'], data_bundle) 
         for i in range(EXP)
     ]
     
@@ -1186,10 +1216,14 @@ if __name__ == '__main__':
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
+    # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}, Sampler={mejor_config['sampler']}")
+    print(f"Mejor Configuración:")
+    print(f" FMIX_Alpha={mejor_config['fmix_alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}")
+    print(f" CUTMIX_Alpha={mejor_config['cutmix_alpha']}")
+    print(f" Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob_Principal={mejor_config['prob']}, Prob_Metodo2={mejor_config['prob2']}, Sampler={mejor_config['sampler']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

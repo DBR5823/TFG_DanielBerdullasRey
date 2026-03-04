@@ -550,7 +550,7 @@ def aplicar_mixup(inputs, labels, alpha):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler):
+def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -577,7 +577,11 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   #Comprobamos si el sistema tiene una gráfica compatible con CUDA disponible, si es así se pasa a usar la GPU para entrenar y ejecutar el modelo
   cuda=True if torch.cuda.is_available() else False
   #print('* cuda:',cuda)
-  device=torch.device('cuda' if cuda else 'cpu')
+  #Asignamos la GPU según el gpu_id recibido en caso de tener una gpu disponible
+  if cuda:
+      device = torch.device(f'cuda:{gpu_id}')
+  else:
+      device = torch.device('cpu')
   #Si la biblioteca cuDNN está disponible se activan las optimizaciones 
   if torch.backends.cudnn.is_available():
     #print('* Activando CUDNN')
@@ -959,12 +963,12 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
 
 def run_combination(params_with_data):
-    params, data_bundle = params_with_data
+    gpu_id, params, data_bundle = params_with_data
     a, e, b, p, samp= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
+    print(f"[GPU: {gpu_id}]  Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
     sys.stdout.flush()
 
     for exp in range(1):
@@ -973,15 +977,15 @@ def run_combination(params_with_data):
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
+    print(f"[GPU: {gpu_id}]  Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
     sys.stdout.flush()
     
     return {'alpha': a, 'epochs':e,'batch':b ,'prob':p ,'sampler':samp,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, epochs, batch, prob,samp,data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp)
+    gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
+    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
     return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
 
 
@@ -1130,20 +1134,20 @@ if __name__ == '__main__':
         sys.exit(1)
       else:
         # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.3,0.5,0.7,1.0]
+        alphas = [0.1,0.3,0.5,0.7,1.0,2.0]
         epochs= [200]
         batches = [100]
-        probs=[0.2,0.5,0.7]
+        probs=[0.2,0.5,0.8,1.0]
         sampler=[usar_sampler]
 
         combinaciones = list(itertools.product(alphas, epochs, batches, probs, sampler))
 
-        tareas = [(comb, data_bundle) for comb in combinaciones]
+        tareas = [(i % 2, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
         print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
         #Ejecutamos el grid search von 6 procesos
-        with ProcessPoolExecutor(max_workers=3) as executor:
+        with ProcessPoolExecutor(max_workers=6) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
 
         #RESULTADOS DEL GRID SEARCH
@@ -1161,12 +1165,12 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'],mejor_config['sampler'] ,data_bundle) 
+        (i%2, i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'],mejor_config['sampler'] ,data_bundle) 
         for i in range(EXP)
     ]
     
     #Ejecutamos el test final con 5 procesos
-    with ProcessPoolExecutor(max_workers=3) as executor:
+    with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
 
         # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
