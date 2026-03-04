@@ -765,6 +765,8 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
+  tiempo_inicial_entrenamiento=time.time()
+
   #Bucle de entrenamiento asociado a las épocas
   for epoch in range(EPOCHS):
 
@@ -847,6 +849,11 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
     elif(ADA>1): scheduler.step()
     #Si endTrain ha pasado a True se finaliza el entrenamiento
     if(endTrain): break
+
+  
+  tiempo_total_entrenamiento=time.time()-tiempo_inicial_entrenamiento
+  
+  tiempo_epoca_entrenamiento=tiempo_total_entrenamiento/EPOCHS
 
   #Si no está activado el flag de testeo la función devuelve directamente la media del accuracy asociado al conjunto de validación obtenido en la validación de la última época de entrenamiento
   if(TEST==0): 
@@ -963,7 +970,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   print("ACABÓ LA PRUEBA")
 
   #Finalizamos el main Devolviendo el Overall Accuracy del modelo, el Average Accuracy y el accuracy asociado a cada clase presente en el conjunto de test
-  return( OA, AA, class_aa)
+  return( OA, AA, class_aa, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
 
@@ -991,8 +998,8 @@ def run_combination(params_with_data):
 
 def run_final_eval(args):
     exp_idx, alpha, epochs, batch, prob,samp, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp)
-    return oa, aa, class_aa
+    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp)
+    return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
 
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
@@ -1004,7 +1011,10 @@ if __name__ == '__main__':
         pass
     
 
+    directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
+    directorio_datos=os.path.join(directorio_actual,'..','datosEntrada')
+    
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<3:
       ficheroLeido="oitaven"
@@ -1016,13 +1026,13 @@ if __name__ == '__main__':
 
       print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
       #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-      DATASET='datosEntrada/oitaven/oitaven_river.raw'
+      DATASET= os.path.join(directorio_datos, 'oitaven', 'oitaven_river.raw')
       #GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-      GT='datosEntrada/oitaven/oitaven_river.pgm'
+      GT= os.path.join(directorio_datos, 'oitaven', 'oitaven_river.pgm')
       #SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-      SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
+      SEG= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp.raw')
       #CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-      CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
+      CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
     
     else:
       try:
@@ -1036,59 +1046,59 @@ if __name__ == '__main__':
         case 1:
           ficheroLeido="das_mestas"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/das_mestas/das_mestas_river.raw'
-          GT='datosEntrada/das_mestas/das_mestas_river.pgm'
-          SEG='datosEntrada/das_mestas/seg_mestas_wp.raw'
-          CENTER='datosEntrada/das_mestas/seg_mestas_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'das_mestas', 'das_mestas_river.raw')
+          GT= os.path.join(directorio_datos, 'das_mestas', 'das_mestas_river.pgm')
+          SEG= os.path.join(directorio_datos, 'das_mestas', 'seg_mestas_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'das_mestas', 'seg_mestas_wp_centers.raw')
         case 2:
           ficheroLeido="eiras_dam"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/eiras_dam/eiras_dam.raw'
-          GT='datosEntrada/eiras_dam/eiras_dam.pgm'
-          SEG='datosEntrada/eiras_dam/seg_eiras_wp.raw'
-          CENTER='datosEntrada/eiras_dam/seg_eiras_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'eiras_dam', 'eiras_dam.raw')
+          GT= os.path.join(directorio_datos, 'eiras_dam', 'eiras_dam.pgm')
+          SEG= os.path.join(directorio_datos, 'eiras_dam', 'seg_eiras_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'eiras_dam', 'seg_eiras_wp_centers.raw')
         case 3:
           ficheroLeido="ermidas_creek"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ermidas_creek/ermidas_creek.raw'
-          GT='datosEntrada/ermidas_creek/ermidas_creek.pgm'
-          SEG='datosEntrada/ermidas_creek/seg_ermidas_wp.raw'
-          CENTER='datosEntrada/ermidas_creek/seg_ermidas_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'ermidas_creek', 'ermidas_creek.raw')
+          GT= os.path.join(directorio_datos, 'ermidas_creek', 'ermidas_creek.pgm')
+          SEG= os.path.join(directorio_datos, 'ermidas_creek', 'seg_ermidas_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'ermidas_creek', 'seg_ermidas_wp_centers.raw')
         case 4:
           ficheroLeido="ferreiras_river"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ferreiras_river/ferreiras_river.raw'
-          GT='datosEntrada/ferreiras_river/ferreiras_river.pgm'
-          SEG='datosEntrada/ferreiras_river/seg_ferreiras_wp.raw'
-          CENTER='datosEntrada/ferreiras_river/seg_ferreiras_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'ferreiras_river', 'ferreiras_river.raw')
+          GT= os.path.join(directorio_datos, 'ferreiras_river', 'ferreiras_river.pgm')
+          SEG= os.path.join(directorio_datos, 'ferreiras_river', 'seg_ferreiras_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'ferreiras_river', 'seg_ferreiras_wp_centers.raw')
         case 5:
           ficheroLeido="mera_river"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/mera_river/mera_river.raw'
-          GT='datosEntrada/mera_river/mera_river.pgm'
-          SEG='datosEntrada/mera_river/seg_mera_wp.raw'
-          CENTER='datosEntrada/mera_river/seg_mera_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'mera_river', 'mera_river.raw')
+          GT= os.path.join(directorio_datos, 'mera_river', 'mera_river.pgm')
+          SEG= os.path.join(directorio_datos, 'mera_river', 'seg_mera_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'mera_river', 'seg_mera_wp_centers.raw')
         case 6:
           ficheroLeido="ulla"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/ulla/ulla_river.raw'
-          GT='datosEntrada/ulla/ulla_river.pgm'
-          SEG='datosEntrada/ulla/seg_ulla_wp.raw'
-          CENTER='datosEntrada/ulla/seg_ulla_wp_centers.raw'
+          DATASET = os.path.join(directorio_datos, 'ulla', 'ulla_river.raw')
+          GT= os.path.join(directorio_datos, 'ulla', 'ulla_river.pgm')
+          SEG= os.path.join(directorio_datos, 'ulla', 'seg_ulla_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'ulla', 'seg_ulla_wp_centers.raw')
         case 7:
           ficheroLeido="xesta"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/xesta/xesta_basin.raw'
-          GT='datosEntrada/xesta/xesta_basin.pgm'
-          SEG='datosEntrada/xesta/seg_xesta_wp.raw'
-          CENTER='datosEntrada/xesta/seg_xesta_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'xesta', 'xesta_basin.raw')
+          GT= os.path.join(directorio_datos, 'xesta', 'xesta_basin.pgm')
+          SEG= os.path.join(directorio_datos, 'xesta', 'seg_xesta_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'xesta', 'seg_xesta_wp_centers.raw')
         case _:
           ficheroLeido="oitaven"
           print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
-          DATASET='datosEntrada/oitaven/oitaven_river.raw'
-          GT='datosEntrada/oitaven/oitaven_river.pgm'
-          SEG='datosEntrada/oitaven/seg_oitaven_wp.raw'
-          CENTER='datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
+          DATASET= os.path.join(directorio_datos, 'oitaven', 'oitaven_river.raw')
+          GT= os.path.join(directorio_datos, 'oitaven', 'oitaven_river.pgm')
+          SEG= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp.raw')
+          CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
     
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
@@ -1180,10 +1190,20 @@ if __name__ == '__main__':
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
-    class_aa_matrix = np.array([res[2] for res in resultados_test]) 
+    class_aa_matrix = np.array([res[2] for res in resultados_test])
+
+    #Listas para almacenar los tiempo de entrenamiento totales y los tiempos por época para cada test
+    final_tiempo_total_list = [res[3] for res in resultados_test]
+    final_tiempo_epoch_list = [res[4] for res in resultados_test] 
 
     m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
     m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
+
+    #Calculamos el tiempo total medio de entrenamiento y el tiempo medio por época de entrenamiento
+    m_t_total = np.mean(final_tiempo_total_list)
+    m_t_epoch = np.mean(final_tiempo_epoch_list)
+
+
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
