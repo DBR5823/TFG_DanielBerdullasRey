@@ -932,8 +932,8 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
 
 
 def run_final_eval(args):
-    gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
+    gpu_id, exp_idx, epochs, batch, usar_sampler, data_bundle = args
+    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch, gpu_id)
     return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
 
 

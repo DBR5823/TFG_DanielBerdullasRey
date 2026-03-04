@@ -965,7 +965,7 @@ def run_combination(params_with_data):
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp)
+        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp, gpu_id)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)

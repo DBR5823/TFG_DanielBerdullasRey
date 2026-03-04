@@ -979,7 +979,7 @@ def run_combination(params_with_data):
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, data_bundle,0, e, b, p, samp)
+        res = main(exp, a, data_bundle,0, e, b, p, samp, gpu_id)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
@@ -991,8 +991,8 @@ def run_combination(params_with_data):
 
 
 def run_final_eval(args):
-    gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
+    gpu_id, exp_idx, alpha, epochs, batch, prob, samp, data_bundle = args
+    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
     return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
 
 

@@ -5,7 +5,9 @@
 #SBATCH --partition=gpu              # Partición de GPUs del CITIUS
 #SBATCH --output=log_TOTAL_%j.out    # Archivo donde verás los "echo" y resultados
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
-#SBATCH --time=12:00:00              #Duración estimada
+#SBATCH --time=20:00:00              #Duración estimada
+
+source /home/daniel.berdullas/TFG/venv/bin/activate
 
 echo "INICIO EXPERIMENTACIÓN COMPLETA: $(date +%T)"
 echo "Nodo de ejecución: $SLURM_NODELIST"
