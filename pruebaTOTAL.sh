@@ -1,20 +1,21 @@
 #!/bin/bash
 
 
+echo "INICIO EXPERIMENTACIÓN COMPLETA: $(date +%T)"
 
-echo "Iniciando script 1..."
+echo "Iniciando pruebas CNN_Basica..."
 ./pruebaCNN_Basica.sh
 
-echo "Script 1 finalizado. Iniciando script 2..."
+echo "Iniciando pruebas FMIX..."
 ./pruebaFMIX.sh
 
 
-echo "Script 2 finalizado. Iniciando script 3..."
+echo "Iniciando pruebas CUTMIX..."
 ./pruebaCUTMIX.sh
 
 
-echo "Script 3 finalizado. Iniciando script 4..."
+echo "Iniciando pruebas MIXUP..."
 ./pruebaMIXUP.sh
 
 
-echo "Todos los procesos han terminado."
+echo "FIN EXPERIMENTACIÓN COMPLETA: $(date +%T)"

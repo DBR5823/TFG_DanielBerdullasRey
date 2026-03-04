@@ -1,0 +1,51 @@
+********** Iniciando experimentos FMIX con aumentado: 12:12:38 **********
+Ejecutando: prueba inicial FMIX (sobre Oitaven)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (8 combinaciones) ---
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Evaluando: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Fin evaluación: Alpha=0.5, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Evaluando: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Evaluando: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Fin evaluación: Alpha=0.5, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Fin evaluación: Alpha=1.0, Decay=2.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Evaluando: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+ Fin evaluación: Alpha=1.0, Decay=3.0, Soft=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=1 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Alpha=1.0, Decay=2.0, Soft=0.0, Epoch=200, Batch=100, Prob=0.5, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.60% ± 0.65%
+  Clase 02: 84.47% ± 4.47%
+  Clase 03: 84.35% ± 1.41%
+  Clase 04: 92.50% ± 4.38%
+  Clase 05: 94.44% ± 2.05%
+  Clase 06: 95.14% ± 1.71%
+  Clase 07: 97.37% ± 0.41%
+  Clase 08: 95.43% ± 0.39%
+  Clase 09: 99.11% ± 0.75%
+  Clase 10: 92.20% ± 1.11%
+------------------------------------------------------------
+OA Final: 95.65% ± 0.18%
+AA Final: 93.16% ± 0.28%
+============================================================
+------------------------------------------
+********** Se han finalizado todas las pruebas de FMIX con aumentado: 12:16:47 **********

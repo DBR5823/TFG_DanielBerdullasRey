@@ -525,7 +525,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -601,40 +601,46 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
-  # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
-  class_counts = [0] * nclases
-  for ind in train:
-    # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
-    clase_real = truth[ind] - 1
-    class_counts[clase_real] += 1
-  
-  # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
-  class_weights = [1.0/math.sqrt(count) if count > 0 else 0.0 for count in class_counts]
-
-  # 3. Asignamos el peso correspondiente a cada muestra individual
-  sample_weights = [0.0] * len(train)
-  for i, ind in enumerate(train):
-    clase_real = truth[ind] - 1
-    sample_weights[i] = class_weights[clase_real]
-
-  # 4. Creamos el Sampler de PyTorch
-  sample_weights_tensor = torch.DoubleTensor(sample_weights)
-  # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
-  sampler = WeightedRandomSampler(
-    weights=sample_weights_tensor, 
-    num_samples=len(sample_weights_tensor), 
-    replacement=True
-  )
-
   # Dataloader
   #Número de hilos a usar para el dataloader
   num_workers_dl = 0
   #Indicamos el batch size (cantidad de patches que se van a procesar al mismo tiempo tanto para entrenar como para validar)
   batch_size=BATCH # defecto 100
-  #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
-  #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
 
-  train_loader=DataLoader(dataset_train,batch_size,sampler=sampler,num_workers=num_workers_dl)
+  sampler=None
+  if (usar_sampler==1):
+    # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
+    class_counts = [0] * nclases
+    for ind in train:
+      # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
+      clase_real = truth[ind] - 1
+      class_counts[clase_real] += 1
+    
+    # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
+    class_weights = [1.0/math.sqrt(count) if count > 0 else 0.0 for count in class_counts]
+
+    # 3. Asignamos el peso correspondiente a cada muestra individual
+    sample_weights = [0.0] * len(train)
+    for i, ind in enumerate(train):
+      clase_real = truth[ind] - 1
+      sample_weights[i] = class_weights[clase_real]
+
+    # 4. Creamos el Sampler de PyTorch
+    sample_weights_tensor = torch.DoubleTensor(sample_weights)
+    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    sampler = WeightedRandomSampler(
+      weights=sample_weights_tensor, 
+      num_samples=len(sample_weights_tensor), 
+      replacement=True
+    )
+    #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
+    #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
+    train_loader=DataLoader(dataset_train,batch_size,sampler=sampler,num_workers=num_workers_dl)
+  
+  #Si no se ha indicado el uso del aumentado de las clases minoritarias se usa el DataLoader por defecto sin el sampler
+  else:
+    train_loader=DataLoader(dataset_train,batch_size,shuffle=True, num_workers=num_workers_dl)
+
   
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -932,28 +938,28 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
 def run_combination(params_with_data):
     params, data_bundle = params_with_data
-    a, d, s, e, b, p= params
+    a, d, s, e, b, p, samp= params
     
     val_acc_list = []
 
-    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}")
+    print(f" Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p)
+        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
-    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p} *************************")
+    print(f" Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
     sys.stdout.flush()
     
-    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'mean_val_oa': np.mean(val_acc_list)}
+    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'sampler':samp,'mean_val_oa': np.mean(val_acc_list)}
 
 
 def run_final_eval(args):
-    exp_idx, alpha, decay, soft, epochs, batch, prob, data_bundle = args
-    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob)
+    exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
+    oa, aa, class_aa = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp)
     return oa, aa, class_aa
 
 
@@ -965,12 +971,17 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
-    #Archivo que contiene la mejor configuración de hiperparámetros
-    archivoParametros = "hiperParametros_FMIX.json"
+    
 
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
-    if len(sys.argv)<2:
+    if len(sys.argv)<3:
       ficheroLeido="oitaven"
+      try:
+        usar_sampler=int(sys.argv[1])
+      except ValueError:
+          print("Error: El argumento debe ser un número entero.")
+          sys.exit(1)
+
       print("********************Ejecutando prueba sobre el dataset "+ficheroLeido+ " ******************************")
       #Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
       DATASET='datosEntrada/oitaven/oitaven_river.raw'
@@ -984,6 +995,7 @@ if __name__ == '__main__':
     else:
       try:
         opcion = int(sys.argv[1])
+        usar_sampler=int(sys.argv[2])
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1075,6 +1087,13 @@ if __name__ == '__main__':
     }
 
 
+    #Archivo que contiene la mejor configuración de hiperparámetros según se esté empleando el sampler o no
+    if(usar_sampler==1):
+      
+      archivoParametros = "hiperParametros_FMIX_Con_Aumentado.json"
+    else:
+      archivoParametros = "hiperParametros_FMIX.json"
+
     mejor_config=None
     #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
     if os.path.exists(archivoParametros):
@@ -1095,9 +1114,10 @@ if __name__ == '__main__':
         epochs= [200]
         batches = [100]
         probs=[0.2,0.5,0.7]
+        sampler=[usar_sampler]
 
 
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs))
+        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs, sampler))
 
         tareas = [(comb, data_bundle) for comb in combinaciones]
         
@@ -1122,7 +1142,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], data_bundle) 
+        (i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], mejor_config['sampler'],data_bundle) 
         for i in range(EXP)
     ]
     
@@ -1144,7 +1164,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}")
+    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}, Sampler={mejor_config['sampler']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
