@@ -622,7 +622,14 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
   #Seleccionamos los conjuntos de entrenamiento, validación y test según lo especificado.
   #La función devuelve los índices de los centros de segmentos que van a cada conjunto en base a la proporción indicada para cada conjunto mediante el parámetro SAMPLES
-  (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,SAMPLES)
+  #Si estamos en la evaluación final (TEST == 1), sumamos el porcentaje de validación al de entrenamiento y dejamos la validación a 0.
+  if TEST == 1:
+      muestras_actuales = [SAMPLES[0] + SAMPLES[1], 0.0]
+  else:
+      muestras_actuales = SAMPLES
+
+  # Seleccionamos los conjuntos de entrenamiento, validación y test
+  (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,muestras_actuales)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
   dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey)
