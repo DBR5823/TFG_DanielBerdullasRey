@@ -739,7 +739,44 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
-  tiempo_inicial_entrenamiento=time.time()
+  #WARM-UP para que las medidas de tiempo sean correctas (pues la primera época es más lenta)
+  model.train()
+  # Solo corremos unas cuantas iteraciones o una época corta
+  for i, (inputs, labels) in enumerate(train_loader):
+    inputs, labels = inputs.to(device), labels.to(device)
+    optimizer.zero_grad()
+    outputs = model(inputs)
+    loss = criterion(outputs, labels)
+    loss.backward()
+    optimizer.step()
+    if i > 5: break
+
+  # 2. RESET TOTAL DE PARÁMETROS APRENDIDOS EN EL WARMUP
+  @torch.no_grad()
+  def weight_reset(m):
+      # Busca el método reset_parameters en cualquier subcapa
+      reset_parameters = getattr(m, "reset_parameters", None)
+      if callable(reset_parameters):
+          m.reset_parameters()
+
+  model.apply(weight_reset) #Aplicamos el reset a toda la red
+
+  #RE-INICIALIZACIÓN DEL OPTIMIZADOR Y SCHEDULER
+  optimizer=torch.optim.Adam(model.parameters(),lr=lr)
+
+  if(ADA==2): scheduler=torch.optim.lr_scheduler.MultiStepLR(optimizer,milestones=[EPOCHS//2,(5*EPOCHS)//6],gamma=0.1)
+  
+  elif(ADA==3): scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=EPOCHS,eta_min=0)
+  
+
+  elif(ADA==4): scheduler=torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.99, verbose=True)
+
+
+  if torch.cuda.is_available():
+    torch.cuda.synchronize(device) # Limpiamos la cola de la GPU
+  
+  #Tomamos la marca de tiempo después de hacer el warm-up
+  tiempo_inicial_entrenamiento = time.perf_counter()
 
   #Bucle de entrenamiento asociado a las épocas
   for epoch in range(EPOCHS):
@@ -793,8 +830,16 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
     # si tenemos validacion usamos estas muestras, si no el propio train
     
-    #Realizamos la validación en la última época de todas
+    #Realizamos la validación y medida final de tiempos en la última época de todas
     if(epoch == EPOCHS - 1):
+        #Sincronizamos antes de parar el reloj para asegurar que la GPU terminó la última tarea
+      if torch.cuda.is_available():
+        torch.cuda.synchronize(device)
+
+      tiempo_final_entrenamiento = time.perf_counter()
+      tiempo_total_entrenamiento = tiempo_final_entrenamiento - tiempo_inicial_entrenamiento
+      tiempo_epoca_entrenamiento = tiempo_total_entrenamiento / EPOCHS
+
       if(len(val) > 0):
         model.eval()
         # Inicializamos contadores por clase para la validación
