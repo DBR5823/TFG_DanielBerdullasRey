@@ -1,0 +1,40 @@
+********** Iniciando experimentos CNN Básica sin aumentado: 14:32:23 **********
+Ejecutando: prueba inicial CNN Básica (sobre Oitaven)
+GPUs detectadas: 1
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.34% ± 0.30%
+  Clase 02: 84.90% ± 1.30%
+  Clase 03: 80.46% ± 3.81%
+  Clase 04: 90.94% ± 1.74%
+  Clase 05: 90.59% ± 1.29%
+  Clase 06: 94.11% ± 1.52%
+  Clase 07: 97.53% ± 0.35%
+  Clase 08: 96.53% ± 0.27%
+  Clase 09: 99.06% ± 0.67%
+  Clase 10: 93.67% ± 1.19%
+------------------------------------------------------------
+OA Final: 96.13% ± 0.25%
+AA Final: 92.51% ± 0.53%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 102.89 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5145 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 1
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...

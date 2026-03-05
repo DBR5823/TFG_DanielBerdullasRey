@@ -890,9 +890,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
     #Si endTrain ha pasado a True se finaliza el entrenamiento
     if(endTrain): break
 
-  tiempo_total_entrenamiento=time.time()-tiempo_inicial_entrenamiento
-  
-  tiempo_epoca_entrenamiento=tiempo_total_entrenamiento/EPOCHS
+
 
   #Si no está activado el flag de testeo la función devuelve directamente la media del accuracy asociado al conjunto de validación obtenido en la validación de la última época de entrenamiento
   if(TEST==0): 

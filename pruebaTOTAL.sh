@@ -35,6 +35,7 @@ echo "Iniciando pruebas MIXUP..."
 echo "Iniciando pruebas CUTMIX+MIXUP..."
 ./pruebaCUTMIX_FMIX.sh
 
+rm *.json
 
 echo "----------------------------------------"
 echo "FIN EXPERIMENTACIÓN COMPLETA: $(date +%T)"
