@@ -47,7 +47,7 @@ DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALI
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
 
-
+SEMILLA=0
 
 
 # DATASET='/home/amo/profile.raw'
@@ -1161,15 +1161,18 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados")
         sys.exit(1)
       else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH (Cuidado con poner muchos valores
-        fmix_alphas = [0.1,0.5,1.0]
-        decays = [1.0, 2.0, 3.0]
-        softs  = [0.0,0.2,0.5,1.0]
-        cutmix_alphas = [0.1,0.3,0.5,0.7,1.0]
-        probs = [0.2,0.5,0.8]
-        probs2 = [0.2,0.5,0.8]
+        # 2. CONFIGURACIÓN DEL RANDOM SEARCH
+        fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
+        decays = [1.0, 1.5, 2.0, 2.5, 3.0]
+        softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+        cutmix_alphas = [0.1, 0.3, 0.5, 0.7, 1.0]
+        probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+        probs2 = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 
         PRUEBAS=100
+
+        if(DET==1 ):
+          random.seed(SEMILLA)
 
 
         combinaciones_totales = list(itertools.product(

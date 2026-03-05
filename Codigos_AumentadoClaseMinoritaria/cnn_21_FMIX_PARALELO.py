@@ -1136,7 +1136,7 @@ if __name__ == '__main__':
         # 2. CONFIGURACIÓN DEL GRID SEARCH
         alphas = [0.1,0.5,1.0,1.5]
         decays = [1.0, 2.0, 3.0]
-        softs  = [0.0,0.2,0.5,1.0]
+        softs  = [0.0,0.5,1.0]
         epochs= [200]
         batches = [100]
         probs=[0.2,0.5,0.8]
