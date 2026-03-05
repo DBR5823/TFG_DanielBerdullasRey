@@ -1,0 +1,1 @@
+{"alpha": 0.3, "epochs": 200, "batch": 100, "prob": 0.5, "sampler": 0, "mean_val_oa": 92.93965081619936}

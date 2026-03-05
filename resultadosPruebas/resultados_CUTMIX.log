@@ -31,3 +31,45 @@ Cargando datos en memoria principal...
 [GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=200, Batch=100, Prob=0.5, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.86% ± 0.47%
+  Clase 02: 85.57% ± 1.20%
+  Clase 03: 81.64% ± 1.78%
+  Clase 04: 93.30% ± 3.78%
+  Clase 05: 90.92% ± 1.92%
+  Clase 06: 92.74% ± 0.81%
+  Clase 07: 97.88% ± 0.16%
+  Clase 08: 97.04% ± 0.23%
+  Clase 09: 99.49% ± 0.27%
+  Clase 10: 93.85% ± 1.03%
+------------------------------------------------------------
+OA Final: 96.52% ± 0.20%
+AA Final: 93.03% ± 0.45%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 105.99 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5300 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 1
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (5 experimentos) ---

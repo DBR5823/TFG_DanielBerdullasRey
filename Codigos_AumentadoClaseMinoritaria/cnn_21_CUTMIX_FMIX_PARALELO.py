@@ -1161,19 +1161,26 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados")
         sys.exit(1)
       else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH (Cuidado con poner muchos valores, ¡crece multiplicativamente!)
-        fmix_alphas = [0.1, 1.0]
-        decays = [2.0, 3.0]
-        softs  = [0.0]
-        cutmix_alphas = [0.1, 1.0]
-        epochs= [200]
-        batches = [100]
-        probs=[0.2, 0.5, 0.7] # Probabilidad de aplicar mix
-        probs2=[0.3, 0.5, 0.7] # Probabilidad de que sea FMIX (en lugar de CUTMIX)
-        sampler=[usar_sampler]
+        # 2. CONFIGURACIÓN DEL GRID SEARCH (Cuidado con poner muchos valores
+        fmix_alphas = [0.1,0.5,1.0]
+        decays = [1.0, 2.0, 3.0]
+        softs  = [0.0,0.2,0.5,1.0]
+        cutmix_alphas = [0.1,0.3,0.5,0.7,1.0]
+        probs = [0.2,0.5,0.8]
+        probs2 = [0.2,0.5,0.8]
+
+        PRUEBAS=100
 
 
-        combinaciones = list(itertools.product(fmix_alphas, decays, softs, cutmix_alphas, epochs, batches, probs, probs2, sampler))
+        combinaciones_totales = list(itertools.product(
+          fmix_alphas, decays, softs, cutmix_alphas, [200], [100], probs, probs2, [usar_sampler]
+        ))
+
+        # Seleccionamos N_TRIALS al azar de todas las posibles
+        if len(combinaciones_totales) > PRUEBAS:
+          combinaciones = random.sample(combinaciones_totales, PRUEBAS)
+        else:
+          combinaciones = combinaciones_totales
 
         tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
