@@ -533,7 +533,7 @@ class CNN21(nn.Module):
 def aplicar_cutmix(inputs, labels, alpha):
   '''Corta un rectángulo de una imagen y lo pega en otra'''
   lam = np.random.beta(alpha, alpha)
-  index = torch.randperm(inputs.size(0)).cuda() if inputs.is_cuda else torch.randperm(inputs.size(0))
+  index = torch.randperm(inputs.size(0), device=inputs.device)
   
   # Calcular coordenadas del cuadro
   W, H = inputs.size(2), inputs.size(3)
@@ -1021,6 +1021,10 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
+    #Detectar cuántas GPUs hay disponibles
+    num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
+    print(f"GPUs detectadas: {num_gpus}")
+    
 
     directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
@@ -1162,12 +1166,12 @@ if __name__ == '__main__':
         alphas = [0.1,0.3,0.5,0.7,1.0]
         epochs= [200]
         batches = [100]
-        probs=[0.2,0.5,0.8,1.0]
+        probs=[0.2,0.5,0.8]
         sampler=[usar_sampler]
 
         combinaciones = list(itertools.product(alphas, epochs, batches, probs, sampler))
 
-        tareas = [(i % 2, comb, data_bundle) for i, comb in enumerate(combinaciones)]
+        tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
         print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
@@ -1190,7 +1194,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
-        (i%2,i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'],mejor_config['prob'],mejor_config['sampler'],data_bundle) 
+        (i%num_gpus,i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'],mejor_config['prob'],mejor_config['sampler'],data_bundle) 
         for i in range(EXP)
     ]
     

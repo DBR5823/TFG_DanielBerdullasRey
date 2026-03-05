@@ -1,0 +1,33 @@
+********** Iniciando experimentos CUTMIX sin aumentado: 12:24:10 **********
+Ejecutando: prueba inicial CUTMIX (sobre Oitaven)
+GPUs detectadas: 1
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (15 combinaciones) ---
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100, Prob=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=200, Batch=100, Prob=0.5, Usar_sampler=0
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=200, Batch=100, Prob=0.8, Usar_sampler=0
