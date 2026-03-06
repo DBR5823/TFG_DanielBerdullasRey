@@ -1203,6 +1203,7 @@ if __name__ == '__main__':
         #Ejecutamos el grid search von 6 procesos
         with ProcessPoolExecutor(max_workers=6) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
+            executor.shutdown(wait=True)
 
         #RESULTADOS DEL GRID SEARCH
         resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
@@ -1226,6 +1227,7 @@ if __name__ == '__main__':
     #Ejecutamos el test final con 5 procesos
     with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
+        executor.shutdown(wait=True)
 
         # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]

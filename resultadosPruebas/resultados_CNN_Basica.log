@@ -1,6 +1,6 @@
-********** Iniciando experimentos CNN Básica sin aumentado: 14:32:23 **********
+********** Iniciando experimentos CNN Básica sin aumentado: 14:45:22 **********
 Ejecutando: prueba inicial CNN Básica (sobre Oitaven)
-GPUs detectadas: 1
+GPUs detectadas: 2
 ********************Ejecutando prueba sobre el dataset oitaven ******************************
 Cargando datos en memoria principal...
 Ejecutando test...
@@ -16,25 +16,252 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
 Mejor Configuración: Epoch=200, Batch=100, Sampler=0
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 97.34% ± 0.30%
-  Clase 02: 84.90% ± 1.30%
-  Clase 03: 80.46% ± 3.81%
-  Clase 04: 90.94% ± 1.74%
-  Clase 05: 90.59% ± 1.29%
-  Clase 06: 94.11% ± 1.52%
-  Clase 07: 97.53% ± 0.35%
-  Clase 08: 96.53% ± 0.27%
-  Clase 09: 99.06% ± 0.67%
-  Clase 10: 93.67% ± 1.19%
+  Clase 01: 97.76% ± 0.44%
+  Clase 02: 85.07% ± 1.44%
+  Clase 03: 80.28% ± 3.96%
+  Clase 04: 92.18% ± 1.64%
+  Clase 05: 90.02% ± 3.59%
+  Clase 06: 92.90% ± 1.79%
+  Clase 07: 97.73% ± 0.11%
+  Clase 08: 96.47% ± 0.35%
+  Clase 09: 99.10% ± 0.59%
+  Clase 10: 94.20% ± 0.35%
 ------------------------------------------------------------
-OA Final: 96.13% ± 0.25%
-AA Final: 92.51% ± 0.53%
+OA Final: 96.26% ± 0.10%
+AA Final: 92.57% ± 0.65%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 102.89 s
-Tiempo medio por época con hiperparámetros óptimos: 0.5145 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 135.81 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6791 s
 ============================================================
 ------------------------------------------
 Ejecutando prueba iteración: 1...
-GPUs detectadas: 1
+GPUs detectadas: 2
 ********************Ejecutando prueba sobre el dataset das_mestas ******************************
 Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 71.57% ± 0.35%
+  Clase 07: 91.22% ± 0.23%
+  Clase 08: 95.03% ± 0.88%
+  Clase 10: 95.01% ± 0.31%
+------------------------------------------------------------
+OA Final: 91.01% ± 0.11%
+AA Final: 88.21% ± 0.19%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 250.73 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2536 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.40% ± 0.14%
+  Clase 02: 83.53% ± 1.56%
+  Clase 03: 96.31% ± 1.61%
+  Clase 04: 93.67% ± 2.41%
+  Clase 05: 78.34% ± 6.76%
+  Clase 06: 90.51% ± 9.44%
+  Clase 07: 96.52% ± 0.63%
+  Clase 08: 98.90% ± 0.08%
+  Clase 09: 82.59% ± 3.05%
+  Clase 10: 85.75% ± 5.80%
+------------------------------------------------------------
+OA Final: 97.43% ± 0.14%
+AA Final: 90.55% ± 1.84%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 95.79 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4789 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 94.19% ± 2.09%
+  Clase 02: 92.05% ± 2.26%
+  Clase 03: 93.85% ± 1.36%
+  Clase 04: 98.79% ± 0.40%
+  Clase 05: 97.07% ± 2.44%
+  Clase 06: 98.51% ± 0.72%
+  Clase 07: 99.43% ± 0.11%
+  Clase 08: 97.79% ± 0.18%
+  Clase 09: 97.64% ± 1.06%
+  Clase 10: 98.68% ± 0.16%
+------------------------------------------------------------
+OA Final: 98.64% ± 0.09%
+AA Final: 96.80% ± 0.32%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 146.74 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7337 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.37% ± 0.21%
+  Clase 04: 97.11% ± 0.79%
+  Clase 07: 80.92% ± 0.33%
+  Clase 08: 91.24% ± 0.89%
+  Clase 09: 16.76% ± 8.89%
+  Clase 10: 94.32% ± 0.28%
+------------------------------------------------------------
+OA Final: 91.38% ± 0.15%
+AA Final: 79.12% ± 1.46%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 336.12 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6806 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 86.75% ± 0.64%
+  Clase 04: 89.43% ± 1.26%
+  Clase 05: 27.44% ± 28.78%
+  Clase 06: 17.99% ± 11.80%
+  Clase 07: 88.61% ± 0.28%
+  Clase 08: 96.59% ± 0.41%
+  Clase 10: 93.39% ± 0.11%
+------------------------------------------------------------
+OA Final: 90.70% ± 0.03%
+AA Final: 71.46% ± 4.05%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 381.97 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9099 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.90% ± 0.09%
+  Clase 04: 94.42% ± 12.48%
+  Clase 07: 98.61% ± 1.33%
+  Clase 08: 99.58% ± 0.31%
+  Clase 09: 96.31% ± 3.63%
+------------------------------------------------------------
+OA Final: 99.14% ± 0.56%
+AA Final: 97.76% ± 2.50%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 8.95 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0447 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 87.72% ± 4.39%
+  Clase 02: 77.30% ± 1.90%
+  Clase 03: 91.54% ± 0.48%
+  Clase 04: 94.17% ± 1.88%
+  Clase 07: 99.24% ± 0.06%
+  Clase 08: 97.45% ± 0.34%
+------------------------------------------------------------
+OA Final: 98.53% ± 0.08%
+AA Final: 91.24% ± 1.04%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 381.53 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9077 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de CNN Básica sin aumentado: 15:31:56 **********
