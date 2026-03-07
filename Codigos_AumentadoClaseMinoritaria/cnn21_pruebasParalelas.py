@@ -22,7 +22,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
-import torchvision.transforms as transforms
+from torchvision.transforms import v2
 import torchvision.utils as vutils
 
 
@@ -359,8 +359,8 @@ class HyperDataset(Dataset):
 
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
-    self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()])
+    self.transform=v2.Compose(
+      [v2.RandomHorizontalFlip(),v2.RandomVerticalFlip()])
     
   def __len__(self):
     return len(self.samples)
