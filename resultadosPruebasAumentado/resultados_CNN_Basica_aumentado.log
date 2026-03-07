@@ -1,4 +1,4 @@
-********** Iniciando experimentos CNN Básica sin aumentado: 13:30:14 **********
+********** Iniciando experimentos CNN Básica con aumentado: 14:17:31 **********
 Ejecutando: prueba inicial CNN Básica (sobre Oitaven)
 GPUs detectadas: 2
 ********************Ejecutando prueba sobre el dataset oitaven ******************************
@@ -13,25 +13,25 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 97.62% ± 0.93%
-  Clase 02: 83.49% ± 2.82%
-  Clase 03: 80.59% ± 2.44%
-  Clase 04: 91.77% ± 3.43%
-  Clase 05: 89.61% ± 3.48%
-  Clase 06: 93.35% ± 1.58%
-  Clase 07: 97.59% ± 0.24%
-  Clase 08: 96.21% ± 0.52%
-  Clase 09: 99.29% ± 0.26%
-  Clase 10: 93.87% ± 0.79%
+  Clase 01: 97.30% ± 0.66%
+  Clase 02: 83.69% ± 2.39%
+  Clase 03: 83.06% ± 3.32%
+  Clase 04: 91.51% ± 2.96%
+  Clase 05: 91.16% ± 2.46%
+  Clase 06: 95.08% ± 2.13%
+  Clase 07: 97.43% ± 0.33%
+  Clase 08: 95.98% ± 0.64%
+  Clase 09: 99.42% ± 0.24%
+  Clase 10: 94.36% ± 0.56%
 ------------------------------------------------------------
-OA Final: 96.05% ± 0.15%
-AA Final: 92.34% ± 0.44%
+OA Final: 96.04% ± 0.22%
+AA Final: 92.90% ± 0.70%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 134.54 s
-Tiempo medio por época con hiperparámetros óptimos: 0.6727 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 131.28 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6564 s
 ============================================================
 ------------------------------------------
 Ejecutando prueba iteración: 1...
@@ -48,19 +48,19 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 71.31% ± 0.56%
-  Clase 07: 91.28% ± 0.21%
-  Clase 08: 95.53% ± 0.63%
-  Clase 10: 94.97% ± 0.15%
+  Clase 02: 71.46% ± 0.44%
+  Clase 07: 91.16% ± 0.19%
+  Clase 08: 95.93% ± 0.99%
+  Clase 10: 94.89% ± 0.20%
 ------------------------------------------------------------
-OA Final: 91.01% ± 0.09%
-AA Final: 88.27% ± 0.23%
+OA Final: 90.95% ± 0.10%
+AA Final: 88.36% ± 0.27%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 243.92 s
-Tiempo medio por época con hiperparámetros óptimos: 1.2196 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 241.96 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2098 s
 ============================================================
 Prueba iteracion 1 finalizada.
 ********************************************
@@ -78,25 +78,25 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 99.35% ± 0.28%
-  Clase 02: 85.24% ± 1.87%
-  Clase 03: 95.90% ± 1.30%
-  Clase 04: 96.54% ± 1.44%
-  Clase 05: 79.88% ± 2.36%
-  Clase 06: 72.40% ± 8.46%
-  Clase 07: 96.27% ± 0.46%
-  Clase 08: 99.12% ± 0.10%
-  Clase 09: 83.21% ± 2.73%
-  Clase 10: 78.31% ± 7.83%
+  Clase 01: 99.49% ± 0.20%
+  Clase 02: 85.85% ± 1.68%
+  Clase 03: 97.21% ± 0.68%
+  Clase 04: 95.98% ± 2.96%
+  Clase 05: 79.16% ± 5.20%
+  Clase 06: 88.84% ± 9.82%
+  Clase 07: 96.68% ± 0.56%
+  Clase 08: 98.79% ± 0.16%
+  Clase 09: 85.83% ± 3.51%
+  Clase 10: 87.24% ± 5.15%
 ------------------------------------------------------------
-OA Final: 97.56% ± 0.10%
-AA Final: 88.62% ± 1.19%
+OA Final: 97.63% ± 0.11%
+AA Final: 91.51% ± 0.58%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 104.45 s
-Tiempo medio por época con hiperparámetros óptimos: 0.5223 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 95.48 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4774 s
 ============================================================
 Prueba iteracion 2 finalizada.
 ********************************************
@@ -114,25 +114,25 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 94.70% ± 0.89%
-  Clase 02: 91.92% ± 1.32%
-  Clase 03: 92.70% ± 1.52%
-  Clase 04: 98.71% ± 0.32%
-  Clase 05: 96.54% ± 2.15%
-  Clase 06: 98.70% ± 0.75%
-  Clase 07: 99.43% ± 0.11%
-  Clase 08: 97.37% ± 0.33%
-  Clase 09: 98.27% ± 0.62%
-  Clase 10: 98.39% ± 0.19%
+  Clase 01: 94.77% ± 1.27%
+  Clase 02: 93.41% ± 0.95%
+  Clase 03: 93.55% ± 1.35%
+  Clase 04: 98.81% ± 0.36%
+  Clase 05: 98.19% ± 0.39%
+  Clase 06: 99.05% ± 0.44%
+  Clase 07: 99.30% ± 0.09%
+  Clase 08: 97.83% ± 0.41%
+  Clase 09: 98.58% ± 0.33%
+  Clase 10: 98.39% ± 0.40%
 ------------------------------------------------------------
-OA Final: 98.54% ± 0.07%
-AA Final: 96.67% ± 0.24%
+OA Final: 98.60% ± 0.05%
+AA Final: 97.19% ± 0.15%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 154.03 s
-Tiempo medio por época con hiperparámetros óptimos: 0.7702 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 149.39 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7470 s
 ============================================================
 Prueba iteracion 3 finalizada.
 ********************************************
@@ -150,21 +150,21 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 94.36% ± 0.19%
-  Clase 04: 96.61% ± 1.05%
-  Clase 07: 81.02% ± 0.28%
-  Clase 08: 92.27% ± 1.44%
-  Clase 09: 11.01% ± 6.78%
-  Clase 10: 94.07% ± 0.24%
+  Clase 02: 94.54% ± 0.15%
+  Clase 04: 97.66% ± 0.16%
+  Clase 07: 81.01% ± 0.54%
+  Clase 08: 93.44% ± 1.84%
+  Clase 09: 16.51% ± 9.27%
+  Clase 10: 93.89% ± 0.35%
 ------------------------------------------------------------
-OA Final: 91.32% ± 0.11%
-AA Final: 78.22% ± 1.28%
+OA Final: 91.36% ± 0.12%
+AA Final: 79.51% ± 1.78%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 338.47 s
-Tiempo medio por época con hiperparámetros óptimos: 1.6924 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 335.57 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6778 s
 ============================================================
 Prueba iteracion 4 finalizada.
 ********************************************
@@ -182,22 +182,22 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 86.66% ± 0.34%
-  Clase 04: 88.27% ± 2.47%
-  Clase 05: 37.44% ± 33.67%
-  Clase 06: 10.36% ± 4.02%
-  Clase 07: 88.93% ± 0.24%
-  Clase 08: 96.88% ± 0.23%
-  Clase 10: 93.19% ± 0.32%
+  Clase 02: 86.63% ± 0.27%
+  Clase 04: 90.28% ± 2.02%
+  Clase 05: 63.28% ± 23.84%
+  Clase 06: 22.81% ± 22.88%
+  Clase 07: 88.85% ± 0.26%
+  Clase 08: 96.96% ± 0.51%
+  Clase 10: 93.21% ± 0.24%
 ------------------------------------------------------------
-OA Final: 90.74% ± 0.03%
-AA Final: 71.67% ± 4.86%
+OA Final: 90.73% ± 0.06%
+AA Final: 77.43% ± 5.47%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 377.49 s
-Tiempo medio por época con hiperparámetros óptimos: 1.8875 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 380.55 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9028 s
 ============================================================
 Prueba iteracion 5 finalizada.
 ********************************************
@@ -215,20 +215,20 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 99.90% ± 0.09%
-  Clase 04: 93.16% ± 6.91%
-  Clase 07: 98.93% ± 1.31%
-  Clase 08: 99.67% ± 0.38%
-  Clase 09: 95.66% ± 2.40%
+  Clase 02: 99.84% ± 0.10%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 98.76% ± 1.48%
+  Clase 08: 99.52% ± 0.28%
+  Clase 09: 97.10% ± 1.68%
 ------------------------------------------------------------
-OA Final: 99.23% ± 0.36%
-AA Final: 97.46% ± 1.01%
+OA Final: 99.26% ± 0.31%
+AA Final: 99.04% ± 0.33%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 9.14 s
-Tiempo medio por época con hiperparámetros óptimos: 0.0457 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 8.64 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0432 s
 ============================================================
 Prueba iteracion 6 finalizada.
 ********************************************
@@ -246,22 +246,22 @@ ACABÓ LA PRUEBA
 ============================================================
 RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
 ============================================================
-Mejor Configuración: Epoch=200, Batch=100, Sampler=0
+Mejor Configuración: Epoch=200, Batch=100, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 89.56% ± 2.22%
-  Clase 02: 71.44% ± 6.44%
-  Clase 03: 91.77% ± 0.66%
-  Clase 04: 94.25% ± 1.50%
-  Clase 07: 99.21% ± 0.06%
-  Clase 08: 97.76% ± 0.24%
+  Clase 01: 89.26% ± 2.37%
+  Clase 02: 77.02% ± 5.36%
+  Clase 03: 92.07% ± 0.69%
+  Clase 04: 94.22% ± 1.38%
+  Clase 07: 99.14% ± 0.04%
+  Clase 08: 97.89% ± 0.19%
 ------------------------------------------------------------
-OA Final: 98.57% ± 0.07%
-AA Final: 90.66% ± 0.86%
+OA Final: 98.57% ± 0.03%
+AA Final: 91.60% ± 0.84%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 386.54 s
-Tiempo medio por época con hiperparámetros óptimos: 1.9327 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 384.98 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9249 s
 ============================================================
 Prueba iteracion 7 finalizada.
 ********************************************
-********** Se han finalizado todas las pruebas de CNN Básica sin aumentado: 14:17:31 **********
+********** Se han finalizado todas las pruebas de CNN Básica con aumentado: 15:04:12 **********

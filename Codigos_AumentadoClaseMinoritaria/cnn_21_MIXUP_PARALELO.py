@@ -37,6 +37,9 @@ import sys
 
 import os, json
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.resource_tracker')
+
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05)  (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
@@ -1204,6 +1207,8 @@ if __name__ == '__main__':
         with ProcessPoolExecutor(max_workers=6) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
             executor.shutdown(wait=True)
+        
+        time.sleep(0.5)
 
         #RESULTADOS DEL GRID SEARCH
         resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
@@ -1228,6 +1233,8 @@ if __name__ == '__main__':
     with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
+    
+    time.sleep(0.5)
 
         # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
