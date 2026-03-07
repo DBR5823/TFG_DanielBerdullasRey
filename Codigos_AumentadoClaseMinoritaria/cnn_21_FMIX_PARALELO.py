@@ -1147,7 +1147,7 @@ if __name__ == '__main__':
         decays = [1.0, 2.0, 3.0]
         softs  = [0.0,0.5,1.0]
         epochs= [200]
-        batches = [100]
+        batches = [256]
         probs=[0.2,0.5,0.8]
         sampler=[usar_sampler]
 

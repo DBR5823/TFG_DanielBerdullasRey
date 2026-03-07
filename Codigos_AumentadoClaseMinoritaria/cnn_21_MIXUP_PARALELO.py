@@ -1158,7 +1158,7 @@ if __name__ == '__main__':
         # 2. CONFIGURACIÓN DEL GRID SEARCH
         alphas = [0.1,0.3,0.5,0.7,1.0,2.0]
         epochs= [200]
-        batches = [100]
+        batches = [256]
         probs=[0.2,0.5,0.8]
         sampler=[usar_sampler]
 

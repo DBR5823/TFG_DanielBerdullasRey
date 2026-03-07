@@ -1186,7 +1186,7 @@ if __name__ == '__main__':
 
 
         combinaciones_totales = list(itertools.product(
-          fmix_alphas, decays, softs, cutmix_alphas, [200], [100], probs, probs2, [usar_sampler]
+          fmix_alphas, decays, softs, cutmix_alphas, [200], [256], probs, probs2, [usar_sampler]
         ))
 
         # Seleccionamos N_TRIALS al azar de todas las posibles

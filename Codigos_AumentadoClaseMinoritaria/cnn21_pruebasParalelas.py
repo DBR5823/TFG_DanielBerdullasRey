@@ -868,7 +868,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
   #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
   for i in train: output[i]=0
   for i in val: output[i]=0
-  
+
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
   #Recorremos todos los píxeles del output
@@ -1076,7 +1076,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, 200,100,usar_sampler,data_bundle) 
+        (i%num_gpus, i, 200,256,usar_sampler,data_bundle) 
         for i in range(EXP)
     ]
 
