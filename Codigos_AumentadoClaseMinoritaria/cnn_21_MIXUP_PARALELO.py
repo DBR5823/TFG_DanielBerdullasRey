@@ -355,56 +355,18 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 # PYTORCH - SETS
 #-----------------------------------------------------------------
 
-# cogemos muestras sin ground-truth (dadas por el indice samples)
 
-#Clase asociada al dataset sin el ground truth (etiquetas), se usa para realizar la inferencia final sobre la imagen entera (aunque tengan etiqueta o no de ground-truth)
-#Se usa para realizar la predicción final de clasificación sobre toda la imagen
-class HyperAllDataset(Dataset):
-  #Constructor de la clase
-  def __init__(self,datos,samples,H,V,sizex,sizey):
-    #Se guarda la imagen (datos) y los índices de los centros (samples) de los segmentos
-    self.datos=datos; self.samples=samples
-    self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
-    
-    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
-    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
-    self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()],)
-
-  #Función para devolver el número de instancias del dataset
-  def __len__(self):
-    return len(self.samples)
-
-
-  #Función que se ejecuta cada vez que se pide un patch para analizar
-  def __getitem__(self,idx):
-    #Se recuperan los datos almacenados al construir la instancia
-    datos=self.datos; H=self.H; V=self.V;
-    sizex=self.sizex; sizey=self.sizey; 
-    
-    #Se convierte el índice del centroide en coordenadas 2D (x e y)
-    x=self.samples[idx]%H; y=int(self.samples[idx]/H)
-
-    #Se obtiene el patch alrededor de ese centroide
-    patch=select_patch(datos,sizex,sizey,x,y)
-    
-    #Si el aumentado de datos está activado se aplican las transformaciones al azar
-    if(AUM==1): patch=self.transform(patch)
-
-    #Se devuelve el patch final
-    return(patch)
-
-#----------------
 
 # cogemos muestras con ground-truth (dadas por el indice samples)
 
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth
 #Usada para el entrenamiento
 class HyperDataset(Dataset):
-  def __init__(self,datos,truth,samples,H,V,sizex,sizey):
+  def __init__(self,datos,truth,samples,H,V,sizex,sizey,is_train):
     #Se guarda la imagen (datos), las etiquetas asociadas a los píxeles y los índices de los centros (samples) de los segmentos
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
+    self.is_train = is_train
 
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
@@ -427,7 +389,8 @@ class HyperDataset(Dataset):
     patch=select_patch(datos,sizex,sizey,x,y)
 
     #Si el aumentado de datos está activado se aplican las transformaciones al azar
-    if(AUM==1): patch=self.transform(patch)
+    if(AUM==1 and self.is_train): 
+      patch=self.transform(patch)
 
     # renumeramos porque la red clasifica tambien la clase 0 
     
@@ -635,9 +598,9 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,muestras_actuales)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
-  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey)
+  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True)
   #print('  - train dataset:',len(dataset_train))
-  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
+  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey, is_train=False)
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
@@ -688,7 +651,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
-    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey)
+    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey, is_train=False)
     #print('  - val dataset:',len(dataset_val))
     #Creamos el dataloader que se usará durante la validación de la red neuronal
     #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento

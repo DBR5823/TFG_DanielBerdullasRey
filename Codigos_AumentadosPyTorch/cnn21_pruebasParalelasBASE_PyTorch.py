@@ -25,7 +25,7 @@ from sklearn import preprocessing
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 
-from implementations.torchbearer_implementation import FMix
+
 
 from concurrent.futures import ProcessPoolExecutor
 
@@ -33,13 +33,13 @@ import torch.multiprocessing as mp
 
 import itertools
 
-import sys
-
-import os
-
-import json
+import sys, os
 
 import warnings
+
+import torchvision.transforms.v2 as v2
+
+
 warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.resource_tracker')
 
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
@@ -49,19 +49,6 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
-
-
-
-
-# DATASET='/home/amo/profile.raw'
-# GT='/mnt/media/images/salinas_gt.pgm'
-# SEG='/home/amo/seg.raw'
-# CENTER='/mnt/media/images/seg_salinas_centers.raw'
-
-# DATASET='/mnt/media/images/ermidas_creek.raw'
-# GT='/mnt/media/images/ermidas_creek.pgm'
-# SEG='/mnt/media/images/seg_ermidas.raw'
-# CENTER='/mnt/media/images/seg_ermidas_centers.raw'
 
 #-----------------------------------------------------------------
 # FUNCIONES PARA LEER DATASETS Y SELECCIONAR MUESTRAS
@@ -84,12 +71,13 @@ def read_raw(fichero):
   #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
   #print('  Píxeles leídos:',len(datos))
   # esta red no necesita realmente normalizar
+
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
   d_min = datos.min()
   d_max = datos.max()
   datos -= d_min
   datos /= (d_max - d_min)
-  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
+
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -120,17 +108,13 @@ def read_seg(fichero):
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
 
-#EN ESTA FUNCIÓN TENGO DUDAS DE SI FUNCIONA BIEN????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????''
+
 #Función que permite leer el fichero que contiene los píxeles centrales de los segmentos (CENTER)
 def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
 
-  #nseg es el número total de segmentos??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #Porq a mi me pone  nseg 1 siempre y en H tmb pone 1
-  #Básicamente nseg no se usa en este código para nada**************************************************************************************************************************+
-  
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
@@ -351,19 +335,46 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 #-----------------------------------------------------------------
 
 
+
+# cogemos muestras con ground-truth (dadas por el indice samples)
+
+# --- NUEVA CLASE PARA RUIDO GAUSSIANO ---
+class AddGaussianNoise(torch.nn.Module):
+  def __init__(self, mean=0., std=0.05):
+      super().__init__()
+      self.std = std
+      self.mean = mean
+  def forward(self, tensor):
+      return tensor + torch.randn(tensor.size()) * self.std + self.mean
+
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth
 #Usada para el entrenamiento
 class HyperDataset(Dataset):
-  def __init__(self,datos,truth,samples,H,V,sizex,sizey,is_train):
-    #Se guarda la imagen (datos), las etiquetas asociadas a los píxeles y los índices de los centros (samples) de los segmentos
+  def __init__(self, datos, truth, samples, H, V, sizex, sizey, metodo=0):
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
-    self.is_train = is_train
+    self.metodo = metodo
 
-    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
-    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
-    self.transform=transforms.Compose(
-      [transforms.RandomHorizontalFlip(),transforms.RandomVerticalFlip()])
+    #Métodos de aumentado que serán probados
+    flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
+    rotation = v2.RandomRotation(degrees=(0, 360))
+    # En v1, RandomResizedCrop no suele tener el parámetro 'antialias'
+    r_crop = v2.RandomResizedCrop(size=(sizex, sizey), scale=(0.8, 1.0), antialias=True)
+    noise = AddGaussianNoise(std=0.02) 
+
+    #Auto aumentado
+    auto_aug = v2.AutoAugment(policy=v2.AutoAugmentPolicy.CIFAR10)
+
+    t_list = flips.copy()
+    if metodo == 1: t_list.append(rotation)
+    elif metodo == 2: t_list.append(r_crop)
+    elif metodo == 3: t_list.append(noise)
+    elif metodo == 4: t_list.extend([rotation, r_crop])
+    elif metodo == 5: t_list.extend([rotation, noise])
+    elif metodo == 6: t_list.extend([r_crop, noise])
+    elif metodo == 7: t_list.append(auto_aug)
+
+    self.transform = v2.Compose(t_list)
     
   def __len__(self):
     return len(self.samples)
@@ -381,8 +392,7 @@ class HyperDataset(Dataset):
     patch=select_patch(datos,sizex,sizey,x,y)
 
     #Si el aumentado de datos está activado se aplican las transformaciones al azar
-    if(AUM==1 and self.is_train): 
-      patch=self.transform(patch)
+    if(AUM==1): patch=self.transform(patch)
 
     # renumeramos porque la red clasifica tambien la clase 0 
     
@@ -410,7 +420,6 @@ def update_lr(optimizer,lr):
     param_group['lr']=lr
 
 # calcula los promedios de precisiones
-
 
 
 #-----------------------------------------------------------------
@@ -488,7 +497,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler, gpu_id=0):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -515,13 +524,11 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Comprobamos si el sistema tiene una gráfica compatible con CUDA disponible, si es así se pasa a usar la GPU para entrenar y ejecutar el modelo
   cuda=True if torch.cuda.is_available() else False
   #print('* cuda:',cuda)
-  
   #Asignamos la GPU según el gpu_id recibido en caso de tener una gpu disponible
   if cuda:
       device = torch.device(f'cuda:{gpu_id}')
   else:
       device = torch.device('cpu')
-
   #Si la biblioteca cuDNN está disponible se activan las optimizaciones 
   if torch.backends.cudnn.is_available():
     #print('* Activando CUDNN')
@@ -572,9 +579,9 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,muestras_actuales)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
-  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True)
+  dataset_train = HyperDataset(datos, truth, train, H, V, sizex, sizey, metodo=metodo_aum)
   #print('  - train dataset:',len(dataset_train))
-  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey, is_train=False)
+  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
@@ -584,31 +591,41 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   batch_size=BATCH # defecto 100
 
   sampler=None
-  if (usar_sampler==1):
+  if (usar_sampler == 1):
     # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
     class_counts = [0] * nclases
     for ind in train:
-      # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
-      clase_real = truth[ind] - 1
-      class_counts[clase_real] += 1
+        clase_real = truth[ind] - 1
+        class_counts[clase_real] += 1
     
-    # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
-    class_weights = [1.0/math.sqrt(count) if count > 0 else 0.0 for count in class_counts]
+    # --- NUEVA LÓGICA DE MEDIA ---
+    # Calculamos la media de muestras de las clases que NO están vacías
+    active_counts = [c for c in class_counts if c > 0]
+    mean_samples = sum(active_counts) / len(active_counts) if active_counts else 0
+    # -----------------------------
+
+    # 2. Calculamos el peso condicional de cada clase
+    # Si N < media: w = 1 / (sqrt(N) * 2)
+    # Si N >= media: w = 1 / sqrt(N)
+    class_weights = []
+    for count in class_counts:
+        if count > 0:
+            base_w = 1.0 / math.sqrt(count)
+            # Aplicamos la penalización a las clases menos representadas (por debajo de la media)
+            weight = base_w / 2 if count < mean_samples else base_w
+            class_weights.append(weight)
+        else:
+            class_weights.append(0.0)
 
     # 3. Asignamos el peso correspondiente a cada muestra individual
     sample_weights = [0.0] * len(train)
     for i, ind in enumerate(train):
-      clase_real = truth[ind] - 1
-      sample_weights[i] = class_weights[clase_real]
+        clase_real = truth[ind] - 1
+        sample_weights[i] = class_weights[clase_real]
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
-    sampler = WeightedRandomSampler(
-      weights=sample_weights_tensor, 
-      num_samples=len(sample_weights_tensor), 
-      replacement=True
-    )
+    sampler = WeightedRandomSampler(weights=sample_weights_tensor, num_samples=len(sample_weights_tensor), replacement=True)
     #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
     #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
     train_loader=DataLoader(dataset_train,batch_size,sampler=sampler,num_workers=num_workers_dl)
@@ -625,7 +642,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
-    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey, is_train=False)
+    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey)
     #print('  - val dataset:',len(dataset_val))
     #Creamos el dataloader que se usará durante la validación de la red neuronal
     #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -658,8 +675,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Generamos la red y la cargamos en la CPU o GPU (si es compatible con CUDA)
   model=CNN21(N1,N2,N3,N4,N5,D1,D2).to(device)
 
-  # Inicializamos FMix para patches de 32x32 (sizex x sizey)
-  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
   # 6. Loss, optimizer, and scheduler
 
@@ -757,26 +772,12 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       inputs=inputs.to(device)
       labels=labels.to(device)
 
-      if(random.random()<probabilidad):
-        # --- INTEGRACIÓN FMIX ---
-        # Aplicamos FMix a los inputs que ya están en el 'device' (GPU)
-        inputs_mixed = fmix_util(inputs) 
-        lam = fmix_util.lam         # El peso de la mezcla
-        indices = fmix_util.index   # Los índices de las imágenes mezcladas
-        
-        # 7.2. Forward pass
-        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-        #Usando las imágenes mezcladas
-        outputs = model(inputs_mixed)
-
-        #Comparamos las predicciones con las etiquetas reales y se calcula el error.
-        # loss = lam * Loss(pred, etiqueta_A) + (1 - lam) * Loss(pred, etiqueta_B)
-        loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
       
-      else:
-        outputs=model(inputs)
-        loss=criterion(outputs,labels)
-      
+      # 7.2. Forward pass
+      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+      outputs=model(inputs)
+      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
+      loss=criterion(outputs,labels)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -840,7 +841,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
     if(endTrain): break
 
 
-
   #Si no está activado el flag de testeo la función devuelve directamente la media del accuracy asociado al conjunto de validación obtenido en la validación de la última época de entrenamiento
   if(TEST==0): 
     return current_val_aa
@@ -887,6 +887,10 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
       #Cada vez que se han clasificado 2000 patches se imprime por pantalla el progreso del testeo
       #if(total%2000==0): #print('  Testeando: %6d/%d'%(total,len(dataset_test)))
 
+
+  #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
+  for i in train: output[i]=0
+  for i in val: output[i]=0
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
   #Recorremos todos los píxeles del output
@@ -895,9 +899,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
   #Miramos que clase fue asignada al píxel central (mediante el patch) y le asignamos esa clase al píxel actual
   for i in range(H*V): output[i]=output[center[seg[i]]]
 
-  #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
-  for i in train: output[i]=0
-  for i in val: output[i]=0
+  
   
   # 9. Calculamos las precisiones por segmentos (excluyendo los usados en el entrenamiento y validación)
   #Contadores para clasificaciones correctas de segmentos y el total de segmentos
@@ -960,32 +962,9 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
 
 
 
-
-def run_combination(params_with_data):
-    gpu_id, params, data_bundle = params_with_data
-    a, d, s, e, b, p, samp= params
-    
-    val_acc_list = []
-
-    print(f"[GPU: {gpu_id}] Evaluando: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
-    sys.stdout.flush()
-
-    for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp, gpu_id)
-        # Maneja si main devuelve una tupla o un solo valor según TEST
-        v_acc = res[0] if isinstance(res, tuple) else res
-        val_acc_list.append(v_acc)
-
-    print(f"[GPU: {gpu_id}]  Fin evaluación: Alpha={a}, Decay={d}, Soft={s}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
-    sys.stdout.flush()
-    
-    return {'alpha': a, 'decay': d, 'soft': s, 'epochs':e,'batch':b ,'prob':p,'sampler':samp,'mean_val_oa': np.mean(val_acc_list)}
-
-
 def run_final_eval(args):
-    gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
-    return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
+    gpu_id, exp_idx, epochs, batch, samp, metodo_aum, data_bundle = args
+    return main(exp_idx, data_bundle, 1, epochs, batch, samp, metodo_aum, gpu_id)
 
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
@@ -1003,13 +982,14 @@ if __name__ == '__main__':
     directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
     directorio_datos=os.path.join(directorio_actual,'..','datosEntrada')
-    
 
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
-    if len(sys.argv)<3:
+    if len(sys.argv)<4:
       ficheroLeido="oitaven"
       try:
         usar_sampler=int(sys.argv[1])
+        metodo_id = int(sys.argv[2])
+        print(f"Usando el método de aumento con ID: {metodo_id}")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1028,6 +1008,8 @@ if __name__ == '__main__':
       try:
         opcion = int(sys.argv[1])
         usar_sampler=int(sys.argv[2])
+        metodo_id = int(sys.argv[3])
+        print(f"Usando el método de aumento con ID: {metodo_id}")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1089,8 +1071,6 @@ if __name__ == '__main__':
           GT= os.path.join(directorio_datos, 'oitaven', 'oitaven_river.pgm')
           SEG= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp.raw')
           CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
-      
-
     
     # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
     print("Cargando datos en memoria principal...")
@@ -1117,71 +1097,17 @@ if __name__ == '__main__':
         'center': center, 'H3': H3, 'V3': V3,
         'nseg': nseg
     }
-
-
-    #Archivo que contiene la mejor configuración de hiperparámetros según se esté empleando el sampler o no
-    if(usar_sampler==1):
-      
-      archivoParametros = "hiperParametros_FMIX_Con_Aumentado.json"
-    else:
-      archivoParametros = "hiperParametros_FMIX.json"
-
-    mejor_config=None
-    #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
-    if os.path.exists(archivoParametros):
-      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
-      with open(archivoParametros, 'r') as f:
-        mejor_config = json.load(f)
-
-    #Si no existe el fichero que contiene los hiperparámetros optimizados y nos encontramos ante el dataset oitaven pasamos a optimizarlos
-    if mejor_config is None:
-      if ficheroLeido!="oitaven":
-        print("ERROR: No hay parámetros optimizados almacenados")
-        sys.exit(1)
-      else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.5,1.0,1.5]
-        decays = [1.0, 2.0, 3.0]
-        softs  = [0.0,0.5,1.0]
-        epochs= [200]
-        batches = [100]
-        probs=[0.2,0.5,0.8]
-        sampler=[usar_sampler]
-
-
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs, sampler))
-
-        tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
-        
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
-
-        #Ejecutamos el grid search con 5 procesos
-        with ProcessPoolExecutor(max_workers=6) as executor:
-            resultados_finales = list(executor.map(run_combination, tareas))
-            executor.shutdown(wait=True)
-        
-        time.sleep(0.5)
-
-        #RESULTADOS DEL GRID SEARCH
-        resultados_finales.sort(key=lambda x: x['mean_val_oa'], reverse=True)
-        mejor_config = resultados_finales[0]
-
-        #Almacenamos los hiperparámetros optimizados
-        with open(archivoParametros,'w') as f:
-          json.dump(mejor_config,f)
-
-
-    # 3. EVALUACIÓN FINAL PARALELIZADA
-    print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados a la mejor configuración
+    # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, mejor_config['alpha'], mejor_config['decay'], mejor_config['soft'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'], mejor_config['sampler'],data_bundle) 
+        (i%num_gpus, i, 200,100,usar_sampler,metodo_id,data_bundle) 
         for i in range(EXP)
     ]
+
+    print("Ejecutando test...")
     
-    #Ejecutamos el test final con 5 procesos
+    #Ejecutamos el test con 5 procesos
     with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
@@ -1191,11 +1117,11 @@ if __name__ == '__main__':
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
-    class_aa_matrix = np.array([res[2] for res in resultados_test]) 
+    class_aa_matrix = np.array([res[2] for res in resultados_test])
 
     #Listas para almacenar los tiempo de entrenamiento totales y los tiempos por época para cada test
     final_tiempo_total_list = [res[3] for res in resultados_test]
-    final_tiempo_epoch_list = [res[4] for res in resultados_test]
+    final_tiempo_epoch_list = [res[4] for res in resultados_test] 
 
     m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
     m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
@@ -1212,7 +1138,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}, Sampler={mejor_config['sampler']}")
+    print(f"Mejor Configuración: Epoch=200, Batch=100, Sampler={usar_sampler}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
@@ -1223,13 +1149,14 @@ if __name__ == '__main__':
     print("-" * 60)
     print(f"OA Final: {m_oa:.2f}% ± {s_oa:.2f}%")
     print(f"AA Final: {m_aa:.2f}% ± {s_aa:.2f}%")
-
     print("-" * 60)
 
     print(f"Tiempo entrenamiento total medio con hiperparámetros óptimos: {m_t_total:.2f} s")
     print(f"Tiempo medio por época con hiperparámetros óptimos: {m_t_epoch:.4f} s")
 
     print("="*60)
+
+    
 
     
     
