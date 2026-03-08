@@ -936,14 +936,14 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
   print("ACABÓ LA PRUEBA")
 
   #Finalizamos el main Devolviendo el Overall Accuracy del modelo, el Average Accuracy y el accuracy asociado a cada clase presente en el conjunto de test
-  return( OA, AA, class_aa, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
+  return( OA, AA, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
 
 def run_final_eval(args):
     gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
-    oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,gpu_id)
-    return oa, aa, class_aa, tiempo_total_entrenamiento, tiempo_epoca
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,gpu_id)
+    return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
@@ -1093,10 +1093,14 @@ if __name__ == '__main__':
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
+    class_total_matrix = np.array([res[3] for res in resultados_test])
+
+    #Calculamos la media de muestras por clase usadas en los test
+    m_total = np.mean(class_total_matrix, axis=0)
 
     #Listas para almacenar los tiempo de entrenamiento totales y los tiempos por época para cada test
-    final_tiempo_total_list = [res[3] for res in resultados_test]
-    final_tiempo_epoch_list = [res[4] for res in resultados_test] 
+    final_tiempo_total_list = [res[4] for res in resultados_test]
+    final_tiempo_epoch_list = [res[5] for res in resultados_test]
 
     m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
     m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
@@ -1118,8 +1122,9 @@ if __name__ == '__main__':
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-        if m_class[j] > 0 or s_class[j] > 0:
-            print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
+      #Si la media de muestras de la clase usadas en test es mayor que 0, la clase existía en el test
+      if m_total[j] > 0: 
+          print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 
     print("-" * 60)
     print(f"OA Final: {m_oa:.2f}% ± {s_oa:.2f}%")
