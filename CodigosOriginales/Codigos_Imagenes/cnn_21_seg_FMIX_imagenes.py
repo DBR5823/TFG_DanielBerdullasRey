@@ -36,7 +36,7 @@ SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porc
 BATCH=100  # batch_size, defecto 100 
 ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-StepLR
 AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
-DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
+DET=1  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 TEST=1 # 0-validacion, 1-test
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
