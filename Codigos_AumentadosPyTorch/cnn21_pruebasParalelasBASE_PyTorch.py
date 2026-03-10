@@ -1,20 +1,4 @@
 #!/usr/bin/env python3
-# https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials (pytorch-tutorial-master.zip)
-# Adapted to multi/hyperspectral images: F. Arguello
-# CNN21: 2 capas convolucionales, 1 completamente conectada
-# oitaven WP (15%, texturas+fv+3kelm, t=3m44s): OA=93.03, OA=87.18
-# CNN21 SEG EXP: 5 EPOCHS: 100 SAMPLES: [0.15, 0.05] ADA: 3 AUM: 1
-# Class 01: 96.66+0.33
-# Class 02: 80.72+2.00
-# Class 03: 75.76+4.18
-# Class 04: 87.01+3.79
-# Class 05: 86.18+1.77
-# Class 06: 92.11+1.21
-# Class 07: 96.46+0.15
-# Class 08: 95.77+0.21
-# Class 09: 98.66+0.56
-# Class 10: 90.81+0.62
-# OA=94.77+0.20, AA=90.01+0.66, t=60 s
   
 import math, random, struct, signal, time
 import numpy as np
@@ -22,7 +6,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
-import torchvision.transforms as transforms
+from torchvision.transforms import v2
 import torchvision.utils as vutils
 
 
@@ -36,10 +20,6 @@ import itertools
 import sys, os
 
 import warnings
-
-import torchvision.transforms.v2 as v2
-
-
 warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.resource_tracker')
 
 EXP=5      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), lso resultados serán el promedio de cada resultado
@@ -48,6 +28,7 @@ ADA=3  # learning rate: 0-fijo, 1-manual, 2-MultiStepLR, 3-CosineAnnealingLR, 4-
 AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
+
 
 
 #-----------------------------------------------------------------
@@ -108,13 +89,17 @@ def read_seg(fichero):
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
 
-
+#EN ESTA FUNCIÓN TENGO DUDAS DE SI FUNCIONA BIEN????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????''
 #Función que permite leer el fichero que contiene los píxeles centrales de los segmentos (CENTER)
 def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
 
+  #nseg es el número total de segmentos??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #Porq a mi me pone  nseg 1 siempre y en H tmb pone 1
+  #Básicamente nseg no se usa en este código para nada**************************************************************************************************************************+
+  
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
@@ -334,11 +319,6 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 # PYTORCH - SETS
 #-----------------------------------------------------------------
 
-
-
-# cogemos muestras con ground-truth (dadas por el indice samples)
-
-# --- NUEVA CLASE PARA RUIDO GAUSSIANO ---
 class AddGaussianNoise(torch.nn.Module):
   def __init__(self, mean=0., std=0.05):
       super().__init__()
@@ -347,23 +327,21 @@ class AddGaussianNoise(torch.nn.Module):
   def forward(self, tensor):
       return tensor + torch.randn(tensor.size()) * self.std + self.mean
 
+# cogemos muestras con ground-truth (dadas por el indice samples)
+
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth
 #Usada para el entrenamiento
 class HyperDataset(Dataset):
-  def __init__(self, datos, truth, samples, H, V, sizex, sizey, metodo=0):
+  def __init__(self, datos, truth, samples, H, V, sizex, sizey, is_train, metodo=0):
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
-    self.metodo = metodo
+    self.is_train = is_train
 
-    #Métodos de aumentado que serán probados
+    #Métodos de aumentado
     flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
     rotation = v2.RandomRotation(degrees=(0, 360))
-    # En v1, RandomResizedCrop no suele tener el parámetro 'antialias'
     r_crop = v2.RandomResizedCrop(size=(sizex, sizey), scale=(0.8, 1.0), antialias=True)
     noise = AddGaussianNoise(std=0.02) 
-
-    #Auto aumentado
-    auto_aug = v2.AutoAugment(policy=v2.AutoAugmentPolicy.CIFAR10)
 
     t_list = flips.copy()
     if metodo == 1: t_list.append(rotation)
@@ -372,7 +350,7 @@ class HyperDataset(Dataset):
     elif metodo == 4: t_list.extend([rotation, r_crop])
     elif metodo == 5: t_list.extend([rotation, noise])
     elif metodo == 6: t_list.extend([r_crop, noise])
-    elif metodo == 7: t_list.append(auto_aug)
+    # NOTA: Se eliminó AutoAugment (CIFAR10) porque es exclusivo para imágenes RGB (3 canales) y crashea con hiperespectrales.
 
     self.transform = v2.Compose(t_list)
     
@@ -392,7 +370,8 @@ class HyperDataset(Dataset):
     patch=select_patch(datos,sizex,sizey,x,y)
 
     #Si el aumentado de datos está activado se aplican las transformaciones al azar
-    if(AUM==1): patch=self.transform(patch)
+    if(AUM==1 and self.is_train): 
+      patch=self.transform(patch)
 
     # renumeramos porque la red clasifica tambien la clase 0 
     
@@ -497,7 +476,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=0):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -579,9 +558,9 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,muestras_actuales)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
-  dataset_train = HyperDataset(datos, truth, train, H, V, sizex, sizey, metodo=metodo_aum)
+  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True, metodo=metodo_aum)
   #print('  - train dataset:',len(dataset_train))
-  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey)
+  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey, is_train=False, metodo=0)
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
@@ -591,41 +570,31 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=
   batch_size=BATCH # defecto 100
 
   sampler=None
-  if (usar_sampler == 1):
+  if (usar_sampler==1):
     # 1. Contamos cuántas muestras hay de cada clase en el conjunto de entrenamiento
     class_counts = [0] * nclases
     for ind in train:
-        clase_real = truth[ind] - 1
-        class_counts[clase_real] += 1
+      # truth[ind] va de 1 a nclases, restamos 1 para usarlo como índice de la lista
+      clase_real = truth[ind] - 1
+      class_counts[clase_real] += 1
     
-    # --- NUEVA LÓGICA DE MEDIA ---
-    # Calculamos la media de muestras de las clases que NO están vacías
-    active_counts = [c for c in class_counts if c > 0]
-    mean_samples = sum(active_counts) / len(active_counts) if active_counts else 0
-    # -----------------------------
-
-    # 2. Calculamos el peso condicional de cada clase
-    # Si N < media: w = 1 / (sqrt(N) * 2)
-    # Si N >= media: w = 1 / sqrt(N)
-    class_weights = []
-    for count in class_counts:
-        if count > 0:
-            base_w = 1.0 / math.sqrt(count)
-            # Aplicamos la penalización a las clases menos representadas (por debajo de la media)
-            weight = base_w / 2 if count < mean_samples else base_w
-            class_weights.append(weight)
-        else:
-            class_weights.append(0.0)
+    # 2. Calculamos el peso de cada clase (1 dividido entre la cantidad de muestras)
+    class_weights = [1.0/math.sqrt(count) if count > 0 else 0.0 for count in class_counts]
 
     # 3. Asignamos el peso correspondiente a cada muestra individual
     sample_weights = [0.0] * len(train)
     for i, ind in enumerate(train):
-        clase_real = truth[ind] - 1
-        sample_weights[i] = class_weights[clase_real]
+      clase_real = truth[ind] - 1
+      sample_weights[i] = class_weights[clase_real]
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    sampler = WeightedRandomSampler(weights=sample_weights_tensor, num_samples=len(sample_weights_tensor), replacement=True)
+    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    sampler = WeightedRandomSampler(
+      weights=sample_weights_tensor, 
+      num_samples=len(sample_weights_tensor), 
+      replacement=True
+    )
     #Creamos el dataloader que se usará durante el entrenamiento, sacará los patches del dataset de entrenamiento con el batch size indicado, es decir sacará batch_size patches
     #Con shuffle=True mezclamos los patches que se usan para entrenar (los centros de segmentos), es decir, se meten patches de distintos lugares de la imagen, de esta manera evitamos que el modelo aprenda el orden de los datos
     train_loader=DataLoader(dataset_train,batch_size,sampler=sampler,num_workers=num_workers_dl)
@@ -642,7 +611,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
-    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey)
+    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey, is_train=False,metodo=0)
     #print('  - val dataset:',len(dataset_val))
     #Creamos el dataloader que se usará durante la validación de la red neuronal
     #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -891,6 +860,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=
   #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
   for i in train: output[i]=0
   for i in val: output[i]=0
+
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
   #Recorremos todos los píxeles del output
@@ -958,16 +928,16 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler,metodo_aum, gpu_id=
   print("ACABÓ LA PRUEBA")
 
   #Finalizamos el main Devolviendo el Overall Accuracy del modelo, el Average Accuracy y el accuracy asociado a cada clase presente en el conjunto de test
-  return( OA, AA, class_aa, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
+  return( OA, AA, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
 
 def run_final_eval(args):
-    gpu_id, exp_idx, epochs, batch, samp, metodo_aum, data_bundle = args
-    return main(exp_idx, data_bundle, 1, epochs, batch, samp, metodo_aum, gpu_id)
+    gpu_id, exp_idx, epochs, batch, samp,metodo_aum, data_bundle = args
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp, metodo_aum ,gpu_id)
+    return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
-
-#Si se lanza el fichero directamente se entra en el entrenamiento y validación
+    #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
     # IMPORTANTE para PyTorch + Multiprocessing
     try:
@@ -1101,7 +1071,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, 200,100,usar_sampler,metodo_id,data_bundle) 
+        (i%num_gpus, i, 200,256,usar_sampler,metodo_id,data_bundle) 
         for i in range(EXP)
     ]
 
@@ -1118,10 +1088,11 @@ if __name__ == '__main__':
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
+    class_total_matrix = np.array([res[3] for res in resultados_test])
 
     #Listas para almacenar los tiempo de entrenamiento totales y los tiempos por época para cada test
-    final_tiempo_total_list = [res[3] for res in resultados_test]
-    final_tiempo_epoch_list = [res[4] for res in resultados_test] 
+    final_tiempo_total_list = [res[4] for res in resultados_test]
+    final_tiempo_epoch_list = [res[5] for res in resultados_test] 
 
     m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
     m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
@@ -1130,6 +1101,7 @@ if __name__ == '__main__':
     m_t_total = np.mean(final_tiempo_total_list)
     m_t_epoch = np.mean(final_tiempo_epoch_list)
 
+    m_total = np.mean(class_total_matrix, axis=0)
 
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
@@ -1138,12 +1110,13 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Epoch=200, Batch=100, Sampler={usar_sampler}")
+    print(f"Mejor Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-        if m_class[j] > 0 or s_class[j] > 0:
+        # Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
+        if m_total[j] > 0: 
             print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 
     print("-" * 60)
