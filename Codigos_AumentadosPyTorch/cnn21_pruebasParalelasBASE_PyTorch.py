@@ -319,13 +319,70 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 # PYTORCH - SETS
 #-----------------------------------------------------------------
 
-class AddGaussianNoise(torch.nn.Module):
+#Clase que permite añadir ruído gaussiano a un patch (en todas las bandas por igual)
+class AnhadirRuidoGaussiano(torch.nn.Module):
+  #Recibe la media del ruuído y la intensidad
   def __init__(self, mean=0., std=0.05):
-      super().__init__()
-      self.std = std
-      self.mean = mean
+    super().__init__()
+    self.std = std
+    self.mean = mean
+
   def forward(self, tensor):
-      return tensor + torch.randn(tensor.size()) * self.std + self.mean
+    #Generamos un nuevo tensor lleno de valores aleatorios siguiendo una distribución gaussiana con la desviación y media que indicamos y se suma al patch original (tensor)
+
+    noise = torch.randn(tensor.size(), device=tensor.device) * self.std + self.mean
+
+    #Mantenemos los valores entre 0 y 1
+    return torch.clamp(tensor + noise, 0.0, 1.0)
+
+#Clase que permite añadir ruído gaussiano a cada banda de manera independiente
+class AnhadirRuidoEspectral(torch.nn.Module):
+    #Recibe el rango de ruído con el que puede trabajar en cada una de las bandas del patch
+    def __init__(self, std_range=(0.01, 0.05)):
+      super().__init__()
+      self.std_range = std_range
+
+    def forward(self, tensor):
+      #Extraemos las dimensiones del patch
+      B, H, V = tensor.size()
+
+      #Creamos una desviación estándar aleatoria (dentro del rango establecido) para cada banda del patch
+      stds = torch.empty(B, 1, 1).uniform_(self.std_range[0], self.std_range[1]).to(tensor.device)
+      
+      #Creamos un patch de ruido del mismo tamaño que el patch y le aplicamos
+      noise = torch.randn(tensor.size(), device=tensor.device) * stds
+
+      #Se aplica el ruido al patch
+      return torch.clamp(tensor + noise, 0.0, 1.0)
+
+#Clase que cambia la iluminación del patch en todas las bandas    
+class IluminacionAleatoria(torch.nn.Module):
+    #Recibe el rango en el que puede operar de luz
+    def __init__(self, factor_range=(0.9, 1.1)):
+      super().__init__()
+      self.factor_range = factor_range
+
+    def forward(self, tensor):
+      #Generamos un número aleatorio dentro del rango establecido
+      factor = random.uniform(self.factor_range[0], self.factor_range[1])
+      #Aplicamos el factor a todo el patch y evitamos que se salga de los valores se salgan de los límites tras normalizar
+      return torch.clamp(tensor * factor, 0.0, 1.0)
+
+#Clase que elimina bandas completas del patch (las pone a 0)
+class EliminarBandas(torch.nn.Module):
+    #Recibe la probabilidad de borrado
+    def __init__(self, drop_prob=0.1):
+      super().__init__()
+      self.drop_prob = drop_prob
+
+    def forward(self, tensor):
+      #Obtenemos las dimensiones del patch
+      B, H, V = tensor.size()
+      #Creamos una máscara aleatoria de 0s y 1s para las bandas
+      mask = (torch.rand(B, 1, 1) > self.drop_prob).float().to(tensor.device)
+      #Multiplicamos el patch por la máscara, haciendo que las bandas que tienen un 0 en la máscara pasen a valer 0
+      return tensor * mask
+    
 
 # cogemos muestras con ground-truth (dadas por el indice samples)
 
@@ -338,19 +395,55 @@ class HyperDataset(Dataset):
     self.is_train = is_train
 
     #Métodos de aumentado
+    #Flips (por defecto)
     flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
+    #Rotaciones
     rotation = v2.RandomRotation(degrees=(0, 360))
-    r_crop = v2.RandomResizedCrop(size=(sizex, sizey), scale=(0.8, 1.0), antialias=True)
-    noise = AddGaussianNoise(std=0.02) 
+    #Zoom in y zoom out
+    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
+
+
+    noise = AnhadirRuidoGaussiano(std=0.02) 
+    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.05))
+    spec_illum = IluminacionAleatoria(factor_range=(0.9, 1.1))
+    spec_drop = EliminarBandas(drop_prob=0.1)
+
+    #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
+    erasing = v2.RandomErasing(p=0.5, scale=(0.02, 0.1), value=0)
 
     t_list = flips.copy()
-    if metodo == 1: t_list.append(rotation)
-    elif metodo == 2: t_list.append(r_crop)
-    elif metodo == 3: t_list.append(noise)
-    elif metodo == 4: t_list.extend([rotation, r_crop])
-    elif metodo == 5: t_list.extend([rotation, noise])
-    elif metodo == 6: t_list.extend([r_crop, noise])
-    # NOTA: Se eliminó AutoAugment (CIFAR10) porque es exclusivo para imágenes RGB (3 canales) y crashea con hiperespectrales.
+
+    #Con esta combinación se busca realizar variaciones geométricas de los patches originales, haciendo rotaciones aleatorias y zoom in y zoom out aleatorios 
+    #(pues el curso de los ríos no es completamente plano y la altura del dron tampoco es constante)
+    #al introducir estas variaciones hacemos que el modelo no se centre en la posición ni la altura del dron.
+    if metodo == 1: 
+        #Añadimos a la lista de tranformaciones las rotaciones aleatorias y el zoom simétrico
+        #Tenemos flips + rotacion + zoom simétrico
+        t_list.extend([rotation, simetric_zoom])
+
+    #Con esta combinación se busca evitar que el modelo dependa de únicamente texturas perfectas o formas perfectas, eliminando partes de las mismas en los parches    
+    elif metodo == 2: 
+        #Tenemos flips + borrado aleatorio
+        t_list.append(erasing)
+    
+    #Con esta combinación se busca introducir ruido en los datos de manera aleatoria para que el modelo sea más robusto ante el mismo, pudiendo así emplearse sobre datos con más ruído que los originales
+    elif metodo == 3: 
+        #Tenemos flips + ruido espectral (se genera ruído independiente para cada banda) + ruido gaussiano (se genera el mismo ruído sobre todas las bandas)
+        t_list.extend([spec_noise, noise])
+    
+    #Con esta combinación se modifica la firma espectral completa del patch, modifica la iluminación en todas las bandas y apaga bandas de manera aleatoria para que el modelo no se centre en emplear una única banda ni en depender de la misma iluminación
+    elif metodo == 4: 
+        #Tenemos flips + random ilumination + spectral
+        t_list.extend([spec_illum, spec_drop])
+
+    #Combinación de los métodos anteriores    
+    elif metodo == 5: 
+        ##Tenemos flips, rotación, zoom aleatorio, random ilumination y ruido gaussiano (igual para todas las bandas)
+        t_list.extend([rotation, simetric_zoom, spec_illum, noise])
+    
+    #Combinación de todos los métodos anteriores
+    elif metodo == 6: 
+        t_list.extend([rotation, simetric_zoom, spec_illum, spec_noise, spec_drop, erasing])
 
     self.transform = v2.Compose(t_list)
     

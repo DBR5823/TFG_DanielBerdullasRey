@@ -4,18 +4,73 @@ import os
 import numpy as np
 import torch
 import torchvision.transforms.v2 as v2
+import random
 
-class AddGaussianNoise(torch.nn.Module):
-    def __init__(self, mean=0., std=0.05):
-        super().__init__()
-        self.std = std
-        self.mean = mean
+
+#Clase que permite añadir ruído gaussiano a un patch (en todas las bandas por igual)
+class AnhadirRuidoGaussiano(torch.nn.Module):
+  #Recibe la media del ruuído y la intensidad
+  def __init__(self, mean=0., std=0.05):
+    super().__init__()
+    self.std = std
+    self.mean = mean
+
+  def forward(self, tensor):
+    #Generamos un nuevo tensor lleno de valores aleatorios siguiendo una distribución gaussiana con la desviación y media que indicamos y se suma al patch original (tensor)
+
+    noise = torch.randn(tensor.size(), device=tensor.device) * self.std + self.mean
+
+    #Mantenemos los valores entre 0 y 1
+    return torch.clamp(tensor + noise, 0.0, 1.0)
+
+#Clase que permite añadir ruído gaussiano a cada banda de manera independiente
+class AnhadirRuidoEspectral(torch.nn.Module):
+    #Recibe el rango de ruído con el que puede trabajar en cada una de las bandas del patch
+    def __init__(self, std_range=(0.01, 0.05)):
+      super().__init__()
+      self.std_range = std_range
 
     def forward(self, tensor):
-        # Sumamos el ruido
-        noisy_tensor = tensor + torch.randn(tensor.size()) * self.std + self.mean
-        # IMPORTANTE: Forzamos a que los valores se mantengan en el rango [0, 1]
-        return torch.clamp(noisy_tensor, 0.0, 1.0)
+      #Extraemos las dimensiones del patch
+      B, H, V = tensor.size()
+
+      #Creamos una desviación estándar aleatoria (dentro del rango establecido) para cada banda del patch
+      stds = torch.empty(B, 1, 1).uniform_(self.std_range[0], self.std_range[1]).to(tensor.device)
+      
+      #Creamos un patch de ruido del mismo tamaño que el patch y le aplicamos
+      noise = torch.randn(tensor.size(), device=tensor.device) * stds
+
+      #Se aplica el ruido al patch
+      return torch.clamp(tensor + noise, 0.0, 1.0)
+
+#Clase que cambia la iluminación del patch en todas las bandas    
+class IluminacionAleatoria(torch.nn.Module):
+    #Recibe el rango en el que puede operar de luz
+    def __init__(self, factor_range=(0.9, 1.1)):
+      super().__init__()
+      self.factor_range = factor_range
+
+    def forward(self, tensor):
+      #Generamos un número aleatorio dentro del rango establecido
+      factor = random.uniform(self.factor_range[0], self.factor_range[1])
+      #Aplicamos el factor a todo el patch y evitamos que se salga de los valores se salgan de los límites tras normalizar
+      return torch.clamp(tensor * factor, 0.0, 1.0)
+
+#Clase que elimina bandas completas del patch (las pone a 0)
+class EliminarBandas(torch.nn.Module):
+    #Recibe la probabilidad de borrado
+    def __init__(self, drop_prob=0.1):
+      super().__init__()
+      self.drop_prob = drop_prob
+
+    def forward(self, tensor):
+      #Obtenemos las dimensiones del patch
+      B, H, V = tensor.size()
+      #Creamos una máscara aleatoria de 0s y 1s para las bandas
+      mask = (torch.rand(B, 1, 1) > self.drop_prob).float().to(tensor.device)
+      #Multiplicamos el patch por la máscara, haciendo que las bandas que tienen un 0 en la máscara pasen a valer 0
+      return tensor * mask
+    
 
 def read_raw(fichero):
   #Leemos los 3 primeros números presentes en el archivo, los 3 son enteros de 32 bits
@@ -115,27 +170,29 @@ if __name__ == '__main__':
     
     sizex, sizey = 32, 32
     
-    print("\n--> Buscando un parche brillante y con contenido real...")
-    x_centro, y_centro = None, None
+
+    patch_original = select_patch(datos_tensor, sizex, sizey, 4100, 3200)
+
+    flips = [v2.RandomHorizontalFlip(p=1.0), v2.RandomVerticalFlip(p=1.0)]
+    rotation = v2.RandomRotation(degrees=(45, 45)) # Fijado a 45 grados exactos
+    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.7, 0.7)) # Fijado a un zoom-out obvio
     
-    for y in range(sizey, V - sizey, 20):
-        for x in range(sizex, H - sizex, 20):
-            patch_prueba = select_patch(datos_tensor, sizex, sizey, x, y)
-            if patch_prueba.mean() > 0.5:
-                x_centro = x
-                y_centro = y
-                break
-        if x_centro is not None:
-            break
-            
-    print(f"--> ¡Parche válido encontrado en X={x_centro}, Y={y_centro}!")
-    patch_original = select_patch(datos_tensor, sizex, sizey, x_centro, y_centro)
+    noise = AnhadirRuidoGaussiano(std=0.1) # Ruido alto
+    spec_noise = AnhadirRuidoEspectral(std_range=(0.08, 0.15)) # Ruido espectral notable
+    spec_illum = IluminacionAleatoria(factor_range=(0.4, 0.4)) # Oscurecido fuertemente
+    spec_drop = EliminarBandas(drop_prob=0.4) # Apagamos el 40% de las bandas
+    
+    erasing = v2.RandomErasing(p=1.0, scale=(0.15, 0.15), ratio=(1.0, 1.0), value=0) # Borrado de un cuadrado negro fijo
     
     transformaciones = {
-        "1_Original": None,
-        "2_Rotacion_45": v2.RandomRotation(degrees=(45, 45)), 
-        "3_Resized_Crop": v2.RandomResizedCrop(size=(sizex, sizey), scale=(0.6, 0.6), antialias=True),
-        "4_Ruido_Gaussiano": AddGaussianNoise(std=0.1) 
+        "0_Original": None,
+        "1_Base_Flips": v2.Compose(flips),
+        "2_Geometria": v2.Compose(flips + [rotation, simetric_zoom]),
+        "3_Oclusion": v2.Compose(flips + [erasing]),
+        "4_Ruido_Sensores": v2.Compose(flips + [spec_noise, noise]),
+        "5_Firma_Espectral": v2.Compose(flips + [spec_illum, spec_drop]),
+        "6_Combo_Equilibrado": v2.Compose(flips + [rotation, simetric_zoom, spec_illum, noise]),
+        "7_All_In": v2.Compose(flips + [rotation, simetric_zoom, spec_illum, spec_noise, spec_drop, erasing])
     }
     
     carpeta_salida = "ejemplos_aumentados_raw"
@@ -152,4 +209,4 @@ if __name__ == '__main__':
         # Le pasamos el d_max para que sepa cuánta luz darle
         save_patch(patch_transformado, sizex, sizey, B, ruta_salida)
         
-    print(f"\n¡Proceso terminado! Abre los nuevos ficheros, que esta vez sí vas a ver la luz.")
+    print(f"\nSe han generado todas las imágenes")
