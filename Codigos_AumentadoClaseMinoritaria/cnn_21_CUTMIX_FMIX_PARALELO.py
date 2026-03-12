@@ -918,9 +918,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
       #if(total%2000==0): #print('  Testeando: %6d/%d'%(total,len(dataset_test)))
 
   
-  #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
-  for i in train: output[i]=0
-  for i in val: output[i]=0
+  
   
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
@@ -929,6 +927,10 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
   #Buscamos cual es el píxel central del segmento al que pertenece el píxel actual center[seg[i]]
   #Miramos que clase fue asignada al píxel central (mediante el patch) y le asignamos esa clase al píxel actual
   for i in range(H*V): output[i]=output[center[seg[i]]]
+
+  #Eliminamos los centros usados en el entrenamiento y validación de la red, de esta manera en el output todos valdrán 0
+  for i in train: output[i]=0
+  for i in val: output[i]=0
 
   
   
