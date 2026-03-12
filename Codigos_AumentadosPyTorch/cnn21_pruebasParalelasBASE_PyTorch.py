@@ -641,14 +641,9 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, gpu_id
 
   #Seleccionamos los conjuntos de entrenamiento, validación y test según lo especificado.
   #La función devuelve los índices de los centros de segmentos que van a cada conjunto en base a la proporción indicada para cada conjunto mediante el parámetro SAMPLES
-  #Si estamos en la evaluación final (TEST == 1), sumamos el porcentaje de validación al de entrenamiento y dejamos la validación a 0.
-  if TEST == 1:
-      muestras_actuales = [SAMPLES[0] + SAMPLES[1], 0.0]
-  else:
-      muestras_actuales = SAMPLES
 
   # Seleccionamos los conjuntos de entrenamiento, validación y test
-  (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,muestras_actuales)
+  (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,SAMPLES)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
   dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True, metodo=metodo_aum)
@@ -779,43 +774,8 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, gpu_id
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
-  #WARM-UP para que las medidas de tiempo sean correctas (pues la primera época es más lenta)
-  model.train()
-  # Solo corremos unas cuantas iteraciones o una época corta
-  for i, (inputs, labels) in enumerate(train_loader):
-    inputs, labels = inputs.to(device), labels.to(device)
-    optimizer.zero_grad()
-    outputs = model(inputs)
-    loss = criterion(outputs, labels)
-    loss.backward()
-    optimizer.step()
-    if i > 5: break
-
-  # 2. RESET TOTAL DE PARÁMETROS APRENDIDOS EN EL WARMUP
-  @torch.no_grad()
-  def weight_reset(m):
-      # Busca el método reset_parameters en cualquier subcapa
-      reset_parameters = getattr(m, "reset_parameters", None)
-      if callable(reset_parameters):
-          m.reset_parameters()
-
-  model.apply(weight_reset) #Aplicamos el reset a toda la red
-
-  #RE-INICIALIZACIÓN DEL OPTIMIZADOR Y SCHEDULER
-  optimizer=torch.optim.Adam(model.parameters(),lr=lr)
-
-  if(ADA==2): scheduler=torch.optim.lr_scheduler.MultiStepLR(optimizer,milestones=[EPOCHS//2,(5*EPOCHS)//6],gamma=0.1)
   
-  elif(ADA==3): scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=EPOCHS,eta_min=0)
-  
-
-  elif(ADA==4): scheduler=torch.optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.99, verbose=True)
-
-
-  if torch.cuda.is_available():
-    torch.cuda.synchronize(device) # Limpiamos la cola de la GPU
-  
-  #Tomamos la marca de tiempo después de hacer el warm-up
+  #Tomamos la marca de tiempo inicial
   tiempo_inicial_entrenamiento = time.perf_counter()
 
   #Bucle de entrenamiento asociado a las épocas
