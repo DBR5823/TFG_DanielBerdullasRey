@@ -1148,7 +1148,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, 200,256,usar_sampler,metodo_id,data_bundle) 
+        (i%num_gpus, i, 100 ,256,usar_sampler,metodo_id,data_bundle) 
         for i in range(EXP)
     ]
 
