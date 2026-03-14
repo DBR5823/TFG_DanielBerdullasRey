@@ -1135,13 +1135,13 @@ if __name__ == '__main__':
       else:
         # 2. CONFIGURACIÓN DEL RANDOM SEARCH
         fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
-        decays = [1.0, 1.5, 2.0, 2.5, 3.0]
+        decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
         cutmix_alphas = [0.1, 0.3, 0.5, 0.7, 1.0]
         probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
         probs2 = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 
-        PRUEBAS=100
+        PRUEBAS=150
 
         if(DET==1 ):
           random.seed(SEMILLA)
@@ -1159,7 +1159,7 @@ if __name__ == '__main__':
 
         tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones de {len(combinaciones_totales)} combinaciones totales) ---")
 
         #Ejecutamos el grid search con 5 procesos
         with ProcessPoolExecutor(max_workers=6) as executor:

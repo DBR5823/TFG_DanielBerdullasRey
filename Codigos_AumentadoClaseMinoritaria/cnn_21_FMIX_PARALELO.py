@@ -49,7 +49,7 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
-
+SEMILLA=0
 
 
 
@@ -1106,20 +1106,32 @@ if __name__ == '__main__':
         sys.exit(1)
       else:
         # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.5,1.0,1.5]
-        decays = [1.0, 2.0, 3.0]
-        softs  = [0.0,0.5,1.0]
+        alphas =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
+        decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
+        softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
         epochs= [200]
         batches = [256]
-        probs=[0.2,0.5,0.8]
+        probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
         sampler=[usar_sampler]
 
 
-        combinaciones = list(itertools.product(alphas, decays, softs, epochs, batches, probs, sampler))
+        PRUEBAS = 150
+
+        if(DET==1 ):
+          random.seed(SEMILLA)
+
+
+        combinaciones_totales = list(itertools.product(alphas, decays, softs, epochs, batches, probs, sampler))
+
+        # 2. Seleccionamos un número máximo de combinaciones al azar
+        if len(combinaciones_totales) > PRUEBAS:
+          combinaciones = random.sample(combinaciones_totales, PRUEBAS)
+        else:
+          combinaciones = combinaciones_totales
 
         tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
         
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
+        print(f"--- Iniciando Random Search Paralelo ({len(combinaciones)} de {len(combinaciones_totales)} combinaciones totales) ---")
 
         #Ejecutamos el grid search con 5 procesos
         with ProcessPoolExecutor(max_workers=6) as executor:

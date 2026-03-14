@@ -413,37 +413,43 @@ class HyperDataset(Dataset):
 
     t_list = flips.copy()
 
-    #Con esta combinación se busca realizar variaciones geométricas de los patches originales, haciendo rotaciones aleatorias y zoom in y zoom out aleatorios 
-    #(pues el curso de los ríos no es completamente plano y la altura del dron tampoco es constante)
-    #al introducir estas variaciones hacemos que el modelo no se centre en la posición ni la altura del dron.
+    # --- CATEGORÍA A: Geométricas ---
     if metodo == 1: 
-        #Añadimos a la lista de tranformaciones las rotaciones aleatorias y el zoom simétrico
-        #Tenemos flips + rotacion + zoom simétrico
+        # Solo Rotación (sobre flips)
+        t_list.append(rotation)
+    elif metodo == 2: 
+        # Solo Zoom Simétrico (sobre flips)
+        t_list.append(simetric_zoom)
+    elif metodo == 3: 
+        # Rotación + Zoom Simétrico (juntos sobre flips)
         t_list.extend([rotation, simetric_zoom])
 
-    #Con esta combinación se busca evitar que el modelo dependa de únicamente texturas perfectas o formas perfectas, eliminando partes de las mismas en los parches    
-    elif metodo == 2: 
-        #Tenemos flips + borrado aleatorio
-        t_list.append(erasing)
-    
-    #Con esta combinación se busca introducir ruido en los datos de manera aleatoria para que el modelo sea más robusto ante el mismo, pudiendo así emplearse sobre datos con más ruído que los originales
-    elif metodo == 3: 
-        #Tenemos flips + ruido espectral (se genera ruído independiente para cada banda) + ruido gaussiano (se genera el mismo ruído sobre todas las bandas)
-        t_list.extend([spec_noise, noise])
-    
-    #Con esta combinación se modifica la firma espectral completa del patch, modifica la iluminación en todas las bandas y apaga bandas de manera aleatoria para que el modelo no se centre en emplear una única banda ni en depender de la misma iluminación
-    elif metodo == 4: 
-        #Tenemos flips + random ilumination + spectral
+    # --- CATEGORÍA B: Ruido ---
+    elif metodo == 4:
+        # Solo Ruido Gaussiano general (sobre flips)
+        t_list.append(noise)
+    elif metodo == 5:
+        # Solo Ruido Espectral independiente por banda (sobre flips)
+        t_list.append(spec_noise)
+    elif metodo == 6:
+        # Ruido Gaussiano + Ruido Espectral (juntos sobre flips)
+        t_list.extend([noise, spec_noise])
+
+    # --- CATEGORÍA C: Espectrales / Iluminación ---
+    elif metodo == 7:
+        # Solo Iluminación Aleatoria (sobre flips)
+        t_list.append(spec_illum)
+    elif metodo == 8:
+        # Solo Eliminar Bandas (sobre flips)
+        t_list.append(spec_drop)
+    elif metodo == 9:
+        # Iluminación Aleatoria + Eliminar Bandas (juntos sobre flips)
         t_list.extend([spec_illum, spec_drop])
 
-    #Combinación de los métodos anteriores    
-    elif metodo == 5: 
-        ##Tenemos flips, rotación, zoom aleatorio, random ilumination y ruido gaussiano (igual para todas las bandas)
-        t_list.extend([rotation, simetric_zoom, spec_illum, noise])
-    
-    #Combinación de todos los métodos anteriores
-    elif metodo == 6: 
-        t_list.extend([rotation, simetric_zoom, spec_illum, spec_noise, spec_drop, erasing])
+    # --- CATEGORÍA D: Borrado ---
+    elif metodo == 10:
+        # Solo Borrado Aleatorio (sobre flips)
+        t_list.append(erasing)
 
     self.transform = v2.Compose(t_list)
     
