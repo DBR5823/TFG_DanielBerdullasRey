@@ -1008,6 +1008,21 @@ if __name__ == '__main__':
     #Detectar cuántas GPUs hay disponibles
     num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
     print(f"GPUs detectadas: {num_gpus}")
+
+    #Diccionario para mapear el ID del método con su nombre real
+    nombres_aumentado = {
+        0: "Sin aumentado extra (solo Flips)",
+        1: "Rotación",
+        2: "Zoom Simétrico",
+        3: "Rotación + Zoom Simétrico",
+        4: "Ruido Gaussiano",
+        5: "Ruido Espectral independiente",
+        6: "Ruido Gaussiano + Ruido Espectral",
+        7: "Iluminación Aleatoria",
+        8: "Eliminar Bandas",
+        9: "Iluminación Aleatoria + Eliminar Bandas",
+        10: "Borrado Aleatorio"
+    }
     
     directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
@@ -1019,7 +1034,8 @@ if __name__ == '__main__':
       try:
         usar_sampler=int(sys.argv[1])
         metodo_id = int(sys.argv[2])
-        print(f"Usando el método de aumento con ID: {metodo_id}")
+        nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
+        print(f"Usando el método de aumento: {nombre_metodo} (ID: {metodo_id})")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1039,7 +1055,8 @@ if __name__ == '__main__':
         opcion = int(sys.argv[1])
         usar_sampler=int(sys.argv[2])
         metodo_id = int(sys.argv[3])
-        print(f"Usando el método de aumento con ID: {metodo_id}")
+        nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
+        print(f"Usando el método de aumento: {nombre_metodo} (ID: {metodo_id})")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1170,7 +1187,8 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}")
+    nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
+    print(f"Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}, Aumentado={nombre_metodo}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
