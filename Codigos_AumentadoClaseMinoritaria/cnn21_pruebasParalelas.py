@@ -1039,7 +1039,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, 200,256,usar_sampler,data_bundle) 
+        (i%num_gpus, i, 100 ,256,usar_sampler,data_bundle) 
         for i in range(EXP)
     ]
 
@@ -1080,7 +1080,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}")
+    print(f"Mejor Configuración: Epoch=100, Batch=256, Sampler={usar_sampler}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")

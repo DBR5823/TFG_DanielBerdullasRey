@@ -1188,7 +1188,7 @@ if __name__ == '__main__':
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
     nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
-    print(f"Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}, Aumentado={nombre_metodo}")
+    print(f"Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}, ID Aumentado={metodo_id}, Aumentado={nombre_metodo}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
