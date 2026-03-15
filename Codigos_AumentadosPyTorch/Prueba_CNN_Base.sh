@@ -7,6 +7,9 @@
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
 #SBATCH --time=40:00:00              # Duración estimada (aumentada por los nuevos métodos)
 
+
+source /home/daniel.berdullas/TFG/venv/bin/activate
+
 # Directorio de salida
 mkdir -p resultadosAumentado_PyTorch
 

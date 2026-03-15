@@ -338,7 +338,7 @@ class AnhadirRuidoGaussiano(torch.nn.Module):
 #Clase que permite añadir ruído gaussiano a cada banda de manera independiente
 class AnhadirRuidoEspectral(torch.nn.Module):
     #Recibe el rango de ruído con el que puede trabajar en cada una de las bandas del patch
-    def __init__(self, std_range=(0.01, 0.05)):
+    def __init__(self, std_range=(0.01, 0.03)):
       super().__init__()
       self.std_range = std_range
 
@@ -358,7 +358,7 @@ class AnhadirRuidoEspectral(torch.nn.Module):
 #Clase que cambia la iluminación del patch en todas las bandas    
 class IluminacionAleatoria(torch.nn.Module):
     #Recibe el rango en el que puede operar de luz
-    def __init__(self, factor_range=(0.9, 1.1)):
+    def __init__(self, factor_range=(0.8, 1.2)):
       super().__init__()
       self.factor_range = factor_range
 
@@ -398,18 +398,18 @@ class HyperDataset(Dataset):
     #Flips (por defecto)
     flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
     #Rotaciones
-    rotation = v2.RandomRotation(degrees=(0, 360))
+    rotation = v2.RandomRotation(degrees=(0, 360), padding_mode='reflect')
     #Zoom in y zoom out
     simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
 
 
     noise = AnhadirRuidoGaussiano(std=0.02) 
-    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.05))
-    spec_illum = IluminacionAleatoria(factor_range=(0.9, 1.1))
+    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.03))
+    spec_illum = IluminacionAleatoria(factor_range=(0.8, 1.2))
     spec_drop = EliminarBandas(drop_prob=0.1)
 
     #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
-    erasing = v2.RandomErasing(p=0.5, scale=(0.02, 0.1), value=0)
+    erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
 
     t_list = flips.copy()
 

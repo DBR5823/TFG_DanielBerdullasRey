@@ -1,0 +1,274 @@
+**Ejecutando dataset: 0 | Método: Ruido_Gaussiano_Espectral | Inicio: 00:19:34**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.18% ± 2.45%
+  Clase 02: 77.63% ± 2.81%
+  Clase 03: 82.35% ± 4.12%
+  Clase 04: 88.26% ± 2.40%
+  Clase 05: 91.20% ± 1.29%
+  Clase 06: 88.40% ± 3.36%
+  Clase 07: 96.24% ± 0.47%
+  Clase 08: 93.35% ± 0.67%
+  Clase 09: 97.09% ± 1.20%
+  Clase 10: 85.69% ± 2.25%
+------------------------------------------------------------
+OA Final: 93.13% ± 0.04%
+AA Final: 89.24% ± 0.57%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 110.00 s
+Tiempo medio por época con hiperparámetros óptimos: 1.1000 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Ruido_Gaussiano_Espectral | 00:22:23
+********************************************
+**Ejecutando dataset: 1 | Método: Ruido_Gaussiano_Espectral | Inicio: 01:05:53**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 72.80% ± 0.77%
+  Clase 07: 91.90% ± 0.78%
+  Clase 08: 91.38% ± 3.24%
+  Clase 10: 92.43% ± 0.91%
+------------------------------------------------------------
+OA Final: 90.23% ± 0.19%
+AA Final: 87.13% ± 0.85%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 201.97 s
+Tiempo medio por época con hiperparámetros óptimos: 2.0197 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Ruido_Gaussiano_Espectral | 01:10:24
+********************************************
+**Ejecutando dataset: 2 | Método: Ruido_Gaussiano_Espectral | Inicio: 01:45:32**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.50% ± 1.68%
+  Clase 02: 86.71% ± 2.42%
+  Clase 03: 86.09% ± 3.73%
+  Clase 04: 94.59% ± 2.45%
+  Clase 05: 58.61% ± 12.37%
+  Clase 06: 82.23% ± 11.52%
+  Clase 07: 90.02% ± 1.82%
+  Clase 08: 94.07% ± 3.77%
+  Clase 09: 65.09% ± 16.95%
+  Clase 10: 93.89% ± 6.96%
+------------------------------------------------------------
+OA Final: 92.48% ± 2.28%
+AA Final: 84.78% ± 2.09%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 81.79 s
+Tiempo medio por época con hiperparámetros óptimos: 0.8179 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Ruido_Gaussiano_Espectral | 01:48:38
+********************************************
+**Ejecutando dataset: 3 | Método: Ruido_Gaussiano_Espectral | Inicio: 02:39:55**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 80.12% ± 6.45%
+  Clase 02: 82.39% ± 6.21%
+  Clase 03: 76.45% ± 4.46%
+  Clase 04: 97.88% ± 0.77%
+  Clase 05: 95.62% ± 3.40%
+  Clase 06: 91.78% ± 2.10%
+  Clase 07: 97.88% ± 0.41%
+  Clase 08: 94.11% ± 1.64%
+  Clase 09: 91.96% ± 1.52%
+  Clase 10: 94.50% ± 1.06%
+------------------------------------------------------------
+OA Final: 95.59% ± 0.53%
+AA Final: 90.27% ± 1.73%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 121.78 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2178 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Ruido_Gaussiano_Espectral | 02:45:55
+********************************************
+**Ejecutando dataset: 4 | Método: Ruido_Gaussiano_Espectral | Inicio: 03:55:47**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.71% ± 0.39%
+  Clase 04: 95.20% ± 1.46%
+  Clase 07: 82.77% ± 0.71%
+  Clase 08: 89.99% ± 3.63%
+  Clase 09: 6.65% ± 5.06%
+  Clase 10: 90.72% ± 0.94%
+------------------------------------------------------------
+OA Final: 90.48% ± 0.27%
+AA Final: 76.67% ± 0.93%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 277.85 s
+Tiempo medio por época con hiperparámetros óptimos: 2.7785 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Ruido_Gaussiano_Espectral | 04:02:16
+********************************************
+**Ejecutando dataset: 5 | Método: Ruido_Gaussiano_Espectral | Inicio: 05:30:28**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.40% ± 0.55%
+  Clase 04: 85.46% ± 6.80%
+  Clase 05: 42.45% ± 33.06%
+  Clase 06: 17.86% ± 22.28%
+  Clase 07: 88.29% ± 1.12%
+  Clase 08: 95.51% ± 3.09%
+  Clase 10: 90.30% ± 1.11%
+------------------------------------------------------------
+OA Final: 89.38% ± 0.42%
+AA Final: 72.47% ± 5.20%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 308.26 s
+Tiempo medio por época con hiperparámetros óptimos: 3.0826 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Ruido_Gaussiano_Espectral | 05:39:54
+********************************************
+**Ejecutando dataset: 6 | Método: Ruido_Gaussiano_Espectral | Inicio: 06:21:04**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.26% ± 1.32%
+  Clase 04: 95.57% ± 4.05%
+  Clase 07: 99.09% ± 1.35%
+  Clase 08: 97.12% ± 1.61%
+  Clase 09: 88.47% ± 9.53%
+------------------------------------------------------------
+OA Final: 97.52% ± 0.66%
+AA Final: 95.90% ± 1.41%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 9.55 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0955 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Ruido_Gaussiano_Espectral | 06:22:46
+********************************************
+**Ejecutando dataset: 7 | Método: Ruido_Gaussiano_Espectral | Inicio: 07:20:07**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano + Ruido Espectral (ID: 6)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=6, Aumentado=Ruido Gaussiano + Ruido Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 88.97% ± 4.27%
+  Clase 02: 76.02% ± 4.01%
+  Clase 03: 89.12% ± 1.87%
+  Clase 04: 93.81% ± 1.71%
+  Clase 07: 98.33% ± 0.35%
+  Clase 08: 95.65% ± 0.62%
+------------------------------------------------------------
+OA Final: 97.40% ± 0.26%
+AA Final: 90.32% ± 0.51%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 317.27 s
+Tiempo medio por época con hiperparámetros óptimos: 3.1727 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Ruido_Gaussiano_Espectral | 07:27:02
+********************************************

@@ -861,19 +861,19 @@ if __name__=='__main__':
   #Si el flag TEST está a 0 no se ejecuta el modelo sobre el conjunto de test
   if(TEST==0): # validacion (se podria hacer una validacion cruzada de varias vias)
     acces=0
-    # Se ejecuta la función main tantas veces como indique EXP
+    #Se ejecuta la función main tantas veces como indique EXP
     for exp in range(EXP): acces=acces+main(exp)
     print('* ViT TIMM SEG EXP:',EXP,'SAMPLES:',SAMPLES,'EPOCHS:',EPOCHS,'BATCH:',BATCH,'SIZEX:',SIZEX,'AUM:',AUM)
     print('  VAL: %02.02f'%(100*acces/EXP))
     
   #Si el flag test está a 1 se realiza el test del modelo sobre el conjunto
   else: # test de 5 experimentos
-    # Listas para guardar resultados de los diferentes experimentos
+    #Listas para guardar resultados de los diferentes experimentos
     OA=[0]*EXP; AA=[0]*EXP; aa=[0]*EXP 
     
-    # Se ejecuta la función main y se almacenan los valores devueltos
+    #Se ejecuta la función main y se almacenan los valores devueltos
     for exp in range(EXP): (OA[exp],AA[exp],aa[exp])=main(exp)
     
-    # Si se ha realizado más de un experimento se calcula la media y la desviación típica
+    #Si se ha realizado más de un experimento se calcula la media y la desviación típica
     if(EXP>1): accuracy_mean_deviation(OA,AA,aa) 
     print('* ViT TIMM SEG EXP:',EXP,'SAMPLES:',SAMPLES,'EPOCHS:',EPOCHS,'BATCH:',BATCH,'SIZEX:',SIZEX,'AUM:',AUM)

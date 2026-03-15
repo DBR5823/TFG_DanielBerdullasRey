@@ -1,0 +1,274 @@
+**Ejecutando dataset: 0 | Método: Iluminacion_Aleatoria | Inicio: 00:22:26**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.97% ± 0.33%
+  Clase 02: 82.86% ± 2.38%
+  Clase 03: 82.48% ± 1.96%
+  Clase 04: 88.05% ± 4.62%
+  Clase 05: 89.09% ± 1.44%
+  Clase 06: 93.71% ± 1.20%
+  Clase 07: 96.34% ± 0.66%
+  Clase 08: 94.67% ± 0.38%
+  Clase 09: 98.78% ± 0.32%
+  Clase 10: 93.29% ± 0.61%
+------------------------------------------------------------
+OA Final: 94.91% ± 0.24%
+AA Final: 91.62% ± 0.63%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 74.58 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7458 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Iluminacion_Aleatoria | 00:24:39
+********************************************
+**Ejecutando dataset: 1 | Método: Iluminacion_Aleatoria | Inicio: 01:10:27**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 72.65% ± 0.45%
+  Clase 07: 90.98% ± 0.30%
+  Clase 08: 96.52% ± 0.67%
+  Clase 10: 94.65% ± 0.17%
+------------------------------------------------------------
+OA Final: 90.90% ± 0.11%
+AA Final: 88.70% ± 0.24%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 112.98 s
+Tiempo medio por época con hiperparámetros óptimos: 1.1298 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Iluminacion_Aleatoria | 01:13:22
+********************************************
+**Ejecutando dataset: 2 | Método: Iluminacion_Aleatoria | Inicio: 01:48:41**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.50% ± 0.57%
+  Clase 02: 83.01% ± 3.09%
+  Clase 03: 94.04% ± 2.64%
+  Clase 04: 93.31% ± 3.58%
+  Clase 05: 74.89% ± 2.29%
+  Clase 06: 89.80% ± 3.14%
+  Clase 07: 94.77% ± 0.14%
+  Clase 08: 96.21% ± 0.50%
+  Clase 09: 78.86% ± 7.31%
+  Clase 10: 86.87% ± 6.40%
+------------------------------------------------------------
+OA Final: 95.33% ± 0.39%
+AA Final: 89.03% ± 0.97%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 46.35 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4635 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Iluminacion_Aleatoria | 01:51:12
+********************************************
+**Ejecutando dataset: 3 | Método: Iluminacion_Aleatoria | Inicio: 02:45:58**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.21% ± 1.24%
+  Clase 02: 92.73% ± 0.67%
+  Clase 03: 92.82% ± 2.33%
+  Clase 04: 98.26% ± 0.41%
+  Clase 05: 93.59% ± 5.68%
+  Clase 06: 97.31% ± 1.77%
+  Clase 07: 98.90% ± 0.21%
+  Clase 08: 97.69% ± 0.28%
+  Clase 09: 97.79% ± 0.91%
+  Clase 10: 97.86% ± 0.31%
+------------------------------------------------------------
+OA Final: 98.11% ± 0.08%
+AA Final: 96.02% ± 0.63%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 69.85 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6985 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Iluminacion_Aleatoria | 02:51:04
+********************************************
+**Ejecutando dataset: 4 | Método: Iluminacion_Aleatoria | Inicio: 04:02:19**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.61% ± 0.17%
+  Clase 04: 96.92% ± 0.61%
+  Clase 07: 81.40% ± 0.49%
+  Clase 08: 93.19% ± 1.45%
+  Clase 09: 13.22% ± 7.71%
+  Clase 10: 93.55% ± 0.16%
+------------------------------------------------------------
+OA Final: 91.33% ± 0.09%
+AA Final: 78.82% ± 1.47%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 174.07 s
+Tiempo medio por época con hiperparámetros óptimos: 1.7407 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Iluminacion_Aleatoria | 04:06:57
+********************************************
+**Ejecutando dataset: 5 | Método: Iluminacion_Aleatoria | Inicio: 05:39:57**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.67% ± 0.21%
+  Clase 04: 89.22% ± 3.07%
+  Clase 05: 58.04% ± 25.10%
+  Clase 06: 12.43% ± 5.02%
+  Clase 07: 87.71% ± 0.53%
+  Clase 08: 97.23% ± 0.19%
+  Clase 10: 93.50% ± 0.53%
+------------------------------------------------------------
+OA Final: 90.58% ± 0.13%
+AA Final: 75.12% ± 3.95%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 175.02 s
+Tiempo medio por época con hiperparámetros óptimos: 1.7502 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Iluminacion_Aleatoria | 05:47:11
+********************************************
+**Ejecutando dataset: 6 | Método: Iluminacion_Aleatoria | Inicio: 06:22:49**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.08%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 97.80% ± 4.42%
+  Clase 08: 98.29% ± 0.65%
+  Clase 09: 96.10% ± 4.28%
+------------------------------------------------------------
+OA Final: 98.33% ± 1.23%
+AA Final: 98.43% ± 1.66%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.86 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0486 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Iluminacion_Aleatoria | 06:24:13
+********************************************
+**Ejecutando dataset: 7 | Método: Iluminacion_Aleatoria | Inicio: 07:27:05**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 89.78% ± 3.72%
+  Clase 02: 78.73% ± 3.18%
+  Clase 03: 91.93% ± 0.43%
+  Clase 04: 95.32% ± 1.08%
+  Clase 07: 98.73% ± 0.11%
+  Clase 08: 97.41% ± 0.16%
+------------------------------------------------------------
+OA Final: 98.17% ± 0.10%
+AA Final: 91.98% ± 0.70%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 175.45 s
+Tiempo medio por época con hiperparámetros óptimos: 1.7545 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Iluminacion_Aleatoria | 07:31:34
+********************************************
