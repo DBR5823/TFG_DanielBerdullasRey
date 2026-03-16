@@ -522,7 +522,7 @@ def aplicar_cutmix(inputs, labels, alpha):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST, EPOCHS, BATCH, probabilidad, probabilidad2,usar_sampler, gpu_id=0):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST, EPOCHS, BATCH, probabilidad, probabilidad2,usar_sampler, semilla_fija,gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -563,10 +563,10 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
     torch.backends.cudnn.benchmark=True
 
   # experimentos deterministas o aleatorios
-  #Si DET posee valor 1 el experimento será determinista
-  if(DET==1):
-    #Fijamos la semilla a 0
-    SEED=0
+  #Si semilla_fija posee valor 1 el experimento será determinista
+  if(semilla_fija==1):
+    #Fijamos la semilla, sumándole exp para que las pruebas en test determinista sean distintas entre sí
+    SEED=SEMILLA + exp
     #Establecemos la semilla a 0 para PyTorch, NumPy y Python
     torch.manual_seed(SEED)
     np.random.seed(SEED)
@@ -966,7 +966,7 @@ def run_combination(params_with_data):
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a_fmix, d, s, a_cmix,data_bundle,0, e, b, p, p2, samp, gpu_id)
+        res = main(exp, a_fmix, d, s, a_cmix,data_bundle,0, e, b, p, p2, samp, 1, gpu_id)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
@@ -979,7 +979,7 @@ def run_combination(params_with_data):
 
 def run_final_eval(args):
     gpu_id, exp_idx, fmix_alpha, decay, soft, cutmix_alpha, epochs, batch, prob, prob2, samp, data_bundle = args
-    oa, aa, class_aa,class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx,fmix_alpha,decay,soft,cutmix_alpha,data_bundle,1,epochs,batch,prob,prob2,samp,gpu_id)
+    oa, aa, class_aa,class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx,fmix_alpha,decay,soft,cutmix_alpha,data_bundle,1,epochs,batch,prob,prob2,samp,DET,gpu_id)
     return oa, aa, class_aa,class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 

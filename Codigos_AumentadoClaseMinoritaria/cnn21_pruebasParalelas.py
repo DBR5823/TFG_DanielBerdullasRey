@@ -47,6 +47,8 @@ ALL=0  # testar 0-solo ground-truth, 1-todo
 
 
 
+SEMILLA=0
+
 
 # DATASET='/home/amo/profile.raw'
 # GT='/mnt/media/images/salinas_gt.pgm'
@@ -484,7 +486,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -525,10 +527,10 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
     torch.backends.cudnn.benchmark=True
 
   # experimentos deterministas o aleatorios
-  #Si DET posee valor 1 el experimento será determinista
-  if(DET==1):
-    #Fijamos la semilla a 0
-    SEED=0
+  #Si semilla_fija posee valor 1 el experimento será determinista
+  if(semilla_fija==1):
+    #Fijamos la semilla, sumándole exp para que las pruebas en test determinista sean distintas entre sí
+    SEED=SEMILLA + exp
     #Establecemos la semilla a 0 para PyTorch, NumPy y Python
     torch.manual_seed(SEED)
     np.random.seed(SEED)
@@ -905,7 +907,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, gpu_id=0):
 
 def run_final_eval(args):
     gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
-    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,gpu_id)
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 

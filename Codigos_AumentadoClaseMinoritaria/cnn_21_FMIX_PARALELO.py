@@ -488,7 +488,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler, gpu_id=0):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler,semilla_fija, gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -531,10 +531,10 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, data_bundle, TEST, EPOCHS, BATC
     torch.backends.cudnn.benchmark=True
 
   # experimentos deterministas o aleatorios
-  #Si DET posee valor 1 el experimento será determinista
-  if(DET==1):
-    #Fijamos la semilla a 0
-    SEED=0
+  #Si semilla_fija posee valor 1 el experimento será determinista
+  if(semilla_fija==1):
+    #Fijamos la semilla, sumándole exp para que las pruebas en test determinista sean distintas entre sí
+    SEED=SEMILLA + exp
     #Establecemos la semilla a 0 para PyTorch, NumPy y Python
     torch.manual_seed(SEED)
     np.random.seed(SEED)
@@ -937,7 +937,7 @@ def run_combination(params_with_data):
     sys.stdout.flush()
 
     for exp in range(1):
-        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp, gpu_id)
+        res = main(exp, a, d, s, data_bundle,0, e, b, p, samp, 1, gpu_id)
         # Maneja si main devuelve una tupla o un solo valor según TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
@@ -950,7 +950,7 @@ def run_combination(params_with_data):
 
 def run_final_eval(args):
     gpu_id, exp_idx, alpha, decay, soft, epochs, batch, prob, samp, data_bundle = args
-    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, gpu_id)
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, decay, soft, data_bundle, 1, epochs, batch, prob, samp, DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 
