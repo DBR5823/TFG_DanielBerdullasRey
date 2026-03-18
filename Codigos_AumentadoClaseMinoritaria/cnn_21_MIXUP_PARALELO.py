@@ -372,6 +372,11 @@ class HyperDataset(Dataset):
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
     self.is_train = is_train
+
+    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
+    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
+    self.transform=v2.Compose(
+      [v2.RandomHorizontalFlip(),v2.RandomVerticalFlip()])
     
   def __len__(self):
     return len(self.samples)
@@ -387,6 +392,10 @@ class HyperDataset(Dataset):
 
     #Se obtiene el patch alrededor de ese centroide
     patch=select_patch(datos,sizex,sizey,x,y)
+
+    #Si el aumentado de datos está activado se aplican las transformaciones al azar
+    if(AUM==1 and self.is_train): 
+      patch=self.transform(patch)
 
     # renumeramos porque la red clasifica tambien la clase 0 
     
@@ -717,12 +726,6 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
-  flips=None
-  if AUM==1:
-    flips = v2.Compose([
-          v2.RandomHorizontalFlip(),
-          v2.RandomVerticalFlip()
-      ])
 
   
   #Tomamos la marca de tiempo inicial
@@ -743,10 +746,6 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
       #Cargamos los datos y sus etiquetas en la GPU (o se dejan en la CPU)
       inputs=inputs.to(device)
       labels=labels.to(device)
-
-      #Aplicamos el aumentado de datos en la GPU a todo el batch a la vez
-      if flips is not None:
-        inputs=flips(inputs)
 
       if(random.random()<probabilidad):
 
@@ -950,6 +949,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
 
 def run_combination(params_with_data):
+    torch.set_num_threads(1)
     gpu_id, params, data_bundle = params_with_data
     a, e, b, p, samp= params
     
@@ -971,6 +971,7 @@ def run_combination(params_with_data):
 
 
 def run_final_eval(args):
+    torch.set_num_threads(1)
     gpu_id, exp_idx, alpha, epochs, batch, prob, samp, data_bundle = args
     oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp, DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca

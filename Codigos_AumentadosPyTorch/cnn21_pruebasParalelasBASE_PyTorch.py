@@ -15,6 +15,8 @@ from concurrent.futures import ProcessPoolExecutor
 
 import torch.multiprocessing as mp
 
+from torchvision.transforms import InterpolationMode
+
 import itertools
 
 import sys, os
@@ -394,18 +396,93 @@ class HyperDataset(Dataset):
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
     self.is_train = is_train
 
+    #Métodos de aumentado
+    #Flips (por defecto)
+    flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
+    #Rotaciones
+    # Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
+    # La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
+    rotation = v2.Compose([
+        v2.Pad(padding=8, padding_mode='reflect'),
+        v2.RandomRotation(degrees=(0, 360), interpolation=InterpolationMode.NEAREST),
+        v2.CenterCrop(size=(self.sizey, self.sizex))
+    ])
+    #Zoom in y zoom out
+    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
 
+
+    noise = AnhadirRuidoGaussiano(std=0.02) 
+    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.03))
+    spec_illum = IluminacionAleatoria(factor_range=(0.8, 1.2))
+    spec_drop = EliminarBandas(drop_prob=0.1)
+
+    #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
+    erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
+
+    t_list = flips.copy()
+
+    # --- CATEGORÍA A: Geométricas ---
+    if metodo == 1: 
+        # Solo Rotación (sobre flips)
+        t_list.append(rotation)
+    elif metodo == 2: 
+        # Solo Zoom Simétrico (sobre flips)
+        t_list.append(simetric_zoom)
+    elif metodo == 3: 
+        # Rotación + Zoom Simétrico (juntos sobre flips)
+        t_list.extend([rotation, simetric_zoom])
+
+    # --- CATEGORÍA B: Ruido ---
+    elif metodo == 4:
+        # Solo Ruido Gaussiano general (sobre flips)
+        t_list.append(noise)
+    elif metodo == 5:
+        # Solo Ruido Espectral independiente por banda (sobre flips)
+        t_list.append(spec_noise)
+    elif metodo == 6:
+        # Ruido Gaussiano + Ruido Espectral (juntos sobre flips)
+        t_list.extend([noise, spec_noise])
+
+    # --- CATEGORÍA C: Espectrales / Iluminación ---
+    elif metodo == 7:
+        # Solo Iluminación Aleatoria (sobre flips)
+        t_list.append(spec_illum)
+    elif metodo == 8:
+        # Solo Eliminar Bandas (sobre flips)
+        t_list.append(spec_drop)
+    elif metodo == 9:
+        # Iluminación Aleatoria + Eliminar Bandas (juntos sobre flips)
+        t_list.extend([spec_illum, spec_drop])
+
+    # --- CATEGORÍA D: Borrado ---
+    elif metodo == 10:
+        # Solo Borrado Aleatorio (sobre flips)
+        t_list.append(erasing)
+
+    self.transform = v2.Compose(t_list)
+    
   def __len__(self):
     return len(self.samples)
 
+  #Función que se ejecuta cada vez que se pide un patch para analizar
   def __getitem__(self,idx):
+    #Se recuperan los datos almacenados al construir la instancia
     datos=self.datos; truth=self.truth; H=self.H; V=self.V;
     sizex=self.sizex; sizey=self.sizey; 
 
+    #Se convierte el índice del centroide en coordenadas 2D (x e y)
     x=self.samples[idx]%H; y=int(self.samples[idx]/H)
+
+    #Se obtiene el patch alrededor de ese centroide
     patch=select_patch(datos,sizex,sizey,x,y)
 
+    #Si el aumentado de datos está activado se aplican las transformaciones al azar
+    if(AUM==1 and self.is_train): 
+      patch=self.transform(patch)
 
+    # renumeramos porque la red clasifica tambien la clase 0 
+    
+    #Se devuelve el patch y la etiqueta restándole 1 debido a que las redes neuronales de PyTorch esperan que las categorías empiecen en 0
     return(patch,truth[self.samples[idx]]-1)
 
 #-----------------------------------------------------------------
@@ -711,56 +788,6 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
-
-
-  transform = None
-  if AUM == 1:
-      #Métodos de aumentado
-      #Flips (por defecto)
-      flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
-      #Rotaciones
-      #Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
-      #La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
-      rotation = v2.Compose([
-          v2.Pad(padding=8, padding_mode='reflect'),
-          v2.RandomRotation(degrees=(0, 360)),
-          v2.CenterCrop(size=(sizey, sizex))
-      ])
-
-      #Zoom in y zoom out
-      simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
-      
-      
-      noise = AnhadirRuidoGaussiano(std=0.02) 
-      spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.03))
-      spec_illum = IluminacionAleatoria(factor_range=(0.8, 1.2))
-      spec_drop = EliminarBandas(drop_prob=0.1)
-
-      #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
-      erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
-
-      t_list = flips.copy()
-
-      # --- CATEGORÍA A: Geométricas ---
-      if metodo_aum == 1: t_list.append(rotation)
-      elif metodo_aum == 2: t_list.append(simetric_zoom)
-      elif metodo_aum == 3: t_list.extend([rotation, simetric_zoom])
-
-      # --- CATEGORÍA B: Ruido ---
-      elif metodo_aum == 4: t_list.append(noise)
-      elif metodo_aum == 5: t_list.append(spec_noise)
-      elif metodo_aum == 6: t_list.extend([noise, spec_noise])
-
-      # --- CATEGORÍA C: Espectrales / Iluminación ---
-      elif metodo_aum == 7: t_list.append(spec_illum)
-      elif metodo_aum == 8: t_list.append(spec_drop)
-      elif metodo_aum == 9: t_list.extend([spec_illum, spec_drop])
-
-      # --- CATEGORÍA D: Borrado ---
-      elif metodo_aum == 10: t_list.append(erasing)
-
-      transform = v2.Compose(t_list)
-
   
   #Tomamos la marca de tiempo inicial
   tiempo_inicial_entrenamiento = time.perf_counter()
@@ -780,10 +807,6 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
       #Cargamos los datos y sus etiquetas en la GPU (o se dejan en la CPU)
       inputs=inputs.to(device)
       labels=labels.to(device)
-
-      # APLICAR AUMENTO DE DATOS EN LA GPU
-      if transform is not None:
-          inputs = transform(inputs)
 
       
       # 7.2. Forward pass
@@ -978,6 +1001,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
 
 
 def run_final_eval(args):
+    torch.set_num_threads(1)
     gpu_id, exp_idx, epochs, batch, samp,metodo_aum, data_bundle = args
     oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp, metodo_aum ,DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca

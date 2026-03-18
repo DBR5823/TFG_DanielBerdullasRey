@@ -256,11 +256,16 @@ def select_training_samples_seg(truth,center,H,V,sizex,sizey,porcentaje):
 # cogemos muestras con ground-truth (dadas por el indice samples)
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth. Usada para el entrenamiento.
 class HyperDataset(Dataset):
-  def __init__(self,datos,truth,samples,H,V,sizex,sizey,is_train):
+  def __init__(self,datos,truth,samples,H,V,sizex,sizey, is_train):
     #Se guarda la imagen (datos), las etiquetas asociadas a los píxeles y los índices de los centros (samples) de los segmentos
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
-    self.is_train = is_train
+    self.is_train=is_train
+
+    #Herramienta de aumentado de datos
+    self.transform=v2.Compose([
+      v2.RandomHorizontalFlip(),
+      v2.RandomVerticalFlip()])
     
   def __len__(self):
     return len(self.samples)
@@ -270,15 +275,13 @@ class HyperDataset(Dataset):
     #Se recuperan los datos almacenados al construir la instancia
     datos=self.datos; truth=self.truth; H=self.H; V=self.V;
     sizex=self.sizex; sizey=self.sizey; 
-
     #Se convierte el índice del centroide en coordenadas 2D (x e y)
     x=self.samples[idx]%H; y=int(self.samples[idx]/H)
-
     #Se obtiene el patch alrededor de ese centroide
     patch=select_patch(datos,sizex,sizey,x,y)
-
+    #Si el aumentado de datos está activado se aplican las transformaciones al azar
+    if(AUM==1 and self.is_train): patch=self.transform(patch)
     # renumeramos porque la red clasifica tambien la clase 0 
-    
     #Se devuelve el patch y la etiqueta restándole 1 debido a que las redes neuronales de PyTorch esperan que las categorías empiecen en 0
     return(patch,truth[self.samples[idx]]-1)
 
@@ -559,13 +562,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
   #Borramos los gradientes que pudieran estar acumulados antes de iniciar
   optim.zero_grad()
 
-  flips=None
-  if AUM==1:
-    flips = v2.Compose([
-          v2.RandomHorizontalFlip(),
-          v2.RandomVerticalFlip()
-      ])
-
   tiempo_inicial_entrenamiento = time.perf_counter()
   
   #Bucle de entrenamiento asociado a las épocas
@@ -581,10 +577,6 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
       #Cargamos los datos y sus etiquetas en la GPU/CPU
       img=img.to(device)
       label=label.to(device)
-
-      #Aplicamos el aumentado de datos en la GPU a todo el batch a la vez
-      if flips is not None:
-        img=flips(img)
 
       # APLICAMOS CUTMIX / FMIX CON PROBABILIDADES
       if(random.random() < probabilidad):
@@ -794,6 +786,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
 
 
 def run_combination(params_with_data):
+    torch.set_num_threads(1)
     gpu_id, params, data_bundle = params_with_data
     a_fmix, d, s, a_cmix, e, b, p, p2, samp= params
     
@@ -810,6 +803,7 @@ def run_combination(params_with_data):
 
 
 def run_final_eval(args):
+    torch.set_num_threads(1)
     gpu_id, exp_idx, fmix_alpha, decay, soft, cutmix_alpha, epochs, batch, prob, prob2, samp, data_bundle = args
     oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, fmix_alpha, decay, soft, cutmix_alpha, data_bundle, 1, epochs, batch, prob, prob2, samp, DET, gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
