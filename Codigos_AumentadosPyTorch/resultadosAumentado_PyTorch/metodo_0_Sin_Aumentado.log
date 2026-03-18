@@ -1,0 +1,42 @@
+**Ejecutando dataset: 0 | Método: Sin_Aumentado | Inicio: 12:57:33**
+GPUs detectadas: 1
+Usando el método de aumento: Sin aumentado extra (solo Flips) (ID: 0)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Sin aumentado extra (solo Flips)
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.58% ± 1.13%
+  Clase 02: 83.51% ± 3.07%
+  Clase 03: 81.99% ± 3.78%
+  Clase 04: 90.38% ± 5.33%
+  Clase 05: 89.73% ± 2.77%
+  Clase 06: 93.64% ± 3.00%
+  Clase 07: 96.70% ± 0.35%
+  Clase 08: 94.52% ± 0.66%
+  Clase 09: 98.70% ± 0.72%
+  Clase 10: 92.94% ± 0.79%
+------------------------------------------------------------
+OA Final: 94.99% ± 0.21%
+AA Final: 91.87% ± 0.79%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 52.38 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5238 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Sin_Aumentado | 12:59:58
+********************************************

@@ -44,9 +44,11 @@ from torchvision.transforms import v2
 
 from concurrent.futures import ProcessPoolExecutor
 import torch.multiprocessing as mp
-import sys, os
+import sys, os, json, itertools
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.resource_tracker')
+
+from implementations.torchbearer_implementation import FMix
 
 EXP=10      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), los resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05) (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
@@ -301,6 +303,37 @@ def update_lr(optimizer,lr):
     param_group['lr']=lr
 
 
+def aplicar_cutmix(inputs, labels, alpha):
+  '''Corta un rectángulo de una imagen y lo pega en otra'''
+  lam = np.random.beta(alpha, alpha)
+  index = torch.randperm(inputs.size(0), device=inputs.device)
+
+  # Calcular coordenadas del cuadro
+  W, H = inputs.size(2), inputs.size(3)
+  cut_rat = np.sqrt(1. - lam)
+  cut_w = int(W * cut_rat)
+  cut_h = int(H * cut_rat)
+  cx = np.random.randint(W)
+  cy = np.random.randint(H)
+
+  bbx1 = np.clip(cx - cut_w // 2, 0, W)
+  bby1 = np.clip(cy - cut_h // 2, 0, H)
+  bbx2 = np.clip(cx + cut_w // 2, 0, W)
+  bby2 = np.clip(cy + cut_h // 2, 0, H)
+
+  # Clonar el tensor para no destruir los datos originales
+  inputs_mixed = inputs.clone()
+
+  # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+  inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+
+  # Ajustar lambda según el área real cortada
+  lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+
+  # Devolver el tensor modificado, dejando "inputs" intacto
+  return inputs_mixed, labels, labels[index], lam
+
+
 
 
 # selecciona la funcion de perdida
@@ -338,7 +371,7 @@ def select_loss(str_loss, truth, device, n_classes):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu_id=0):
+def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, probabilidad2, usar_sampler, semilla_fija, gpu_id=0):
   
   # Desempaquetado del data_bundle
   datos = data_bundle['datos']
@@ -499,6 +532,10 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
     img_size=sizex, num_classes=nclases, in_chans=B,
     patch_size=patch_size, window_size=16).to(device)
 
+
+  # Inicializamos FMix
+  fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
+
   # 6. Loss, optimizer, and scheduler
   #Definimos la función de pérdida. Usamos entropía cruzada.
   loss_fn=torch.nn.CrossEntropyLoss()
@@ -547,16 +584,29 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
 
       #Aplicamos el aumentado de datos en la GPU a todo el batch a la vez
       if flips is not None:
-        inputs=flips(inputs)
+        img=flips(img)
 
-      #Forward pass: La red procesa los patches y devuelve sus predicciones
-      logits=model(img)
-
-      #Calculamos el error (pérdida) de las predicciones
-      loss=loss_fn(logits, label)
-
-      #Calculamos la precisión (accuracy)
-      acc=acc_fn(logits, label)
+      # APLICAMOS CUTMIX / FMIX CON PROBABILIDADES
+      if(random.random() < probabilidad):
+        if random.random() < probabilidad2:
+          # --- INTEGRACIÓN FMIX ---
+          inputs_mixed = fmix_util(img) 
+          lam = fmix_util.lam         
+          indices = fmix_util.index   
+          logits = model(inputs_mixed)
+          loss = lam * loss_fn(logits, label) + (1 - lam) * loss_fn(logits, label[indices])
+          acc = acc_fn(logits, label) 
+        else:
+          # --- INTEGRACIÓN CUTMIX ---
+          inputs_mixed, target_a, target_b, lam = aplicar_cutmix(img, label, alpha=cutmix_alpha)
+          logits = model(inputs_mixed)
+          loss = lam * loss_fn(logits, target_a) + (1 - lam) * loss_fn(logits, target_b)
+          acc = acc_fn(logits, target_a) 
+      else:
+        # Sin aumentado
+        logits=model(img)
+        loss=loss_fn(logits, label)
+        acc=acc_fn(logits, label)
       
       #Backward pass: Realizamos la retropropagación, calculando el gradiente
       loss.backward()
@@ -589,10 +639,13 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
       #Ponemos el modelo en modo evaluación (evitando que se actualicen las estadísticas de BatchNorm/Dropout)
       model.eval()
       
+      # INICIALIZAMOS CONTADORES PARA EL AA
+      val_class_correct = [0] * (nclases + 1)
+      val_class_total = [0] * (nclases + 1)
+
       #Desactivamos el cálculo de gradientes para ahorrar memoria y CPU/GPU
       with torch.no_grad():
         losses=[]
-        acces=[]
 
         #Recorremos batches de patches de validación
         for i,(img,label) in enumerate(val_loader):
@@ -603,29 +656,37 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
 
           #Calculamos el error y el accuracy
           loss=loss_fn(logits, label)
-          acc=acc_fn(logits, label)
 
-          #Almacenamos el error y el accuracy del batch actual
           losses.append(loss.item())
-          acces.append(acc.item())
-        
-        #Calculamos el error medio y el accuracy medio obtenidos sobre el conjunto de validación
-        avg_val_loss=sum(losses) / len(losses)
-        avg_val_acc=sum(acces) / len(acces)
-    
-    #Imprimimos los resultados de la época
-    #if(len(val)>0): print(f'* Epoch {e}, Train loss: %02.04f, Acc: %02.04f, Val. loss: %02.04f, Acc: %02.04f'
-       #%(avg_train_loss,avg_train_acc,avg_val_loss,avg_val_acc))
-    #else: print(f'* Epoch {e}, Training loss: %02.04f, Acc: %02.04f'%(avg_train_loss,avg_train_acc))
 
-    #Si la precisión de validación actual es la mejor hasta ahora, guardamos los pesos del modelo
-    if(len(val)>0 and avg_val_acc > best_val_acc):
-      best_val_acc=avg_val_acc
-      #print(f'  (saving best validation model with acc %02.04f at %d epoch)'%(best_val_acc,e))       
-      torch.save(model,model_path)
+          # SACAMOS LAS PREDICCIONES
+          (_, predicted) = torch.max(logits, 1)
 
-  #Si no está activado el flag de testeo la función devuelve la media del accuracy obtenido
-  if(TEST==0): return(sum(acces)/len(acces))
+          # LLENAMOS LOS CONTADORES POR CLASE
+          for j in range(len(label)):
+            real_class = label[j].item() + 1 # +1 porque restamos 1 en el Dataset
+            val_class_total[real_class] += 1
+            if predicted[j] == label[j]:
+              val_class_correct[real_class] += 1
+          
+          avg_val_loss = sum(losses) / len(losses)
+
+          # CALCULAMOS EL AA DE VALIDACIÓN
+          val_accuracies = []
+          for c in range(1, nclases + 1):
+            if val_class_total[c] > 0:
+              val_accuracies.append(100 * val_class_correct[c] / val_class_total[c])
+          
+          current_val_aa = sum(val_accuracies) / len(val_accuracies) if val_accuracies else 0
+
+          if(len(val)>0 and current_val_aa > best_val_acc):
+            best_val_acc = current_val_aa     
+            torch.save(model, model_path)
+
+  #Si no está activado el flag de testeo la función devolvemos el average accuracy obtenido
+  if(TEST==0): 
+    if len(val) > 0: return current_val_aa
+    else: return avg_train_acc
 
   # 8. Test the model
   #print('* Test ViT, exp.%d'%(exp))
@@ -731,11 +792,27 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
   return (OA, AA, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
-def run_final_eval(args):
-  gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
-  oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch, samp, DET, gpu_id)
-  return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
+def run_combination(params_with_data):
+    gpu_id, params, data_bundle = params_with_data
+    a_fmix, d, s, a_cmix, e, b, p, p2, samp= params
+    
+    val_acc_list = []
+    print(f"[GPU: {gpu_id}] Evaluando ViT: F_Alpha={a_fmix}, Decay={d}, Soft={s}, C_Alpha={a_cmix}, Epochs={e}, Batch={b}, Prob={p}, Prob2={p2}, Usar_sampler={samp}")
+    sys.stdout.flush()
+
+    for exp in range(1):
+        res = main(exp, a_fmix, d, s, a_cmix, data_bundle, 0, e, b, p, p2, samp, 1, gpu_id)
+        v_acc = res[0] if isinstance(res, tuple) else res
+        val_acc_list.append(v_acc)
+
+    return {'fmix_alpha': a_fmix, 'decay': d, 'soft': s, 'cutmix_alpha': a_cmix, 'epochs':e,'batch':b ,'prob':p, 'prob2':p2, 'sampler':samp, 'mean_val_aa': np.mean(val_acc_list)}
+
+
+def run_final_eval(args):
+    gpu_id, exp_idx, fmix_alpha, decay, soft, cutmix_alpha, epochs, batch, prob, prob2, samp, data_bundle = args
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, fmix_alpha, decay, soft, cutmix_alpha, data_bundle, 1, epochs, batch, prob, prob2, samp, DET, gpu_id)
+    return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
@@ -854,12 +931,71 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
+    if(usar_sampler==1):
+      archivoParametros = "hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json"
+    else:
+      archivoParametros = "hiperParametros_ViT_FMIX_CUTMIX.json"
+
+    mejor_config = None
+
+    if os.path.exists(archivoParametros):
+      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
+      with open(archivoParametros, 'r') as f:
+        mejor_config = json.load(f)
+
+    if mejor_config is None:
+      if ficheroLeido != "oitaven":
+        print("ERROR: No hay parámetros optimizados almacenados para ViT")
+        sys.exit(1)
+      else:
+        # ---> GRID SEARCH DE VIT FMIX+CUTMIX
+        fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
+        decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
+        softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+        cutmix_alphas = [0.1, 0.3, 0.5, 0.7, 1.0]
+        epochs= [100]
+        batches = [256] 
+        probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+        probs2 = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+        sampler=[usar_sampler]
+
+        PRUEBAS = 150
+        
+        combinaciones_totales = list(itertools.product(
+          fmix_alphas, decays, softs, cutmix_alphas, epochs, batches, probs, probs2, sampler
+        ))
+
+        # Seleccionamos N_TRIALS al azar si exceden el límite
+        if len(combinaciones_totales) > PRUEBAS:
+          combinaciones = random.sample(combinaciones_totales, PRUEBAS)
+        else:
+          combinaciones = combinaciones_totales
+
+        tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
+        
+        print(f"--- Iniciando Grid Search Paralelo ViT ({len(combinaciones)} combinaciones) ---")
+
+        with ProcessPoolExecutor(max_workers=2) as executor:
+            resultados_finales = list(executor.map(run_combination, tareas))
+            executor.shutdown(wait=True)
+
+        time.sleep(0.5)
+
+        # Seleccionar el mejor
+        resultados_finales.sort(key=lambda x: x['mean_val_aa'], reverse=True)
+        mejor_config = resultados_finales[0]
+        
+        # ---> ¡NUEVO! <--- Guardar JSON
+        with open(archivoParametros,'w') as f:
+          json.dump(mejor_config,f)
+
+    print(f"\n--- Ejecutando evaluación final paralela ViT ({EXP} experimentos) ---")
+
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i % num_gpus, i, 100, 256, usar_sampler, data_bundle) 
+        (i % num_gpus, i, mejor_config['fmix_alpha'], mejor_config['decay'], mejor_config['soft'], mejor_config['cutmix_alpha'], mejor_config['epochs'], mejor_config['batch'], mejor_config['prob'], mejor_config['prob2'], mejor_config['sampler'], data_bundle) 
         for i in range(EXP)
     ]
-
     print("Ejecutando test de ViT...")
     
     #Ejecutamos el test con 2 procesos
@@ -893,14 +1029,16 @@ if __name__ == '__main__':
 
     # 5. IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
-    print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: " + ficheroLeido)
+    print("RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: " + ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración ViT: Epoch=100, Batch=256, Sampler={usar_sampler}")
+    print(f"Mejor Configuración ViT:")
+    print(f" FMIX_Alpha={mejor_config['fmix_alpha']}, Decay={mejor_config['decay']}, Soft={mejor_config['soft']}")
+    print(f" CUTMIX_Alpha={mejor_config['cutmix_alpha']}")
+    print(f" Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob_Principal={mejor_config['prob']}, Prob_Metodo2={mejor_config['prob2']}, Sampler={mejor_config['sampler']}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-        # Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
         if m_total[j] > 0: 
             print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 
@@ -909,6 +1047,6 @@ if __name__ == '__main__':
     print(f"AA Final: {m_aa:.2f}% ± {s_aa:.2f}%")
     print("-" * 60)
 
-    print(f"Tiempo entrenamiento total medio con hiperparámetros óptimos: {m_t_total:.2f} s")
-    print(f"Tiempo medio por época con hiperparámetros óptimos: {m_t_epoch:.4f} s")
+    print(f"Tiempo entrenamiento total medio: {m_t_total:.2f} s")
+    print(f"Tiempo medio por época: {m_t_epoch:.4f} s")
     print("="*60)

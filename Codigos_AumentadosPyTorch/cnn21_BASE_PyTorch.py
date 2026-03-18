@@ -25,7 +25,7 @@ from sklearn import preprocessing
 from torchvision.transforms import v2
 import torchvision.utils as vutils
 
-from implementations.torchbearer_implementation import FMix
+
 
 from concurrent.futures import ProcessPoolExecutor
 
@@ -33,11 +33,7 @@ import torch.multiprocessing as mp
 
 import itertools
 
-import sys
-
-from torch.utils.data import WeightedRandomSampler
-
-import os, json
+import sys, os
 
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.resource_tracker')
@@ -49,18 +45,9 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
+
+
 SEMILLA=0
-
-#Rutas de archivos
-#Dataset: dataset original, contiene la información obtenida por el dron (cada píxel tiene un cierto número de bandas con datos en cada una)
-DATASET='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
-#GT: Etiquetas de cada segmento, son las etiquetas reales correspondientes a cada segmento, los segmentos son de 32 x 32 píxeles centrados en un centro.
-GT='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.pgm'
-#SEG: segmentación, cada píxel tiene el ID del segmento al que pertenece
-SEG='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp.raw'
-#CENTER: centros de los segmentos, contiene los índices de cada píxel correspondiente al centro de cada segmento.
-CENTER='/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/seg_oitaven_wp_centers.raw'
-
 
 
 # DATASET='/home/amo/profile.raw'
@@ -94,12 +81,13 @@ def read_raw(fichero):
   #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
   #print('  Píxeles leídos:',len(datos))
   # esta red no necesita realmente normalizar
+
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
   d_min = datos.min()
   d_max = datos.max()
   datos -= d_min
   datos /= (d_max - d_min)
-  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
+
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -360,7 +348,6 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 # PYTORCH - SETS
 #-----------------------------------------------------------------
 
-
 # cogemos muestras con ground-truth (dadas por el indice samples)
 
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth
@@ -486,46 +473,11 @@ class CNN21(nn.Module):
     #Se devuelven las puntuaciones de clases asociadas al patch que ha sido analizado
     return out
 
-
-
-def aplicar_cutmix(inputs, labels, alpha):
-  '''Corta un rectángulo de una imagen y lo pega en otra'''
-  lam = np.random.beta(alpha, alpha)
-  index = torch.randperm(inputs.size(0), device=inputs.device)
-  
-  # Calcular coordenadas del cuadro
-  W, H = inputs.size(2), inputs.size(3)
-  cut_rat = np.sqrt(1. - lam)
-  cut_w = int(W * cut_rat)
-  cut_h = int(H * cut_rat)
-  cx = np.random.randint(W)
-  cy = np.random.randint(H)
-
-  bbx1 = np.clip(cx - cut_w // 2, 0, W)
-  bby1 = np.clip(cy - cut_h // 2, 0, H)
-  bbx2 = np.clip(cx + cut_w // 2, 0, W)
-  bby2 = np.clip(cy + cut_h // 2, 0, H)
-
-  # Clonar el tensor para no destruir los datos originales
-  inputs_mixed = inputs.clone()
-  
-  # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
-  inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
-  
-  # Ajustar lambda según el área real cortada
-  lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
-  
-  # Devolver el tensor modificado, dejando "inputs" intacto
-  return inputs_mixed, labels, labels[index], lam
-
-
-
-
 #-----------------------------------------------------------------
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sampler, semilla_fija,gpu_id=0):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -651,6 +603,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   #Creamos el dataloader que se usará durante el testeo de la red neuronal
   #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
   test_loader=DataLoader(dataset_test,batch_size,shuffle=False,num_workers=num_workers_dl)
+
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
@@ -761,19 +714,12 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
       if flips is not None:
         inputs=flips(inputs)
 
-      if(random.random()<probabilidad):
-        inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=alpha)
       
-        # 7.2. Forward pass
-        #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
-        #Usando las imágenes mezcladas
-        outputs = model(inputs_mixed)
-        loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
-      else:
-        outputs=model(inputs)
-        loss=criterion(outputs,labels)
-
-      
+      # 7.2. Forward pass
+      #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
+      outputs=model(inputs)
+      #Comparamos las predicciones con las etiquetas reales y se calcula el error.
+      loss=criterion(outputs,labels)
       
       # 7.3. Backward and optimize
       # 7.3.1. reset the gradients (PyTorch accumulates gradients on subsequent backward passes)
@@ -837,7 +783,6 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
     if(endTrain): break
 
 
-
   #Si no está activado el flag de testeo la función devuelve directamente la media del accuracy asociado al conjunto de validación obtenido en la validación de la última época de entrenamiento
   if(TEST==0): 
     return current_val_aa
@@ -884,9 +829,9 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
       #Cada vez que se han clasificado 2000 patches se imprime por pantalla el progreso del testeo
       #if(total%2000==0): #print('  Testeando: %6d/%d'%(total,len(dataset_test)))
 
+
   
-  
-  
+
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
   #Recorremos todos los píxeles del output
@@ -962,31 +907,9 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
 
 
-
-def run_combination(params_with_data):
-    gpu_id, params, data_bundle = params_with_data
-    a, e, b, p, samp= params
-    
-    val_acc_list = []
-
-    print(f"[GPU: {gpu_id}]  Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
-    sys.stdout.flush()
-
-    for exp in range(1):
-        res = main(exp, a, data_bundle,0, e, b, p, samp, 1,gpu_id)
-        # Maneja si main devuelve una tupla o un solo valor según TEST
-        v_acc = res[0] if isinstance(res, tuple) else res
-        val_acc_list.append(v_acc)
-
-    print(f"[GPU: {gpu_id}]  Fin evaluación: Alpha={a},  Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp} *************************")
-    sys.stdout.flush()
-    
-    return {'alpha': a, 'epochs':e,'batch':b ,'prob':p,'sampler':samp, 'mean_val_aa': np.mean(val_acc_list)}
-
-
 def run_final_eval(args):
-    gpu_id, exp_idx, alpha, epochs, batch, prob, samp, data_bundle = args
-    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, alpha, data_bundle, 1, epochs, batch, prob, samp, DET, gpu_id)
+    gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
 
@@ -1002,11 +925,10 @@ if __name__ == '__main__':
     num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
     print(f"GPUs detectadas: {num_gpus}")
     
-
     directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
     directorio_datos=os.path.join(directorio_actual,'..','datosEntrada')
-    
+
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
     if len(sys.argv)<3:
       ficheroLeido="oitaven"
@@ -1117,71 +1039,21 @@ if __name__ == '__main__':
         'center': center, 'H3': H3, 'V3': V3,
         'nseg': nseg
     }
-
-    #Archivo que contiene la mejor configuración de hiperparámetros según se esté empleando el sampler o no
-    if(usar_sampler==1):
-      
-      archivoParametros = "hiperParametros_CUTMIX_Con_Aumentado.json"
-    else:
-      archivoParametros = "hiperParametros_CUTMIX.json"
-
-
-    mejor_config=None
-    #Si existe el fichero que contiene los hiperparámetros optimizados pasamos a abrirlo y cargar los hiperparámetros optimizados
-    if os.path.exists(archivoParametros):
-      print(f"--- Cargando hiperparámetros óptimos desde {archivoParametros} ---")
-      with open(archivoParametros, 'r') as f:
-        mejor_config = json.load(f)
-
-    #Si no existe el fichero que contiene los hiperparámetros optimizados y nos encontramos ante el dataset oitaven pasamos a optimizarlos
-    if mejor_config is None:
-      if ficheroLeido!="oitaven":
-        print("ERROR: No hay parámetros optimizados almacenados")
-        sys.exit(1)
-      else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.3,0.5,0.7,1.0]
-        epochs= [100]
-        batches = [256]
-        probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
-        sampler=[usar_sampler]
-
-        combinaciones = list(itertools.product(alphas, epochs, batches, probs, sampler))
-
-        tareas = [(i % num_gpus, comb, data_bundle) for i, comb in enumerate(combinaciones)]
-        
-        print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
-
-        #Ejecutamos el grid search con 5 procesos
-        with ProcessPoolExecutor(max_workers=6) as executor:
-            resultados_finales = list(executor.map(run_combination, tareas))
-            executor.shutdown(wait=True)
-
-        time.sleep(0.5)
-
-        #RESULTADOS DEL GRID SEARCH
-        resultados_finales.sort(key=lambda x: x['mean_val_aa'], reverse=True)
-        mejor_config = resultados_finales[0]
-        
-        #Almacenamos los hiperparámetros optimizados
-        with open(archivoParametros,'w') as f:
-          json.dump(mejor_config,f)
-
-
-    # 3. EVALUACIÓN FINAL PARALELIZADA
-    print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados a la mejor configuración
+    # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus,i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'],mejor_config['prob'],mejor_config['sampler'],data_bundle) 
+        (i%num_gpus, i, 100 ,256,usar_sampler,data_bundle) 
         for i in range(EXP)
     ]
+
+    print("Ejecutando test...")
     
-    #Ejecutamos el test final con 5 procesos
+    #Ejecutamos el test con 5 procesos
     with ProcessPoolExecutor(max_workers=6) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
+    
     time.sleep(0.5)
 
     # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
@@ -1212,7 +1084,7 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    print(f"Mejor Configuración: Alpha={mejor_config['alpha']}, Epoch={mejor_config['epochs']}, Batch={mejor_config['batch']}, Prob={mejor_config['prob']}, Sampler={mejor_config['sampler']}")
+    print(f"Mejor Configuración: Epoch=100, Batch=256, Sampler={usar_sampler}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
@@ -1230,6 +1102,8 @@ if __name__ == '__main__':
     print(f"Tiempo medio por época con hiperparámetros óptimos: {m_t_epoch:.4f} s")
 
     print("="*60)
+
+    
 
     
     

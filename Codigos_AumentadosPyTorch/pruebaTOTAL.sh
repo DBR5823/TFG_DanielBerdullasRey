@@ -19,27 +19,19 @@ echo "----------------------------------------"
 
 
 echo "Iniciando pruebas CNN_Basica..."
-./pruebaCNN_Basica.sh
+./pruebaCNN_Basica_PyTorch.sh
 
 sleep 1
 
-echo "Iniciando pruebas FMIX..."
-./pruebaFMIX.sh
-
-sleep 1
 
 echo "Iniciando pruebas CUTMIX..."
-./pruebaCUTMIX.sh
+./pruebaCUTMIX_PyTorch.sh
 
 sleep 1
 
-echo "Iniciando pruebas MIXUP..."
-./pruebaMIXUP.sh
-
-sleep 1
 
 echo "Iniciando pruebas CUTMIX+FMIX..."
-./pruebaCUTMIX_FMIX.sh
+./pruebaCUTMIX_FMIX_PyTorch.sh
 
 sleep 1
 

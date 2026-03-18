@@ -174,7 +174,13 @@ if __name__ == '__main__':
     patch_original = select_patch(datos_tensor, sizex, sizey, 4100, 3200)
 
     flips = [v2.RandomHorizontalFlip(p=1.0), v2.RandomVerticalFlip(p=1.0)]
-    rotation = v2.RandomRotation(degrees=(45, 45)) # Fijado a 45 grados exactos
+
+    rotation = v2.Compose([
+          v2.Pad(padding=8, padding_mode='reflect'),
+          v2.RandomRotation(degrees=(45, 45)),
+          v2.CenterCrop(size=(sizey, sizex))
+      ])
+
     simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.7, 0.7)) # Fijado a un zoom-out obvio
     
     noise = AnhadirRuidoGaussiano(std=0.1) # Ruido alto

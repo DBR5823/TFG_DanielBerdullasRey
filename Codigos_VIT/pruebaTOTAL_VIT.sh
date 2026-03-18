@@ -18,28 +18,20 @@ echo "GPUs asignadas: $CUDA_VISIBLE_DEVICES"
 echo "----------------------------------------"
 
 
-echo "Iniciando pruebas CNN_Basica..."
-./pruebaCNN_Basica.sh
+echo "Iniciando pruebas VIT_Basica..."
+./pruebaVIT_Basica.sh
 
 sleep 1
 
-echo "Iniciando pruebas FMIX..."
-./pruebaFMIX.sh
 
-sleep 1
 
 echo "Iniciando pruebas CUTMIX..."
 ./pruebaCUTMIX.sh
 
 sleep 1
 
-echo "Iniciando pruebas MIXUP..."
-./pruebaMIXUP.sh
-
-sleep 1
-
-echo "Iniciando pruebas CUTMIX+FMIX..."
-./pruebaCUTMIX_FMIX.sh
+#echo "Iniciando pruebas CUTMIX+MIXUP..."
+#./pruebaCUTMIX_FMIX.sh
 
 sleep 1
 
