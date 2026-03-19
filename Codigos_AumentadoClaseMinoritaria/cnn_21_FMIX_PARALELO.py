@@ -1117,7 +1117,7 @@ if __name__ == '__main__':
         sampler=[usar_sampler]
 
 
-        PRUEBAS = 150
+        PRUEBAS = 200
 
         if(DET==1 ):
           random.seed(SEMILLA)

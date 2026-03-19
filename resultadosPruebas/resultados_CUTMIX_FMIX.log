@@ -1,0 +1,647 @@
+********** Iniciando experimentos CUTMIX+FMIX sin aumentado: 00:19:09 **********
+Ejecutando: prueba inicial CUTMIX+FMIX (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (150 combinaciones de 72030 combinaciones totales) ---
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=1.5, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=1.0, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.2, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=1.5, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.1, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=1.0, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.2, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=1.0, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=1.0, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.1, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=0.1, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=1.0, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=1.0, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.5, Decay=0.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.8, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=1.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=0.1, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=1.0, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.8, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.1, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.5, Decay=0.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=1.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.5, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=1.0, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.1, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.5, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=1.0, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.5, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.5, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=1.0, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.1, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.5, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.0, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.5, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.2, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.5, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.1, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.0, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.5, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.2, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.1, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=0.8, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.0, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=0.8, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.1, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.1, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.0, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=0.8, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.2, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.5, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=1.0, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.5, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.1, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=0.8, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=0.8, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.1, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.2, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.8, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.2, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.5, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=1.0, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.1, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=0.8, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.8, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.5, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=1.0, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.2, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.0, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.1, Decay=1.5, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.5, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=1.0, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.0, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=1.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.1, Decay=1.5, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.5, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=1.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=1.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.5, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=0.5, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.5, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=1.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=0.1, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.5, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=0.5, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.8, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=1.0, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=0.1, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.8, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.2, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.1, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.8, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.2, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=0.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.8, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=0.1, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.8, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.1, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=1.2, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.2, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=0.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.2, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.1, Decay=1.2, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=0.1, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.1, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.8, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=1.2, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.1, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.1, Decay=1.2, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.8, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.2, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=0.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.1, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=0.8, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.5, Decay=1.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.1, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.8, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.8, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.1, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=0.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.1, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=0.8, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=0.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.5, Decay=1.2, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.8, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.1, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=1.0, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=0.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.1, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=0.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.1, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=1.0, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.1, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=1.5, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=0.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=1.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=1.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=1.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.1, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.5, Decay=0.5, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.1, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.5, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.8, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=1.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=1.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=1.2, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=1.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=1.2, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.5, Decay=0.5, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.8, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.2, Decay=0.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.5, Soft=1.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=1.2, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=0.2, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=1.2, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.5, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.0, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.2, Decay=0.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.5, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.5, Soft=1.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=0.5, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.5, Decay=0.5, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=0.2, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=1.5, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.5, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.1, Decay=1.0, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.0, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.2, Decay=1.2, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.5, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=1.0, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=0.5, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.5, Decay=0.5, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.0, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=1.5, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.1, Decay=0.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.1, Decay=1.0, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.2, Decay=0.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=1.2, Decay=1.2, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=1.0, Decay=0.1, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=1.0, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=1.0, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.5, Decay=1.0, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.0, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 0]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0
+[GPU: 1]  Fin evaluación: F_Alpha=0.1, Decay=0.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 1]  Evaluando: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0
+[GPU: 0]  Fin evaluación: F_Alpha=1.2, Decay=0.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=1.0, Decay=0.1, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=1.0, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.5, Decay=1.0, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=0 *************************
+[GPU: 0]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=0 *************************
+[GPU: 1]  Fin evaluación: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=0 *************************
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.09% ± 0.84%
+  Clase 02: 81.48% ± 2.52%
+  Clase 03: 77.56% ± 3.68%
+  Clase 04: 89.35% ± 4.09%
+  Clase 05: 86.68% ± 2.13%
+  Clase 06: 93.55% ± 1.80%
+  Clase 07: 96.92% ± 0.33%
+  Clase 08: 95.79% ± 0.56%
+  Clase 09: 99.22% ± 0.45%
+  Clase 10: 91.69% ± 1.00%
+------------------------------------------------------------
+OA Final: 95.19% ± 0.14%
+AA Final: 90.93% ± 0.52%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 52.46 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5246 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 70.52% ± 0.84%
+  Clase 07: 91.75% ± 0.28%
+  Clase 08: 93.89% ± 0.86%
+  Clase 10: 95.06% ± 0.24%
+------------------------------------------------------------
+OA Final: 91.14% ± 0.09%
+AA Final: 87.81% ± 0.24%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 96.59 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9659 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.95% ± 0.35%
+  Clase 02: 77.01% ± 5.05%
+  Clase 03: 94.74% ± 1.61%
+  Clase 04: 90.79% ± 3.37%
+  Clase 05: 58.55% ± 8.94%
+  Clase 06: 80.83% ± 14.71%
+  Clase 07: 94.28% ± 1.48%
+  Clase 08: 98.02% ± 0.60%
+  Clase 09: 60.01% ± 4.77%
+  Clase 10: 60.04% ± 16.79%
+------------------------------------------------------------
+OA Final: 95.47% ± 0.29%
+AA Final: 81.32% ± 2.58%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 39.89 s
+Tiempo medio por época con hiperparámetros óptimos: 0.3989 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.66% ± 2.13%
+  Clase 02: 90.36% ± 3.13%
+  Clase 03: 88.92% ± 2.69%
+  Clase 04: 98.42% ± 0.36%
+  Clase 05: 96.50% ± 3.72%
+  Clase 06: 97.87% ± 0.91%
+  Clase 07: 99.20% ± 0.17%
+  Clase 08: 97.05% ± 0.50%
+  Clase 09: 97.56% ± 0.80%
+  Clase 10: 98.07% ± 0.24%
+------------------------------------------------------------
+OA Final: 98.12% ± 0.12%
+AA Final: 95.66% ± 0.48%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 59.70 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5970 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 95.03% ± 0.18%
+  Clase 04: 97.02% ± 1.00%
+  Clase 07: 80.48% ± 0.77%
+  Clase 08: 87.24% ± 1.94%
+  Clase 09: 4.44% ± 6.05%
+  Clase 10: 94.56% ± 0.35%
+------------------------------------------------------------
+OA Final: 91.51% ± 0.10%
+AA Final: 76.46% ± 1.10%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 136.18 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3618 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 86.75% ± 0.28%
+  Clase 04: 89.43% ± 2.40%
+  Clase 05: 51.17% ± 25.41%
+  Clase 06: 14.79% ± 11.71%
+  Clase 07: 88.45% ± 0.15%
+  Clase 08: 96.06% ± 0.55%
+  Clase 10: 93.94% ± 0.20%
+------------------------------------------------------------
+OA Final: 90.81% ± 0.09%
+AA Final: 74.37% ± 4.40%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 151.95 s
+Tiempo medio por época con hiperparámetros óptimos: 1.5195 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.21% ± 1.50%
+  Clase 04: 90.68% ± 7.15%
+  Clase 07: 99.45% ± 0.47%
+  Clase 08: 99.09% ± 0.47%
+  Clase 09: 90.37% ± 6.77%
+------------------------------------------------------------
+OA Final: 98.67% ± 0.50%
+AA Final: 95.76% ± 1.61%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.45 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0445 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_FMIX_CUTMIX.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración:
+ FMIX_Alpha=0.5, Decay=1.5, Soft=1.0
+ CUTMIX_Alpha=1.0
+ Epoch=100, Batch=256, Prob_Principal=0.2, Prob_Metodo2=0.8, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 84.93% ± 2.36%
+  Clase 02: 75.44% ± 5.78%
+  Clase 03: 91.14% ± 0.77%
+  Clase 04: 93.46% ± 1.36%
+  Clase 07: 99.00% ± 0.11%
+  Clase 08: 96.90% ± 0.33%
+------------------------------------------------------------
+OA Final: 98.20% ± 0.12%
+AA Final: 90.14% ± 1.06%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 147.19 s
+Tiempo medio por época con hiperparámetros óptimos: 1.4719 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de CUTMIX+FMIX sin aumentado: 01:34:46 **********

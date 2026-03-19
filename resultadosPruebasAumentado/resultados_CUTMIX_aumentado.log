@@ -1,0 +1,393 @@
+********** Iniciando experimentos CUTMIX con aumentado: 21:27:55 **********
+Ejecutando: prueba inicial CUTMIX (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo (35 combinaciones) ---
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.44% ± 0.81%
+  Clase 02: 85.39% ± 2.46%
+  Clase 03: 84.48% ± 3.87%
+  Clase 04: 93.48% ± 4.11%
+  Clase 05: 89.69% ± 2.75%
+  Clase 06: 95.52% ± 0.85%
+  Clase 07: 95.35% ± 0.62%
+  Clase 08: 94.13% ± 0.87%
+  Clase 09: 99.44% ± 0.31%
+  Clase 10: 90.64% ± 0.73%
+------------------------------------------------------------
+OA Final: 94.14% ± 0.17%
+AA Final: 92.46% ± 0.65%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 53.40 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5340 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.15% ± 0.67%
+  Clase 07: 90.25% ± 0.38%
+  Clase 08: 97.27% ± 1.23%
+  Clase 10: 94.46% ± 0.26%
+------------------------------------------------------------
+OA Final: 90.76% ± 0.15%
+AA Final: 89.28% ± 0.30%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 95.32 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9532 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.50% ± 0.38%
+  Clase 02: 86.99% ± 2.00%
+  Clase 03: 94.00% ± 2.16%
+  Clase 04: 96.93% ± 1.95%
+  Clase 05: 79.78% ± 5.65%
+  Clase 06: 98.49% ± 3.33%
+  Clase 07: 92.93% ± 1.57%
+  Clase 08: 96.18% ± 0.96%
+  Clase 09: 80.03% ± 6.02%
+  Clase 10: 91.52% ± 5.70%
+------------------------------------------------------------
+OA Final: 95.27% ± 0.34%
+AA Final: 91.53% ± 0.61%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 40.08 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4008 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.09% ± 1.44%
+  Clase 02: 93.92% ± 1.28%
+  Clase 03: 89.25% ± 3.95%
+  Clase 04: 98.11% ± 0.71%
+  Clase 05: 98.84% ± 1.22%
+  Clase 06: 97.97% ± 0.92%
+  Clase 07: 98.29% ± 0.23%
+  Clase 08: 96.36% ± 0.59%
+  Clase 09: 97.15% ± 1.32%
+  Clase 10: 97.66% ± 0.44%
+------------------------------------------------------------
+OA Final: 97.55% ± 0.21%
+AA Final: 96.06% ± 0.59%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 59.82 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5982 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.75% ± 0.23%
+  Clase 04: 98.74% ± 0.27%
+  Clase 07: 79.91% ± 0.69%
+  Clase 08: 92.69% ± 1.44%
+  Clase 09: 9.09% ± 9.06%
+  Clase 10: 93.78% ± 0.38%
+------------------------------------------------------------
+OA Final: 91.15% ± 0.15%
+AA Final: 78.16% ± 1.51%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 133.06 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3306 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.54% ± 0.31%
+  Clase 04: 91.48% ± 3.44%
+  Clase 05: 97.50% ± 5.28%
+  Clase 06: 23.28% ± 17.83%
+  Clase 07: 86.97% ± 0.39%
+  Clase 08: 97.69% ± 0.45%
+  Clase 10: 93.25% ± 0.32%
+------------------------------------------------------------
+OA Final: 90.38% ± 0.13%
+AA Final: 82.67% ± 2.53%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 155.26 s
+Tiempo medio por época con hiperparámetros óptimos: 1.5526 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.91% ± 0.09%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 99.71% ± 0.29%
+  Clase 08: 98.16% ± 0.27%
+  Clase 09: 96.87% ± 1.58%
+------------------------------------------------------------
+OA Final: 98.79% ± 0.23%
+AA Final: 98.93% ± 0.37%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.44 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0444 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela (10 experimentos) ---
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración: Alpha=0.3, Epoch=100, Batch=256, Prob=0.8, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 90.35% ± 3.36%
+  Clase 02: 86.15% ± 3.16%
+  Clase 03: 92.94% ± 0.55%
+  Clase 04: 96.38% ± 1.42%
+  Clase 07: 98.50% ± 0.15%
+  Clase 08: 96.70% ± 0.70%
+------------------------------------------------------------
+OA Final: 97.90% ± 0.07%
+AA Final: 93.50% ± 0.81%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 149.82 s
+Tiempo medio por época con hiperparámetros óptimos: 1.4982 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de CUTMIX con aumentado: 22:24:23 **********

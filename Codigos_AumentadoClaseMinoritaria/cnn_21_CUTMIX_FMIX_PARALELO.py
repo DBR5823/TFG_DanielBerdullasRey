@@ -1143,7 +1143,7 @@ if __name__ == '__main__':
         probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
         probs2 = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
 
-        PRUEBAS=150
+        PRUEBAS=200
 
         if(DET==1 ):
           random.seed(SEMILLA)
