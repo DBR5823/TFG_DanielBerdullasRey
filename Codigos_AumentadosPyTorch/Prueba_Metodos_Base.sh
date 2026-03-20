@@ -26,12 +26,14 @@ METODOS=(
     "Eliminar_Bandas" 
     "Iluminacion_Eliminar_Bandas" 
     "Borrado_Aleatorio"
+    "Rotacion_Borrado_Aleatorio"                  
+    "Rotacion_Zoom_Borrado_Aleatorio"
 )
 
 # 1. INICIALIZACIÓN DE LOGS
 # Vaciamos (o creamos) los 11 archivos de log antes de empezar las pruebas.
 # Así nos aseguramos de no arrastrar datos de ejecuciones anteriores.
-for m_idx in {0..10}
+for m_idx in {11..12}
 do
     NOMBRE_METODO=${METODOS[$m_idx]}
     > "resultadosAumentado_PyTorch/metodo_${m_idx}_${NOMBRE_METODO}.log"
@@ -42,7 +44,7 @@ done
 for d_idx in {0..7}
 do
     # Iteramos sobre los métodos de aumento (0 a 10)
-    for m_idx in {0..10}
+    for m_idx in {11..12}
     do
         NOMBRE_METODO=${METODOS[$m_idx]}
         ARCHIVO_LOG="resultadosAumentado_PyTorch/metodo_${m_idx}_${NOMBRE_METODO}.log"

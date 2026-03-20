@@ -1126,7 +1126,7 @@ if __name__ == '__main__':
         sys.exit(1)
       else:
         # 2. CONFIGURACIÓN DEL GRID SEARCH
-        alphas = [0.1,0.3,0.5,0.7,1.0,2.0]
+        alphas = [0.1,0.2,0.3,0.5,0.7,0.9,1.0,2.0]
         epochs= [100]
         batches = [256]
         probs=[0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]

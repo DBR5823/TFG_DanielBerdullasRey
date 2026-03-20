@@ -398,23 +398,29 @@ class HyperDataset(Dataset):
 
     #Métodos de aumentado
     #Flips (por defecto)
-    flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
+    flips = [v2.RandomHorizontalFlip(p=0.5), v2.RandomVerticalFlip(p=0.5)]
+    
     #Rotaciones
     # Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
     # La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
-    rotation = v2.Compose([
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    rotation = v2.RandomApply([v2.Compose([
         v2.Pad(padding=8, padding_mode='reflect'),
         v2.RandomRotation(degrees=(0, 360), interpolation=InterpolationMode.NEAREST),
         v2.CenterCrop(size=(self.sizey, self.sizex))
-    ])
+    ])], p=0.5)
+
     #Zoom in y zoom out
-    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    simetric_zoom = v2.RandomApply([v2.RandomAffine(degrees=0, scale=(0.8, 1.2))], p=0.5)
 
-
-    noise = AnhadirRuidoGaussiano(std=0.02) 
-    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.03))
-    spec_illum = IluminacionAleatoria(factor_range=(0.8, 1.2))
-    spec_drop = EliminarBandas(drop_prob=0.1)
+    # Envolvemos los ruidos y efectos en RandomApply(p=0.5)
+    noise = v2.RandomApply([AnhadirRuidoGaussiano(std=0.02)], p=0.5)
+    spec_noise = v2.RandomApply([AnhadirRuidoEspectral(std_range=(0.01, 0.03))], p=0.5)
+    spec_illum = v2.RandomApply([IluminacionAleatoria(factor_range=(0.8, 1.2))], p=0.5)
+    
+    # Nota: drop_prob de la clase se deja en 1.0 para que el control real sea el 0.5 del RandomApply
+    spec_drop = v2.RandomApply([EliminarBandas(drop_prob=1.0)], p=0.5)
 
     #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
     erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
@@ -458,6 +464,15 @@ class HyperDataset(Dataset):
     elif metodo == 10:
         # Solo Borrado Aleatorio (sobre flips)
         t_list.append(erasing)
+
+    # --- NUEVAS CATEGORÍAS SOLICITADAS ---
+    elif metodo == 11:
+        # Rotación + Borrado Aleatorio (sobre flips)
+        t_list.extend([rotation, erasing])
+
+    elif metodo == 12:
+        # Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
+        t_list.extend([rotation, simetric_zoom, erasing])
 
     self.transform = v2.Compose(t_list)
     
@@ -1020,17 +1035,20 @@ if __name__ == '__main__':
 
     #Diccionario para mapear el ID del método con su nombre real
     nombres_aumentado = {
-        0: "Sin aumentado extra (solo Flips)",
+        0: "Flips",
         1: "Rotación",
-        2: "Zoom Simétrico",
-        3: "Rotación + Zoom Simétrico",
+        2: "Zoom",
+        3: "Rotación_Zoom",
         4: "Ruido Gaussiano",
         5: "Ruido Espectral independiente",
-        6: "Ruido Gaussiano + Ruido Espectral",
+        6: "Ruido Gaussiano_Ruido Espectral",
         7: "Iluminación Aleatoria",
         8: "Eliminar Bandas",
-        9: "Iluminación Aleatoria + Eliminar Bandas",
-        10: "Borrado Aleatorio"
+        9: "Iluminación Aleatoria_Eliminar Bandas",
+        10: "Borrado Aleatorio",
+        # Nuevos métodos:
+        11: "Rotación_Borrado Aleatorio",
+        12: "Rotación_Zoom_Borrado Aleatorio"
     }
     
     directorio_actual=os.path.dirname(os.path.abspath(__file__))

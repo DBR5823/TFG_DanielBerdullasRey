@@ -946,17 +946,14 @@ if __name__ == '__main__':
         fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-        cutmix_alphas = [0.1, 0.3, 0.5, 0.7, 1.0]
-        epochs= [100]
-        batches = [256] 
+        cutmix_alphas = [0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
         probs = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
         probs2 = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
-        sampler=[usar_sampler]
 
-        PRUEBAS = 150
+        PRUEBAS=200
         
         combinaciones_totales = list(itertools.product(
-          fmix_alphas, decays, softs, cutmix_alphas, epochs, batches, probs, probs2, sampler
+          fmix_alphas, decays, softs, cutmix_alphas, [100], [256], probs, probs2, [usar_sampler]
         ))
 
         # Seleccionamos N_TRIALS al azar si exceden el límite
