@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Zoom_Simetrico | Inicio: 00:23:23**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.13% ± 0.95%
+  Clase 02: 85.37% ± 2.59%
+  Clase 03: 82.80% ± 4.02%
+  Clase 04: 92.52% ± 3.68%
+  Clase 05: 87.64% ± 3.19%
+  Clase 06: 92.56% ± 1.84%
+  Clase 07: 96.06% ± 0.24%
+  Clase 08: 95.22% ± 0.30%
+  Clase 09: 99.10% ± 0.35%
+  Clase 10: 92.92% ± 0.51%
+------------------------------------------------------------
+OA Final: 94.97% ± 0.12%
+AA Final: 92.13% ± 0.57%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 126.72 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2672 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Zoom_Simetrico | 00:29:17
+********************************************
+**Ejecutando dataset: 1 | Método: Zoom_Simetrico | Inicio: 01:42:21**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 73.81% ± 0.82%
+  Clase 07: 90.32% ± 0.36%
+  Clase 08: 96.40% ± 0.90%
+  Clase 10: 94.93% ± 0.29%
+------------------------------------------------------------
+OA Final: 90.84% ± 0.14%
+AA Final: 88.87% ± 0.38%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 228.33 s
+Tiempo medio por época con hiperparámetros óptimos: 2.2833 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Zoom_Simetrico | 01:51:44
+********************************************
+**Ejecutando dataset: 2 | Método: Zoom_Simetrico | Inicio: 03:33:49**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.57% ± 0.47%
+  Clase 02: 81.98% ± 3.72%
+  Clase 03: 94.82% ± 2.00%
+  Clase 04: 94.17% ± 2.49%
+  Clase 05: 77.00% ± 5.78%
+  Clase 06: 81.16% ± 12.68%
+  Clase 07: 94.44% ± 1.30%
+  Clase 08: 95.76% ± 0.95%
+  Clase 09: 82.40% ± 4.80%
+  Clase 10: 82.84% ± 6.04%
+------------------------------------------------------------
+OA Final: 95.13% ± 0.44%
+AA Final: 88.31% ± 1.58%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 90.66 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9066 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Zoom_Simetrico | 03:39:50
+********************************************
+**Ejecutando dataset: 3 | Método: Zoom_Simetrico | Inicio: 04:59:53**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.89% ± 2.41%
+  Clase 02: 92.35% ± 1.80%
+  Clase 03: 92.35% ± 2.33%
+  Clase 04: 98.21% ± 0.44%
+  Clase 05: 94.39% ± 4.91%
+  Clase 06: 97.41% ± 1.55%
+  Clase 07: 98.76% ± 0.14%
+  Clase 08: 97.48% ± 0.45%
+  Clase 09: 98.43% ± 0.62%
+  Clase 10: 97.65% ± 0.53%
+------------------------------------------------------------
+OA Final: 97.97% ± 0.12%
+AA Final: 95.99% ± 0.59%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 139.55 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3955 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Zoom_Simetrico | 05:11:19
+********************************************
+**Ejecutando dataset: 4 | Método: Zoom_Simetrico | Inicio: 07:25:55**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.53% ± 0.18%
+  Clase 04: 97.65% ± 0.44%
+  Clase 07: 80.71% ± 0.32%
+  Clase 08: 95.01% ± 1.32%
+  Clase 09: 10.45% ± 7.27%
+  Clase 10: 94.19% ± 0.23%
+------------------------------------------------------------
+OA Final: 91.45% ± 0.09%
+AA Final: 78.76% ± 1.25%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 319.43 s
+Tiempo medio por época con hiperparámetros óptimos: 3.1943 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Zoom_Simetrico | 07:39:38
+********************************************
+**Ejecutando dataset: 5 | Método: Zoom_Simetrico | Inicio: 10:26:30**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.10% ± 0.52%
+  Clase 04: 90.80% ± 2.77%
+  Clase 05: 58.52% ± 33.18%
+  Clase 06: 12.45% ± 18.35%
+  Clase 07: 87.80% ± 0.39%
+  Clase 08: 97.21% ± 0.45%
+  Clase 10: 93.53% ± 0.30%
+------------------------------------------------------------
+OA Final: 90.70% ± 0.09%
+AA Final: 75.49% ± 4.39%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 363.74 s
+Tiempo medio por época con hiperparámetros óptimos: 3.6374 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Zoom_Simetrico | 10:46:14
+********************************************
+**Ejecutando dataset: 6 | Método: Zoom_Simetrico | Inicio: 13:59:30**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.95% ± 0.11%
+  Clase 04: 96.77% ± 7.13%
+  Clase 07: 99.27% ± 0.54%
+  Clase 08: 98.56% ± 0.70%
+  Clase 09: 92.44% ± 2.89%
+------------------------------------------------------------
+OA Final: 98.64% ± 0.28%
+AA Final: 97.40% ± 1.26%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 9.54 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0954 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Zoom_Simetrico | 14:01:54
+********************************************
+**Ejecutando dataset: 7 | Método: Zoom_Simetrico | Inicio: 14:50:48**
+GPUs detectadas: 2
+Usando el método de aumento: Zoom (ID: 2)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=2, Aumentado=Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 89.55% ± 3.67%
+  Clase 02: 77.10% ± 4.96%
+  Clase 03: 92.81% ± 0.58%
+  Clase 04: 95.10% ± 1.09%
+  Clase 07: 98.59% ± 0.12%
+  Clase 08: 97.34% ± 0.26%
+------------------------------------------------------------
+OA Final: 98.06% ± 0.08%
+AA Final: 91.75% ± 0.81%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 353.83 s
+Tiempo medio por época con hiperparámetros óptimos: 3.5383 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Zoom_Simetrico | 15:05:17
+********************************************

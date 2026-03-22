@@ -1,4 +1,20 @@
 #!/usr/bin/env python3
+# https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials (pytorch-tutorial-master.zip)
+# Adapted to multi/hyperspectral images: F. Arguello
+# CNN21: 2 capas convolucionales, 1 completamente conectada
+# oitaven WP (15%, texturas+fv+3kelm, t=3m44s): OA=93.03, OA=87.18
+# CNN21 SEG EXP: 5 EPOCHS: 100 SAMPLES: [0.15, 0.05] ADA: 3 AUM: 1
+# Class 01: 96.66+0.33
+# Class 02: 80.72+2.00
+# Class 03: 75.76+4.18
+# Class 04: 87.01+3.79
+# Class 05: 86.18+1.77
+# Class 06: 92.11+1.21
+# Class 07: 96.46+0.15
+# Class 08: 95.77+0.21
+# Class 09: 98.66+0.56
+# Class 10: 90.81+0.62
+# OA=94.77+0.20, AA=90.01+0.66, t=60 s
   
 import math, random, struct, signal, time
 import numpy as np
@@ -8,6 +24,8 @@ from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
 from sklearn import preprocessing
 from torchvision.transforms import v2
 import torchvision.utils as vutils
+
+from torchvision.transforms import InterpolationMode
 
 
 
@@ -29,7 +47,20 @@ AUM=1  # aumentado: 0-sin_aumentado, 1-con_aumentado
 DET=0  # experimentos: 0-aleatorios, 1-deterministas (CON ALEATORIOS SE INICIALIZAN PESOS Y SELECCIÓN DE MUESTRAS AL AZAR)
 ALL=0  # testar 0-solo ground-truth, 1-todo
 
+
+
 SEMILLA=0
+
+
+# DATASET='/home/amo/profile.raw'
+# GT='/mnt/media/images/salinas_gt.pgm'
+# SEG='/home/amo/seg.raw'
+# CENTER='/mnt/media/images/seg_salinas_centers.raw'
+
+# DATASET='/mnt/media/images/ermidas_creek.raw'
+# GT='/mnt/media/images/ermidas_creek.pgm'
+# SEG='/mnt/media/images/seg_ermidas.raw'
+# CENTER='/mnt/media/images/seg_ermidas_centers.raw'
 
 #-----------------------------------------------------------------
 # FUNCIONES PARA LEER DATASETS Y SELECCIONAR MUESTRAS
@@ -319,144 +350,45 @@ def select_all_samples_seg(center,H,V,sizex,sizey):
 # PYTORCH - SETS
 #-----------------------------------------------------------------
 
-#Clase que permite añadir ruído gaussiano a un patch (en todas las bandas por igual)
-class AnhadirRuidoGaussiano(torch.nn.Module):
-  #Recibe la media del ruuído y la intensidad
-  def __init__(self, mean=0., std=0.05):
-    super().__init__()
-    self.std = std
-    self.mean = mean
-
-  def forward(self, tensor):
-    #Generamos un nuevo tensor lleno de valores aleatorios siguiendo una distribución gaussiana con la desviación y media que indicamos y se suma al patch original (tensor)
-
-    noise = torch.randn(tensor.size(), device=tensor.device) * self.std + self.mean
-
-    #Mantenemos los valores entre 0 y 1
-    return torch.clamp(tensor + noise, 0.0, 1.0)
-
-#Clase que permite añadir ruído gaussiano a cada banda de manera independiente
-class AnhadirRuidoEspectral(torch.nn.Module):
-    #Recibe el rango de ruído con el que puede trabajar en cada una de las bandas del patch
-    def __init__(self, std_range=(0.01, 0.03)):
-      super().__init__()
-      self.std_range = std_range
-
-    def forward(self, tensor):
-      #Extraemos las dimensiones del patch
-      B, H, V = tensor.size()
-
-      #Creamos una desviación estándar aleatoria (dentro del rango establecido) para cada banda del patch
-      stds = torch.empty(B, 1, 1).uniform_(self.std_range[0], self.std_range[1]).to(tensor.device)
-      
-      #Creamos un patch de ruido del mismo tamaño que el patch y le aplicamos
-      noise = torch.randn(tensor.size(), device=tensor.device) * stds
-
-      #Se aplica el ruido al patch
-      return torch.clamp(tensor + noise, 0.0, 1.0)
-
-#Clase que cambia la iluminación del patch en todas las bandas    
-class IluminacionAleatoria(torch.nn.Module):
-    #Recibe el rango en el que puede operar de luz
-    def __init__(self, factor_range=(0.8, 1.2)):
-      super().__init__()
-      self.factor_range = factor_range
-
-    def forward(self, tensor):
-      #Generamos un número aleatorio dentro del rango establecido
-      factor = random.uniform(self.factor_range[0], self.factor_range[1])
-      #Aplicamos el factor a todo el patch y evitamos que se salga de los valores se salgan de los límites tras normalizar
-      return torch.clamp(tensor * factor, 0.0, 1.0)
-
-#Clase que elimina bandas completas del patch (las pone a 0)
-class EliminarBandas(torch.nn.Module):
-    #Recibe la probabilidad de borrado
-    def __init__(self, drop_prob=0.1):
-      super().__init__()
-      self.drop_prob = drop_prob
-
-    def forward(self, tensor):
-      #Obtenemos las dimensiones del patch
-      B, H, V = tensor.size()
-      #Creamos una máscara aleatoria de 0s y 1s para las bandas
-      mask = (torch.rand(B, 1, 1) > self.drop_prob).float().to(tensor.device)
-      #Multiplicamos el patch por la máscara, haciendo que las bandas que tienen un 0 en la máscara pasen a valer 0
-      return tensor * mask
-    
-
 # cogemos muestras con ground-truth (dadas por el indice samples)
 
 #Clase asociada al dataset con las etiquetas, igual que el anterior pero con las etiquetas del ground truth
 #Usada para el entrenamiento
 class HyperDataset(Dataset):
-  def __init__(self, datos, truth, samples, H, V, sizex, sizey, is_train, metodo=0):
+  def __init__(self,datos,truth,samples,H,V,sizex,sizey,is_train):
+    #Se guarda la imagen (datos), las etiquetas asociadas a los píxeles y los índices de los centros (samples) de los segmentos
     self.datos=datos; self.truth=truth; self.samples=samples
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
     self.is_train = is_train
 
-    #Métodos de aumentado
-    #Flips (por defecto)
-    flips = [v2.RandomHorizontalFlip(), v2.RandomVerticalFlip()]
+    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
+    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
+    flips=v2.Compose(
+      [v2.RandomHorizontalFlip(),v2.RandomVerticalFlip()])
     
+    t_list = flips.copy()
+
     #Rotaciones
-    #Calculamos un padding suficiente para que al rotar 32x32 no queden huecos negros
-    #La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
-    rotation = v2.Compose([
+    # Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
+    # La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    rotation = v2.RandomApply([v2.Compose([
         v2.Pad(padding=8, padding_mode='reflect'),
-        v2.RandomRotation(degrees=(0, 360)),
+        v2.RandomRotation(degrees=(0, 360), interpolation=InterpolationMode.NEAREST),
         v2.CenterCrop(size=(self.sizey, self.sizex))
-    ])
+    ])], p=0.5)
+
     #Zoom in y zoom out
-    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 1.2))
-
-
-    noise = AnhadirRuidoGaussiano(std=0.02) 
-    spec_noise = AnhadirRuidoEspectral(std_range=(0.01, 0.03))
-    spec_illum = IluminacionAleatoria(factor_range=(0.8, 1.2))
-    spec_drop = EliminarBandas(drop_prob=0.1)
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    simetric_zoom = v2.RandomApply([v2.RandomAffine(degrees=0, scale=(0.8, 1.2))], p=0.5)
 
     #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
     erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
 
-    t_list = flips.copy()
 
-    # --- CATEGORÍA A: Geométricas ---
-    if metodo == 1: 
-        # Solo Rotación (sobre flips)
-        t_list.append(rotation)
-    elif metodo == 2: 
-        # Solo Zoom Simétrico (sobre flips)
-        t_list.append(simetric_zoom)
-    elif metodo == 3: 
-        # Rotación + Zoom Simétrico (juntos sobre flips)
-        t_list.extend([rotation, simetric_zoom])
 
-    # --- CATEGORÍA B: Ruido ---
-    elif metodo == 4:
-        # Solo Ruido Gaussiano general (sobre flips)
-        t_list.append(noise)
-    elif metodo == 5:
-        # Solo Ruido Espectral independiente por banda (sobre flips)
-        t_list.append(spec_noise)
-    elif metodo == 6:
-        # Ruido Gaussiano + Ruido Espectral (juntos sobre flips)
-        t_list.extend([noise, spec_noise])
-
-    # --- CATEGORÍA C: Espectrales / Iluminación ---
-    elif metodo == 7:
-        # Solo Iluminación Aleatoria (sobre flips)
-        t_list.append(spec_illum)
-    elif metodo == 8:
-        # Solo Eliminar Bandas (sobre flips)
-        t_list.append(spec_drop)
-    elif metodo == 9:
-        # Iluminación Aleatoria + Eliminar Bandas (juntos sobre flips)
-        t_list.extend([spec_illum, spec_drop])
-
-    # --- CATEGORÍA D: Borrado ---
-    elif metodo == 10:
-        # Solo Borrado Aleatorio (sobre flips)
-        t_list.append(erasing)
+    # Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
+    t_list.extend([rotation, simetric_zoom, erasing])
 
     self.transform = v2.Compose(t_list)
     
@@ -582,7 +514,7 @@ class CNN21(nn.Module):
 # PYTORCH - MAIN
 #-----------------------------------------------------------------
 
-def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semilla_fija,gpu_id=0):
+def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_id=0):
   #Leemos los datos del data_bundle
 
   # Datos y dimensiones originales
@@ -659,9 +591,9 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
   (train,val,test,nclases,nclases_no_vacias)=select_training_samples_seg(truth,center,H,V,sizex,sizey,SAMPLES)
 
   #Creamos el dataset de entrenamiento y el dataset de testeo en base a los conjuntos de entrenamiento y de testeo
-  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True, metodo=metodo_aum)
+  dataset_train=HyperDataset(datos,truth,train,H,V,sizex,sizey, is_train=True)
   #print('  - train dataset:',len(dataset_train))
-  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey, is_train=False, metodo=0)
+  dataset_test=HyperDataset(datos,truth,test,H,V,sizex,sizey, is_train=False)
   #print('  - test dataset:',len(dataset_test))
 
   # Dataloader
@@ -712,7 +644,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
   # Si queremos validacion
   if(len(val)>0):
     #Creamos el dataset de validación con el conjunto de validación
-    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey, is_train=False,metodo=0)
+    dataset_val=HyperDataset(datos,truth,val,H,V,sizex,sizey, is_train=False)
     #print('  - val dataset:',len(dataset_val))
     #Creamos el dataloader que se usará durante la validación de la red neuronal
     #En este caso establecemos shuffle=False para poder evaluar correctamente la predicción de la red hecha para cada segmento
@@ -787,6 +719,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
   #Obtenemos el número de batches que van a ser procesados durante el entrenamiento
   total_step=len(train_loader)
 
+  
   
   #Tomamos la marca de tiempo inicial
   tiempo_inicial_entrenamiento = time.perf_counter()
@@ -923,6 +856,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
       #if(total%2000==0): #print('  Testeando: %6d/%d'%(total,len(dataset_test)))
 
 
+  
 
   #Tras lo anterior tenemos el mapa con únicamente la clasificación de los píxeles que son centros de segmento, por tanto se debe propagar la clase del centro del segmento a los píxeles del segmento completo
   #print('* Generando mapa de clasificación (only ground-truth) (solo segmentos usados en el testeo)')
@@ -1001,11 +935,12 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, metodo_aum, semill
 
 def run_final_eval(args):
     torch.set_num_threads(1)
-    gpu_id, exp_idx, epochs, batch, samp,metodo_aum, data_bundle = args
-    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp, metodo_aum ,DET,gpu_id)
+    gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
+    oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca = main(exp_idx, data_bundle, 1, epochs, batch,samp ,DET,gpu_id)
     return oa, aa, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca
 
-    #Si se lanza el fichero directamente se entra en el entrenamiento y validación
+
+#Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
     # IMPORTANTE para PyTorch + Multiprocessing
     try:
@@ -1016,34 +951,16 @@ if __name__ == '__main__':
     #Detectar cuántas GPUs hay disponibles
     num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
     print(f"GPUs detectadas: {num_gpus}")
-
-    #Diccionario para mapear el ID del método con su nombre real
-    nombres_aumentado = {
-        0: "Sin aumentado extra (solo Flips)",
-        1: "Rotación",
-        2: "Zoom Simétrico",
-        3: "Rotación + Zoom Simétrico",
-        4: "Ruido Gaussiano",
-        5: "Ruido Espectral independiente",
-        6: "Ruido Gaussiano + Ruido Espectral",
-        7: "Iluminación Aleatoria",
-        8: "Eliminar Bandas",
-        9: "Iluminación Aleatoria + Eliminar Bandas",
-        10: "Borrado Aleatorio"
-    }
     
     directorio_actual=os.path.dirname(os.path.abspath(__file__))
 
     directorio_datos=os.path.join(directorio_actual,'..','datosEntrada')
 
     #Si no se ha indicado un número asociado a un dataset se ejecuta la prueba asociada al dataset del río Oitaven
-    if len(sys.argv)<4:
+    if len(sys.argv)<3:
       ficheroLeido="oitaven"
       try:
         usar_sampler=int(sys.argv[1])
-        metodo_id = int(sys.argv[2])
-        nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
-        print(f"Usando el método de aumento: {nombre_metodo} (ID: {metodo_id})")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1062,9 +979,6 @@ if __name__ == '__main__':
       try:
         opcion = int(sys.argv[1])
         usar_sampler=int(sys.argv[2])
-        metodo_id = int(sys.argv[3])
-        nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
-        print(f"Usando el método de aumento: {nombre_metodo} (ID: {metodo_id})")
       except ValueError:
           print("Error: El argumento debe ser un número entero.")
           sys.exit(1)
@@ -1156,7 +1070,7 @@ if __name__ == '__main__':
     
     # Especificamos los parámetros asociados al experimento
     tareas_finales = [
-        (i%num_gpus, i, 100 ,256,usar_sampler,metodo_id,data_bundle) 
+        (i%num_gpus, i, 100 ,256,usar_sampler,data_bundle) 
         for i in range(EXP)
     ]
 
@@ -1175,9 +1089,12 @@ if __name__ == '__main__':
     class_aa_matrix = np.array([res[2] for res in resultados_test])
     class_total_matrix = np.array([res[3] for res in resultados_test])
 
+    #Calculamos la media de muestras por clase usadas en los test
+    m_total = np.mean(class_total_matrix, axis=0)
+
     #Listas para almacenar los tiempo de entrenamiento totales y los tiempos por época para cada test
     final_tiempo_total_list = [res[4] for res in resultados_test]
-    final_tiempo_epoch_list = [res[5] for res in resultados_test] 
+    final_tiempo_epoch_list = [res[5] for res in resultados_test]
 
     m_oa, s_oa = np.mean(final_oa_list), np.std(final_oa_list, ddof=1)
     m_aa, s_aa = np.mean(final_aa_list), np.std(final_aa_list, ddof=1)
@@ -1186,7 +1103,6 @@ if __name__ == '__main__':
     m_t_total = np.mean(final_tiempo_total_list)
     m_t_epoch = np.mean(final_tiempo_epoch_list)
 
-    m_total = np.mean(class_total_matrix, axis=0)
 
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
@@ -1195,15 +1111,14 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
-    nombre_metodo = nombres_aumentado.get(metodo_id, "Desconocido")
-    print(f"Configuración: Epoch=200, Batch=256, Sampler={usar_sampler}, ID Aumentado={metodo_id}, Aumentado={nombre_metodo}")
+    print(f"Mejor Configuración: Epoch=100, Batch=256, Sampler={usar_sampler}")
     print("-" * 60)
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-        # Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
-        if m_total[j] > 0: 
-            print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
+      #Si la media de muestras de la clase usadas en test es mayor que 0, la clase existía en el test
+      if m_total[j] > 0: 
+          print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 
     print("-" * 60)
     print(f"OA Final: {m_oa:.2f}% ± {s_oa:.2f}%")

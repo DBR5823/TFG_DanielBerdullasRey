@@ -1,16 +1,16 @@
 #!/bin/bash
 
 #Nombre del archivo donde se guardarán los resultados de las pruebas
-ARCHIVO_LOG="resultadosPruebas/resultados_CUTMIX.log"
+ARCHIVO_LOG="resultadosPruebas/resultados_CUTMIX_PyTorch.log"
 
 #Limpiamos el archivo si ya existe para guardar únicamente las nuevas estadísticas 
 > "$ARCHIVO_LOG"
 
-echo "********** Iniciando experimentos CUTMIX sin aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
+echo "********** Iniciando experimentos CUTMIX con aumentado óptimo (Flips+Rotación+Zoom+Borrado): $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
 
 # 1. Ejecución inicial sin argumentos para ejecutar la prueba sobre el dataset de Oitaven
 echo "Ejecutando: prueba inicial CUTMIX (sobre Oitaven)" | tee -a "$ARCHIVO_LOG"
-python3 -u Codigos_AumentadoClaseMinoritaria/cnn_21_CUTMIX_PARALELO.py 0 0 2>&1 | tee -a "$ARCHIVO_LOG"
+python3 -u cnn_21_CUTMIX_PARALELO_PyTorch.py 0 0 2>&1 | tee -a "$ARCHIVO_LOG"
 sleep 2
 
 echo "------------------------------------------" | tee -a "$ARCHIVO_LOG"
@@ -20,40 +20,12 @@ for i in {1..7}
 do
     echo "Ejecutando prueba iteración: $i..." | tee -a "$ARCHIVO_LOG"
     # Ejecutamos el comando, redirigimos errores (stderr) al mismo lugar y usamos tee
-    python3 -u Codigos_AumentadoClaseMinoritaria/cnn_21_CUTMIX_PARALELO.py "$i" 0 2>&1 | tee -a "$ARCHIVO_LOG"
+    python3 -u cnn_21_CUTMIX_PARALELO_PyTorch.py "$i" 0 2>&1 | tee -a "$ARCHIVO_LOG"
     sleep 2
     echo "Prueba iteracion $i finalizada." | tee -a "$ARCHIVO_LOG"
     echo "********************************************" | tee -a "$ARCHIVO_LOG"
 done
 
-echo "********** Se han finalizado todas las pruebas de CUTMIX sin aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
+echo "********** Se han finalizado todas las pruebas de CUTMIX $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
 
 
-
-#Nombre del archivo donde se guardarán los resultados de las pruebas
-ARCHIVO_LOG="resultadosPruebasAumentado/resultados_CUTMIX_aumentado.log"
-
-#Limpiamos el archivo si ya existe para guardar únicamente las nuevas estadísticas 
-> "$ARCHIVO_LOG"
-
-echo "********** Iniciando experimentos CUTMIX con aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
-
-# 1. Ejecución inicial sin argumentos para ejecutar la prueba sobre el dataset de Oitaven
-echo "Ejecutando: prueba inicial CUTMIX (sobre Oitaven)" | tee -a "$ARCHIVO_LOG"
-python3 -u Codigos_AumentadoClaseMinoritaria/cnn_21_CUTMIX_PARALELO.py 0 1 2>&1 | tee -a "$ARCHIVO_LOG"
-sleep 2
-
-echo "------------------------------------------" | tee -a "$ARCHIVO_LOG"
-
-# 2. Bucle del 1 al 7 para ejecutar la prueba sobre todos los datasets
-for i in {1..7}
-do
-    echo "Ejecutando prueba iteración: $i..." | tee -a "$ARCHIVO_LOG"
-    # Ejecutamos el comando, redirigimos errores (stderr) al mismo lugar y usamos tee
-    python3 -u Codigos_AumentadoClaseMinoritaria/cnn_21_CUTMIX_PARALELO.py "$i" 1 2>&1 | tee -a "$ARCHIVO_LOG"
-    sleep 2
-    echo "Prueba iteracion $i finalizada." | tee -a "$ARCHIVO_LOG"
-    echo "********************************************" | tee -a "$ARCHIVO_LOG"
-done
-
-echo "********** Se han finalizado todas las pruebas de CUTMIX con aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"

@@ -1,0 +1,361 @@
+**Ejecutando dataset: 0 | Método: Rotacion_Zoom | Inicio: 00:29:20**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.45% ± 0.86%
+  Clase 02: 85.86% ± 2.87%
+  Clase 03: 83.74% ± 2.64%
+  Clase 04: 93.02% ± 4.69%
+  Clase 05: 92.00% ± 2.66%
+  Clase 06: 93.44% ± 1.99%
+  Clase 07: 96.20% ± 0.31%
+  Clase 08: 94.85% ± 0.58%
+  Clase 09: 98.97% ± 0.63%
+  Clase 10: 92.60% ± 0.27%
+------------------------------------------------------------
+OA Final: 94.96% ± 0.16%
+AA Final: 92.71% ± 0.70%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 220.94 s
+Tiempo medio por época con hiperparámetros óptimos: 2.2094 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Rotacion_Zoom | 00:38:26
+********************************************
+**Ejecutando dataset: 1 | Método: Rotacion_Zoom | Inicio: 01:51:47**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.62% ± 0.84%
+  Clase 07: 90.51% ± 0.39%
+  Clase 08: 97.36% ± 0.47%
+  Clase 10: 94.14% ± 0.25%
+------------------------------------------------------------
+OA Final: 90.78% ± 0.11%
+AA Final: 89.41% ± 0.27%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 402.26 s
+Tiempo medio por época con hiperparámetros óptimos: 4.0226 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Rotacion_Zoom | 02:06:59
+********************************************
+**Ejecutando dataset: 2 | Método: Rotacion_Zoom | Inicio: 03:39:53**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.72% ± 0.50%
+  Clase 02: 85.23% ± 1.59%
+  Clase 03: 95.22% ± 1.41%
+  Clase 04: 92.11% ± 3.58%
+  Clase 05: 81.48% ± 4.44%
+  Clase 06: 87.87% ± 14.60%
+  Clase 07: 94.72% ± 1.23%
+  Clase 08: 95.87% ± 0.55%
+  Clase 09: 82.71% ± 4.70%
+  Clase 10: 86.97% ± 5.61%
+------------------------------------------------------------
+OA Final: 95.37% ± 0.29%
+AA Final: 90.09% ± 1.84%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 160.97 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6097 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Rotacion_Zoom | 03:48:14
+********************************************
+**Ejecutando dataset: 3 | Método: Rotacion_Zoom | Inicio: 05:11:22**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.28% ± 1.45%
+  Clase 02: 92.75% ± 1.47%
+  Clase 03: 92.28% ± 3.02%
+  Clase 04: 98.39% ± 0.48%
+  Clase 05: 96.64% ± 3.14%
+  Clase 06: 98.06% ± 1.00%
+  Clase 07: 98.62% ± 0.24%
+  Clase 08: 97.40% ± 0.29%
+  Clase 09: 98.27% ± 0.92%
+  Clase 10: 97.77% ± 0.40%
+------------------------------------------------------------
+OA Final: 97.96% ± 0.15%
+AA Final: 96.35% ± 0.34%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 244.41 s
+Tiempo medio por época con hiperparámetros óptimos: 2.4441 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Rotacion_Zoom | 05:26:16
+********************************************
+**Ejecutando dataset: 4 | Método: Rotacion_Zoom | Inicio: 07:39:41**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.72% ± 0.34%
+  Clase 04: 97.77% ± 0.42%
+  Clase 07: 81.37% ± 0.75%
+  Clase 08: 94.99% ± 1.28%
+  Clase 09: 11.82% ± 7.62%
+  Clase 10: 93.78% ± 0.27%
+------------------------------------------------------------
+OA Final: 91.50% ± 0.10%
+AA Final: 79.08% ± 1.35%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 557.52 s
+Tiempo medio por época con hiperparámetros óptimos: 5.5752 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Rotacion_Zoom | 08:01:17
+********************************************
+**Ejecutando dataset: 5 | Método: Rotacion_Zoom | Inicio: 10:46:17**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.77% ± 0.40%
+  Clase 04: 93.34% ± 2.36%
+  Clase 05: 87.97% ± 10.72%
+  Clase 06: 24.61% ± 19.12%
+  Clase 07: 87.57% ± 0.36%
+  Clase 08: 97.46% ± 0.60%
+  Clase 10: 93.47% ± 0.27%
+------------------------------------------------------------
+OA Final: 90.73% ± 0.06%
+AA Final: 81.88% ± 2.82%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 628.72 s
+Tiempo medio por época con hiperparámetros óptimos: 6.2872 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Rotacion_Zoom | 11:14:32
+********************************************
+**Ejecutando dataset: 6 | Método: Rotacion_Zoom | Inicio: 14:01:57**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.07%
+  Clase 04: 98.57% ± 3.02%
+  Clase 07: 99.23% ± 0.71%
+  Clase 08: 98.97% ± 0.67%
+  Clase 09: 95.21% ± 4.33%
+------------------------------------------------------------
+OA Final: 99.00% ± 0.48%
+AA Final: 98.39% ± 1.24%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 15.68 s
+Tiempo medio por época con hiperparámetros óptimos: 0.1568 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Rotacion_Zoom | 14:04:34
+********************************************
+**Ejecutando dataset: 7 | Método: Rotacion_Zoom | Inicio: 15:05:20**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom (ID: 3)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=3, Aumentado=Rotación_Zoom
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 90.95% ± 2.86%
+  Clase 02: 81.35% ± 6.39%
+  Clase 03: 92.74% ± 0.71%
+  Clase 04: 96.91% ± 1.15%
+  Clase 07: 98.60% ± 0.12%
+  Clase 08: 97.25% ± 0.36%
+------------------------------------------------------------
+OA Final: 98.08% ± 0.07%
+AA Final: 92.97% ± 1.28%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 626.09 s
+Tiempo medio por época con hiperparámetros óptimos: 6.2609 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1373956-3qws451k': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1373956-oa50lfkm': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1373956-g24sl4gu': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1373956-xqsgs5t7': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1373956-8_ddanpk': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+FINALIZACIÓN dataset: 7 | Método: Rotacion_Zoom | 15:29:09
+********************************************

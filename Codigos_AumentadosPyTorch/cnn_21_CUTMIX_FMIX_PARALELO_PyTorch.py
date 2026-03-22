@@ -21,6 +21,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset,DataLoader,WeightedRandomSampler
+from torchvision.transforms import InterpolationMode
 from sklearn import preprocessing
 from torchvision.transforms import v2
 import torchvision.utils as vutils
@@ -365,8 +366,34 @@ class HyperDataset(Dataset):
 
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
-    self.transform=v2.Compose(
+    flips=v2.Compose(
       [v2.RandomHorizontalFlip(),v2.RandomVerticalFlip()])
+    
+    t_list = flips.copy()
+
+    #Rotaciones
+    # Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
+    # La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    rotation = v2.RandomApply([v2.Compose([
+        v2.Pad(padding=8, padding_mode='reflect'),
+        v2.RandomRotation(degrees=(0, 360), interpolation=InterpolationMode.NEAREST),
+        v2.CenterCrop(size=(self.sizey, self.sizex))
+    ])], p=0.5)
+
+    #Zoom in y zoom out
+    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    simetric_zoom = v2.RandomApply([v2.RandomAffine(degrees=0, scale=(0.8, 1.2))], p=0.5)
+
+    #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
+    erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
+
+
+
+    # Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
+    t_list.extend([rotation, simetric_zoom, erasing])
+
+    self.transform = v2.Compose(t_list)
     
   def __len__(self):
     return len(self.samples)

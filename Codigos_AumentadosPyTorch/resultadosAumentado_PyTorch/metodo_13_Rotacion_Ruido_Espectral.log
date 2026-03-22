@@ -1,0 +1,361 @@
+**Ejecutando dataset: 0 | Método: Rotacion_Ruido_Espectral | Inicio: 21:04:34**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.15% ± 1.22%
+  Clase 02: 85.74% ± 2.37%
+  Clase 03: 84.00% ± 2.19%
+  Clase 04: 92.45% ± 3.58%
+  Clase 05: 89.18% ± 2.15%
+  Clase 06: 94.76% ± 1.82%
+  Clase 07: 95.91% ± 0.23%
+  Clase 08: 95.21% ± 0.40%
+  Clase 09: 99.25% ± 0.38%
+  Clase 10: 91.90% ± 1.04%
+------------------------------------------------------------
+OA Final: 94.86% ± 0.11%
+AA Final: 92.55% ± 0.61%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 172.84 s
+Tiempo medio por época con hiperparámetros óptimos: 1.7284 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1392671-nv4tbx6g': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1392671-vsot3zg8': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1392671-ugcjjf9y': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1392671-d1rl9ers': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1392671-01pru35p': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+FINALIZACIÓN dataset: 0 | Método: Rotacion_Ruido_Espectral | 21:11:57
+********************************************
+**Ejecutando dataset: 1 | Método: Rotacion_Ruido_Espectral | Inicio: 21:27:31**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 74.73% ± 0.99%
+  Clase 07: 90.85% ± 0.31%
+  Clase 08: 96.73% ± 0.95%
+  Clase 10: 94.33% ± 0.25%
+------------------------------------------------------------
+OA Final: 90.91% ± 0.09%
+AA Final: 89.16% ± 0.21%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 311.91 s
+Tiempo medio por época con hiperparámetros óptimos: 3.1191 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Rotacion_Ruido_Espectral | 21:39:48
+********************************************
+**Ejecutando dataset: 2 | Método: Rotacion_Ruido_Espectral | Inicio: 22:05:20**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.77% ± 0.49%
+  Clase 02: 85.82% ± 2.67%
+  Clase 03: 92.66% ± 2.66%
+  Clase 04: 93.87% ± 3.44%
+  Clase 05: 80.13% ± 6.47%
+  Clase 06: 88.61% ± 9.18%
+  Clase 07: 93.61% ± 1.91%
+  Clase 08: 96.50% ± 0.78%
+  Clase 09: 78.34% ± 6.04%
+  Clase 10: 92.46% ± 5.50%
+------------------------------------------------------------
+OA Final: 95.42% ± 0.33%
+AA Final: 90.08% ± 1.31%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 126.56 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2656 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Rotacion_Ruido_Espectral | 22:12:28
+********************************************
+**Ejecutando dataset: 3 | Método: Rotacion_Ruido_Espectral | Inicio: 22:27:14**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.45% ± 1.87%
+  Clase 02: 92.14% ± 1.93%
+  Clase 03: 91.45% ± 2.19%
+  Clase 04: 98.41% ± 0.39%
+  Clase 05: 95.12% ± 3.67%
+  Clase 06: 97.32% ± 1.78%
+  Clase 07: 98.57% ± 0.25%
+  Clase 08: 97.42% ± 0.37%
+  Clase 09: 96.79% ± 0.80%
+  Clase 10: 97.72% ± 0.59%
+------------------------------------------------------------
+OA Final: 97.84% ± 0.11%
+AA Final: 95.84% ± 0.53%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 190.15 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9015 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Rotacion_Ruido_Espectral | 22:40:10
+********************************************
+**Ejecutando dataset: 4 | Método: Rotacion_Ruido_Espectral | Inicio: 23:06:38**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.71% ± 0.22%
+  Clase 04: 97.16% ± 0.66%
+  Clase 07: 81.53% ± 0.53%
+  Clase 08: 94.47% ± 0.94%
+  Clase 09: 16.34% ± 12.84%
+  Clase 10: 93.54% ± 0.20%
+------------------------------------------------------------
+OA Final: 91.42% ± 0.08%
+AA Final: 79.63% ± 2.08%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 442.18 s
+Tiempo medio por época con hiperparámetros óptimos: 4.4218 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Rotacion_Ruido_Espectral | 23:24:25
+********************************************
+**Ejecutando dataset: 5 | Método: Rotacion_Ruido_Espectral | Inicio: 00:01:19**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.46% ± 0.45%
+  Clase 04: 93.20% ± 1.75%
+  Clase 05: 89.18% ± 10.19%
+  Clase 06: 36.90% ± 23.80%
+  Clase 07: 87.67% ± 0.17%
+  Clase 08: 97.32% ± 0.41%
+  Clase 10: 93.39% ± 0.24%
+------------------------------------------------------------
+OA Final: 90.67% ± 0.07%
+AA Final: 83.73% ± 3.38%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 489.14 s
+Tiempo medio por época con hiperparámetros óptimos: 4.8914 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Rotacion_Ruido_Espectral | 00:25:08
+********************************************
+**Ejecutando dataset: 6 | Método: Rotacion_Ruido_Espectral | Inicio: 01:15:04**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.77% ± 0.50%
+  Clase 04: 98.57% ± 3.02%
+  Clase 07: 99.07% ± 1.23%
+  Clase 08: 98.60% ± 0.72%
+  Clase 09: 92.44% ± 3.54%
+------------------------------------------------------------
+OA Final: 98.60% ± 0.37%
+AA Final: 97.69% ± 1.01%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 12.58 s
+Tiempo medio por época con hiperparámetros óptimos: 0.1258 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Rotacion_Ruido_Espectral | 01:17:35
+********************************************
+**Ejecutando dataset: 7 | Método: Rotacion_Ruido_Espectral | Inicio: 01:22:49**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Ruido_Espectral (ID: 13)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=13, Aumentado=Rotacion_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 90.09% ± 1.98%
+  Clase 02: 83.56% ± 5.08%
+  Clase 03: 92.47% ± 1.15%
+  Clase 04: 96.63% ± 1.92%
+  Clase 07: 98.60% ± 0.14%
+  Clase 08: 97.48% ± 0.37%
+------------------------------------------------------------
+OA Final: 98.12% ± 0.05%
+AA Final: 93.14% ± 0.96%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 488.34 s
+Tiempo medio por época con hiperparámetros óptimos: 4.8834 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Rotacion_Ruido_Espectral | 01:41:57
+********************************************

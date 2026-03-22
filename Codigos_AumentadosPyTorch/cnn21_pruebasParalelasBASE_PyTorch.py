@@ -420,7 +420,7 @@ class HyperDataset(Dataset):
     spec_illum = v2.RandomApply([IluminacionAleatoria(factor_range=(0.8, 1.2))], p=0.5)
     
     # Nota: drop_prob de la clase se deja en 1.0 para que el control real sea el 0.5 del RandomApply
-    spec_drop = v2.RandomApply([EliminarBandas(drop_prob=1.0)], p=0.5)
+    spec_drop = v2.RandomApply([EliminarBandas(drop_prob=0.15)], p=0.5)
 
     #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
     erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
@@ -473,6 +473,19 @@ class HyperDataset(Dataset):
     elif metodo == 12:
         # Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
         t_list.extend([rotation, simetric_zoom, erasing])
+
+    elif metodo == 13:
+        # Rotación + Ruido Espectral
+        t_list.extend([rotation, spec_noise])
+
+    elif metodo == 14:
+        # Rotación + Zoom Simétrico + Ruido Espectral
+        t_list.extend([rotation, simetric_zoom, spec_noise])
+
+    elif metodo == 15:
+        # Ruido Espectral + Borrado Aleatorio
+        # (El ruido va antes para no añadir ruido sobre la máscara de borrado)
+        t_list.extend([spec_noise, erasing])
 
     self.transform = v2.Compose(t_list)
     
@@ -1048,7 +1061,10 @@ if __name__ == '__main__':
         10: "Borrado Aleatorio",
         # Nuevos métodos:
         11: "Rotación_Borrado Aleatorio",
-        12: "Rotación_Zoom_Borrado Aleatorio"
+        12: "Rotación_Zoom_Borrado Aleatorio",
+        13: "Rotacion_Ruido_Espectral",
+        14: "Rotacion_Zoom_Ruido_Espectral",
+        15: "Ruido_Espectral_Borrado_Aleatorio"
     }
     
     directorio_actual=os.path.dirname(os.path.abspath(__file__))

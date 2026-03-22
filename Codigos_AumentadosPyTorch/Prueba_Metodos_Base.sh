@@ -28,12 +28,15 @@ METODOS=(
     "Borrado_Aleatorio"
     "Rotacion_Borrado_Aleatorio"                  
     "Rotacion_Zoom_Borrado_Aleatorio"
+    "Rotacion_Ruido_Espectral"
+    "Rotacion_Zoom_Ruido_Espectral"
+    "Ruido_Espectral_Borrado_Aleatorio"
 )
 
 # 1. INICIALIZACIÓN DE LOGS
-# Vaciamos (o creamos) los 12 archivos de log antes de empezar las pruebas.
+# Vaciamos (o creamos) los 15 archivos de log antes de empezar las pruebas.
 # Así nos aseguramos de no arrastrar datos de ejecuciones anteriores.
-for m_idx in {0..12}
+for m_idx in {0..15}
 do
     NOMBRE_METODO=${METODOS[$m_idx]}
     > "resultadosAumentado_PyTorch/metodo_${m_idx}_${NOMBRE_METODO}.log"
@@ -43,8 +46,8 @@ done
 # Iteramos sobre los datasets (0 a 7)
 for d_idx in {0..7}
 do
-    # Iteramos sobre los métodos de aumento (0 a 12)
-    for m_idx in {0..12}
+    # Iteramos sobre los métodos de aumento (0 a 15)
+    for m_idx in {0..15}
     do
         NOMBRE_METODO=${METODOS[$m_idx]}
         ARCHIVO_LOG="resultadosAumentado_PyTorch/metodo_${m_idx}_${NOMBRE_METODO}.log"
