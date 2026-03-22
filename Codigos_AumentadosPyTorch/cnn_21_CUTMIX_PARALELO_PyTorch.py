@@ -377,8 +377,7 @@ class HyperDataset(Dataset):
 
     #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
     #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
-    flips=v2.Compose(
-      [v2.RandomHorizontalFlip(),v2.RandomVerticalFlip()])
+    flips = [v2.RandomHorizontalFlip(p=0.5), v2.RandomVerticalFlip(p=0.5)]
     
     t_list = flips.copy()
 
