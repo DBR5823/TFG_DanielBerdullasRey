@@ -5,7 +5,7 @@
 #SBATCH --partition=gpu              # Partición de GPUs del CITIUS
 #SBATCH --output=log_TOTAL_%j.out    # Archivo donde verás los "echo" y resultados
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
-#SBATCH --time=20:00:00              #Duración estimada
+#SBATCH --time=100:00:00              #Duración estimada
 
 
 source /home/daniel.berdullas/TFG/venv/bin/activate
@@ -19,19 +19,19 @@ echo "----------------------------------------"
 
 
 echo "Iniciando pruebas VIT_Basica..."
-./pruebaVIT_Basica.sh
+#./pruebaVIT_Basica.sh
 
 sleep 1
 
 
 
 echo "Iniciando pruebas CUTMIX..."
-./pruebaCUTMIX.sh
+#./pruebaVIT_CUTMIX.sh
 
 sleep 1
 
-#echo "Iniciando pruebas CUTMIX+MIXUP..."
-#./pruebaCUTMIX_FMIX.sh
+echo "Iniciando pruebas CUTMIX+FMIX..."
+./pruebaVIT_CUTMIX_FMIX.sh
 
 sleep 1
 

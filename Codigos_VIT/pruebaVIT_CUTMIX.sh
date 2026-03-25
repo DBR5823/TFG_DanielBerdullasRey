@@ -26,4 +26,4 @@ do
     echo "********************************************" | tee -a "$ARCHIVO_LOG"
 done
 
-echo "********** Se han finalizado todas las pruebas de VIT+CUTMIX sin aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"
+echo "********** Se han finalizado todas las pruebas de VIT+CUTMIX con aumentado: $(date +%T) **********" | tee -a "$ARCHIVO_LOG"

@@ -1,0 +1,347 @@
+********** Iniciando experimentos VIT+CUTMIX con aumentado: 12:06:28 **********
+Ejecutando: prueba inicial CUTMIX (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo ViT (49 combinaciones) ---
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: oitaven
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.54% ± 0.85%
+  Clase 02: 86.22% ± 2.84%
+  Clase 03: 86.37% ± 2.75%
+  Clase 04: 95.27% ± 3.11%
+  Clase 05: 91.43% ± 2.74%
+  Clase 06: 95.91% ± 1.77%
+  Clase 07: 96.94% ± 0.20%
+  Clase 08: 96.29% ± 0.34%
+  Clase 09: 99.72% ± 0.19%
+  Clase 10: 95.62% ± 0.45%
+------------------------------------------------------------
+OA Final: 96.19% ± 0.22%
+AA Final: 94.03% ± 0.40%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 565.61 s
+Tiempo medio por época: 5.6561 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1534505-e1faplwu': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1534505-ehoi3mdo': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1534505-f9cw7acs': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1534505-krh3a95o': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1534505-xu1kw9jb': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: das_mestas
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.29% ± 1.05%
+  Clase 07: 90.60% ± 0.36%
+  Clase 08: 97.37% ± 0.99%
+  Clase 10: 94.79% ± 0.25%
+------------------------------------------------------------
+OA Final: 91.07% ± 0.09%
+AA Final: 89.51% ± 0.36%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 1030.15 s
+Tiempo medio por época: 10.3015 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: eiras_dam
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.30% ± 0.22%
+  Clase 02: 78.55% ± 4.11%
+  Clase 03: 95.77% ± 1.27%
+  Clase 04: 97.05% ± 1.39%
+  Clase 05: 87.94% ± 2.30%
+  Clase 06: 93.33% ± 6.39%
+  Clase 07: 92.64% ± 1.44%
+  Clase 08: 96.46% ± 0.72%
+  Clase 09: 83.60% ± 5.24%
+  Clase 10: 81.79% ± 6.83%
+------------------------------------------------------------
+OA Final: 95.47% ± 0.25%
+AA Final: 90.64% ± 1.37%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 409.79 s
+Tiempo medio por época: 4.0979 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ermidas_creek
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.81% ± 1.66%
+  Clase 02: 93.18% ± 2.65%
+  Clase 03: 94.18% ± 1.60%
+  Clase 04: 98.75% ± 0.29%
+  Clase 05: 96.11% ± 2.57%
+  Clase 06: 98.92% ± 0.88%
+  Clase 07: 99.01% ± 0.16%
+  Clase 08: 97.78% ± 0.46%
+  Clase 09: 98.91% ± 0.54%
+  Clase 10: 98.56% ± 0.32%
+------------------------------------------------------------
+OA Final: 98.45% ± 0.11%
+AA Final: 96.92% ± 0.32%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 625.99 s
+Tiempo medio por época: 6.2599 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ferreiras_river
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.35% ± 0.31%
+  Clase 04: 98.60% ± 0.39%
+  Clase 07: 82.47% ± 0.44%
+  Clase 08: 95.81% ± 1.16%
+  Clase 09: 26.72% ± 13.08%
+  Clase 10: 94.48% ± 0.25%
+------------------------------------------------------------
+OA Final: 91.90% ± 0.09%
+AA Final: 82.07% ± 2.16%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 1444.72 s
+Tiempo medio por época: 14.4472 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: mera_river
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.03% ± 0.36%
+  Clase 04: 95.11% ± 1.37%
+  Clase 05: 0.00% ± 0.00%
+  Clase 06: 80.79% ± 16.72%
+  Clase 07: 88.86% ± 0.26%
+  Clase 08: 97.70% ± 0.38%
+  Clase 10: 93.77% ± 0.33%
+------------------------------------------------------------
+OA Final: 91.24% ± 0.09%
+AA Final: 90.71% ± 2.74%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 1598.05 s
+Tiempo medio por época: 15.9805 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ulla
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.95% ± 0.08%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 98.73% ± 1.14%
+  Clase 08: 97.58% ± 0.80%
+  Clase 09: 84.08% ± 13.00%
+------------------------------------------------------------
+OA Final: 97.63% ± 0.97%
+AA Final: 96.07% ± 2.76%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 38.92 s
+Tiempo medio por época: 0.3892 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: xesta
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.58% ± 3.14%
+  Clase 02: 92.19% ± 2.41%
+  Clase 03: 93.10% ± 0.48%
+  Clase 04: 98.30% ± 0.73%
+  Clase 07: 99.15% ± 0.07%
+  Clase 08: 98.59% ± 0.11%
+------------------------------------------------------------
+OA Final: 98.83% ± 0.06%
+AA Final: 95.82% ± 0.64%
+------------------------------------------------------------
+Tiempo entrenamiento total medio: 1645.89 s
+Tiempo medio por época: 16.4589 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de VIT+CUTMIX sin aumentado: 03:30:51 **********
