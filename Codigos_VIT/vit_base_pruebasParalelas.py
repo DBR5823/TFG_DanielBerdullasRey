@@ -862,7 +862,7 @@ if __name__ == '__main__':
     print("Ejecutando test de ViT...")
     
     #Ejecutamos el test con 2 procesos
-    with ProcessPoolExecutor(max_workers=6) as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
     
