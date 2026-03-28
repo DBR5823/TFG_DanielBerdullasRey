@@ -1036,6 +1036,6 @@ if __name__ == '__main__':
     print(f"AA Final: {m_aa:.2f}% ± {s_aa:.2f}%")
     print("-" * 60)
 
-    print(f"Tiempo entrenamiento total medio: {m_t_total:.2f} s")
-    print(f"Tiempo medio por época: {m_t_epoch:.4f} s")
+    print(f"Tiempo entrenamiento total medio con hiperparámetros óptimos: {m_t_total:.2f} s")
+    print(f"Tiempo medio por época con hiperparámetros óptimos: {m_t_epoch:.4f} s")
     print("="*60)
