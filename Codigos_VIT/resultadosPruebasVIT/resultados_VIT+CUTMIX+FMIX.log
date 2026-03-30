@@ -1,0 +1,522 @@
+********** Iniciando experimentos VIT+CUTMIX+FMIX con aumentado: 01:47:00 **********
+Ejecutando: prueba inicial CUTMIX+FMIX (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo ViT (200 combinaciones) ---
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.6, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=0.8, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=0.8, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=0.8, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=0.8, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.1, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=1.2, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.8, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.8, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.5, Soft=1.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.1, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.0, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=1.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=1.2, Soft=1.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.8, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=0.5, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=0.1, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=1.2, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=1.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=0.5, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=1.0, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.5, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=1.5, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.5, Soft=0.6, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.1, Soft=1.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=0.1, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=1.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.5, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=1.5, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.0, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.5, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=1.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=0.1, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.2, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=1.2, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=0.8, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.0, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.2, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.5, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.0, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.4, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.8, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.0, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.5, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=0.5, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=1.2, Soft=0.2, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=1.5, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=0.2, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=1.0, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.8, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.4, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.2, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.0, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.0, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=1.0, Soft=0.8, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=0.1, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.2, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.4, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.2, Soft=0.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=0.8, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.1, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=0.5, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.8, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.8, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.0, Soft=0.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.1, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=0.8, Soft=0.4, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.5, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.1, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=0.2, Soft=0.6, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.0, Soft=1.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.6, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=0.4, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.1, Soft=0.4, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.0, Soft=0.4, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.2, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.2, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.5, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.5, Soft=0.2, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=1.5, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=1.0, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=1.0, Soft=1.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=1.5, Soft=0.4, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.5, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=0.1, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Prob2=0.2, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.6, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.8, Soft=0.6, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.8, Soft=0.6, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=1.2, Soft=0.2, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=1.0, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=0.8, Soft=1.0, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=1.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.8, C_Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.0, Soft=0.0, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=1.5, Soft=0.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.2, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Prob2=0.3, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.5, Soft=1.0, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=0.2, Soft=0.4, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.5, Decay=0.5, Soft=1.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.4, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.5, Soft=0.8, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.8, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.1, Soft=1.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.2, Decay=1.2, Soft=0.8, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=1.2, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=1.0, Soft=0.4, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.0, Decay=0.8, Soft=0.6, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.0, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.2, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Prob2=0.2, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.5, Decay=0.8, Soft=1.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Prob2=0.6, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.8, Soft=0.2, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=0.1, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Prob2=0.7, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.5, Decay=0.2, Soft=0.4, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Prob2=0.3, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.2, Decay=1.0, Soft=0.6, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=1.0, Decay=0.5, Soft=0.0, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.2, Soft=0.0, C_Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.4, C_Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Prob2=0.7, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.5, Decay=0.1, Soft=0.8, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Prob2=0.8, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.8, Decay=0.5, Soft=0.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.8, Decay=0.8, Soft=0.4, C_Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Prob2=0.5, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.2, Soft=0.8, C_Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Prob2=0.6, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=1.2, Decay=0.1, Soft=0.2, C_Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.2, Decay=0.1, Soft=0.6, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.5, Usar_sampler=1
+[GPU: 0] Evaluando ViT: F_Alpha=0.1, Decay=1.0, Soft=1.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Prob2=0.4, Usar_sampler=1
+[GPU: 1] Evaluando ViT: F_Alpha=0.1, Decay=0.1, Soft=1.0, C_Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Prob2=0.2, Usar_sampler=1
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: oitaven
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.25% ± 0.59%
+  Clase 02: 87.03% ± 3.98%
+  Clase 03: 85.25% ± 2.27%
+  Clase 04: 92.87% ± 3.60%
+  Clase 05: 94.00% ± 1.59%
+  Clase 06: 96.05% ± 1.65%
+  Clase 07: 96.94% ± 0.43%
+  Clase 08: 96.31% ± 0.62%
+  Clase 09: 99.78% ± 0.15%
+  Clase 10: 95.76% ± 0.33%
+------------------------------------------------------------
+OA Final: 96.28% ± 0.21%
+AA Final: 94.12% ± 0.71%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 748.67 s
+Tiempo medio por época con hiperparámetros óptimos: 7.4867 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: das_mestas
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.56% ± 0.74%
+  Clase 07: 90.71% ± 0.44%
+  Clase 08: 97.73% ± 0.68%
+  Clase 10: 94.76% ± 0.37%
+------------------------------------------------------------
+OA Final: 91.14% ± 0.10%
+AA Final: 89.69% ± 0.22%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1321.50 s
+Tiempo medio por época con hiperparámetros óptimos: 13.2150 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: eiras_dam
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.11% ± 0.39%
+  Clase 02: 79.75% ± 3.43%
+  Clase 03: 93.68% ± 1.48%
+  Clase 04: 96.51% ± 1.26%
+  Clase 05: 87.94% ± 5.05%
+  Clase 06: 91.61% ± 5.54%
+  Clase 07: 92.53% ± 0.82%
+  Clase 08: 95.92% ± 0.60%
+  Clase 09: 85.78% ± 5.74%
+  Clase 10: 82.65% ± 3.88%
+------------------------------------------------------------
+OA Final: 95.14% ± 0.34%
+AA Final: 90.55% ± 1.44%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 518.84 s
+Tiempo medio por época con hiperparámetros óptimos: 5.1884 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: ermidas_creek
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.83% ± 2.14%
+  Clase 02: 94.09% ± 1.41%
+  Clase 03: 94.37% ± 1.54%
+  Clase 04: 99.04% ± 0.32%
+  Clase 05: 96.37% ± 3.09%
+  Clase 06: 99.04% ± 0.82%
+  Clase 07: 99.10% ± 0.13%
+  Clase 08: 97.74% ± 0.36%
+  Clase 09: 98.95% ± 0.42%
+  Clase 10: 98.49% ± 0.31%
+------------------------------------------------------------
+OA Final: 98.53% ± 0.11%
+AA Final: 97.10% ± 0.30%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 800.66 s
+Tiempo medio por época con hiperparámetros óptimos: 8.0066 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: ferreiras_river
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.64% ± 0.23%
+  Clase 04: 98.64% ± 0.35%
+  Clase 07: 82.44% ± 0.43%
+  Clase 08: 95.76% ± 0.66%
+  Clase 09: 19.39% ± 14.98%
+  Clase 10: 94.64% ± 0.35%
+------------------------------------------------------------
+OA Final: 92.06% ± 0.10%
+AA Final: 80.92% ± 2.56%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1852.76 s
+Tiempo medio por época con hiperparámetros óptimos: 18.5276 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3000663-v5qdano9': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3000663-djqblt1t': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3000663-d7see43v': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3000663-v3jts4du': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3000663-x0_fnhb_': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: mera_river
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.16% ± 0.34%
+  Clase 04: 94.33% ± 2.52%
+  Clase 05: 0.00% ± 0.00%
+  Clase 06: 73.28% ± 27.38%
+  Clase 07: 88.87% ± 0.35%
+  Clase 08: 98.11% ± 0.25%
+  Clase 10: 93.82% ± 0.23%
+------------------------------------------------------------
+OA Final: 91.31% ± 0.09%
+AA Final: 89.43% ± 4.56%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2052.72 s
+Tiempo medio por época con hiperparámetros óptimos: 20.5272 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: ulla
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.10%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 98.57% ± 1.56%
+  Clase 08: 97.54% ± 0.73%
+  Clase 09: 92.34% ± 5.47%
+------------------------------------------------------------
+OA Final: 97.95% ± 0.70%
+AA Final: 97.68% ± 1.25%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 54.03 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5403 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_FMIX_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: xesta
+============================================================
+Mejor Configuración ViT:
+ FMIX_Alpha=1.0, Decay=0.8, Soft=0.6
+ CUTMIX_Alpha=0.9
+ Epoch=100, Batch=256, Prob_Principal=0.3, Prob_Metodo2=0.7, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 94.73% ± 1.09%
+  Clase 02: 89.31% ± 4.28%
+  Clase 03: 93.67% ± 0.47%
+  Clase 04: 97.99% ± 0.81%
+  Clase 07: 99.07% ± 0.09%
+  Clase 08: 98.75% ± 0.10%
+------------------------------------------------------------
+OA Final: 98.82% ± 0.07%
+AA Final: 95.59% ± 0.70%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2051.02 s
+Tiempo medio por época con hiperparámetros óptimos: 20.5102 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de VIT+CUTMIX+FMIX con aumentado: 21:10:43 **********
