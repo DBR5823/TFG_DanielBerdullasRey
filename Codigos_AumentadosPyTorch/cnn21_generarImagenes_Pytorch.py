@@ -4,13 +4,14 @@ import os
 import numpy as np
 import torch
 import torchvision.transforms.v2 as v2
+from torchvision.transforms import InterpolationMode
 import random
 
 
 #Clase que permite añadir ruído gaussiano a un patch (en todas las bandas por igual)
 class AnhadirRuidoGaussiano(torch.nn.Module):
   #Recibe la media del ruuído y la intensidad
-  def __init__(self, mean=0., std=0.05):
+  def __init__(self, mean=0., std=0.02):
     super().__init__()
     self.std = std
     self.mean = mean
@@ -26,7 +27,7 @@ class AnhadirRuidoGaussiano(torch.nn.Module):
 #Clase que permite añadir ruído gaussiano a cada banda de manera independiente
 class AnhadirRuidoEspectral(torch.nn.Module):
     #Recibe el rango de ruído con el que puede trabajar en cada una de las bandas del patch
-    def __init__(self, std_range=(0.01, 0.05)):
+    def __init__(self, std_range=(0.01, 0.03)):
       super().__init__()
       self.std_range = std_range
 
@@ -46,7 +47,7 @@ class AnhadirRuidoEspectral(torch.nn.Module):
 #Clase que cambia la iluminación del patch en todas las bandas    
 class IluminacionAleatoria(torch.nn.Module):
     #Recibe el rango en el que puede operar de luz
-    def __init__(self, factor_range=(0.9, 1.1)):
+    def __init__(self, factor_range=(0.8, 1.2)):
       super().__init__()
       self.factor_range = factor_range
 
@@ -59,7 +60,7 @@ class IluminacionAleatoria(torch.nn.Module):
 #Clase que elimina bandas completas del patch (las pone a 0)
 class EliminarBandas(torch.nn.Module):
     #Recibe la probabilidad de borrado
-    def __init__(self, drop_prob=0.1):
+    def __init__(self, drop_prob=0.15):
       super().__init__()
       self.drop_prob = drop_prob
 
@@ -173,32 +174,45 @@ if __name__ == '__main__':
 
     patch_original = select_patch(datos_tensor, sizex, sizey, 4100, 3200)
 
-    flips = [v2.RandomHorizontalFlip(p=1.0), v2.RandomVerticalFlip(p=1.0)]
+    flips_list = [v2.RandomHorizontalFlip(p=1.0), v2.RandomVerticalFlip(p=1.0)]
 
+    # Rotación (Fijado a 45 grados para que sea evidente)
     rotation = v2.Compose([
-          v2.Pad(padding=8, padding_mode='reflect'),
-          v2.RandomRotation(degrees=(45, 45)),
-          v2.CenterCrop(size=(sizey, sizex))
-      ])
+        v2.Pad(padding=8, padding_mode='reflect'),
+        v2.RandomRotation(degrees=(45, 45), interpolation=InterpolationMode.NEAREST),
+        v2.CenterCrop(size=(sizey, sizex))
+    ])
 
-    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.7, 0.7)) # Fijado a un zoom-out obvio
+    # Zoom (Fijado a 0.8, un zoom-out obvio)
+    simetric_zoom = v2.RandomAffine(degrees=0, scale=(0.8, 0.8))
     
-    noise = AnhadirRuidoGaussiano(std=0.1) # Ruido alto
-    spec_noise = AnhadirRuidoEspectral(std_range=(0.08, 0.15)) # Ruido espectral notable
-    spec_illum = IluminacionAleatoria(factor_range=(0.4, 0.4)) # Oscurecido fuertemente
-    spec_drop = EliminarBandas(drop_prob=0.4) # Apagamos el 40% de las bandas
+    # Ruidos y Espectrales (Valores usados en tu script base)
+    noise = AnhadirRuidoGaussiano(std=0.02)
+    spec_noise = AnhadirRuidoEspectral(std_range=(0.03, 0.03)) # Forzado al máximo del rango para el ejemplo
+    spec_illum = IluminacionAleatoria(factor_range=(0.8, 0.8)) # Forzado a oscurecer para el ejemplo
+    spec_drop = EliminarBandas(drop_prob=0.15)
     
-    erasing = v2.RandomErasing(p=1.0, scale=(0.15, 0.15), ratio=(1.0, 1.0), value=0) # Borrado de un cuadrado negro fijo
+    # Borrado Aleatorio (p=1.0 garantizado)
+    erasing = v2.RandomErasing(p=1.0, scale=(0.05, 0.05), value=0)
     
     transformaciones = {
-        "0_Original": None,
-        "1_Base_Flips": v2.Compose(flips),
-        "2_Geometria": v2.Compose(flips + [rotation, simetric_zoom]),
-        "3_Oclusion": v2.Compose(flips + [erasing]),
-        "4_Ruido_Sensores": v2.Compose(flips + [spec_noise, noise]),
-        "5_Firma_Espectral": v2.Compose(flips + [spec_illum, spec_drop]),
-        "6_Combo_Equilibrado": v2.Compose(flips + [rotation, simetric_zoom, spec_illum, noise]),
-        "7_All_In": v2.Compose(flips + [rotation, simetric_zoom, spec_illum, spec_noise, spec_drop, erasing])
+        "00_Original": None,
+        "00_Flips": v2.Compose(flips_list),
+        "01_Rotacion": v2.Compose(flips_list + [rotation]),
+        "02_Zoom": v2.Compose(flips_list + [simetric_zoom]),
+        "03_Rotacion_Zoom": v2.Compose(flips_list + [rotation, simetric_zoom]),
+        "04_Ruido_Gaussiano": v2.Compose(flips_list + [noise]),
+        "05_Ruido_Espectral": v2.Compose(flips_list + [spec_noise]),
+        "06_R_Gaussiano_R_Espectral": v2.Compose(flips_list + [noise, spec_noise]),
+        "07_Iluminacion_Aleatoria": v2.Compose(flips_list + [spec_illum]),
+        "08_Eliminar_Bandas": v2.Compose(flips_list + [spec_drop]),
+        "09_Ilum_Aleatoria_Elim_Bandas": v2.Compose(flips_list + [spec_illum, spec_drop]),
+        "10_Borrado_Aleatorio": v2.Compose(flips_list + [erasing]),
+        "11_Rotacion_Borrado": v2.Compose(flips_list + [rotation, erasing]),
+        "12_Rotacion_Zoom_Borrado": v2.Compose(flips_list + [rotation, simetric_zoom, erasing]),
+        "13_Rotacion_Ruido_Espectral": v2.Compose(flips_list + [rotation, spec_noise]),
+        "14_Rotacion_Zoom_R_Espectral": v2.Compose(flips_list + [rotation, simetric_zoom, spec_noise]),
+        "15_R_Espectral_Borrado": v2.Compose(flips_list + [spec_noise, erasing])
     }
     
     carpeta_salida = "ejemplos_aumentados_raw"
