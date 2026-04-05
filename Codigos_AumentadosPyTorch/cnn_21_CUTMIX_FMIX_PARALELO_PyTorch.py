@@ -1190,7 +1190,7 @@ if __name__ == '__main__':
         print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones de {len(combinaciones_totales)} combinaciones totales) ---")
 
         #Ejecutamos el grid search con 5 procesos
-        with ProcessPoolExecutor(max_workers=6) as executor:
+        with ProcessPoolExecutor(max_workers=4) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
             executor.shutdown(wait=True)
 
@@ -1216,7 +1216,7 @@ if __name__ == '__main__':
     ]
     
     #Ejecutamos el test final con 5 procesos
-    with ProcessPoolExecutor(max_workers=6) as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
 

@@ -64,7 +64,7 @@ SEMILLA=0
 
 ViTsize=4  # 0-micro, 1-mini, 2-base, 3-large, 4-pruebas (Tamaño y complejidad del modelo Transformer a utilizar)
 ViTtype=0  # 0-vit, 1-swin (Tipo de arquitectura: 0 para Vision Transformer clásico, 1 para Swin Transformer)
-TEST=1     # 0-validacion, 1-test
+
 	   
 
 #-----------------------------------------------------------------
