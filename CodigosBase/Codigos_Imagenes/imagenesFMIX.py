@@ -43,7 +43,7 @@ def save_patch(datos, sizex, sizey, B, filename):
 if __name__ == '__main__':
     DATASET = '/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
     sizex, sizey = 32, 32
-    carpeta_salida = "figurasFMIX_CORREGIDAS"
+    carpeta_salida = "figuras_fmix"
     os.makedirs(carpeta_salida, exist_ok=True)
 
     # Parámetros originales
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     fmix_decay = 2.0
     fmix_soft = 0.0
 
-    print("--> Leyendo Dataset...")
+    print("Leyendo Dataset...")
     datos_raw, H, V, B = read_raw(DATASET)
     
     # Seleccionamos dos parches con gran contraste (p.ej. agua vs vegetación)
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     # Inicializamos FMix
     fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
-    print(f"--> Generando mezcla FMix...")
+    print(f"Generando mezcla FMix...")
     
     # Aplicamos FMix al lote
     inputs_mixed = fmix_util(inputs) 
@@ -89,5 +89,3 @@ if __name__ == '__main__':
         vutils.save_image(mask, os.path.join(carpeta_salida, f'parche_{j}_mascara.png'))
 
     print(f"\nLambda obtenido: {lam:.4f}")
-    print(f"¡Listo! Si 'mascara.png' no es totalmente negra o blanca, verás la mezcla en MIXED.raw.")
-    print(f"Si sigue saliendo igual, prueba a cambiar fmix_decay a 3.0 o 4.0.")

@@ -81,16 +81,16 @@ def aplicar_cutmix_visual(patch_a, patch_b, alpha=1.0):
 if __name__ == '__main__':
     DATASET = '/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
     sizex, sizey = 32, 32
-    carpeta_salida = "ejemplos_cutmix_raw"
+    carpeta_salida = "figuras_cutmix"
     os.makedirs(carpeta_salida, exist_ok=True)
 
-    print("--> Leyendo Dataset...")
+    print("Leyendo Dataset...")
     datos_raw, H, V, B = read_raw(DATASET)
     
     # Buscamos dos parches diferentes para mezclar
     # Parche A: Zona del río (brillante/agua)
     # Parche B: Zona de vegetación (más oscura o distinta firma)
-    print("--> Extrayendo parches de control...")
+    print("Extrayendo parches de control...")
     patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) # Coordenadas arbitrarias
     patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) # Coordenadas alejadas
     
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # Aplicar CutMix con diferentes Alphas
     configuraciones = [0.2, 1.0, 10.0]
     
-    print("--> Generando mezclas CutMix...")
+    print("Generando mezclas CutMix...")
     for alpha in configuraciones:
         # Generamos 2 ejemplos por cada alpha
         for i in range(2):
@@ -110,5 +110,3 @@ if __name__ == '__main__':
             save_patch(mezcla, sizex, sizey, B, os.path.join(carpeta_salida, nombre))
             print(f"    Guardado {nombre} | Recorte en: {coords}")
 
-    print(f"\n¡Listo! Revisa la carpeta '{carpeta_salida}'.")
-    print("Verás cómo trozos del Parche B se han insertado en el Parche A.")

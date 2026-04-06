@@ -67,13 +67,13 @@ def aplicar_mixup_visual(patch_a, patch_b, alpha=1.0):
 if __name__ == '__main__':
     DATASET = '/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
     sizex, sizey = 32, 32
-    carpeta_salida = "ejemplos_mixup_raw"
+    carpeta_salida = "figuras_mixup"
     os.makedirs(carpeta_salida, exist_ok=True)
 
-    print("--> Leyendo Dataset...")
+    print("Leyendo Dataset...")
     datos_raw, H, V, B = read_raw(DATASET)
     
-    print("--> Extrayendo parches de control...")
+    print("Extrayendo parches de control...")
     # Parche A y B (ajusta coordenadas según tu imagen)
     patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
     patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
@@ -84,7 +84,7 @@ if __name__ == '__main__':
     # Mixup suele usarse con alpha entre 0.2 y 1.0
     configuraciones = [0.2, 1.0, 10.0]
     
-    print("--> Generando mezclas Mixup...")
+    print("Generando mezclas Mixup...")
     for alpha in configuraciones:
         for i in range(2):
             mezcla, lam = aplicar_mixup_visual(patch_a, patch_b, alpha=alpha)
@@ -92,5 +92,3 @@ if __name__ == '__main__':
             save_patch(mezcla, sizex, sizey, B, os.path.join(carpeta_salida, nombre))
             print(f"    Guardado {nombre} | Lambda: {lam:.4f} (A al {lam*100:.1f}%)")
 
-    print(f"\n¡Listo! Revisa la carpeta '{carpeta_salida}'.")
-    print("Verás imágenes 'fantasmagóricas' donde A y B se superponen con transparencia.")
