@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --job-name=EXP_CNN_TRANSFORM_DANIEL
+#SBATCH --job-name=EXP_CNN_PYTORCH
 #SBATCH -w ctgpgpu5                  # Fuerza el nodo actual
 #SBATCH --gres=gpu:2                 # Reserva las 2 GPUs
-#SBATCH --cpus-per-task=7            # Reserva exactamente 6 núcleos de CPU
+#SBATCH --cpus-per-task=8            # Reserva exactamente 8 núcleos de CPU
 #SBATCH --partition=gpu              # Partición de GPUs del CITIUS
 #SBATCH --output=log_TOTAL_%j.out    # Archivo donde verás los "echo" y resultados
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
