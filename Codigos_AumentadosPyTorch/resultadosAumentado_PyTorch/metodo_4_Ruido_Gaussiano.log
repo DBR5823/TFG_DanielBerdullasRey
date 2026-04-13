@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Ruido_Gaussiano | Inicio: 10:17:06**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.09% ± 1.80%
+  Clase 02: 84.35% ± 2.02%
+  Clase 03: 82.15% ± 2.71%
+  Clase 04: 89.81% ± 3.49%
+  Clase 05: 89.03% ± 3.26%
+  Clase 06: 92.99% ± 2.43%
+  Clase 07: 96.34% ± 0.41%
+  Clase 08: 94.98% ± 0.45%
+  Clase 09: 98.43% ± 0.68%
+  Clase 10: 91.60% ± 0.54%
+------------------------------------------------------------
+OA Final: 94.77% ± 0.17%
+AA Final: 91.58% ± 0.61%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 74.01 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7401 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Ruido_Gaussiano | 10:22:49
+********************************************
+**Ejecutando dataset: 1 | Método: Ruido_Gaussiano | Inicio: 12:56:34**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 73.60% ± 0.71%
+  Clase 07: 90.85% ± 0.34%
+  Clase 08: 95.79% ± 0.81%
+  Clase 10: 94.27% ± 0.24%
+------------------------------------------------------------
+OA Final: 90.75% ± 0.11%
+AA Final: 88.63% ± 0.17%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 137.03 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3703 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Ruido_Gaussiano | 13:05:42
+********************************************
+**Ejecutando dataset: 2 | Método: Ruido_Gaussiano | Inicio: 16:16:09**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.69% ± 0.48%
+  Clase 02: 85.35% ± 2.42%
+  Clase 03: 92.74% ± 2.69%
+  Clase 04: 93.23% ± 1.84%
+  Clase 05: 73.81% ± 4.72%
+  Clase 06: 88.29% ± 9.25%
+  Clase 07: 94.22% ± 1.43%
+  Clase 08: 96.58% ± 0.91%
+  Clase 09: 77.08% ± 4.58%
+  Clase 10: 87.64% ± 4.99%
+------------------------------------------------------------
+OA Final: 95.44% ± 0.22%
+AA Final: 88.76% ± 1.10%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 55.97 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5597 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Ruido_Gaussiano | 16:22:49
+********************************************
+**Ejecutando dataset: 3 | Método: Ruido_Gaussiano | Inicio: 19:05:33**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.07% ± 2.79%
+  Clase 02: 91.05% ± 2.14%
+  Clase 03: 90.15% ± 1.03%
+  Clase 04: 98.29% ± 0.31%
+  Clase 05: 96.86% ± 2.03%
+  Clase 06: 96.19% ± 2.08%
+  Clase 07: 98.70% ± 0.16%
+  Clase 08: 97.39% ± 0.68%
+  Clase 09: 96.51% ± 1.04%
+  Clase 10: 97.76% ± 0.44%
+------------------------------------------------------------
+OA Final: 97.81% ± 0.11%
+AA Final: 95.50% ± 0.67%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 83.69 s
+Tiempo medio por época con hiperparámetros óptimos: 0.8369 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Ruido_Gaussiano | 19:18:49
+********************************************
+**Ejecutando dataset: 4 | Método: Ruido_Gaussiano | Inicio: 23:42:33**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.75% ± 0.22%
+  Clase 04: 97.52% ± 0.68%
+  Clase 07: 81.01% ± 0.51%
+  Clase 08: 93.79% ± 0.74%
+  Clase 09: 7.41% ± 5.79%
+  Clase 10: 93.49% ± 0.30%
+------------------------------------------------------------
+OA Final: 91.29% ± 0.12%
+AA Final: 77.99% ± 1.08%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 192.79 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9279 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Ruido_Gaussiano | 23:55:53
+********************************************
+**Ejecutando dataset: 5 | Método: Ruido_Gaussiano | Inicio: 05:40:18**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.86% ± 0.51%
+  Clase 04: 89.92% ± 2.58%
+  Clase 05: 68.70% ± 23.01%
+  Clase 06: 30.81% ± 25.66%
+  Clase 07: 87.92% ± 0.38%
+  Clase 08: 97.24% ± 0.45%
+  Clase 10: 93.09% ± 0.34%
+------------------------------------------------------------
+OA Final: 90.54% ± 0.08%
+AA Final: 79.37% ± 3.78%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 213.67 s
+Tiempo medio por época con hiperparámetros óptimos: 2.1367 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Ruido_Gaussiano | 06:00:41
+********************************************
+**Ejecutando dataset: 6 | Método: Ruido_Gaussiano | Inicio: 11:27:07**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.98% ± 0.05%
+  Clase 04: 95.88% ± 5.80%
+  Clase 07: 99.77% ± 0.26%
+  Clase 08: 98.69% ± 0.68%
+  Clase 09: 95.87% ± 3.33%
+------------------------------------------------------------
+OA Final: 98.99% ± 0.33%
+AA Final: 98.04% ± 1.35%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 5.73 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0573 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Ruido_Gaussiano | 11:30:12
+********************************************
+**Ejecutando dataset: 7 | Método: Ruido_Gaussiano | Inicio: 13:37:41**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Gaussiano (ID: 4)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=4, Aumentado=Ruido Gaussiano
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 87.29% ± 3.74%
+  Clase 02: 76.49% ± 5.09%
+  Clase 03: 91.69% ± 0.81%
+  Clase 04: 94.27% ± 1.30%
+  Clase 07: 98.72% ± 0.07%
+  Clase 08: 97.09% ± 0.31%
+------------------------------------------------------------
+OA Final: 98.06% ± 0.05%
+AA Final: 90.92% ± 1.19%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 213.33 s
+Tiempo medio por época con hiperparámetros óptimos: 2.1333 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Ruido_Gaussiano | 13:51:41
+********************************************

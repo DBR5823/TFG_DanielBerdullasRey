@@ -1,0 +1,354 @@
+********** Iniciando experimentos CNN Básica sin aumentado: 21:38:36 **********
+Ejecutando: prueba inicial CNN Básica (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.44% ± 0.82%
+  Clase 02: 81.15% ± 2.88%
+  Clase 03: 78.25% ± 2.13%
+  Clase 04: 87.79% ± 4.33%
+  Clase 05: 86.42% ± 3.43%
+  Clase 06: 92.19% ± 1.27%
+  Clase 07: 96.91% ± 0.28%
+  Clase 08: 95.57% ± 0.35%
+  Clase 09: 98.99% ± 0.33%
+  Clase 10: 92.47% ± 0.67%
+------------------------------------------------------------
+OA Final: 95.20% ± 0.17%
+AA Final: 90.72% ± 0.76%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 52.45 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5245 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 70.67% ± 0.85%
+  Clase 07: 91.57% ± 0.32%
+  Clase 08: 94.24% ± 0.88%
+  Clase 10: 94.90% ± 0.23%
+------------------------------------------------------------
+OA Final: 91.01% ± 0.13%
+AA Final: 87.84% ± 0.16%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 93.20 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9320 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.87% ± 0.46%
+  Clase 02: 79.49% ± 3.62%
+  Clase 03: 93.58% ± 2.36%
+  Clase 04: 90.75% ± 2.19%
+  Clase 05: 59.26% ± 10.60%
+  Clase 06: 67.74% ± 16.98%
+  Clase 07: 94.42% ± 1.19%
+  Clase 08: 97.88% ± 0.52%
+  Clase 09: 64.17% ± 8.46%
+  Clase 10: 64.65% ± 16.34%
+------------------------------------------------------------
+OA Final: 95.52% ± 0.28%
+AA Final: 81.08% ± 2.49%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 38.56 s
+Tiempo medio por época con hiperparámetros óptimos: 0.3856 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.65% ± 1.62%
+  Clase 02: 91.11% ± 1.43%
+  Clase 03: 90.58% ± 1.45%
+  Clase 04: 98.17% ± 0.46%
+  Clase 05: 93.15% ± 3.56%
+  Clase 06: 97.35% ± 1.52%
+  Clase 07: 99.18% ± 0.15%
+  Clase 08: 97.21% ± 0.51%
+  Clase 09: 96.97% ± 0.99%
+  Clase 10: 97.86% ± 0.51%
+------------------------------------------------------------
+OA Final: 98.08% ± 0.16%
+AA Final: 95.42% ± 0.26%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 59.07 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5907 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1237790-iai315an': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1237790-1jr0dmne': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1237790-uqjxwcmu': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1237790-mqig_hke': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-1237790-wg5prggg': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.69% ± 0.16%
+  Clase 04: 96.49% ± 0.99%
+  Clase 07: 80.56% ± 0.39%
+  Clase 08: 89.90% ± 1.01%
+  Clase 09: 5.11% ± 3.80%
+  Clase 10: 94.37% ± 0.28%
+------------------------------------------------------------
+OA Final: 91.39% ± 0.10%
+AA Final: 76.85% ± 0.70%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 128.60 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2860 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 86.90% ± 0.37%
+  Clase 04: 86.84% ± 3.31%
+  Clase 05: 44.45% ± 32.15%
+  Clase 06: 15.19% ± 17.66%
+  Clase 07: 88.61% ± 0.32%
+  Clase 08: 96.04% ± 0.67%
+  Clase 10: 93.48% ± 0.55%
+------------------------------------------------------------
+OA Final: 90.70% ± 0.14%
+AA Final: 73.07% ± 6.05%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 150.23 s
+Tiempo medio por época con hiperparámetros óptimos: 1.5023 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.68% ± 0.86%
+  Clase 04: 91.93% ± 8.19%
+  Clase 07: 97.29% ± 3.55%
+  Clase 08: 99.47% ± 0.34%
+  Clase 09: 91.29% ± 4.43%
+------------------------------------------------------------
+OA Final: 98.44% ± 1.03%
+AA Final: 95.93% ± 2.26%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.20 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0420 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración: Epoch=100, Batch=256, Sampler=0
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 85.45% ± 2.81%
+  Clase 02: 71.30% ± 8.01%
+  Clase 03: 90.74% ± 0.93%
+  Clase 04: 92.72% ± 1.50%
+  Clase 07: 98.96% ± 0.12%
+  Clase 08: 96.95% ± 0.29%
+------------------------------------------------------------
+OA Final: 98.16% ± 0.09%
+AA Final: 89.35% ± 1.50%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 149.89 s
+Tiempo medio por época con hiperparámetros óptimos: 1.4989 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de CNN Básica sin aumentado: 22:49:34 **********

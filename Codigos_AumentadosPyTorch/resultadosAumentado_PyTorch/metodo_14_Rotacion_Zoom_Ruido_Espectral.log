@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 11:35:50**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.03% ± 1.53%
+  Clase 02: 85.73% ± 2.75%
+  Clase 03: 84.23% ± 2.29%
+  Clase 04: 91.09% ± 4.40%
+  Clase 05: 90.60% ± 2.22%
+  Clase 06: 94.07% ± 1.78%
+  Clase 07: 95.98% ± 0.49%
+  Clase 08: 94.88% ± 0.40%
+  Clase 09: 99.16% ± 0.42%
+  Clase 10: 91.67% ± 0.56%
+------------------------------------------------------------
+OA Final: 94.72% ± 0.15%
+AA Final: 92.34% ± 0.49%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 249.36 s
+Tiempo medio por época con hiperparámetros óptimos: 2.4936 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Rotacion_Zoom_Ruido_Espectral | 11:50:31
+********************************************
+**Ejecutando dataset: 1 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 15:03:52**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.25% ± 0.90%
+  Clase 07: 90.53% ± 0.30%
+  Clase 08: 96.75% ± 0.95%
+  Clase 10: 94.06% ± 0.29%
+------------------------------------------------------------
+OA Final: 90.71% ± 0.07%
+AA Final: 89.15% ± 0.18%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 447.93 s
+Tiempo medio por época con hiperparámetros óptimos: 4.4793 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Rotacion_Zoom_Ruido_Espectral | 15:28:10
+********************************************
+**Ejecutando dataset: 2 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 17:37:59**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.46% ± 0.45%
+  Clase 02: 86.80% ± 1.90%
+  Clase 03: 92.45% ± 2.99%
+  Clase 04: 94.76% ± 3.38%
+  Clase 05: 76.50% ± 8.52%
+  Clase 06: 85.13% ± 12.12%
+  Clase 07: 93.96% ± 1.25%
+  Clase 08: 96.06% ± 0.59%
+  Clase 09: 80.53% ± 6.94%
+  Clase 10: 87.76% ± 5.47%
+------------------------------------------------------------
+OA Final: 95.23% ± 0.34%
+AA Final: 89.24% ± 1.69%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 181.28 s
+Tiempo medio por época con hiperparámetros óptimos: 1.8128 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Rotacion_Zoom_Ruido_Espectral | 17:50:57
+********************************************
+**Ejecutando dataset: 3 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 21:40:27**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.74% ± 0.96%
+  Clase 02: 92.31% ± 2.45%
+  Clase 03: 92.00% ± 2.46%
+  Clase 04: 98.07% ± 0.48%
+  Clase 05: 98.11% ± 1.71%
+  Clase 06: 98.05% ± 0.69%
+  Clase 07: 98.35% ± 0.21%
+  Clase 08: 97.50% ± 0.40%
+  Clase 09: 97.71% ± 1.25%
+  Clase 10: 97.82% ± 0.51%
+------------------------------------------------------------
+OA Final: 97.79% ± 0.15%
+AA Final: 96.37% ± 0.45%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 271.53 s
+Tiempo medio por época con hiperparámetros óptimos: 2.7153 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Rotacion_Zoom_Ruido_Espectral | 22:03:00
+********************************************
+**Ejecutando dataset: 4 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 02:48:40**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.78% ± 0.12%
+  Clase 04: 97.39% ± 0.74%
+  Clase 07: 81.60% ± 0.50%
+  Clase 08: 95.44% ± 0.84%
+  Clase 09: 9.38% ± 3.60%
+  Clase 10: 93.32% ± 0.35%
+------------------------------------------------------------
+OA Final: 91.41% ± 0.10%
+AA Final: 78.65% ± 0.61%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 631.86 s
+Tiempo medio por época con hiperparámetros óptimos: 6.3186 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Rotacion_Zoom_Ruido_Espectral | 03:24:34
+********************************************
+**Ejecutando dataset: 5 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 10:03:18**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.45% ± 0.43%
+  Clase 04: 92.20% ± 1.62%
+  Clase 05: 93.18% ± 9.30%
+  Clase 06: 41.88% ± 25.18%
+  Clase 07: 87.58% ± 0.42%
+  Clase 08: 97.38% ± 0.30%
+  Clase 10: 93.22% ± 0.30%
+------------------------------------------------------------
+OA Final: 90.57% ± 0.10%
+AA Final: 84.84% ± 3.97%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 701.37 s
+Tiempo medio por época con hiperparámetros óptimos: 7.0137 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Rotacion_Zoom_Ruido_Espectral | 10:47:54
+********************************************
+**Ejecutando dataset: 6 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 11:59:47**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.88% ± 0.16%
+  Clase 04: 97.21% ± 8.83%
+  Clase 07: 99.43% ± 0.72%
+  Clase 08: 98.48% ± 0.69%
+  Clase 09: 92.47% ± 4.24%
+------------------------------------------------------------
+OA Final: 98.63% ± 0.26%
+AA Final: 97.50% ± 2.00%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 17.28 s
+Tiempo medio por época con hiperparámetros óptimos: 0.1728 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Rotacion_Zoom_Ruido_Espectral | 12:03:24
+********************************************
+**Ejecutando dataset: 7 | Método: Rotacion_Zoom_Ruido_Espectral | Inicio: 16:55:21**
+GPUs detectadas: 2
+Usando el método de aumento: Rotacion_Zoom_Ruido_Espectral (ID: 14)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=14, Aumentado=Rotacion_Zoom_Ruido_Espectral
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 89.98% ± 4.64%
+  Clase 02: 83.21% ± 3.44%
+  Clase 03: 92.74% ± 0.47%
+  Clase 04: 96.67% ± 1.15%
+  Clase 07: 98.50% ± 0.14%
+  Clase 08: 97.21% ± 0.33%
+------------------------------------------------------------
+OA Final: 98.00% ± 0.07%
+AA Final: 93.05% ± 0.83%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 701.38 s
+Tiempo medio por época con hiperparámetros óptimos: 7.0138 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Rotacion_Zoom_Ruido_Espectral | 17:33:25
+********************************************

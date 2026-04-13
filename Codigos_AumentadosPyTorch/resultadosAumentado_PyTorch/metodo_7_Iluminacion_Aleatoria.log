@@ -1,0 +1,361 @@
+**Ejecutando dataset: 0 | Método: Iluminacion_Aleatoria | Inicio: 10:35:29**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.95% ± 0.80%
+  Clase 02: 85.22% ± 1.68%
+  Clase 03: 82.84% ± 2.13%
+  Clase 04: 92.06% ± 3.06%
+  Clase 05: 90.22% ± 1.50%
+  Clase 06: 93.96% ± 2.09%
+  Clase 07: 96.58% ± 0.31%
+  Clase 08: 94.43% ± 0.66%
+  Clase 09: 99.06% ± 0.42%
+  Clase 10: 92.90% ± 0.72%
+------------------------------------------------------------
+OA Final: 95.00% ± 0.14%
+AA Final: 92.42% ± 0.55%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 63.71 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6371 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Iluminacion_Aleatoria | 10:40:44
+********************************************
+**Ejecutando dataset: 1 | Método: Iluminacion_Aleatoria | Inicio: 13:25:27**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 73.06% ± 0.58%
+  Clase 07: 90.79% ± 0.29%
+  Clase 08: 96.31% ± 0.89%
+  Clase 10: 94.54% ± 0.25%
+------------------------------------------------------------
+OA Final: 90.80% ± 0.12%
+AA Final: 88.67% ± 0.33%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 115.89 s
+Tiempo medio por época con hiperparámetros óptimos: 1.1589 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Iluminacion_Aleatoria | 13:33:20
+********************************************
+**Ejecutando dataset: 2 | Método: Iluminacion_Aleatoria | Inicio: 16:37:11**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.49% ± 0.49%
+  Clase 02: 84.57% ± 2.90%
+  Clase 03: 93.76% ± 2.68%
+  Clase 04: 94.88% ± 2.35%
+  Clase 05: 75.78% ± 4.69%
+  Clase 06: 90.95% ± 8.86%
+  Clase 07: 93.59% ± 1.05%
+  Clase 08: 95.82% ± 0.57%
+  Clase 09: 84.29% ± 6.29%
+  Clase 10: 85.28% ± 8.35%
+------------------------------------------------------------
+OA Final: 95.12% ± 0.23%
+AA Final: 89.74% ± 1.77%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 48.57 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4857 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Iluminacion_Aleatoria | 16:43:31
+********************************************
+**Ejecutando dataset: 3 | Método: Iluminacion_Aleatoria | Inicio: 19:46:09**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.98% ± 0.85%
+  Clase 02: 92.79% ± 1.32%
+  Clase 03: 92.52% ± 1.72%
+  Clase 04: 98.50% ± 0.44%
+  Clase 05: 97.37% ± 2.22%
+  Clase 06: 97.88% ± 1.49%
+  Clase 07: 98.91% ± 0.20%
+  Clase 08: 97.56% ± 0.42%
+  Clase 09: 97.62% ± 0.77%
+  Clase 10: 97.82% ± 0.47%
+------------------------------------------------------------
+OA Final: 98.13% ± 0.11%
+AA Final: 96.39% ± 0.29%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 70.02 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7002 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Iluminacion_Aleatoria | 19:58:47
+********************************************
+**Ejecutando dataset: 4 | Método: Iluminacion_Aleatoria | Inicio: 00:25:15**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.52% ± 0.27%
+  Clase 04: 97.18% ± 0.51%
+  Clase 07: 80.94% ± 0.73%
+  Clase 08: 94.16% ± 1.11%
+  Clase 09: 7.22% ± 6.37%
+  Clase 10: 93.88% ± 0.28%
+------------------------------------------------------------
+OA Final: 91.34% ± 0.11%
+AA Final: 77.98% ± 1.10%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 161.52 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6152 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Iluminacion_Aleatoria | 00:37:18
+********************************************
+**Ejecutando dataset: 5 | Método: Iluminacion_Aleatoria | Inicio: 06:44:44**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.88% ± 0.39%
+  Clase 04: 91.19% ± 2.31%
+  Clase 05: 66.10% ± 23.71%
+  Clase 06: 28.48% ± 23.77%
+  Clase 07: 87.55% ± 0.41%
+  Clase 08: 97.05% ± 0.54%
+  Clase 10: 93.49% ± 0.25%
+------------------------------------------------------------
+OA Final: 90.55% ± 0.09%
+AA Final: 78.82% ± 4.03%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 181.86 s
+Tiempo medio por época con hiperparámetros óptimos: 1.8186 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Iluminacion_Aleatoria | 07:03:17
+********************************************
+**Ejecutando dataset: 6 | Método: Iluminacion_Aleatoria | Inicio: 11:36:33**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+Exception ignored in: <Finalize object, dead>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/multiprocessing/util.py", line 224, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/lib/python3.10/multiprocessing/synchronize.py", line 87, in _cleanup
+    sem_unlink(name)
+FileNotFoundError: [Errno 2] No such file or directory
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.93% ± 0.09%
+  Clase 04: 94.54% ± 8.16%
+  Clase 07: 98.98% ± 1.32%
+  Clase 08: 98.79% ± 0.57%
+  Clase 09: 91.93% ± 6.16%
+------------------------------------------------------------
+OA Final: 98.62% ± 0.47%
+AA Final: 96.83% ± 1.79%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 5.19 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0519 s
+============================================================
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 5 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3827630-pnlwkerb': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3827630-31l7besk': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3827630-rr0ytkea': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3827630-1e9xeuml': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+/usr/lib/python3.10/multiprocessing/resource_tracker.py:237: UserWarning: resource_tracker: '/loky-3827630-23i3dnsa': [Errno 2] No such file or directory
+  warnings.warn('resource_tracker: %r: %s' % (name, e))
+FINALIZACIÓN dataset: 6 | Método: Iluminacion_Aleatoria | 11:39:39
+********************************************
+**Ejecutando dataset: 7 | Método: Iluminacion_Aleatoria | Inicio: 14:22:24**
+GPUs detectadas: 2
+Usando el método de aumento: Iluminación Aleatoria (ID: 7)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=7, Aumentado=Iluminación Aleatoria
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 87.91% ± 2.59%
+  Clase 02: 77.33% ± 4.73%
+  Clase 03: 92.28% ± 0.63%
+  Clase 04: 94.65% ± 0.58%
+  Clase 07: 98.65% ± 0.10%
+  Clase 08: 97.37% ± 0.31%
+------------------------------------------------------------
+OA Final: 98.10% ± 0.09%
+AA Final: 91.36% ± 0.60%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 177.65 s
+Tiempo medio por época con hiperparámetros óptimos: 1.7765 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Iluminacion_Aleatoria | 14:34:24
+********************************************

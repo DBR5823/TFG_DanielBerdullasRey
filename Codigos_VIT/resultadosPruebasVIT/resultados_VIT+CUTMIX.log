@@ -1,0 +1,300 @@
+********** Iniciando experimentos VIT+CUTMIX con aumentado: 03:17:27 **********
+Ejecutando: prueba inicial CUTMIX (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+--- Iniciando Grid Search Paralelo ViT (49 combinaciones) ---
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=0.9, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 0]  Evaluando ViT: Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: oitaven
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.10% ± 1.04%
+  Clase 02: 85.93% ± 2.68%
+  Clase 03: 85.67% ± 3.41%
+  Clase 04: 94.14% ± 3.24%
+  Clase 05: 92.31% ± 2.10%
+  Clase 06: 97.23% ± 1.61%
+  Clase 07: 97.10% ± 0.44%
+  Clase 08: 96.26% ± 0.56%
+  Clase 09: 99.75% ± 0.20%
+  Clase 10: 95.56% ± 0.50%
+------------------------------------------------------------
+OA Final: 96.28% ± 0.28%
+AA Final: 94.11% ± 0.62%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 740.30 s
+Tiempo medio por época con hiperparámetros óptimos: 7.4030 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: das_mestas
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.91% ± 0.68%
+  Clase 07: 90.49% ± 0.29%
+  Clase 08: 97.71% ± 0.52%
+  Clase 10: 94.63% ± 0.26%
+------------------------------------------------------------
+OA Final: 91.02% ± 0.14%
+AA Final: 89.69% ± 0.22%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1325.27 s
+Tiempo medio por época con hiperparámetros óptimos: 13.2527 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: eiras_dam
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.85% ± 0.49%
+  Clase 02: 82.32% ± 2.53%
+  Clase 03: 95.39% ± 1.99%
+  Clase 04: 97.14% ± 1.48%
+  Clase 05: 88.07% ± 3.93%
+  Clase 06: 90.86% ± 4.64%
+  Clase 07: 92.62% ± 1.22%
+  Clase 08: 96.04% ± 0.52%
+  Clase 09: 85.98% ± 5.20%
+  Clase 10: 82.69% ± 7.55%
+------------------------------------------------------------
+OA Final: 95.30% ± 0.39%
+AA Final: 91.00% ± 1.27%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 517.55 s
+Tiempo medio por época con hiperparámetros óptimos: 5.1755 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ermidas_creek
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 94.24% ± 1.13%
+  Clase 02: 94.03% ± 1.43%
+  Clase 03: 93.96% ± 1.91%
+  Clase 04: 98.69% ± 0.39%
+  Clase 05: 95.79% ± 2.89%
+  Clase 06: 98.82% ± 0.85%
+  Clase 07: 99.08% ± 0.19%
+  Clase 08: 97.79% ± 0.38%
+  Clase 09: 98.90% ± 0.71%
+  Clase 10: 98.69% ± 0.41%
+------------------------------------------------------------
+OA Final: 98.51% ± 0.15%
+AA Final: 97.00% ± 0.41%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 806.25 s
+Tiempo medio por época con hiperparámetros óptimos: 8.0625 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ferreiras_river
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.46% ± 0.24%
+  Clase 04: 98.42% ± 0.36%
+  Clase 07: 82.38% ± 0.54%
+  Clase 08: 95.21% ± 1.24%
+  Clase 09: 27.70% ± 13.62%
+  Clase 10: 94.56% ± 0.29%
+------------------------------------------------------------
+OA Final: 91.94% ± 0.12%
+AA Final: 82.12% ± 2.31%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1836.75 s
+Tiempo medio por época con hiperparámetros óptimos: 18.3675 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: mera_river
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.93% ± 0.42%
+  Clase 04: 94.95% ± 1.80%
+  Clase 05: 0.00% ± 0.00%
+  Clase 06: 83.73% ± 8.81%
+  Clase 07: 88.86% ± 0.32%
+  Clase 08: 97.72% ± 0.33%
+  Clase 10: 93.76% ± 0.16%
+------------------------------------------------------------
+OA Final: 91.22% ± 0.04%
+AA Final: 91.16% ± 1.43%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2018.52 s
+Tiempo medio por época con hiperparámetros óptimos: 20.1852 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: ulla
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.93% ± 0.17%
+  Clase 04: 99.28% ± 2.26%
+  Clase 07: 98.76% ± 1.15%
+  Clase 08: 97.11% ± 0.99%
+  Clase 09: 89.27% ± 8.30%
+------------------------------------------------------------
+OA Final: 97.62% ± 1.00%
+AA Final: 96.87% ± 1.86%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 54.29 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5429 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+--- Cargando hiperparámetros óptimos desde hiperParametros_ViT_CUTMIX_Con_Aumentado.json ---
+
+--- Ejecutando evaluación final paralela ViT (10 experimentos) ---
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS VIT+CUTMIX SOBRE: xesta
+============================================================
+Mejor Configuración ViT: Alpha=0.5, Epoch=100, Batch=256, Prob=0.2, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.75% ± 3.84%
+  Clase 02: 86.37% ± 6.84%
+  Clase 03: 93.42% ± 0.36%
+  Clase 04: 98.08% ± 0.68%
+  Clase 07: 99.16% ± 0.06%
+  Clase 08: 98.56% ± 0.15%
+------------------------------------------------------------
+OA Final: 98.83% ± 0.05%
+AA Final: 94.89% ± 1.49%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2057.43 s
+Tiempo medio por época con hiperparámetros óptimos: 20.5743 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de VIT+CUTMIX con aumentado: 14:19:16 **********

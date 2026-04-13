@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 11:50:34**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 95.99% ± 1.41%
+  Clase 02: 83.33% ± 3.07%
+  Clase 03: 80.30% ± 1.66%
+  Clase 04: 91.51% ± 2.80%
+  Clase 05: 89.72% ± 3.58%
+  Clase 06: 92.24% ± 2.09%
+  Clase 07: 96.24% ± 0.40%
+  Clase 08: 95.07% ± 0.52%
+  Clase 09: 98.29% ± 0.68%
+  Clase 10: 91.32% ± 1.04%
+------------------------------------------------------------
+OA Final: 94.69% ± 0.19%
+AA Final: 91.40% ± 0.65%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 112.72 s
+Tiempo medio por época con hiperparámetros óptimos: 1.1272 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Ruido_Espectral_Borrado_Aleatorio | 11:58:12
+********************************************
+**Ejecutando dataset: 1 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 15:28:13**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 74.26% ± 0.81%
+  Clase 07: 90.58% ± 0.33%
+  Clase 08: 96.15% ± 1.02%
+  Clase 10: 94.32% ± 0.11%
+------------------------------------------------------------
+OA Final: 90.73% ± 0.10%
+AA Final: 88.83% ± 0.29%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 204.25 s
+Tiempo medio por época con hiperparámetros óptimos: 2.0425 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Ruido_Espectral_Borrado_Aleatorio | 15:40:34
+********************************************
+**Ejecutando dataset: 2 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 17:51:00**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.43% ± 0.48%
+  Clase 02: 83.65% ± 3.03%
+  Clase 03: 93.68% ± 2.08%
+  Clase 04: 94.76% ± 2.03%
+  Clase 05: 75.57% ± 6.82%
+  Clase 06: 85.61% ± 7.39%
+  Clase 07: 92.79% ± 1.84%
+  Clase 08: 96.63% ± 0.78%
+  Clase 09: 80.69% ± 7.22%
+  Clase 10: 91.72% ± 5.69%
+------------------------------------------------------------
+OA Final: 95.29% ± 0.30%
+AA Final: 89.35% ± 1.72%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 84.48 s
+Tiempo medio por época con hiperparámetros óptimos: 0.8448 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Ruido_Espectral_Borrado_Aleatorio | 17:59:06
+********************************************
+**Ejecutando dataset: 3 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 22:03:03**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.55% ± 1.75%
+  Clase 02: 92.50% ± 1.75%
+  Clase 03: 89.51% ± 2.43%
+  Clase 04: 98.21% ± 0.47%
+  Clase 05: 96.75% ± 3.06%
+  Clase 06: 97.12% ± 1.06%
+  Clase 07: 98.49% ± 0.26%
+  Clase 08: 97.56% ± 0.30%
+  Clase 09: 97.13% ± 1.08%
+  Clase 10: 97.61% ± 0.47%
+------------------------------------------------------------
+OA Final: 97.75% ± 0.08%
+AA Final: 95.74% ± 0.47%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 127.91 s
+Tiempo medio por época con hiperparámetros óptimos: 1.2791 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Ruido_Espectral_Borrado_Aleatorio | 22:18:35
+********************************************
+**Ejecutando dataset: 4 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 03:24:37**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.69% ± 0.14%
+  Clase 04: 97.70% ± 0.54%
+  Clase 07: 81.46% ± 0.40%
+  Clase 08: 93.06% ± 1.66%
+  Clase 09: 8.73% ± 8.03%
+  Clase 10: 93.59% ± 0.39%
+------------------------------------------------------------
+OA Final: 91.39% ± 0.13%
+AA Final: 78.20% ± 1.43%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 287.13 s
+Tiempo medio por época con hiperparámetros óptimos: 2.8713 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Ruido_Espectral_Borrado_Aleatorio | 03:42:51
+********************************************
+**Ejecutando dataset: 5 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 10:47:57**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.12% ± 0.35%
+  Clase 04: 90.83% ± 2.68%
+  Clase 05: 59.61% ± 33.44%
+  Clase 06: 27.16% ± 25.90%
+  Clase 07: 87.71% ± 0.37%
+  Clase 08: 97.08% ± 0.52%
+  Clase 10: 93.10% ± 0.33%
+------------------------------------------------------------
+OA Final: 90.49% ± 0.12%
+AA Final: 77.66% ± 7.58%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 323.88 s
+Tiempo medio por época con hiperparámetros óptimos: 3.2388 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Ruido_Espectral_Borrado_Aleatorio | 11:13:47
+********************************************
+**Ejecutando dataset: 6 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 12:03:27**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.91% ± 0.17%
+  Clase 04: 95.87% ± 8.70%
+  Clase 07: 99.36% ± 0.90%
+  Clase 08: 98.64% ± 0.52%
+  Clase 09: 94.10% ± 3.34%
+------------------------------------------------------------
+OA Final: 98.76% ± 0.25%
+AA Final: 97.58% ± 1.95%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 8.17 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0817 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Ruido_Espectral_Borrado_Aleatorio | 12:06:40
+********************************************
+**Ejecutando dataset: 7 | Método: Ruido_Espectral_Borrado_Aleatorio | Inicio: 17:33:28**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido_Espectral_Borrado_Aleatorio (ID: 15)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=15, Aumentado=Ruido_Espectral_Borrado_Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 88.56% ± 2.50%
+  Clase 02: 77.36% ± 6.04%
+  Clase 03: 92.25% ± 0.71%
+  Clase 04: 94.99% ± 1.64%
+  Clase 07: 98.62% ± 0.11%
+  Clase 08: 97.19% ± 0.44%
+------------------------------------------------------------
+OA Final: 98.03% ± 0.07%
+AA Final: 91.49% ± 0.99%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 330.73 s
+Tiempo medio por época con hiperparámetros óptimos: 3.3073 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Ruido_Espectral_Borrado_Aleatorio | 17:52:58
+********************************************

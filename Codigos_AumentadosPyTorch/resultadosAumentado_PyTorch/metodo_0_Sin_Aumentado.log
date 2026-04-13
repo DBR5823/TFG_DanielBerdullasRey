@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Sin_Aumentado | Inicio: 09:41:29**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.05% ± 0.48%
+  Clase 02: 81.98% ± 2.00%
+  Clase 03: 81.78% ± 2.62%
+  Clase 04: 89.85% ± 5.22%
+  Clase 05: 89.30% ± 2.90%
+  Clase 06: 93.11% ± 1.97%
+  Clase 07: 96.59% ± 0.37%
+  Clase 08: 95.10% ± 0.40%
+  Clase 09: 99.10% ± 0.34%
+  Clase 10: 92.86% ± 0.75%
+------------------------------------------------------------
+OA Final: 95.09% ± 0.20%
+AA Final: 91.67% ± 0.64%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 53.03 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5303 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Sin_Aumentado | 09:46:10
+********************************************
+**Ejecutando dataset: 1 | Método: Sin_Aumentado | Inicio: 11:58:15**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 72.80% ± 0.70%
+  Clase 07: 90.82% ± 0.38%
+  Clase 08: 95.76% ± 0.77%
+  Clase 10: 94.82% ± 0.24%
+------------------------------------------------------------
+OA Final: 90.90% ± 0.08%
+AA Final: 88.55% ± 0.23%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 92.74 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9274 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Sin_Aumentado | 12:05:08
+********************************************
+**Ejecutando dataset: 2 | Método: Sin_Aumentado | Inicio: 15:40:37**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.77% ± 0.50%
+  Clase 02: 81.79% ± 2.27%
+  Clase 03: 94.30% ± 2.20%
+  Clase 04: 94.61% ± 3.63%
+  Clase 05: 79.03% ± 5.20%
+  Clase 06: 86.19% ± 8.10%
+  Clase 07: 94.10% ± 2.02%
+  Clase 08: 96.10% ± 0.89%
+  Clase 09: 82.22% ± 7.04%
+  Clase 10: 82.10% ± 11.55%
+------------------------------------------------------------
+OA Final: 95.30% ± 0.45%
+AA Final: 88.92% ± 0.97%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 39.47 s
+Tiempo medio por época con hiperparámetros óptimos: 0.3947 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Sin_Aumentado | 15:46:32
+********************************************
+**Ejecutando dataset: 3 | Método: Sin_Aumentado | Inicio: 17:59:09**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 92.47% ± 2.29%
+  Clase 02: 91.99% ± 0.88%
+  Clase 03: 91.05% ± 1.72%
+  Clase 04: 98.08% ± 0.46%
+  Clase 05: 95.72% ± 3.13%
+  Clase 06: 97.50% ± 1.26%
+  Clase 07: 98.73% ± 0.15%
+  Clase 08: 97.42% ± 0.44%
+  Clase 09: 97.53% ± 0.91%
+  Clase 10: 97.76% ± 0.30%
+------------------------------------------------------------
+OA Final: 97.89% ± 0.08%
+AA Final: 95.83% ± 0.40%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 58.16 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5816 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Sin_Aumentado | 18:10:51
+********************************************
+**Ejecutando dataset: 4 | Método: Sin_Aumentado | Inicio: 22:18:38**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.74% ± 0.23%
+  Clase 04: 96.93% ± 0.69%
+  Clase 07: 80.46% ± 0.42%
+  Clase 08: 93.85% ± 1.10%
+  Clase 09: 9.71% ± 7.77%
+  Clase 10: 94.04% ± 0.25%
+------------------------------------------------------------
+OA Final: 91.37% ± 0.10%
+AA Final: 78.29% ± 1.26%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 130.76 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3076 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Sin_Aumentado | 22:29:09
+********************************************
+**Ejecutando dataset: 5 | Método: Sin_Aumentado | Inicio: 03:42:54**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.47% ± 0.48%
+  Clase 04: 90.16% ± 2.36%
+  Clase 05: 44.24% ± 28.71%
+  Clase 06: 21.19% ± 20.99%
+  Clase 07: 88.03% ± 0.36%
+  Clase 08: 96.91% ± 0.38%
+  Clase 10: 93.38% ± 0.33%
+------------------------------------------------------------
+OA Final: 90.61% ± 0.09%
+AA Final: 74.48% ± 4.32%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 151.02 s
+Tiempo medio por época con hiperparámetros óptimos: 1.5102 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Sin_Aumentado | 04:00:22
+********************************************
+**Ejecutando dataset: 6 | Método: Sin_Aumentado | Inicio: 11:13:50**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.95% ± 0.08%
+  Clase 04: 98.50% ± 3.16%
+  Clase 07: 97.80% ± 2.46%
+  Clase 08: 99.16% ± 0.52%
+  Clase 09: 93.50% ± 5.50%
+------------------------------------------------------------
+OA Final: 98.65% ± 0.62%
+AA Final: 97.78% ± 1.42%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.24 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0424 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Sin_Aumentado | 11:16:52
+********************************************
+**Ejecutando dataset: 7 | Método: Sin_Aumentado | Inicio: 12:06:43**
+GPUs detectadas: 2
+Usando el método de aumento: Flips (ID: 0)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=0, Aumentado=Flips
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 87.74% ± 3.32%
+  Clase 02: 75.68% ± 5.71%
+  Clase 03: 91.98% ± 0.85%
+  Clase 04: 94.90% ± 1.17%
+  Clase 07: 98.73% ± 0.14%
+  Clase 08: 97.23% ± 0.36%
+------------------------------------------------------------
+OA Final: 98.11% ± 0.10%
+AA Final: 91.04% ± 0.96%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 144.97 s
+Tiempo medio por época con hiperparámetros óptimos: 1.4497 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Sin_Aumentado | 12:17:17
+********************************************

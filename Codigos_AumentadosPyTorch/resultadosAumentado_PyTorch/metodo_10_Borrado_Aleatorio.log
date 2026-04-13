@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Borrado_Aleatorio | Inicio: 10:52:10**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.04% ± 0.52%
+  Clase 02: 83.91% ± 2.07%
+  Clase 03: 79.84% ± 3.24%
+  Clase 04: 93.51% ± 3.70%
+  Clase 05: 90.23% ± 2.88%
+  Clase 06: 92.67% ± 2.66%
+  Clase 07: 96.65% ± 0.27%
+  Clase 08: 95.00% ± 0.63%
+  Clase 09: 98.63% ± 0.56%
+  Clase 10: 92.76% ± 0.95%
+------------------------------------------------------------
+OA Final: 95.11% ± 0.18%
+AA Final: 92.02% ± 0.77%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 92.61 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9261 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Borrado_Aleatorio | 10:58:55
+********************************************
+**Ejecutando dataset: 1 | Método: Borrado_Aleatorio | Inicio: 13:50:34**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 74.11% ± 0.51%
+  Clase 07: 90.55% ± 0.29%
+  Clase 08: 96.13% ± 0.89%
+  Clase 10: 94.72% ± 0.31%
+------------------------------------------------------------
+OA Final: 90.87% ± 0.13%
+AA Final: 88.88% ± 0.22%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 165.75 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6575 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Borrado_Aleatorio | 14:01:04
+********************************************
+**Ejecutando dataset: 2 | Método: Borrado_Aleatorio | Inicio: 16:56:46**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.72% ± 0.28%
+  Clase 02: 83.77% ± 4.23%
+  Clase 03: 93.60% ± 1.56%
+  Clase 04: 94.68% ± 2.25%
+  Clase 05: 74.94% ± 8.33%
+  Clase 06: 90.24% ± 8.00%
+  Clase 07: 93.50% ± 1.99%
+  Clase 08: 96.26% ± 0.46%
+  Clase 09: 84.33% ± 4.33%
+  Clase 10: 89.26% ± 3.55%
+------------------------------------------------------------
+OA Final: 95.35% ± 0.35%
+AA Final: 89.93% ± 0.82%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 67.09 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6709 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Borrado_Aleatorio | 17:04:07
+********************************************
+**Ejecutando dataset: 3 | Método: Borrado_Aleatorio | Inicio: 20:24:50**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.32% ± 1.36%
+  Clase 02: 91.81% ± 2.80%
+  Clase 03: 91.64% ± 1.18%
+  Clase 04: 98.36% ± 0.40%
+  Clase 05: 98.45% ± 1.96%
+  Clase 06: 97.78% ± 1.14%
+  Clase 07: 98.72% ± 0.21%
+  Clase 08: 97.50% ± 0.50%
+  Clase 09: 97.56% ± 1.04%
+  Clase 10: 98.06% ± 0.34%
+------------------------------------------------------------
+OA Final: 98.02% ± 0.14%
+AA Final: 96.32% ± 0.36%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 105.13 s
+Tiempo medio por época con hiperparámetros óptimos: 1.0513 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Borrado_Aleatorio | 20:39:03
+********************************************
+**Ejecutando dataset: 4 | Método: Borrado_Aleatorio | Inicio: 01:03:02**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.71% ± 0.22%
+  Clase 04: 97.71% ± 0.46%
+  Clase 07: 81.17% ± 0.48%
+  Clase 08: 93.81% ± 1.29%
+  Clase 09: 10.18% ± 13.24%
+  Clase 10: 94.01% ± 0.26%
+------------------------------------------------------------
+OA Final: 91.51% ± 0.11%
+AA Final: 78.60% ± 2.14%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 233.75 s
+Tiempo medio por época con hiperparámetros óptimos: 2.3375 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Borrado_Aleatorio | 01:18:39
+********************************************
+**Ejecutando dataset: 5 | Método: Borrado_Aleatorio | Inicio: 07:43:25**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.15% ± 0.55%
+  Clase 04: 91.36% ± 3.17%
+  Clase 05: 71.34% ± 22.29%
+  Clase 06: 36.31% ± 21.24%
+  Clase 07: 87.34% ± 0.26%
+  Clase 08: 97.12% ± 0.28%
+  Clase 10: 93.68% ± 0.33%
+------------------------------------------------------------
+OA Final: 90.59% ± 0.10%
+AA Final: 80.76% ± 3.20%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 259.79 s
+Tiempo medio por época con hiperparámetros óptimos: 2.5979 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Borrado_Aleatorio | 08:06:04
+********************************************
+**Ejecutando dataset: 6 | Método: Borrado_Aleatorio | Inicio: 11:45:58**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.07%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 98.93% ± 1.38%
+  Clase 08: 98.90% ± 0.56%
+  Clase 09: 92.47% ± 5.71%
+------------------------------------------------------------
+OA Final: 98.78% ± 0.40%
+AA Final: 98.05% ± 1.14%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 6.89 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0689 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Borrado_Aleatorio | 11:49:07
+********************************************
+**Ejecutando dataset: 7 | Método: Borrado_Aleatorio | Inicio: 15:01:35**
+GPUs detectadas: 2
+Usando el método de aumento: Borrado Aleatorio (ID: 10)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=10, Aumentado=Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 89.09% ± 3.59%
+  Clase 02: 80.95% ± 4.17%
+  Clase 03: 92.30% ± 0.86%
+  Clase 04: 94.79% ± 1.43%
+  Clase 07: 98.68% ± 0.10%
+  Clase 08: 97.24% ± 0.19%
+------------------------------------------------------------
+OA Final: 98.10% ± 0.08%
+AA Final: 92.17% ± 0.54%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 257.87 s
+Tiempo medio por época con hiperparámetros óptimos: 2.5787 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Borrado_Aleatorio | 15:17:50
+********************************************

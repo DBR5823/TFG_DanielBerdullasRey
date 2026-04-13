@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Ruido_Espectral | Inicio: 10:22:52**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 95.99% ± 1.14%
+  Clase 02: 82.81% ± 2.14%
+  Clase 03: 83.95% ± 1.69%
+  Clase 04: 91.51% ± 3.25%
+  Clase 05: 90.06% ± 2.57%
+  Clase 06: 93.17% ± 1.95%
+  Clase 07: 96.38% ± 0.48%
+  Clase 08: 94.70% ± 0.57%
+  Clase 09: 99.01% ± 0.66%
+  Clase 10: 91.93% ± 0.71%
+------------------------------------------------------------
+OA Final: 94.78% ± 0.20%
+AA Final: 91.95% ± 0.52%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 73.14 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7314 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Ruido_Espectral | 10:28:36
+********************************************
+**Ejecutando dataset: 1 | Método: Ruido_Espectral | Inicio: 13:05:45**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 73.37% ± 0.77%
+  Clase 07: 90.91% ± 0.31%
+  Clase 08: 95.80% ± 0.86%
+  Clase 10: 94.29% ± 0.26%
+------------------------------------------------------------
+OA Final: 90.77% ± 0.08%
+AA Final: 88.59% ± 0.24%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 134.42 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3442 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Ruido_Espectral | 13:14:35
+********************************************
+**Ejecutando dataset: 2 | Método: Ruido_Espectral | Inicio: 16:22:52**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.59% ± 0.32%
+  Clase 02: 84.32% ± 2.31%
+  Clase 03: 93.72% ± 2.02%
+  Clase 04: 94.72% ± 1.93%
+  Clase 05: 75.45% ± 6.02%
+  Clase 06: 84.63% ± 15.77%
+  Clase 07: 93.94% ± 2.01%
+  Clase 08: 96.60% ± 0.59%
+  Clase 09: 75.86% ± 5.71%
+  Clase 10: 86.69% ± 5.28%
+------------------------------------------------------------
+OA Final: 95.39% ± 0.32%
+AA Final: 88.45% ± 1.87%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 53.29 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5329 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Ruido_Espectral | 16:29:30
+********************************************
+**Ejecutando dataset: 3 | Método: Ruido_Espectral | Inicio: 19:18:52**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 91.86% ± 1.92%
+  Clase 02: 91.47% ± 1.96%
+  Clase 03: 91.01% ± 1.90%
+  Clase 04: 97.71% ± 0.58%
+  Clase 05: 94.16% ± 5.41%
+  Clase 06: 96.97% ± 0.74%
+  Clase 07: 98.60% ± 0.32%
+  Clase 08: 97.42% ± 0.55%
+  Clase 09: 97.48% ± 0.64%
+  Clase 10: 97.76% ± 0.42%
+------------------------------------------------------------
+OA Final: 97.74% ± 0.19%
+AA Final: 95.44% ± 0.52%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 84.62 s
+Tiempo medio por época con hiperparámetros óptimos: 0.8462 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Ruido_Espectral | 19:31:55
+********************************************
+**Ejecutando dataset: 4 | Método: Ruido_Espectral | Inicio: 23:55:56**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.76% ± 0.22%
+  Clase 04: 97.29% ± 0.83%
+  Clase 07: 81.06% ± 0.43%
+  Clase 08: 94.02% ± 1.16%
+  Clase 09: 8.37% ± 6.85%
+  Clase 10: 93.46% ± 0.33%
+------------------------------------------------------------
+OA Final: 91.30% ± 0.13%
+AA Final: 78.16% ± 1.25%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 187.76 s
+Tiempo medio por época con hiperparámetros óptimos: 1.8776 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Ruido_Espectral | 00:09:19
+********************************************
+**Ejecutando dataset: 5 | Método: Ruido_Espectral | Inicio: 06:00:44**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.00% ± 0.46%
+  Clase 04: 90.26% ± 4.31%
+  Clase 05: 59.06% ± 35.38%
+  Clase 06: 27.98% ± 22.30%
+  Clase 07: 87.95% ± 0.44%
+  Clase 08: 97.05% ± 0.53%
+  Clase 10: 93.00% ± 0.39%
+------------------------------------------------------------
+OA Final: 90.52% ± 0.10%
+AA Final: 77.61% ± 6.53%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 212.22 s
+Tiempo medio por época con hiperparámetros óptimos: 2.1222 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Ruido_Espectral | 06:21:16
+********************************************
+**Ejecutando dataset: 6 | Método: Ruido_Espectral | Inicio: 11:30:15**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.07%
+  Clase 04: 92.33% ± 8.77%
+  Clase 07: 98.83% ± 1.61%
+  Clase 08: 98.56% ± 1.01%
+  Clase 09: 93.33% ± 4.33%
+------------------------------------------------------------
+OA Final: 98.50% ± 0.26%
+AA Final: 96.60% ± 1.76%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 5.61 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0561 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Ruido_Espectral | 11:33:18
+********************************************
+**Ejecutando dataset: 7 | Método: Ruido_Espectral | Inicio: 13:51:44**
+GPUs detectadas: 2
+Usando el método de aumento: Ruido Espectral independiente (ID: 5)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=5, Aumentado=Ruido Espectral independiente
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 87.79% ± 3.32%
+  Clase 02: 76.89% ± 2.89%
+  Clase 03: 91.85% ± 0.50%
+  Clase 04: 94.87% ± 1.62%
+  Clase 07: 98.74% ± 0.14%
+  Clase 08: 97.13% ± 0.27%
+------------------------------------------------------------
+OA Final: 98.10% ± 0.07%
+AA Final: 91.21% ± 0.73%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 213.95 s
+Tiempo medio por época con hiperparámetros óptimos: 2.1395 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Ruido_Espectral | 14:05:40
+********************************************

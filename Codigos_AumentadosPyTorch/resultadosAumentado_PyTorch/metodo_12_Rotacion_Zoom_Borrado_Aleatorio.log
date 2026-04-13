@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 11:10:23**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.06% ± 0.70%
+  Clase 02: 86.62% ± 2.93%
+  Clase 03: 85.37% ± 2.67%
+  Clase 04: 91.50% ± 3.82%
+  Clase 05: 90.75% ± 2.22%
+  Clase 06: 93.71% ± 2.26%
+  Clase 07: 96.08% ± 0.40%
+  Clase 08: 94.81% ± 0.77%
+  Clase 09: 98.92% ± 0.59%
+  Clase 10: 92.37% ± 0.84%
+------------------------------------------------------------
+OA Final: 94.90% ± 0.19%
+AA Final: 92.72% ± 0.97%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 258.96 s
+Tiempo medio por época con hiperparámetros óptimos: 2.5896 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Rotacion_Zoom_Borrado_Aleatorio | 11:25:06
+********************************************
+**Ejecutando dataset: 1 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 14:20:20**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 75.49% ± 0.71%
+  Clase 07: 90.71% ± 0.35%
+  Clase 08: 97.15% ± 0.95%
+  Clase 10: 94.17% ± 0.24%
+------------------------------------------------------------
+OA Final: 90.87% ± 0.10%
+AA Final: 89.38% ± 0.30%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 477.27 s
+Tiempo medio por época con hiperparámetros óptimos: 4.7727 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Rotacion_Zoom_Borrado_Aleatorio | 14:46:19
+********************************************
+**Ejecutando dataset: 2 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 17:14:44**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.35% ± 0.34%
+  Clase 02: 85.54% ± 2.86%
+  Clase 03: 93.19% ± 2.52%
+  Clase 04: 94.15% ± 2.92%
+  Clase 05: 82.34% ± 3.71%
+  Clase 06: 90.63% ± 8.00%
+  Clase 07: 92.96% ± 2.14%
+  Clase 08: 96.18% ± 1.11%
+  Clase 09: 83.08% ± 5.21%
+  Clase 10: 89.47% ± 8.27%
+------------------------------------------------------------
+OA Final: 95.20% ± 0.35%
+AA Final: 90.59% ± 1.18%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 185.77 s
+Tiempo medio por época con hiperparámetros óptimos: 1.8577 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Rotacion_Zoom_Borrado_Aleatorio | 17:27:55
+********************************************
+**Ejecutando dataset: 3 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 20:58:38**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.97% ± 1.70%
+  Clase 02: 94.05% ± 1.88%
+  Clase 03: 91.12% ± 2.73%
+  Clase 04: 98.17% ± 0.59%
+  Clase 05: 98.29% ± 1.35%
+  Clase 06: 98.58% ± 1.05%
+  Clase 07: 98.47% ± 0.22%
+  Clase 08: 97.30% ± 0.50%
+  Clase 09: 98.16% ± 0.85%
+  Clase 10: 97.94% ± 0.29%
+------------------------------------------------------------
+OA Final: 97.90% ± 0.13%
+AA Final: 96.60% ± 0.31%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 280.91 s
+Tiempo medio por época con hiperparámetros óptimos: 2.8091 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Rotacion_Zoom_Borrado_Aleatorio | 21:21:53
+********************************************
+**Ejecutando dataset: 4 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 01:46:25**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.73% ± 0.20%
+  Clase 04: 97.42% ± 0.74%
+  Clase 07: 81.83% ± 0.57%
+  Clase 08: 94.21% ± 1.07%
+  Clase 09: 11.28% ± 9.59%
+  Clase 10: 93.67% ± 0.33%
+------------------------------------------------------------
+OA Final: 91.54% ± 0.09%
+AA Final: 78.86% ± 1.66%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 657.04 s
+Tiempo medio por época con hiperparámetros óptimos: 6.5704 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Rotacion_Zoom_Borrado_Aleatorio | 02:23:28
+********************************************
+**Ejecutando dataset: 5 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 08:42:42**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 88.75% ± 0.63%
+  Clase 04: 94.25% ± 1.22%
+  Clase 05: 94.09% ± 8.07%
+  Clase 06: 51.57% ± 18.55%
+  Clase 07: 87.53% ± 0.32%
+  Clase 08: 97.73% ± 0.48%
+  Clase 10: 93.29% ± 0.26%
+------------------------------------------------------------
+OA Final: 90.66% ± 0.09%
+AA Final: 86.74% ± 2.60%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 742.85 s
+Tiempo medio por época con hiperparámetros óptimos: 7.4285 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Rotacion_Zoom_Borrado_Aleatorio | 09:28:58
+********************************************
+**Ejecutando dataset: 6 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 11:52:39**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.13% ± 1.76%
+  Clase 04: 100.00% ± 0.00%
+  Clase 07: 99.41% ± 0.95%
+  Clase 08: 98.42% ± 0.52%
+  Clase 09: 93.35% ± 4.26%
+------------------------------------------------------------
+OA Final: 98.57% ± 0.48%
+AA Final: 98.06% ± 0.86%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 18.15 s
+Tiempo medio por época con hiperparámetros óptimos: 0.1815 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Rotacion_Zoom_Borrado_Aleatorio | 11:56:19
+********************************************
+**Ejecutando dataset: 7 | Método: Rotacion_Zoom_Borrado_Aleatorio | Inicio: 15:47:52**
+GPUs detectadas: 2
+Usando el método de aumento: Rotación_Zoom_Borrado Aleatorio (ID: 12)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=12, Aumentado=Rotación_Zoom_Borrado Aleatorio
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 90.29% ± 3.95%
+  Clase 02: 80.47% ± 5.41%
+  Clase 03: 93.01% ± 0.62%
+  Clase 04: 96.66% ± 1.41%
+  Clase 07: 98.51% ± 0.10%
+  Clase 08: 97.45% ± 0.24%
+------------------------------------------------------------
+OA Final: 98.05% ± 0.10%
+AA Final: 92.73% ± 1.23%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 744.31 s
+Tiempo medio por época con hiperparámetros óptimos: 7.4431 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Rotacion_Zoom_Borrado_Aleatorio | 16:27:42
+********************************************

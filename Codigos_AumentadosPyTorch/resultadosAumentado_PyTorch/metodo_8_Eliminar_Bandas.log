@@ -1,0 +1,314 @@
+**Ejecutando dataset: 0 | Método: Eliminar_Bandas | Inicio: 10:40:47**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 96.43% ± 0.65%
+  Clase 02: 78.48% ± 2.70%
+  Clase 03: 77.73% ± 4.81%
+  Clase 04: 84.28% ± 2.91%
+  Clase 05: 83.47% ± 1.88%
+  Clase 06: 89.34% ± 3.55%
+  Clase 07: 95.20% ± 0.18%
+  Clase 08: 91.99% ± 0.95%
+  Clase 09: 98.38% ± 0.64%
+  Clase 10: 86.46% ± 1.69%
+------------------------------------------------------------
+OA Final: 92.40% ± 0.23%
+AA Final: 88.18% ± 0.88%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 67.05 s
+Tiempo medio por época con hiperparámetros óptimos: 0.6705 s
+============================================================
+FINALIZACIÓN dataset: 0 | Método: Eliminar_Bandas | 10:46:08
+********************************************
+**Ejecutando dataset: 1 | Método: Eliminar_Bandas | Inicio: 13:33:23**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 74.62% ± 0.80%
+  Clase 07: 89.61% ± 0.35%
+  Clase 08: 95.84% ± 1.24%
+  Clase 10: 94.04% ± 0.15%
+------------------------------------------------------------
+OA Final: 90.20% ± 0.11%
+AA Final: 88.53% ± 0.37%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 118.03 s
+Tiempo medio por época con hiperparámetros óptimos: 1.1803 s
+============================================================
+FINALIZACIÓN dataset: 1 | Método: Eliminar_Bandas | 13:41:27
+********************************************
+**Ejecutando dataset: 2 | Método: Eliminar_Bandas | Inicio: 16:43:34**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 98.10% ± 0.54%
+  Clase 02: 80.87% ± 3.98%
+  Clase 03: 92.24% ± 2.04%
+  Clase 04: 89.41% ± 2.03%
+  Clase 05: 60.36% ± 10.07%
+  Clase 06: 71.81% ± 9.38%
+  Clase 07: 91.61% ± 3.55%
+  Clase 08: 95.08% ± 1.36%
+  Clase 09: 67.54% ± 7.51%
+  Clase 10: 80.21% ± 17.90%
+------------------------------------------------------------
+OA Final: 93.49% ± 0.52%
+AA Final: 82.72% ± 2.17%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 48.62 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4862 s
+============================================================
+FINALIZACIÓN dataset: 2 | Método: Eliminar_Bandas | 16:49:55
+********************************************
+**Ejecutando dataset: 3 | Método: Eliminar_Bandas | Inicio: 19:58:50**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 91.84% ± 0.69%
+  Clase 02: 89.88% ± 1.93%
+  Clase 03: 87.98% ± 1.93%
+  Clase 04: 96.65% ± 0.83%
+  Clase 05: 85.38% ± 10.05%
+  Clase 06: 96.69% ± 1.14%
+  Clase 07: 98.02% ± 0.35%
+  Clase 08: 96.55% ± 0.59%
+  Clase 09: 96.30% ± 1.06%
+  Clase 10: 95.50% ± 0.57%
+------------------------------------------------------------
+OA Final: 96.73% ± 0.16%
+AA Final: 93.48% ± 1.23%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 73.99 s
+Tiempo medio por época con hiperparámetros óptimos: 0.7399 s
+============================================================
+FINALIZACIÓN dataset: 3 | Método: Eliminar_Bandas | 20:11:30
+********************************************
+**Ejecutando dataset: 4 | Método: Eliminar_Bandas | Inicio: 00:37:21**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.62% ± 0.31%
+  Clase 04: 95.86% ± 1.18%
+  Clase 07: 78.60% ± 0.86%
+  Clase 08: 92.84% ± 1.21%
+  Clase 09: 6.90% ± 5.89%
+  Clase 10: 93.31% ± 0.15%
+------------------------------------------------------------
+OA Final: 90.61% ± 0.13%
+AA Final: 77.02% ± 0.97%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 166.43 s
+Tiempo medio por época con hiperparámetros óptimos: 1.6643 s
+============================================================
+FINALIZACIÓN dataset: 4 | Método: Eliminar_Bandas | 00:49:23
+********************************************
+**Ejecutando dataset: 5 | Método: Eliminar_Bandas | Inicio: 07:03:20**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.67% ± 0.48%
+  Clase 04: 85.93% ± 3.33%
+  Clase 05: 31.65% ± 25.62%
+  Clase 06: 26.02% ± 20.90%
+  Clase 07: 85.56% ± 0.32%
+  Clase 08: 96.05% ± 0.30%
+  Clase 10: 93.19% ± 0.30%
+------------------------------------------------------------
+OA Final: 89.53% ± 0.10%
+AA Final: 72.29% ± 6.19%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 192.08 s
+Tiempo medio por época con hiperparámetros óptimos: 1.9208 s
+============================================================
+FINALIZACIÓN dataset: 5 | Método: Eliminar_Bandas | 07:22:36
+********************************************
+**Ejecutando dataset: 6 | Método: Eliminar_Bandas | Inicio: 11:39:42**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.83% ± 0.31%
+  Clase 04: 84.31% ± 16.76%
+  Clase 07: 98.39% ± 1.45%
+  Clase 08: 97.96% ± 0.96%
+  Clase 09: 77.14% ± 9.52%
+------------------------------------------------------------
+OA Final: 97.17% ± 0.66%
+AA Final: 91.53% ± 4.01%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 5.24 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0524 s
+============================================================
+FINALIZACIÓN dataset: 6 | Método: Eliminar_Bandas | 11:42:45
+********************************************
+**Ejecutando dataset: 7 | Método: Eliminar_Bandas | Inicio: 14:34:27**
+GPUs detectadas: 2
+Usando el método de aumento: Eliminar Bandas (ID: 8)
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test...
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+ACABÓ LA PRUEBA
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Configuración: Epoch=200, Batch=256, Sampler=1, ID Aumentado=8, Aumentado=Eliminar Bandas
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 83.52% ± 4.61%
+  Clase 02: 69.18% ± 6.44%
+  Clase 03: 92.51% ± 0.64%
+  Clase 04: 91.57% ± 1.55%
+  Clase 07: 98.02% ± 0.13%
+  Clase 08: 96.10% ± 0.15%
+------------------------------------------------------------
+OA Final: 97.30% ± 0.08%
+AA Final: 88.48% ± 1.40%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 187.43 s
+Tiempo medio por época con hiperparámetros óptimos: 1.8743 s
+============================================================
+FINALIZACIÓN dataset: 7 | Método: Eliminar_Bandas | 14:47:12
+********************************************

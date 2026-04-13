@@ -1,0 +1,227 @@
+********** Iniciando experimentos VIT Básica con aumentado: 19:10:16 **********
+Ejecutando: prueba inicial VIT Básica (sobre Oitaven)
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset oitaven ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 97.03% ± 1.17%
+  Clase 02: 85.64% ± 3.09%
+  Clase 03: 81.42% ± 3.64%
+  Clase 04: 90.64% ± 4.79%
+  Clase 05: 90.46% ± 2.84%
+  Clase 06: 95.70% ± 1.91%
+  Clase 07: 96.66% ± 0.40%
+  Clase 08: 96.01% ± 0.50%
+  Clase 09: 99.65% ± 0.17%
+  Clase 10: 95.89% ± 0.42%
+------------------------------------------------------------
+OA Final: 95.91% ± 0.25%
+AA Final: 92.91% ± 0.70%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 714.83 s
+Tiempo medio por época con hiperparámetros óptimos: 7.1483 s
+============================================================
+------------------------------------------
+Ejecutando prueba iteración: 1...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset das_mestas ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 74.40% ± 1.01%
+  Clase 07: 90.74% ± 0.30%
+  Clase 08: 96.16% ± 0.98%
+  Clase 10: 94.57% ± 0.32%
+------------------------------------------------------------
+OA Final: 90.92% ± 0.16%
+AA Final: 88.97% ± 0.40%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1292.20 s
+Tiempo medio por época con hiperparámetros óptimos: 12.9220 s
+============================================================
+Prueba iteracion 1 finalizada.
+********************************************
+Ejecutando prueba iteración: 2...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset eiras_dam ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 99.24% ± 0.32%
+  Clase 02: 81.33% ± 4.69%
+  Clase 03: 94.64% ± 1.81%
+  Clase 04: 94.77% ± 2.10%
+  Clase 05: 85.48% ± 4.71%
+  Clase 06: 78.81% ± 15.07%
+  Clase 07: 93.48% ± 1.46%
+  Clase 08: 96.66% ± 0.63%
+  Clase 09: 84.01% ± 4.13%
+  Clase 10: 81.33% ± 6.64%
+------------------------------------------------------------
+OA Final: 95.65% ± 0.21%
+AA Final: 88.98% ± 2.33%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 517.13 s
+Tiempo medio por época con hiperparámetros óptimos: 5.1713 s
+============================================================
+Prueba iteracion 2 finalizada.
+********************************************
+Ejecutando prueba iteración: 3...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ermidas_creek ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_creek
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 93.77% ± 1.69%
+  Clase 02: 92.74% ± 2.11%
+  Clase 03: 94.88% ± 1.16%
+  Clase 04: 98.59% ± 0.43%
+  Clase 05: 87.79% ± 10.98%
+  Clase 06: 98.85% ± 1.12%
+  Clase 07: 99.05% ± 0.14%
+  Clase 08: 97.90% ± 0.29%
+  Clase 09: 98.20% ± 0.91%
+  Clase 10: 98.50% ± 0.46%
+------------------------------------------------------------
+OA Final: 98.40% ± 0.14%
+AA Final: 96.03% ± 1.31%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 774.62 s
+Tiempo medio por época con hiperparámetros óptimos: 7.7462 s
+============================================================
+Prueba iteracion 3 finalizada.
+********************************************
+Ejecutando prueba iteración: 4...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ferreiras_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_river
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 94.32% ± 0.20%
+  Clase 04: 98.14% ± 0.42%
+  Clase 07: 82.38% ± 0.70%
+  Clase 08: 93.67% ± 1.01%
+  Clase 09: 24.48% ± 14.04%
+  Clase 10: 94.14% ± 0.39%
+------------------------------------------------------------
+OA Final: 91.68% ± 0.07%
+AA Final: 81.19% ± 2.39%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 1816.10 s
+Tiempo medio por época con hiperparámetros óptimos: 18.1610 s
+============================================================
+Prueba iteracion 4 finalizada.
+********************************************
+Ejecutando prueba iteración: 5...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset mera_river ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 87.47% ± 0.40%
+  Clase 04: 93.58% ± 2.07%
+  Clase 05: 0.00% ± 0.00%
+  Clase 06: 56.11% ± 31.63%
+  Clase 07: 88.89% ± 0.31%
+  Clase 08: 97.02% ± 0.36%
+  Clase 10: 93.56% ± 0.27%
+------------------------------------------------------------
+OA Final: 91.03% ± 0.10%
+AA Final: 86.11% ± 5.15%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2014.35 s
+Tiempo medio por época con hiperparámetros óptimos: 20.1435 s
+============================================================
+Prueba iteracion 5 finalizada.
+********************************************
+Ejecutando prueba iteración: 6...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset ulla ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 02: 99.97% ± 0.07%
+  Clase 04: 98.50% ± 4.75%
+  Clase 07: 97.46% ± 2.95%
+  Clase 08: 98.10% ± 0.59%
+  Clase 09: 92.58% ± 5.23%
+------------------------------------------------------------
+OA Final: 97.95% ± 0.61%
+AA Final: 97.32% ± 1.38%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 48.73 s
+Tiempo medio por época con hiperparámetros óptimos: 0.4873 s
+============================================================
+Prueba iteracion 6 finalizada.
+********************************************
+Ejecutando prueba iteración: 7...
+GPUs detectadas: 2
+********************Ejecutando prueba sobre el dataset xesta ******************************
+Cargando datos en memoria principal...
+Ejecutando test de ViT...
+
+============================================================
+RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
+============================================================
+Mejor Configuración ViT: Epoch=100, Batch=256, Sampler=1
+------------------------------------------------------------
+ACCURACY POR CLASE:
+  Clase 01: 91.50% ± 4.50%
+  Clase 02: 85.36% ± 4.03%
+  Clase 03: 93.20% ± 0.70%
+  Clase 04: 97.01% ± 1.42%
+  Clase 07: 99.16% ± 0.08%
+  Clase 08: 98.28% ± 0.18%
+------------------------------------------------------------
+OA Final: 98.74% ± 0.05%
+AA Final: 94.09% ± 1.00%
+------------------------------------------------------------
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 2057.40 s
+Tiempo medio por época con hiperparámetros óptimos: 20.5740 s
+============================================================
+Prueba iteracion 7 finalizada.
+********************************************
+********** Se han finalizado todas las pruebas de VIT Básica con aumentado: 03:17:26 **********
