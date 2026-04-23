@@ -198,21 +198,21 @@ if __name__ == '__main__':
     transformaciones = {
         "00_Original": None,
         "00_Flips": v2.Compose(flips_list),
-        "01_Rotacion": v2.Compose(flips_list + [rotation]),
-        "02_Zoom": v2.Compose(flips_list + [simetric_zoom]),
-        "03_Rotacion_Zoom": v2.Compose(flips_list + [rotation, simetric_zoom]),
-        "04_Ruido_Gaussiano": v2.Compose(flips_list + [noise]),
-        "05_Ruido_Espectral": v2.Compose(flips_list + [spec_noise]),
-        "06_R_Gaussiano_R_Espectral": v2.Compose(flips_list + [noise, spec_noise]),
-        "07_Iluminacion_Aleatoria": v2.Compose(flips_list + [spec_illum]),
-        "08_Eliminar_Bandas": v2.Compose(flips_list + [spec_drop]),
-        "09_Ilum_Aleatoria_Elim_Bandas": v2.Compose(flips_list + [spec_illum, spec_drop]),
-        "10_Borrado_Aleatorio": v2.Compose(flips_list + [erasing]),
-        "11_Rotacion_Borrado": v2.Compose(flips_list + [rotation, erasing]),
-        "12_Rotacion_Zoom_Borrado": v2.Compose(flips_list + [rotation, simetric_zoom, erasing]),
-        "13_Rotacion_Ruido_Espectral": v2.Compose(flips_list + [rotation, spec_noise]),
-        "14_Rotacion_Zoom_R_Espectral": v2.Compose(flips_list + [rotation, simetric_zoom, spec_noise]),
-        "15_R_Espectral_Borrado": v2.Compose(flips_list + [spec_noise, erasing])
+        "01_Rotacion": v2.Compose([rotation]),
+        "02_Zoom": v2.Compose([simetric_zoom]),
+        #"03_Rotacion_Zoom": v2.Compose([rotation, simetric_zoom]),
+        "04_Ruido_Gaussiano": v2.Compose([noise]),
+        "05_Ruido_Espectral": v2.Compose([spec_noise]),
+        #"06_R_Gaussiano_R_Espectral": v2.Compose([noise, spec_noise]),
+        "07_Iluminacion_Aleatoria": v2.Compose([spec_illum]),
+        "08_Eliminar_Bandas": v2.Compose([spec_drop]),
+        #"09_Ilum_Aleatoria_Elim_Bandas": v2.Compose([spec_illum, spec_drop]),
+        "10_Borrado_Aleatorio": v2.Compose([erasing]),
+        #"11_Rotacion_Borrado": v2.Compose([rotation, erasing]),
+        #"12_Rotacion_Zoom_Borrado": v2.Compose([rotation, simetric_zoom, erasing]),
+        #"13_Rotacion_Ruido_Espectral": v2.Compose([rotation, spec_noise]),
+        #"14_Rotacion_Zoom_R_Espectral": v2.Compose([rotation, simetric_zoom, spec_noise]),
+        #"15_R_Espectral_Borrado": v2.Compose([spec_noise, erasing])
     }
     
     carpeta_salida = "ejemplos_aumentados_raw"

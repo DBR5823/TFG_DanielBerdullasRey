@@ -59,20 +59,25 @@ if __name__ == '__main__':
     patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
     patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
 
-    # IMPORTANTE: Creamos un batch más grande (4 elementos) 
-    # Repetimos los parches para darle "margen" al algoritmo de máscara a encontrar un umbral
-    inputs = torch.stack([patch_a, patch_b, patch_a, patch_b]) 
+    # Crea un batch de solo 2 parches distintos
+    inputs = torch.stack([patch_a, patch_b]) 
 
     # Inicializamos FMix
     fmix_util = FMix(size=(sizex, sizey), alpha=fmix_alpha, decay_power=fmix_decay, max_soft=fmix_soft)
 
-    print(f"Generando mezcla FMix...")
-    
-    # Aplicamos FMix al lote
-    inputs_mixed = fmix_util(inputs) 
+    # --- TRUCO PARA TESTEO ---
+    # Forzamos los índices para que el parche 0 se mezcle con el 1
+    # En lugar de dejarlo al azar, le decimos: mezcla el primero con el segundo.
+    fmix_util.index = torch.tensor([1, 0]) 
+    # -------------------------
+
+    inputs_mixed = fmix_util(inputs)
     mask = fmix_util.mask 
     indices = fmix_util.index
     lam = fmix_util.lam
+
+    print(f"Índices de mezcla: {fmix_util.index}")
+    print(f"Mezclando parche 0 con parche {fmix_util.index[0]}")
 
     # Guardamos los resultados
     for j in range(1):
