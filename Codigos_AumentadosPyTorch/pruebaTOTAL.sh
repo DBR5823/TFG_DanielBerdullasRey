@@ -4,9 +4,9 @@
 #SBATCH --gres=gpu:2                 # Reserva las 2 GPUs
 #SBATCH --cpus-per-task=8            # Reserva exactamente 8 núcleos de CPU
 #SBATCH --partition=gpu              # Partición de GPUs del CITIUS
-#SBATCH --output=log_TOTAL_%j.out    # Archivo donde verás los "echo" y resultados
+#SBATCH --output=log_TOTAL_%j.out    # Archivo donde se guardará la salida de consola
 #SBATCH --error=log_TOTAL_%j.err     # Archivo para errores
-#SBATCH --time=20:00:00              #Duración estimada
+#SBATCH --time=20:00:00              # Duración estimada
 
 
 source /home/daniel.berdullas/TFG/venv/bin/activate

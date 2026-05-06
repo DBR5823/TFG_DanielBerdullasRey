@@ -26,11 +26,11 @@ def save_raw(output, H, V, B, filename):
     try:
         f = open(filename, "wb")
     except IOError:
-        print('No puedo abrir ', filename)
+        print('No se puede abrir ', filename)
         return
     
     sizes = np.array([B, H, V], dtype=np.uint32)
-    # Asegurar orden (B, H, V) para el guardado compatible con tu lector
+    # Asegurar orden (B, H, V) para el guardado compatible con el lector
     output = output.detach().cpu().numpy()
     # Si viene de PyTorch (B, V, H), trasponemos a (V, H, B) para aplanar correctamente
     if len(output.shape) == 3:
@@ -47,23 +47,21 @@ def save_patch(datos, sizex, sizey, B, filename):
         datos_copy = datos_copy * 255
     save_raw(datos_copy, sizex, sizey, B, filename)
 
-### --- CAMBIO PRINCIPAL: FUNCIÓN MIXUP --- ###
 
+
+#Función MIXUP para aplicar la mezcla MIXUP de dos patches
 def aplicar_mixup_visual(patch_a, patch_b, alpha=1.0):
-    """
-    Aplica Mixup entre dos parches: mezcla = lambda * A + (1 - lambda) * B
-    """
     if alpha > 0:
         lam = np.random.beta(alpha, alpha)
     else:
         lam = 1.0
 
-    # Interpolación lineal píxel a píxel
+    #Mezcla píxel a píxel
     patch_mixed = lam * patch_a + (1 - lam) * patch_b
     
     return patch_mixed, lam
 
-# --- MAIN ---
+
 if __name__ == '__main__':
     DATASET = '/home/dbr/Escritorio/TFG/cnn21/datosEntrada/oitaven/oitaven_river.raw'
     sizex, sizey = 32, 32
@@ -73,15 +71,15 @@ if __name__ == '__main__':
     print("Leyendo Dataset...")
     datos_raw, H, V, B = read_raw(DATASET)
     
-    print("Extrayendo parches de control...")
-    # Parche A y B (ajusta coordenadas según tu imagen)
+
+    #Parche A y B
     patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
     patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
     
     save_patch(patch_a, sizex, sizey, B, os.path.join(carpeta_salida, "0_Original_A.raw"))
     save_patch(patch_b, sizex, sizey, B, os.path.join(carpeta_salida, "0_Original_B.raw"))
 
-    # Mixup suele usarse con alpha entre 0.2 y 1.0
+
     configuraciones = [0.2, 1.0, 10.0]
     
     print("Generando mezclas Mixup...")

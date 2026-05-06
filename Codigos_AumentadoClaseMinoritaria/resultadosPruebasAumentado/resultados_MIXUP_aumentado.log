@@ -1,4 +1,4 @@
-********** Iniciando experimentos MIXUP con aumentado: 16:21:31 **********
+********** Iniciando experimentos MIXUP con aumentado: 08:09:11 **********
 Ejecutando: prueba inicial MIXUP (sobre Oitaven)
 GPUs detectadas: 2
 ********************Ejecutando prueba sobre el dataset oitaven ******************************
@@ -9,64 +9,64 @@ Cargando datos en memoria principal...
 [GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 1]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
-[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
-[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
 [GPU: 0]  Evaluando: Alpha=0.1, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 1]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
-[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
 [GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 0]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
-[GPU: 1]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 1]  Fin evaluación: Alpha=0.1,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 1]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
-[GPU: 0]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
-[GPU: 1]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=0.2, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 0]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
 [GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.2,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
-[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.3, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
-[GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
 [GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.3,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
-[GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.5, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
-[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
-[GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
+[GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.5,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.7,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.7, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
@@ -81,38 +81,38 @@ Cargando datos en memoria principal...
 [GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.9, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=0.9, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=0.9, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=0.9,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=1.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1
 [GPU: 1]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
-[GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=1.0,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
-[GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1
 [GPU: 0]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.2, Usar_sampler=1 *************************
 [GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.3, Usar_sampler=1 *************************
 [GPU: 0]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1
-[GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
-[GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
 [GPU: 0]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.5, Usar_sampler=1 *************************
+[GPU: 1]  Evaluando: Alpha=2.0, Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1
+[GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.4, Usar_sampler=1 *************************
 [GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.6, Usar_sampler=1 *************************
 [GPU: 0]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.7, Usar_sampler=1 *************************
 [GPU: 1]  Fin evaluación: Alpha=2.0,  Epochs=100, Batch=256, Prob=0.8, Usar_sampler=1 *************************
@@ -135,22 +135,22 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: oitaven
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 97.94% ± 0.57%
-  Clase 02: 84.73% ± 2.28%
-  Clase 03: 83.22% ± 3.27%
-  Clase 04: 89.56% ± 3.73%
-  Clase 05: 86.54% ± 3.03%
-  Clase 06: 92.19% ± 2.89%
-  Clase 07: 95.82% ± 0.51%
-  Clase 08: 95.67% ± 0.53%
-  Clase 09: 98.85% ± 0.75%
-  Clase 10: 91.56% ± 1.11%
+  Clase 01: 97.33% ± 0.76%
+  Clase 02: 86.55% ± 1.81%
+  Clase 03: 82.99% ± 2.98%
+  Clase 04: 89.84% ± 3.96%
+  Clase 05: 87.29% ± 2.20%
+  Clase 06: 93.40% ± 1.95%
+  Clase 07: 95.97% ± 0.34%
+  Clase 08: 95.64% ± 0.28%
+  Clase 09: 99.02% ± 0.58%
+  Clase 10: 91.33% ± 1.28%
 ------------------------------------------------------------
-OA Final: 94.81% ± 0.24%
-AA Final: 91.61% ± 0.80%
+OA Final: 94.87% ± 0.21%
+AA Final: 91.94% ± 0.79%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 50.81 s
-Tiempo medio por época con hiperparámetros óptimos: 0.5081 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 51.85 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5185 s
 ============================================================
 ------------------------------------------
 Ejecutando prueba iteración: 1...
@@ -177,16 +177,16 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: das_mestas
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 73.30% ± 0.66%
-  Clase 07: 90.62% ± 0.36%
-  Clase 08: 96.67% ± 0.54%
-  Clase 10: 94.68% ± 0.25%
+  Clase 02: 73.17% ± 0.96%
+  Clase 07: 90.52% ± 0.24%
+  Clase 08: 96.37% ± 0.96%
+  Clase 10: 94.71% ± 0.16%
 ------------------------------------------------------------
-OA Final: 90.82% ± 0.10%
-AA Final: 88.82% ± 0.17%
+OA Final: 90.77% ± 0.13%
+AA Final: 88.69% ± 0.36%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 93.77 s
-Tiempo medio por época con hiperparámetros óptimos: 0.9377 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 96.13 s
+Tiempo medio por época con hiperparámetros óptimos: 0.9613 s
 ============================================================
 Prueba iteracion 1 finalizada.
 ********************************************
@@ -214,22 +214,22 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: eiras_dam
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 99.07% ± 0.29%
-  Clase 02: 81.76% ± 2.06%
-  Clase 03: 94.64% ± 1.66%
-  Clase 04: 93.16% ± 3.05%
-  Clase 05: 76.44% ± 8.15%
-  Clase 06: 83.06% ± 15.42%
-  Clase 07: 94.60% ± 0.70%
-  Clase 08: 96.49% ± 0.48%
-  Clase 09: 80.92% ± 5.38%
-  Clase 10: 84.34% ± 4.38%
+  Clase 01: 99.04% ± 0.38%
+  Clase 02: 82.49% ± 2.69%
+  Clase 03: 94.99% ± 1.50%
+  Clase 04: 93.03% ± 2.92%
+  Clase 05: 76.64% ± 6.07%
+  Clase 06: 86.05% ± 11.04%
+  Clase 07: 94.30% ± 1.62%
+  Clase 08: 96.45% ± 0.69%
+  Clase 09: 80.24% ± 7.25%
+  Clase 10: 83.74% ± 8.67%
 ------------------------------------------------------------
-OA Final: 95.57% ± 0.22%
-AA Final: 88.45% ± 2.17%
+OA Final: 95.51% ± 0.22%
+AA Final: 88.70% ± 1.31%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 39.65 s
-Tiempo medio por época con hiperparámetros óptimos: 0.3965 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 37.78 s
+Tiempo medio por época con hiperparámetros óptimos: 0.3778 s
 ============================================================
 Prueba iteracion 2 finalizada.
 ********************************************
@@ -257,22 +257,22 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ermidas_cree
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 94.43% ± 1.19%
-  Clase 02: 91.56% ± 2.47%
-  Clase 03: 89.92% ± 3.39%
-  Clase 04: 98.40% ± 0.21%
-  Clase 05: 96.82% ± 3.60%
-  Clase 06: 98.39% ± 0.67%
-  Clase 07: 98.64% ± 0.24%
-  Clase 08: 97.51% ± 0.44%
-  Clase 09: 97.37% ± 0.70%
-  Clase 10: 97.69% ± 0.36%
+  Clase 01: 94.94% ± 0.83%
+  Clase 02: 92.23% ± 1.89%
+  Clase 03: 90.70% ± 2.72%
+  Clase 04: 98.03% ± 0.41%
+  Clase 05: 97.69% ± 2.54%
+  Clase 06: 98.19% ± 0.82%
+  Clase 07: 98.74% ± 0.23%
+  Clase 08: 97.36% ± 0.17%
+  Clase 09: 97.67% ± 0.84%
+  Clase 10: 97.73% ± 0.30%
 ------------------------------------------------------------
-OA Final: 97.91% ± 0.14%
-AA Final: 96.07% ± 0.51%
+OA Final: 97.96% ± 0.12%
+AA Final: 96.33% ± 0.44%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 59.61 s
-Tiempo medio por época con hiperparámetros óptimos: 0.5961 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 57.99 s
+Tiempo medio por época con hiperparámetros óptimos: 0.5799 s
 ============================================================
 Prueba iteracion 3 finalizada.
 ********************************************
@@ -300,18 +300,18 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ferreiras_ri
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 94.71% ± 0.12%
-  Clase 04: 97.46% ± 0.56%
-  Clase 07: 80.60% ± 0.53%
-  Clase 08: 93.20% ± 1.55%
-  Clase 09: 7.82% ± 5.96%
-  Clase 10: 93.70% ± 0.38%
+  Clase 02: 94.60% ± 0.23%
+  Clase 04: 97.35% ± 0.51%
+  Clase 07: 80.41% ± 0.92%
+  Clase 08: 93.64% ± 0.63%
+  Clase 09: 7.02% ± 5.16%
+  Clase 10: 93.66% ± 0.26%
 ------------------------------------------------------------
-OA Final: 91.25% ± 0.09%
-AA Final: 77.91% ± 0.94%
+OA Final: 91.17% ± 0.18%
+AA Final: 77.78% ± 0.79%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 132.06 s
-Tiempo medio por época con hiperparámetros óptimos: 1.3206 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 130.00 s
+Tiempo medio por época con hiperparámetros óptimos: 1.3000 s
 ============================================================
 Prueba iteracion 4 finalizada.
 ********************************************
@@ -339,19 +339,19 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: mera_river
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 88.30% ± 0.31%
-  Clase 04: 89.26% ± 1.35%
-  Clase 05: 22.61% ± 16.91%
-  Clase 06: 21.99% ± 22.40%
-  Clase 07: 87.42% ± 0.36%
-  Clase 08: 97.16% ± 0.30%
-  Clase 10: 93.60% ± 0.24%
+  Clase 02: 88.03% ± 0.44%
+  Clase 04: 90.00% ± 1.93%
+  Clase 05: 35.72% ± 18.39%
+  Clase 06: 25.68% ± 20.66%
+  Clase 07: 87.59% ± 0.40%
+  Clase 08: 97.17% ± 0.49%
+  Clase 10: 93.49% ± 0.34%
 ------------------------------------------------------------
-OA Final: 90.59% ± 0.10%
-AA Final: 71.48% ± 3.34%
+OA Final: 90.58% ± 0.10%
+AA Final: 73.95% ± 4.24%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 148.88 s
-Tiempo medio por época con hiperparámetros óptimos: 1.4888 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 151.28 s
+Tiempo medio por época con hiperparámetros óptimos: 1.5128 s
 ============================================================
 Prueba iteracion 5 finalizada.
 ********************************************
@@ -379,17 +379,17 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: ulla
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 02: 99.68% ± 0.60%
-  Clase 04: 92.73% ± 8.67%
-  Clase 07: 98.62% ± 1.08%
-  Clase 08: 98.82% ± 0.35%
-  Clase 09: 93.70% ± 3.31%
+  Clase 02: 99.71% ± 0.35%
+  Clase 04: 95.87% ± 8.70%
+  Clase 07: 98.90% ± 1.44%
+  Clase 08: 98.89% ± 0.49%
+  Clase 09: 93.63% ± 4.86%
 ------------------------------------------------------------
-OA Final: 98.57% ± 0.29%
-AA Final: 96.71% ± 1.52%
+OA Final: 98.72% ± 0.60%
+AA Final: 97.40% ± 2.12%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.29 s
-Tiempo medio por época con hiperparámetros óptimos: 0.0429 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 4.33 s
+Tiempo medio por época con hiperparámetros óptimos: 0.0433 s
 ============================================================
 Prueba iteracion 6 finalizada.
 ********************************************
@@ -417,19 +417,19 @@ RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: xesta
 Mejor Configuración: Alpha=0.2, Epoch=100, Batch=256, Prob=0.3, Sampler=1
 ------------------------------------------------------------
 ACCURACY POR CLASE:
-  Clase 01: 91.18% ± 1.29%
-  Clase 02: 71.47% ± 4.73%
-  Clase 03: 93.03% ± 0.30%
-  Clase 04: 93.46% ± 1.86%
-  Clase 07: 98.63% ± 0.06%
-  Clase 08: 97.28% ± 0.40%
+  Clase 01: 88.77% ± 2.62%
+  Clase 02: 76.89% ± 3.62%
+  Clase 03: 93.24% ± 0.73%
+  Clase 04: 93.87% ± 1.80%
+  Clase 07: 98.60% ± 0.09%
+  Clase 08: 97.26% ± 0.32%
 ------------------------------------------------------------
-OA Final: 98.07% ± 0.11%
-AA Final: 90.84% ± 0.91%
+OA Final: 98.05% ± 0.06%
+AA Final: 91.44% ± 0.72%
 ------------------------------------------------------------
-Tiempo entrenamiento total medio con hiperparámetros óptimos: 146.61 s
-Tiempo medio por época con hiperparámetros óptimos: 1.4661 s
+Tiempo entrenamiento total medio con hiperparámetros óptimos: 149.41 s
+Tiempo medio por época con hiperparámetros óptimos: 1.4941 s
 ============================================================
 Prueba iteracion 7 finalizada.
 ********************************************
-********** Se han finalizado todas las pruebas de MIXUP con aumentado: 17:46:18 **********
+********** Se han finalizado todas las pruebas de MIXUP con aumentado: 09:33:57 **********

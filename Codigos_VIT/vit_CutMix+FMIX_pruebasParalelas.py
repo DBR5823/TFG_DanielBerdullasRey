@@ -53,9 +53,9 @@ from implementations.torchbearer_implementation import FMix
 
 EXP=10      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), los resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05) (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
-EPOCHS=100 # EPOCHS de entrenamiente del clasificador (defecto=100)  **[NO CAMBIES ESTO]**
+EPOCHS=100 # EPOCHS de entrenamiente del clasificador (defecto=100)  **[NO CAMBIAR ESTO]**
 BATCH=256  # batch-size, defecto=100 
-SIZEX=32   # tamano del patch (defecto=32)  **[NO CAMBIES ESTO]**
+SIZEX=32   # tamano del patch (defecto=32)  **[NO CAMBIAR ESTO]**
 DET=0      # experimentos: 0-aleatorios, 1-deterministas (defecto=0)
 AUM=1      # aumentado: 0-sin_aumentado, 1-con_aumentado (defecto=1)
 
@@ -115,12 +115,12 @@ def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
-  #nseg es el número total de segmentos (aunque no se use directamente aquí, viene en la cabecera)
+
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
 
-  #Devolvemos los datos sobre los centros de los segmentos junto a al anchura, la altura y el número de segmentos
+  #Devolvemos los datos sobre los centros de los segmentos junto a la anchura, la altura y el número de segmentos
   return(datos,H,V,nseg)
 
 
@@ -263,16 +263,17 @@ class HyperDataset(Dataset):
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
     self.is_train=is_train
 
-    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
-    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
+    #Operaciones de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado
+    #Mediante el aumentado de datos evitamos que cosas como la posición del sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
     flips = [v2.RandomHorizontalFlip(p=0.5), v2.RandomVerticalFlip(p=0.5)]
     
     t_list = flips.copy()
 
     #Rotaciones
-    # Calculamos un padding suficiente para que al rotar 32x32 no queden huecos
-    # La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48.
-    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    #Calculamos un padding suficiente para que al rotar 32x32 no queden huecos, el padding serán el reflejo de los píxeles de los bordes para no generar firmas espectrales totalmente artificiales.
+    #La diagonal de 32x32 es aprox 45. Un padding de 8 a cada lado nos da 48x48, necesario para que al hacer rotaciones no queden huecos en los datos
+    #Tras hacer la rotación se hace un recorte a partir del centro para devolver el parche al tamaño original tras haberlo rotado
+    #Envolvemos en RandomApply para asegurar probabilidad de 0.5
     rotation = v2.RandomApply([v2.Compose([
         v2.Pad(padding=8, padding_mode='reflect'),
         v2.RandomRotation(degrees=(0, 360), interpolation=InterpolationMode.NEAREST),
@@ -280,15 +281,15 @@ class HyperDataset(Dataset):
     ])], p=0.5)
 
     #Zoom in y zoom out
-    # Envolvemos en RandomApply para asegurar probabilidad de 0.5
+    #Envolvemos en RandomApply para asegurar probabilidad de 0.5
     simetric_zoom = v2.RandomApply([v2.RandomAffine(degrees=0, scale=(0.8, 1.2))], p=0.5)
 
-    #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
+    #Eliminación de zonas aleatorias del patch (se eliminan los datos de dichas zonas en todas las bandas)
     erasing = v2.RandomErasing(p=0.5, scale=(0.01, 0.05), value=0)
 
 
 
-    # Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
+    #Rotación + Zoom Simétrico + Borrado Aleatorio (sobre flips)
     t_list.extend([rotation, simetric_zoom, erasing])
 
     self.transform = v2.Compose(t_list)
@@ -332,35 +333,41 @@ def update_lr(optimizer,lr):
     param_group['lr']=lr
 
 
+#Función que implementa cutmix para un conjunto de patches, corta cuadrados aleatorios de unos patches y los pega en otros
 def aplicar_cutmix(inputs, labels, alpha):
-  '''Corta un rectángulo de una imagen y lo pega en otra'''
-  lam = np.random.beta(alpha, alpha)
-  index = torch.randperm(inputs.size(0), device=inputs.device)
+    #Generamos la proporción de mezcla (lambda) desde una distribución beta
+    lam = np.random.beta(alpha, alpha)
+    index = torch.randperm(inputs.size(0), device=inputs.device)
 
-  # Calcular coordenadas del cuadro
-  W, H = inputs.size(2), inputs.size(3)
-  cut_rat = np.sqrt(1. - lam)
-  cut_w = int(W * cut_rat)
-  cut_h = int(H * cut_rat)
-  cx = np.random.randint(W)
-  cy = np.random.randint(H)
+    #Calculamos las coordenadas del cuadrado
 
-  bbx1 = np.clip(cx - cut_w // 2, 0, W)
-  bby1 = np.clip(cy - cut_h // 2, 0, H)
-  bbx2 = np.clip(cx + cut_w // 2, 0, W)
-  bby2 = np.clip(cy + cut_h // 2, 0, H)
+    #El tamaño del parche es proporcional a sqrt(1-lam)
+    W, H = inputs.size(2), inputs.size(3)
+    cut_rat = np.sqrt(1. - lam)
+    cut_w = int(W * cut_rat)
+    cut_h = int(H * cut_rat)
 
-  # Clonar el tensor para no destruir los datos originales
-  inputs_mixed = inputs.clone()
+    #Calculamos el centro del cuadrado de manera aleatoria
+    cx = np.random.randint(W)
+    cy = np.random.randint(H)
 
-  # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
-  inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+    #Calculamos los límites del cuadrado para no salir del patch original
+    bbx1 = np.clip(cx - cut_w // 2, 0, W)
+    bby1 = np.clip(cy - cut_h // 2, 0, H)
+    bbx2 = np.clip(cx + cut_w // 2, 0, W)
+    bby2 = np.clip(cy + cut_h // 2, 0, H)
 
-  # Ajustar lambda según el área real cortada
-  lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+    #Clonamos el tensor para no destruir los datos originales
+    inputs_mixed = inputs.clone()
 
-  # Devolver el tensor modificado, dejando "inputs" intacto
-  return inputs_mixed, labels, labels[index], lam
+    #Pegamos el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+    inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
+
+    #Ajustamos lambda según el área real cortada
+    lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
+
+    #Devolvemos el tensor modificado, dejando inputs intacto
+    return inputs_mixed, labels, labels[index], lam
 
 
 
@@ -402,7 +409,7 @@ def select_loss(str_loss, truth, device, n_classes):
 
 def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, probabilidad2, usar_sampler, semilla_fija, gpu_id=0):
   
-  # Desempaquetado del data_bundle
+  #Desempaquetado del data_bundle
   datos = data_bundle['datos']
   H, V, B = data_bundle['H'], data_bundle['V'], data_bundle['B']
   truth = data_bundle['truth']
@@ -494,7 +501,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    # Con replacement=True se permite repetir muestras minoritarias para rellenar huecos
     sampler = WeightedRandomSampler(
       weights=sample_weights_tensor, 
       num_samples=len(sample_weights_tensor), 
@@ -604,24 +611,27 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
       img=img.to(device)
       label=label.to(device)
 
-      # APLICAMOS CUTMIX / FMIX CON PROBABILIDADES
+      #APLICAMOS CUTMIX / FMIX CON PROBABILIDADES
       if(random.random() < probabilidad):
+        #Se cumple la probabilidad principal de aplicar el aumentado, decidimos qué método usar:
         if random.random() < probabilidad2:
-          # --- INTEGRACIÓN FMIX ---
+          #INTEGRACIÓN FMIX (aplicamos FMIX)
           inputs_mixed = fmix_util(img) 
           lam = fmix_util.lam         
           indices = fmix_util.index   
           logits = model(inputs_mixed)
+          #Calculamos la pérdida según las etiquetas originales y el coeficiente de mezcla empleado
           loss = lam * loss_fn(logits, label) + (1 - lam) * loss_fn(logits, label[indices])
           acc = acc_fn(logits, label) 
         else:
-          # --- INTEGRACIÓN CUTMIX ---
+          #INTEGRACIÓN CUTMIX (aplicamos CUTMIX)
           inputs_mixed, target_a, target_b, lam = aplicar_cutmix(img, label, alpha=cutmix_alpha)
           logits = model(inputs_mixed)
+          #Calculamos la pérdida según las etiquetas originales y el coeficiente de mezcla empleado
           loss = lam * loss_fn(logits, target_a) + (1 - lam) * loss_fn(logits, target_b)
           acc = acc_fn(logits, target_a) 
       else:
-        # Sin aumentado
+        #Sin aumentado
         logits=model(img)
         loss=loss_fn(logits, label)
         acc=acc_fn(logits, label)
@@ -811,6 +821,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha, data_bundle, TEST
 
 
 
+#Función que permite ejecutar el entrenamiento y prueba del vit con un conjunto de hiperparámetros determinado
 def run_combination(params_with_data):
     torch.set_num_threads(1)
     gpu_id, params, data_bundle = params_with_data
@@ -820,14 +831,17 @@ def run_combination(params_with_data):
     print(f"[GPU: {gpu_id}] Evaluando ViT: F_Alpha={a_fmix}, Decay={d}, Soft={s}, C_Alpha={a_cmix}, Epochs={e}, Batch={b}, Prob={p}, Prob2={p2}, Usar_sampler={samp}")
     sys.stdout.flush()
 
+    #Se ejecuta la prueba una única vez
     for exp in range(1):
         res = main(exp, a_fmix, d, s, a_cmix, data_bundle, 0, e, b, p, p2, samp, 1, gpu_id)
+        #Maneja si main devuelve una tupla o un solo valor según el valor de TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
     return {'fmix_alpha': a_fmix, 'decay': d, 'soft': s, 'cutmix_alpha': a_cmix, 'epochs':e,'batch':b ,'prob':p, 'prob2':p2, 'sampler':samp, 'mean_val_aa': np.mean(val_acc_list)}
 
 
+#Función que permite ejecutar el entrenamiento y testeo final del modelo empleando los hiperparámetros óptimos
 def run_final_eval(args):
     torch.set_num_threads(1)
     gpu_id, exp_idx, fmix_alpha, decay, soft, cutmix_alpha, epochs, batch, prob, prob2, samp, data_bundle = args
@@ -837,6 +851,7 @@ def run_final_eval(args):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
+    #Hacemos que los procesos hijo sean totalmente independientes
     try:
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
@@ -925,7 +940,7 @@ if __name__ == '__main__':
                 CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
         print("********************Ejecutando prueba sobre el dataset " + ficheroLeido + " ******************************")
     
-    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    #Cargamos los datos una única vez (serán compartidos por los procesos hijo)
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
     (truth, H1, V1) = read_pgm(GT)
@@ -941,7 +956,7 @@ if __name__ == '__main__':
     #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
     datos_tensor.share_memory_()
 
-    # Creamos el bundle
+    #Creamos el bundle
     data_bundle = {
         'datos': datos_tensor,
         'H': H, 'V': V, 'B': B,
@@ -968,7 +983,7 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados para ViT")
         sys.exit(1)
       else:
-        # ---> GRID SEARCH DE VIT FMIX+CUTMIX
+        #CONFIGURACIÓN DEL RANDOM SEARCH DE VIT FMIX+CUTMIX
         fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
@@ -982,7 +997,7 @@ if __name__ == '__main__':
           fmix_alphas, decays, softs, cutmix_alphas, [100], [256], probs, probs2, [usar_sampler]
         ))
 
-        # Seleccionamos N_TRIALS al azar si exceden el límite
+        #Seleccionamos N_TRIALS al azar
         if len(combinaciones_totales) > PRUEBAS:
           combinaciones = random.sample(combinaciones_totales, PRUEBAS)
         else:
@@ -992,37 +1007,38 @@ if __name__ == '__main__':
         
         print(f"--- Iniciando Grid Search Paralelo ViT ({len(combinaciones)} combinaciones) ---")
 
+        #Ejecutamos el test con 4 procesos
         with ProcessPoolExecutor(max_workers=4) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
             executor.shutdown(wait=True)
 
         time.sleep(0.5)
 
-        # Seleccionar el mejor
+        #Seleccionamos el mejor
         resultados_finales.sort(key=lambda x: x['mean_val_aa'], reverse=True)
         mejor_config = resultados_finales[0]
         
-        # ---> ¡NUEVO! <--- Guardar JSON
+        #GUARDAMOS EL JSON CON LOS HIPERPARÁMETROS OPTIMIZADOS
         with open(archivoParametros,'w') as f:
           json.dump(mejor_config,f)
 
     print(f"\n--- Ejecutando evaluación final paralela ViT ({EXP} experimentos) ---")
 
-    # Especificamos los parámetros asociados al experimento
+    #Especificamos los parámetros asociados al experimento final
     tareas_finales = [
         (i % num_gpus, i, mejor_config['fmix_alpha'], mejor_config['decay'], mejor_config['soft'], mejor_config['cutmix_alpha'], mejor_config['epochs'], mejor_config['batch'], mejor_config['prob'], mejor_config['prob2'], mejor_config['sampler'], data_bundle) 
         for i in range(EXP)
     ]
     print("Ejecutando test de ViT...")
     
-    #Ejecutamos el test con 2 procesos
+    #Ejecutamos el test con 4 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
     
     time.sleep(0.5)
 
-    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    #EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
@@ -1044,7 +1060,7 @@ if __name__ == '__main__':
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
-    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    #IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS VIT+FMIX+CUTMIX SOBRE: " + ficheroLeido)
     print("="*60)
@@ -1056,6 +1072,7 @@ if __name__ == '__main__':
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
+        #Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
         if m_total[j] > 0: 
             print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 

@@ -52,9 +52,9 @@ warnings.filterwarnings("ignore", category=UserWarning, module='multiprocessing.
 
 EXP=10      # numero de experimentos (NÚMERO DE VECES QUE SE REPITE EL PROCESO DE ENTRENAMIENTO Y PRUEBA), los resultados serán el promedio de cada resultado
 SAMPLES=[0.15,0.05] # [entrenamiento,validacion]: muestras/clase (200,50) o porcentaje (0.15,0.05) (PORCENTAJE DE ENTRENAMIENTO (segmentos usados para entrenar), PORCENTAJE DE VALIDACIÓN (segmentos usados para validar))
-EPOCHS=100 # EPOCHS de entrenamiente del clasificador (defecto=100)  **[NO CAMBIES ESTO]**
+EPOCHS=100 # EPOCHS de entrenamiente del clasificador (defecto=100)  **[NO CAMBIAR ESTO]**
 BATCH=256  # batch-size, defecto=100 
-SIZEX=32   # tamano del patch (defecto=32)  **[NO CAMBIES ESTO]**
+SIZEX=32   # tamano del patch (defecto=32)  **[NO CAMBIAR ESTO]**
 DET=0      # experimentos: 0-aleatorios, 1-deterministas (defecto=0)
 AUM=1      # aumentado: 0-sin_aumentado, 1-con_aumentado (defecto=1)
 
@@ -114,12 +114,12 @@ def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
-  #nseg es el número total de segmentos (aunque no se use directamente aquí, viene en la cabecera)
+
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
 
-  #Devolvemos los datos sobre los centros de los segmentos junto a al anchura, la altura y el número de segmentos
+  #Devolvemos los datos sobre los centros de los segmentos junto a la anchura, la altura y el número de segmentos
   return(datos,H,V,nseg)
 
 
@@ -262,8 +262,8 @@ class HyperDataset(Dataset):
     self.H=H; self.V=V; self.sizex=sizex; self.sizey=sizey;
     self.is_train=is_train
 
-    #Herramienta de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado (es como lanzar varias monedas seguidas)
-    #Mediante el aumentado de datos evitamos que cosas como la posiciónd el sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
+    #Operaciones de aumentado de datos, se realizan estas operaciones con un 50% de probabilidad cada una por separado
+    #Mediante el aumentado de datos evitamos que cosas como la posición del sol en el momento de la captura de la imagen afecten a la manera de aprender y predecir del modelo una vez entrenado
     flips = [v2.RandomHorizontalFlip(p=0.5), v2.RandomVerticalFlip(p=0.5)]
     
     t_list = flips.copy()
@@ -349,7 +349,7 @@ def select_loss(str_loss, truth, device, n_classes):
 
 def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu_id=0):
   
-  # Desempaquetado del data_bundle
+  #Desempaquetado del data_bundle
   datos = data_bundle['datos']
   H, V, B = data_bundle['H'], data_bundle['V'], data_bundle['B']
   truth = data_bundle['truth']
@@ -441,7 +441,7 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    # Con replacement=True se permite repetir muestras minoritarias para rellenar huecos
     sampler = WeightedRandomSampler(
       weights=sample_weights_tensor, 
       num_samples=len(sample_weights_tensor), 
@@ -729,6 +729,7 @@ def  main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija, gpu
   return (OA, AA, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
+#Función que permite ejecutar el entrenamiento y testeo final del modelo empleando los hiperparámetros óptimos
 def run_final_eval(args):
   torch.set_num_threads(1)
   gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
@@ -739,11 +740,13 @@ def run_final_eval(args):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
+    #Hacemos que los procesos hijo sean totalmente independientes
     try:
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
         pass
     
+    #Detectar cuántas GPUs hay disponibles
     num_gpus = torch.cuda.device_count() if torch.cuda.is_available() else 1
     print(f"GPUs detectadas: {num_gpus}")
     
@@ -827,7 +830,7 @@ if __name__ == '__main__':
                 CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
         print("********************Ejecutando prueba sobre el dataset " + ficheroLeido + " ******************************")
     
-    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    #Cargamos los datos una única vez (serán compartidos por los procesos hijo)
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
     (truth, H1, V1) = read_pgm(GT)
@@ -843,7 +846,7 @@ if __name__ == '__main__':
     #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
     datos_tensor.share_memory_()
 
-    # Creamos el bundle
+    #Creamos el bundle
     data_bundle = {
         'datos': datos_tensor,
         'H': H, 'V': V, 'B': B,
@@ -853,7 +856,7 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
-    # Especificamos los parámetros asociados al experimento
+    #Especificamos los parámetros asociados al experimento
     tareas_finales = [
         (i % num_gpus, i, 100, 256, usar_sampler, data_bundle) 
         for i in range(EXP)
@@ -861,14 +864,14 @@ if __name__ == '__main__':
 
     print("Ejecutando test de ViT...")
     
-    #Ejecutamos el test con 2 procesos
+    #Ejecutamos el test con 4 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
     
     time.sleep(0.5)
 
-    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    #EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
@@ -890,7 +893,7 @@ if __name__ == '__main__':
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
-    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    #IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: " + ficheroLeido)
     print("="*60)
@@ -899,7 +902,7 @@ if __name__ == '__main__':
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-        # Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
+        #Si la media de muestras de la clase usadas en test es mayor que 0, la imprimimos
         if m_total[j] > 0: 
             print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 

@@ -130,17 +130,13 @@ def read_seg(fichero):
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
 
-#EN ESTA FUNCIÓN TENGO DUDAS DE SI FUNCIONA BIEN????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????''
+
 #Función que permite leer el fichero que contiene los píxeles centrales de los segmentos (CENTER)
 def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
 
-  #nseg es el número total de segmentos??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #Porq a mi me pone  nseg 1 siempre y en H tmb pone 1
-  #Básicamente nseg no se usa en este código para nada**************************************************************************************************************************+
-  
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
   datos=np.fromfile(fichero,count=H*V,offset=3*4,dtype=np.uint32)
@@ -629,7 +625,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    #Con replacement=True se permite repetir muestras minoritarias para rellenar huecos
     sampler = WeightedRandomSampler(
       weights=sample_weights_tensor, 
       num_samples=len(sample_weights_tensor), 
@@ -734,7 +730,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
   #Bucle de entrenamiento asociado a las épocas
   for epoch in range(EPOCHS):
 
-    #Esta línea de model.train() estaba comentada, se supone que no debería estarlo para que el entrenamiento siga siendo efectivo tras la validación realizada en cada época****************************************************************************************************************************
+
     
     #Activamos el modo entrenamiento al principio de cada época para que las capas actualicen sus estadísticas internas con cada nuevo época, adaptándose así a los nuevos pesos obtenidos en la época anterior
     model.train()
@@ -747,17 +743,20 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
       inputs=inputs.to(device)
       labels=labels.to(device)
 
+      #Se aplica mixup en función de si se cumple la probabilidad de aplicarlo
       if(random.random()<probabilidad):
-
+        #Aplicamos mixup
         inputs_mixed, target_a, target_b, lam = aplicar_mixup(inputs, labels, alpha)
         
         # 7.2. Forward pass
         #La red procesa los patches y devuelve sus predicciones para cada patch (outputs)
         #Usando las imágenes mezcladas
         outputs = model(inputs_mixed)
+        #Calculamos la pérdida según las etiquetas originales y el coeficiente de mezcla empleado
         loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       else:
+        #Sin aumentado
         outputs=model(inputs)
         loss=criterion(outputs,labels)
       
@@ -947,7 +946,7 @@ def main(exp, alpha, data_bundle, TEST, EPOCHS, BATCH, probabilidad, usar_sample
 
 
 
-
+#Función que permite ejecutar el entrenamiento y prueba de la cnn con un conjunto de hiperparámetros determinado
 def run_combination(params_with_data):
     torch.set_num_threads(1)
     gpu_id, params, data_bundle = params_with_data
@@ -958,9 +957,10 @@ def run_combination(params_with_data):
     print(f"[GPU: {gpu_id}]  Evaluando: Alpha={a}, Epochs={e}, Batch={b}, Prob={p}, Usar_sampler={samp}")
     sys.stdout.flush()
 
+    #Se ejecuta la prueba una única vez
     for exp in range(1):
         res = main(exp, a, data_bundle,0, e, b, p, samp, 1,gpu_id)
-        # Maneja si main devuelve una tupla o un solo valor según TEST
+        # Maneja si main devuelve una tupla o un solo valor según el valor de TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
@@ -970,6 +970,7 @@ def run_combination(params_with_data):
     return {'alpha': a, 'epochs':e,'batch':b ,'prob':p ,'sampler':samp,'mean_val_aa': np.mean(val_acc_list)}
 
 
+#Función que permite ejecutar el entrenamiento y testeo final del modelo empleando los hiperparámetros óptimos
 def run_final_eval(args):
     torch.set_num_threads(1)
     gpu_id, exp_idx, alpha, epochs, batch, prob, samp, data_bundle = args
@@ -979,7 +980,7 @@ def run_final_eval(args):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
-    # IMPORTANTE para PyTorch + Multiprocessing
+    #Hacemos que los procesos hijo sean totalmente independientes
     try:
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
@@ -1079,7 +1080,7 @@ if __name__ == '__main__':
           SEG= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp.raw')
           CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
     
-    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    #Cargamos los datos una única vez (serán compartidos por los procesos hijo)
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
     (truth, H1, V1) = read_pgm(GT)
@@ -1095,7 +1096,7 @@ if __name__ == '__main__':
     #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
     datos_tensor.share_memory_()
 
-    # Creamos el bundle
+    #Creamos el bundle
     data_bundle = {
         'datos': datos_tensor,
         'H': H, 'V': V, 'B': B,
@@ -1105,7 +1106,7 @@ if __name__ == '__main__':
         'nseg': nseg
     }
 
-    #Archivo que contiene la mejor configuración de hiperparámetros según se esté empleando el sampler o no
+    #Archivo que contiene la mejor configuración de hiperparámetros en función de si está usando el sampler o no (el aumentado de clases minoritarias mediante el data loader)
     if(usar_sampler==1):
       
       archivoParametros = "hiperParametros_MIXUP_Con_Aumentado.json"
@@ -1125,7 +1126,7 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados")
         sys.exit(1)
       else:
-        # 2. CONFIGURACIÓN DEL GRID SEARCH
+        #CONFIGURACIÓN DEL GRID SEARCH
         alphas = [0.1,0.2,0.3,0.5,0.7,0.9,1.0,2.0]
         epochs= [100]
         batches = [256]
@@ -1138,7 +1139,7 @@ if __name__ == '__main__':
         
         print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones) ---")
 
-        #Ejecutamos el grid search von 6 procesos
+        #Ejecutamos el grid search con 4 procesos
         with ProcessPoolExecutor(max_workers=4) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
             executor.shutdown(wait=True)
@@ -1154,24 +1155,24 @@ if __name__ == '__main__':
           json.dump(mejor_config,f)
 
 
-    # 3. EVALUACIÓN FINAL PARALELIZADA
+    #EVALUACIÓN FINAL PARALELIZADA
     print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados a la mejor configuración
+    #Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
         (i%num_gpus, i, mejor_config['alpha'],mejor_config['epochs'],mejor_config['batch'], mejor_config['prob'],mejor_config['sampler'] ,data_bundle) 
         for i in range(EXP)
     ]
     
-    #Ejecutamos el test final con 5 procesos
+    #Ejecutamos el test final con 4 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
     
     time.sleep(0.5)
 
-    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    #EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
@@ -1195,7 +1196,7 @@ if __name__ == '__main__':
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
-    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    #IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)

@@ -120,16 +120,13 @@ def read_seg(fichero):
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
 
-#EN ESTA FUNCIÓN TENGO DUDAS DE SI FUNCIONA BIEN????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????''
+
 #Función que permite leer el fichero que contiene los píxeles centrales de los segmentos (CENTER)
 def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
 
-  #nseg es el número total de segmentos??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #Porq a mi me pone  nseg 1 siempre y en H tmb pone 1
-  #Básicamente nseg no se usa en este código para nada**************************************************************************************************************************+
   
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
@@ -488,34 +485,40 @@ class CNN21(nn.Module):
     return out
   
 
+#Función que implementa cutmix para un conjunto de patches, corta cuadrados aleatorios de unos patches y los pega en otros
 def aplicar_cutmix(inputs, labels, alpha):
-    '''Corta un rectángulo de una imagen y lo pega en otra'''
+    #Generamos la proporción de mezcla (lambda) desde una distribución beta
     lam = np.random.beta(alpha, alpha)
     index = torch.randperm(inputs.size(0), device=inputs.device)
 
-    # Calcular coordenadas del cuadro
+    #Calculamos las coordenadas del cuadrado
+
+    #El tamaño del parche es proporcional a sqrt(1-lam)
     W, H = inputs.size(2), inputs.size(3)
     cut_rat = np.sqrt(1. - lam)
     cut_w = int(W * cut_rat)
     cut_h = int(H * cut_rat)
+
+    #Calculamos el centro del cuadrado de manera aleatoria
     cx = np.random.randint(W)
     cy = np.random.randint(H)
 
+    #Calculamos los límites del cuadrado para no salir del patch original
     bbx1 = np.clip(cx - cut_w // 2, 0, W)
     bby1 = np.clip(cy - cut_h // 2, 0, H)
     bbx2 = np.clip(cx + cut_w // 2, 0, W)
     bby2 = np.clip(cy + cut_h // 2, 0, H)
 
-    # Clonar el tensor para no destruir los datos originales
+    #Clonamos el tensor para no destruir los datos originales
     inputs_mixed = inputs.clone()
 
-    # Pegar el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
+    #Pegamos el parche en el tensor CLONADO, sacando la información del tensor ORIGINAL
     inputs_mixed[:, :, bbx1:bbx2, bby1:bby2] = inputs[index, :, bbx1:bbx2, bby1:bby2]
 
-    # Ajustar lambda según el área real cortada
+    #Ajustamos lambda según el área real cortada
     lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (W * H))
 
-    # Devolver el tensor modificado, dejando "inputs" intacto
+    #Devolvemos el tensor modificado, dejando inputs intacto
     return inputs_mixed, labels, labels[index], lam
 
 #-----------------------------------------------------------------
@@ -559,7 +562,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
     #print('* Activando CUDNN')
     torch.backends.cudnn.enabled=True
     
-    #Aquí ponía beBhmark en lugar de benchmark*******************************************************************************************************************************************
+  
     torch.backends.cudnn.benchmark=True
 
   # experimentos deterministas o aleatorios
@@ -630,7 +633,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    # Con replacement=True se permite repetir muestras minoritarias para rellenar huecos
     sampler = WeightedRandomSampler(
       weights=sample_weights_tensor, 
       num_samples=len(sample_weights_tensor), 
@@ -737,7 +740,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
   #Bucle de entrenamiento asociado a las épocas
   for epoch in range(EPOCHS):
 
-    #Esta línea de model.train() estaba comentada, se supone que no debería estarlo para que el entrenamiento siga siendo efectivo tras la validación realizada en cada época****************************************************************************************************************************
+
     
     #Activamos el modo entrenamiento al principio de cada época para que las capas actualicen sus estadísticas internas con cada nuevo época, adaptándose así a los nuevos pesos obtenidos en la época anterior
     model.train()
@@ -751,18 +754,20 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
       labels=labels.to(device)
 
       if(random.random()<probabilidad):
-        # Se cumple la probabilidad principal, decidimos qué método usar:
+        #Se cumple la probabilidad principal de aplicar el aumentado, decidimos qué método usar:
         if random.random() < probabilidad2:
-          # --- INTEGRACIÓN FMIX ---
+          #INTEGRACIÓN FMIX (aplicamos FMIX)
           inputs_mixed = fmix_util(inputs) 
           lam = fmix_util.lam         
           indices = fmix_util.index   
           outputs = model(inputs_mixed)
+          #Calculamos la pérdida según las etiquetas originales y el coeficiente de mezcla empleado
           loss = lam * criterion(outputs, labels) + (1 - lam) * criterion(outputs, labels[indices])
         else:
-          # --- INTEGRACIÓN CUTMIX ---
+          #INTEGRACIÓN CUTMIX (aplicamos CUTMIX)
           inputs_mixed, target_a, target_b, lam = aplicar_cutmix(inputs, labels, alpha=cutmix_alpha)
           outputs = model(inputs_mixed)
+          #Calculamos la pérdida según las etiquetas originales y el coeficiente de mezcla empleado
           loss = lam * criterion(outputs, target_a) + (1 - lam) * criterion(outputs, target_b)
       
       else:
@@ -955,7 +960,7 @@ def main(exp, fmix_alpha, fmix_decay, fmix_soft, cutmix_alpha ,data_bundle, TEST
 
 
 
-
+#Función que permite ejecutar el entrenamiento y prueba de la cnn con un conjunto de hiperparámetros determinado
 def run_combination(params_with_data):
     torch.set_num_threads(1)
     gpu_id,params, data_bundle = params_with_data
@@ -966,9 +971,10 @@ def run_combination(params_with_data):
     print(f"[GPU: {gpu_id}]  Evaluando: F_Alpha={a_fmix}, Decay={d}, Soft={s}, C_Alpha={a_cmix}, Epochs={e}, Batch={b}, Prob={p}, Prob2={p2}, Usar_sampler={samp}")
     sys.stdout.flush()
 
+    #Se ejecuta la prueba una única vez
     for exp in range(1):
         res = main(exp, a_fmix, d, s, a_cmix,data_bundle,0, e, b, p, p2, samp, 1, gpu_id)
-        # Maneja si main devuelve una tupla o un solo valor según TEST
+        #Maneja si main devuelve una tupla o un solo valor según el valor de TEST
         v_acc = res[0] if isinstance(res, tuple) else res
         val_acc_list.append(v_acc)
 
@@ -978,6 +984,7 @@ def run_combination(params_with_data):
     return {'fmix_alpha': a_fmix, 'decay': d, 'soft': s, 'cutmix_alpha': a_cmix, 'epochs':e, 'batch':b, 'prob':p, 'prob2':p2, 'sampler':samp, 'mean_val_aa': np.mean(val_acc_list)}
 
 
+#Función que permite ejecutar el entrenamiento y testeo final del modelo empleando los hiperparámetros óptimos
 def run_final_eval(args):
     torch.set_num_threads(1)
     gpu_id, exp_idx, fmix_alpha, decay, soft, cutmix_alpha, epochs, batch, prob, prob2, samp, data_bundle = args
@@ -987,7 +994,7 @@ def run_final_eval(args):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
-    # IMPORTANTE para PyTorch + Multiprocessing
+    #Hacemos que los procesos hijo sean totalmente independientes
     try:
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
@@ -1089,7 +1096,7 @@ if __name__ == '__main__':
       
 
     
-    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    #Cargamos los datos una única vez (serán compartidos por los procesos hijo)
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
     (truth, H1, V1) = read_pgm(GT)
@@ -1105,7 +1112,7 @@ if __name__ == '__main__':
     #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
     datos_tensor.share_memory_()
 
-    # Creamos el bundle
+    #Creamos el bundle
     data_bundle = {
         'datos': datos_tensor,
         'H': H, 'V': V, 'B': B,
@@ -1116,7 +1123,7 @@ if __name__ == '__main__':
     }
 
 
-    #Archivo que contiene la mejor configuración combinada
+    #Archivo que contiene la mejor configuración de hiperparámetros en función de si está usando el sampler o no (el aumentado de clases minoritarias mediante el data loader)
     if(usar_sampler==1):
       archivoParametros = "hiperParametros_FMIX_CUTMIX_Con_Aumentado.json"
     else:
@@ -1135,7 +1142,7 @@ if __name__ == '__main__':
         print("ERROR: No hay parámetros optimizados almacenados")
         sys.exit(1)
       else:
-        # 2. CONFIGURACIÓN DEL RANDOM SEARCH
+        #CONFIGURACIÓN DEL RANDOM SEARCH
         fmix_alphas = [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         decays =  [0.1, 0.2, 0.5, 0.8, 1.0, 1.2, 1.5]
         softs  = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
@@ -1163,14 +1170,14 @@ if __name__ == '__main__':
         
         print(f"--- Iniciando Grid Search Paralelo ({len(combinaciones)} combinaciones de {len(combinaciones_totales)} combinaciones totales) ---")
 
-        #Ejecutamos el grid search con 5 procesos
+        #Ejecutamos el random search con 4 procesos
         with ProcessPoolExecutor(max_workers=4) as executor:
             resultados_finales = list(executor.map(run_combination, tareas))
             executor.shutdown(wait=True)
 
         time.sleep(0.5)
 
-        #RESULTADOS DEL GRID SEARCH
+        #RESULTADOS DEL RANDOM SEARCH
         resultados_finales.sort(key=lambda x: x['mean_val_aa'], reverse=True)
         mejor_config = resultados_finales[0]
 
@@ -1179,24 +1186,24 @@ if __name__ == '__main__':
           json.dump(mejor_config,f)
 
 
-    # 3. EVALUACIÓN FINAL PARALELIZADA
+    #EVALUACIÓN FINAL PARALELIZADA
     print(f"\n--- Ejecutando evaluación final paralela ({EXP} experimentos) ---")
     
     
-    # Especificamos los parámetros asociados a la mejor configuración
+    #Especificamos los parámetros asociados a la mejor configuración
     tareas_finales = [
         (i%num_gpus,i, mejor_config['fmix_alpha'], mejor_config['decay'], mejor_config['soft'], mejor_config['cutmix_alpha'], mejor_config['epochs'], mejor_config['batch'], mejor_config['prob'], mejor_config['prob2'], mejor_config['sampler'], data_bundle) 
         for i in range(EXP)
     ]
     
-    #Ejecutamos el test final con 5 procesos
+    #Ejecutamos el test final con 4 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
 
     time.sleep(0.5)
 
-    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    #EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
@@ -1220,7 +1227,7 @@ if __name__ == '__main__':
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
-    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    #IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)

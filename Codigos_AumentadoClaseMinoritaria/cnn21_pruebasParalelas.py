@@ -118,16 +118,13 @@ def read_seg(fichero):
   #Devolvemos los datos de segmentación junto a la anchura y la altura
   return(datos,H,V)
 
-#EN ESTA FUNCIÓN TENGO DUDAS DE SI FUNCIONA BIEN????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????''
+
 #Función que permite leer el fichero que contiene los píxeles centrales de los segmentos (CENTER)
 def read_seg_centers(fichero):
   #Leemos los 3 primeros números presentes en el archivo (enteros de 32 bits)
   #H es el ancho en píxeles
   #V es el alto en píxeles
 
-  #nseg es el número total de segmentos??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #Porq a mi me pone  nseg 1 siempre y en H tmb pone 1
-  #Básicamente nseg no se usa en este código para nada**************************************************************************************************************************+
   
   (H,V,nseg)=np.fromfile(fichero,count=3,dtype=np.uint32)
   #Leemos el resto de datos del fichero (H*V enteros de 32 bits) saltando los primeros 12 bytes (los 3 valores de la cabecera)
@@ -523,7 +520,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_i
     #print('* Activando CUDNN')
     torch.backends.cudnn.enabled=True
     
-    #Aquí ponía beBhmark en lugar de benchmark*******************************************************************************************************************************************
+    
     torch.backends.cudnn.benchmark=True
 
   # experimentos deterministas o aleatorios
@@ -594,7 +591,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_i
 
     # 4. Creamos el Sampler de PyTorch
     sample_weights_tensor = torch.DoubleTensor(sample_weights)
-    # replacement=True es CLAVE: permite repetir muestras minoritarias para rellenar huecos
+    # Con replacement=True se permite repetir muestras minoritarias para rellenar huecos
     sampler = WeightedRandomSampler(
       weights=sample_weights_tensor, 
       num_samples=len(sample_weights_tensor), 
@@ -699,7 +696,6 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_i
   #Bucle de entrenamiento asociado a las épocas
   for epoch in range(EPOCHS):
 
-    #Esta línea de model.train() estaba comentada, se supone que no debería estarlo para que el entrenamiento siga siendo efectivo tras la validación realizada en cada época****************************************************************************************************************************
     
     #Activamos el modo entrenamiento al principio de cada época para que las capas actualicen sus estadísticas internas con cada nuevo época, adaptándose así a los nuevos pesos obtenidos en la época anterior
     model.train()
@@ -904,7 +900,7 @@ def main(exp, data_bundle, TEST, EPOCHS, BATCH, usar_sampler, semilla_fija,gpu_i
   return( OA, AA, class_aa, class_total, tiempo_total_entrenamiento, tiempo_epoca_entrenamiento)
 
 
-
+#Función que permite ejecutar el entrenamiento y testeo final del modelo empleando los hiperparámetros óptimos
 def run_final_eval(args):
     torch.set_num_threads(1)
     gpu_id, exp_idx, epochs, batch, samp, data_bundle = args
@@ -914,7 +910,7 @@ def run_final_eval(args):
 
 #Si se lanza el fichero directamente se entra en el entrenamiento y validación
 if __name__ == '__main__':
-    # IMPORTANTE para PyTorch + Multiprocessing
+    #Hacemos que los procesos hijo sean totalmente independientes
     try:
         mp.set_start_method('spawn', force=True)
     except RuntimeError:
@@ -1013,7 +1009,7 @@ if __name__ == '__main__':
           SEG= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp.raw')
           CENTER= os.path.join(directorio_datos, 'oitaven', 'seg_oitaven_wp_centers.raw')
     
-    # 1. CARGA LOS DATOS UNA SOLA VEZ AQUÍ
+    #Cargamos los datos una única vez (serán compartidos por los procesos hijo)
     print("Cargando datos en memoria principal...")
     (datos_raw, H, V, B) = read_raw(DATASET)
     (truth, H1, V1) = read_pgm(GT)
@@ -1029,7 +1025,7 @@ if __name__ == '__main__':
     #Hacemos que los datos raw (el dataset original) sean compartidos por todos los procesos hijo, evitando que se copien para cada proceso hijo
     datos_tensor.share_memory_()
 
-    # Creamos el bundle
+    #Creamos el bundle
     data_bundle = {
         'datos': datos_tensor,
         'H': H, 'V': V, 'B': B,
@@ -1040,7 +1036,7 @@ if __name__ == '__main__':
     }
     
     
-    # Especificamos los parámetros asociados al experimento
+    #Especificamos los parámetros asociados al experimento
     tareas_finales = [
         (i%num_gpus, i, 100 ,256,usar_sampler,data_bundle) 
         for i in range(EXP)
@@ -1048,14 +1044,14 @@ if __name__ == '__main__':
 
     print("Ejecutando test...")
     
-    #Ejecutamos el test con 5 procesos
+    #Ejecutamos el test con 4 procesos
     with ProcessPoolExecutor(max_workers=4) as executor:
         resultados_test = list(executor.map(run_final_eval, tareas_finales))
         executor.shutdown(wait=True)
     
     time.sleep(0.5)
 
-    # 4. EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
+    #EXTRACCIÓN Y CÁLCULO DE ESTADÍSTICAS
     final_oa_list = [res[0] for res in resultados_test]
     final_aa_list = [res[1] for res in resultados_test]
     class_aa_matrix = np.array([res[2] for res in resultados_test])
@@ -1079,7 +1075,7 @@ if __name__ == '__main__':
     m_class = np.mean(class_aa_matrix, axis=0)
     s_class = np.std(class_aa_matrix, axis=0, ddof=1)
 
-    # 5. IMPRESIÓN DE RESULTADOS FINALES
+    #IMPRESIÓN DE RESULTADOS FINALES
     print("\n" + "="*60)
     print("RESULTADOS FINALES PROMEDIADOS (CONJUNTO DE TEST) SOBRE EL FICHERO: "+ ficheroLeido)
     print("="*60)
@@ -1088,7 +1084,7 @@ if __name__ == '__main__':
     
     print(f"ACCURACY POR CLASE:")
     for j in range(1, len(m_class)): 
-      #Si la media de muestras de la clase usadas en test es mayor que 0, la clase existía en el test
+      #Si la media de muestras de la clase usadas en test es mayor que 0, la clase existía en el test y por tanto imprimimos sus resultados
       if m_total[j] > 0: 
           print(f"  Clase {j:02d}: {m_class[j]:.2f}% ± {s_class[j]:.2f}%")
 

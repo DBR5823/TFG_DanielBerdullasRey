@@ -19,7 +19,7 @@ echo "------------------------------------------" | tee -a "$ARCHIVO_LOG"
 for i in {1..7}
 do
     echo "Ejecutando prueba iteración: $i..." | tee -a "$ARCHIVO_LOG"
-    # Ejecutamos el comando, redirigimos errores (stderr) al mismo lugar y usamos tee
+    #Ejecutamos el comando, redirigimos errores (stderr) al mismo lugar y usamos tee
     python3 -u cnn21_PyTorch_Paralelo.py "$i" 1 2>&1 | tee -a "$ARCHIVO_LOG"
     sleep 2
     echo "Prueba iteracion $i finalizada." | tee -a "$ARCHIVO_LOG"
