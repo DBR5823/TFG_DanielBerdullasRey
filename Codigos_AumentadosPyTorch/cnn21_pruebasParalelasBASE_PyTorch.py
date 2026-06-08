@@ -415,7 +415,7 @@ class HyperDataset(Dataset):
     spec_noise = v2.RandomApply([AnhadirRuidoEspectral(std_range=(0.01, 0.03))], p=0.5)
     spec_illum = v2.RandomApply([IluminacionAleatoria(factor_range=(0.8, 1.2))], p=0.5)
     
-    # Nota: drop_prob de la clase se deja en 1.0 para que el control real sea el 0.5 del RandomApply
+    
     spec_drop = v2.RandomApply([EliminarBandas(drop_prob=0.15)], p=0.5)
 
     #Eliminación de zonas aleatorias del patch (se eliminan los datos en todas las bandas)
