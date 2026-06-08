@@ -123,7 +123,7 @@ Invoque los siguientes scripts desde sus respectivos directorios:
 * **Vision Transformers (ViT)**: Ejecute `pruebaTOTAL_VIT.sh` dentro de la carpeta `Codigos_VIT/`.
 
 
-5. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizado el proceso, ejecute los *Jupyter Notebooks* interactivos de la raíz (`creacionTablas.ipynb`, `ComparacionMetodosPytorch.ipynb`, `ComparacionMetodosPyTorch_CUTMIX+FMIX.ipynb`, `comparacionMetodosVIT.ipynb` y `comparacionFinal.ipynb`) para interpretar visualmente la evolución del *loss* y generar las gráficas comparativas de exactitud por clase.
+5. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizado el proceso, ejecute los *Jupyter Notebooks* interactivos de la raíz (`creacionTablas.ipynb`, `ComparacionMetodosPytorch.ipynb`, `ComparacionMetodosPyTorch_CUTMIX+FMIX.ipynb`, `comparacionMetodosVIT.ipynb` y `comparacionFinal.ipynb`) para procesar los Logs y generar las tablas y gráficas necesarias para visualizar los resultados.
 
 ---
 
