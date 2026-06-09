@@ -46,7 +46,7 @@ Para aislar las dependencias y asegurar un entorno reproducible y ligero, el pro
 
 1. **Clonar el repositorio y acceder al directorio:**
 ```bash
-git clone [https://github.com/DBR5823/TFG_DanielBerdullasRey.git](https://github.com/DBR5823/TFG_DanielBerdullasRey.git)
+git clone https://github.com/DBR5823/TFG_DanielBerdullasRey.git
 cd TFG_DanielBerdullasRey
 
 ```
