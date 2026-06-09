@@ -3,7 +3,7 @@
 
 El uso de sensores multiespectrales de alta resolución facilita la monitorización de ecosistemas complejos como los fluviales con un gran nivel de detalle. Sin embargo, la aplicación de modelos de aprendizaje profundo en este ámbito se enfrenta a un desafío principal: la escasez de datos etiquetados a nivel de segmento. Esta falta de muestras etiquetadas suele provocar problemas de sobreajuste (*overfitting*), donde los modelos memorizan los datos de entrenamiento en lugar de aprender características generalizables, reduciendo su precisión ante nuevas imágenes.
 
-Este Trabajo de Fin de Grado (TFG) aborda este problema mediante el análisis y la implementación de diversas técnicas de aumentado de datos (*Data Augmentation*). Se ha diseñado un marco experimental que evalúa métodos tradicionales junto a algoritmos avanzados: **MixUp**, **CutMix** y **FMix**. Estas estrategias se han probado, comparado y combinado sobre las dos arquitecturas de referencia dentro del campo de visión artificial: Redes Neuronales Convolucionales (CNN) y *Vision Transformers* (ViT).
+Este Trabajo de Fin de Grado (TFG) aborda este problema mediante el análisis y la implementación de diversas técnicas de aumentado de datos (*Data Augmentation*). Se ha diseñado un marco experimental que evalúa métodos tradicionales junto a algoritmos avanzados: **mixup**, **CutMix** y **FMix**. Estas estrategias se han probado, comparado y combinado sobre las dos arquitecturas de referencia dentro del campo de visión artificial: Redes Neuronales Convolucionales (CNN) y *Vision Transformers* (ViT).
 
 Los resultados demuestran que el aumentado de datos, combinado con el *oversampling* de clases minoritarias, es una herramienta esencial para regularizar el entrenamiento en estos escenarios. En concreto, la hibridación de **FMix** (basado en máscaras fractales) con **CutMix** (basado en el reemplazo de parches), aplicados a nivel de *batch*, sobre técnicas de aumentado clásicas (rotación, zoom y borrado aleatorio de parches), aplicadas a nivel de *patch*, se consolidó como la estrategia óptima. Esta combinación logró el mejor rendimiento de clasificación en ambas redes y consiguió equilibrar el aprendizaje en las clases minoritarias del ecosistema, mejorando la robustez general del modelo.
 
@@ -15,6 +15,8 @@ Los resultados demuestran que el aumentado de datos, combinado con el *oversampl
 
 Por motivos de confidencialidad y derechos de propiedad intelectual pertenecientes a la **Universidade de Santiago de Compostela (USC)**, el directorio `datosEntrada/` (y sus respectivos subdirectorios con archivos `.pgm` y `.raw`) no se incluye en este repositorio público. Estos datos conforman las imágenes de teledetección de alta resolución correspondientes a diferentes ecosistemas fluviales de Galicia.
 
+Tampoco se incluyen los `.raw` asociados a los parches empleados de ejemplo en el trabajo.
+
 Adicionalmente, para la segmentación y visualización de estas imágenes, se ha hecho uso de **HTOOL**, una herramienta de *software* propiedad de la USC. El trabajo se basa en los ficheros de datos proporcionados por este entorno, los cuales son empleados en los códigos `.py` desarrollados específicamente para los experimentos de este TFG. Por tanto, la reproducción completa de los experimentos requiere disponer de las licencias y accesos pertinentes a estos datos y herramientas.
 
 ---
@@ -23,7 +25,7 @@ Adicionalmente, para la segmentación y visualización de estas imágenes, se ha
 
 El directorio de trabajo está diseñado de manera modular, dividiendo los diferentes enfoques experimentales y la recopilación de resultados:
 
-* **`CodigosBase/`**: Contiene los scripts `.py` elementales enfocados en la generación visual y teórica de las imágenes tratadas mediante las técnicas de aumentado espacial (*CutMix*, *MixUp* y *FMix*), almacenando ejemplos visuales en directorios de figuras.
+* **`CodigosBase/`**: Contiene los scripts `.py` elementales enfocados en la generación visual y teórica de las imágenes tratadas mediante las técnicas de aumentado espacial (*CutMix*, *mixup* y *FMix*), almacenando ejemplos visuales en directorios de figuras.
 * **`Codigos_AumentadosPyTorch/`**: Núcleo de las implementaciones puras en PyTorch. Agrupa los scripts `.py` que definen los modelos y los procesos de entrenamiento con diferentes aumentos de datos. Asimismo, incluye múltiples archivos `.sh` (ej. `pruebaTOTAL.sh`, `pruebaCUTMIX.sh`) que permiten la ejecución automatizada en lotes, volcando la salida estándar en archivos `.log` dentro del subdirectorio `resultadosAumentado_PyTorch/`.
 * **`Codigos_AumentadoClaseMinoritaria/`**: Directorio dedicado a la mitigación del desbalanceo de clases. Incluye los códigos desarrollados para aplicar técnicas de mezcla y aumentado exclusivamente sobre las clases minoritarias. Destaca el uso de versiones paralelizadas (como `cnn_21_CUTMIX_FMIX_PARALELO.py`) para optimizar drásticamente los tiempos computacionales.
 * **`Codigos_VIT/`**: Contenedor de las pruebas experimentales empleando arquitecturas de *Vision Transformers* (ViT). Sigue un patrón similar al resto, aportando sus propios scripts paralelos y ejecutables bash para obtener los correspondientes `.log` de resultados bajo estrés espacial y mezclas probabilísticas.
