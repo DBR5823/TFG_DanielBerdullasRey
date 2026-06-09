@@ -13,9 +13,7 @@ Los resultados demuestran que el aumentado de datos, combinado con el *oversampl
 
 ## ⚠️ Consideraciones sobre los Datos de Entrada y Herramientas Propietarias
 
-Por motivos de confidencialidad y derechos de propiedad intelectual pertenecientes a la **Universidade de Santiago de Compostela (USC)**, el directorio `datosEntrada/` (y sus respectivos subdirectorios con archivos `.pgm` y `.raw`) no se incluye en este repositorio público. Estos datos conforman las imágenes de teledetección de alta resolución correspondientes a diferentes ecosistemas fluviales de Galicia.
-
-Tampoco se incluyen los `.raw` asociados a los parches empleados de ejemplo en el trabajo.
+Por motivos de confidencialidad y derechos de propiedad intelectual pertenecientes a la **Universidade de Santiago de Compostela (USC)**, el directorio `datosEntrada/` (y sus respectivos subdirectorios con archivos `.pgm` y `.raw`) no se incluye en este repositorio público. Estos datos conforman las imágenes de teledetección de alta resolución correspondientes a los ecosistemas fluviales y cuencas hidrográficas de Galicia empleados en este trabajo.
 
 Adicionalmente, para la segmentación y visualización de estas imágenes, se ha hecho uso de **HTOOL**, una herramienta de *software* propiedad de la USC. El trabajo se basa en los ficheros de datos proporcionados por este entorno, los cuales son empleados en los códigos `.py` desarrollados específicamente para los experimentos de este TFG. Por tanto, la reproducción completa de los experimentos requiere disponer de las licencias y accesos pertinentes a estos datos y herramientas.
 
@@ -23,18 +21,18 @@ Adicionalmente, para la segmentación y visualización de estas imágenes, se ha
 
 ## Estructura Detallada del Repositorio
 
-El directorio de trabajo está diseñado de manera modular, dividiendo los diferentes enfoques experimentales y la recopilación de resultados:
+El directorio de trabajo está diseñado de manera modular, dividiendo los diferentes enfoques experimentales y conservando los ficheros `.log` con la recopilación de los resultados originales:
 
-* **`CodigosBase/`**: Contiene los scripts `.py` elementales enfocados en la generación visual y teórica de las imágenes tratadas mediante las técnicas de aumentado espacial (*CutMix*, *mixup* y *FMix*), almacenando ejemplos visuales en directorios de figuras.
-* **`Codigos_AumentadosPyTorch/`**: Núcleo de las implementaciones puras en PyTorch. Agrupa los scripts `.py` que definen los modelos y los procesos de entrenamiento con diferentes aumentos de datos. Asimismo, incluye múltiples archivos `.sh` (ej. `pruebaTOTAL.sh`, `pruebaCUTMIX.sh`) que permiten la ejecución automatizada en lotes, volcando la salida estándar en archivos `.log` dentro del subdirectorio `resultadosAumentado_PyTorch/`.
-* **`Codigos_AumentadoClaseMinoritaria/`**: Directorio dedicado a la mitigación del desbalanceo de clases. Incluye los códigos desarrollados para aplicar técnicas de mezcla y aumentado exclusivamente sobre las clases minoritarias. Destaca el uso de versiones paralelizadas (como `cnn_21_CUTMIX_FMIX_PARALELO.py`) para optimizar drásticamente los tiempos computacionales.
-* **`Codigos_VIT/`**: Contenedor de las pruebas experimentales empleando arquitecturas de *Vision Transformers* (ViT). Sigue un patrón similar al resto, aportando sus propios scripts paralelos y ejecutables bash para obtener los correspondientes `.log` de resultados bajo estrés espacial y mezclas probabilísticas.
-* **Análisis y Visualización (Raíz)**: En el directorio raíz se exponen los *Jupyter Notebooks* (`.ipynb`) y sus exportaciones a HTML que procesan los archivos de *logs* generados en los pasos anteriores para compilar las métricas finales y organizar las tablas y gráficas comparativas:
-  * `creacionTablas.ipynb`: Analiza los `.log` obtenidos por `pruebaTOTAL.sh` de la carpeta `Codigos_AumentadoClaseMinoritaria`.
-  * `ComparacionMetodosPytorch.ipynb`: Analiza y visualiza los resultados de los métodos de aumento clásicos obtenidos mediante `Prueba_Metodos_Base.sh`.
-  * `ComparacionMetodosPyTorch_CUTMIX+FMIX.ipynb`: Procesa los resultados de las combinaciones complejas obtenidas al ejecutar `pruebaTOTAL.sh` en la carpeta de PyTorch.
-  * `comparacionMetodosVIT.ipynb`: Analiza y muestra los resultados generados por el script `pruebaTOTAL_VIT.sh`.
-  * `comparacionFinal.ipynb`: Realiza la comparación definitiva entre las arquitecturas CNN y ViT en sus formas base y sus versiones optimizadas.
+* **`CodigosBase/Codigos_Imagenes/`**: Contiene los scripts `.py` enfocados en la generación visual de las imágenes asociadas a los métodos de aumentado avanzados empleados en el trabajo (*CutMix*, *mixup* y *FMix*), almacenando ejemplos visuales en directorios de figuras.
+* **`Codigos_AumentadoClaseMinoritaria/`**: Directorio dedicado a la **Fase 1** de la experimentación. Incluye los scripts `.py` de entrenamiento y validación de la CNN (junto al fichero `fmix.py` necesario para aplicar *FMix*) empleando técnicas de mezcla avanzadas y sobremuestreo (*oversampling*) de las clases minoritarias. Incluye los ficheros `.sh` para la ejecución automatizada en lote. Los subdirectorios `resultadosPruebas/` y `resultadosPruebasAumentado/` contienen los logs resultantes sin aplicar y aplicando *oversampling*, respectivamente.
+* **`Codigos_AumentadosPyTorch/`**: Directorio dedicado a la **Fase 2** y la **Fase 3** de la experimentación. El fichero `cnn21_pruebasParalelasBASE_PyTorch.py` contiene todos los métodos de aumentado clásicos evaluados en la Fase 2, cuyos resultados automatizados mediante `Prueba_Metodos_Base.sh` se almacenan en el subdirectorio `resultadosAumentado_PyTorch/`. El resto de ficheros `.py` y `.sh` ejecutan la experimentación completa de la Fase 3, guardando sus logs en el subdirectorio `resultadosPruebas/`.
+* **`Codigos_VIT/`**: Directorio dedicado a la **Fase 4** de la experimentación empleando arquitecturas de *Vision Transformers* (ViT). Agrupa los scripts `.py` de optimización y los ejecutables `.sh` bash para la ejecución automatizada, cuyos resultados se vuelcan en el subdirectorio `resultadosPruevasVIT/`.
+* **Análisis y Visualización**: Los *Jupyter Notebooks* (`.ipynb`) procesan los logs generados en cada fase para compilar las métricas finales, organizar las tablas y generar las gráficas comparativas:
+  * `Analisis_Fase1.ipynb` (Raíz): Analiza los logs de la Fase 1 obtenidos por `pruebaTOTAL.sh` dentro de `Codigos_AumentadoClaseMinoritaria/`.
+  * `Analisis_Fase2.ipynb` (Raíz): Analiza y visualiza los resultados de los métodos de aumento clásicos de la Fase 2 obtenidos mediante `Prueba_Metodos_Base.sh`.
+  * `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb`: Procesa los resultados de las combinaciones complejas de la Fase 3 obtenidas al ejecutar `pruebaTOTAL.sh` en la carpeta de PyTorch.
+  * `Codigos_VIT/Analisis_Fase4.ipynb`: Analiza y muestra los resultados de los modelos ViT generados por el script `pruebaTOTAL_VIT.sh`.
+  * `comparacionFinal.ipynb` (Raíz): Realiza la comparación definitiva entre las arquitecturas CNN y ViT en sus formas base y sus versiones optimizadas.
 
 ---
 
@@ -71,7 +69,6 @@ tfg-env\Scripts\activate
 
 
 3. **Instalar las dependencias:**
-Tal y como se especifica en el archivo `requirements.txt`, la configuración se enfoca íntegramente en el ecosistema de `PyTorch` y el análisis clásico de datos:
 ```bash
 pip install -r requirements.txt
 
@@ -86,7 +83,7 @@ torch==2.7.1
 torchvision==0.22.1
 timm==1.0.25
 torchbearer==0.5.5
-numpy==2.3.3
+numpy<2.3.3
 pandas==2.3.2
 scikit-learn==1.7.2
 matplotlib==3.10.8
@@ -95,37 +92,41 @@ matplotlib==3.10.8
 
 ### Compatibilidad de Hardware y Soporte CUDA
 
-El código fuente ha sido diseñado de manera flexible para adaptarse automáticamente a las capacidades de cómputo del sistema donde se despliegue:
+El código fuente se adapta automáticamente a las capacidades de cómputo del sistema donde se despliegue:
 
-* **Ejecución en CPU**: Redirige la carga a la CPU en equipos sin gráfica dedicada para tareas de depuración o pruebas con datasets reducidos.
-* **Ejecución en Mono-GPU**: Si el sistema cuenta con soporte CUDA, `PyTorch` aprovechará la aceleración por hardware de forma nativa para agilizar significativamente el entrenamiento y la inferencia.
-* **Ejecución Multi-GPU**: Para entornos de alto rendimiento o servidores, el repositorio incluye scripts optimizados que distribuyen eficientemente los lotes de datos y los modelos entre todas las GPUs disponibles.
+* **Ejecución en CPU**: Redirige automáticamente la carga a la CPU en equipos sin gráfica dedicada para tareas de depuración, análisis o pruebas con datasets reducidos entre los diversos núcleos.
+* **Ejecución en Mono-GPU**: Si el sistema cuenta con soporte CUDA, `PyTorch` aprovechará la aceleración por hardware de forma nativa. Permite realizar experimentos en paralelo empleando varios procesos sobre una única GPU.
+* **Ejecución Multi-GPU**: Para entornos de alto rendimiento o servidores, el repositorio incluye scripts optimizados y versiones paralelizadas que distribuyen eficientemente los lotes de datos y los modelos empleando todas las GPUs disponibles.
 
 ---
 
 ## Manual de Ejecución de los Experimentos
 
-El procedimiento secuencial para replicar los experimentos y generar las métricas de rendimiento para las cuencas fluviales es el siguiente:
+El procedimiento secuencial para replicar los experimentos y generar las métricas de rendimiento es el siguiente:
 
-1. **Configuración inicial**: Active el entorno virtual de `Python` e instale las dependencias.
-2. **Disposición de datos**: Asegúrese de que las imágenes propietarias de la USC y la herramienta **HTOOL** se encuentren mapeadas y ubicadas en el directorio `datosEntrada/`.
-3. **Permisos de ejecución**: Habilite los permisos sobre los scripts bash mediante los siguientes comandos:
+1. **Configuración inicial**: Active el entorno virtual de `Python` e instale los requerimientos del sistema con `pip install -r requirements.txt`.
+2. **Disposición de datos**: Asegúrese de que las imágenes propietarias de la USC, junto a sus datos de segmentación y etiquetas de los segmentos, se encuentren correctamente ubicadas en el directorio `datosEntrada/`. *(Nota: Estos conjuntos de datos no son de acceso libre)*.
+3. **Permisos de ejecución**: Es necesario navegar a los directorios de ejecución específicos y habilitar los permisos sobre los scripts bash mediante el comando:
 ```bash
-chmod +x Codigos_AumentadoClaseMinoritaria/*.sh
-chmod +x Codigos_AumentadosPyTorch/*.sh
-chmod +x Codigos_VIT/*.sh
+cd Codigos_AumentadoClaseMinoritaria && chmod +x *.sh && cd ..
+cd Codigos_AumentadosPyTorch && chmod +x *.sh && cd ..
+cd Codigos_VIT && chmod +x *.sh && cd ..
 
 ```
 
 
 4. **Lanzamiento de pruebas y Generación de Logs**:
-Invoque los siguientes scripts desde sus respectivos directorios:
-* **Aumentado en Clase Minoritaria**: Ejecute `pruebaTOTAL.sh` dentro de `Codigos_AumentadoClaseMinoritaria/`.
-* **Aumentado Clásico y Combinaciones**: En `Codigos_AumentadosPyTorch/`, ejecute `Prueba_Metodos_Base.sh` (métodos clásicos) y posteriormente `pruebaTOTAL.sh` (combinación con CutMix/FMix).
-* **Vision Transformers (ViT)**: Ejecute `pruebaTOTAL_VIT.sh` dentro de la carpeta `Codigos_VIT/`.
+Invoque los siguientes scripts desde sus respectivos directorios para generar los archivos `.log`:
+* **Fase 1 (Clase Minoritaria)**: En `Codigos_AumentadoClaseMinoritaria/`, ejecute el script `pruebaTOTAL.sh` para evaluar de manera secuencial cada tipo de aumentado sobre los 8 datasets.
+* **Fase 2 y 3 (Aumentado Clásico y Combinaciones)**: En `Codigos_AumentadosPyTorch/`, ejecute `Prueba_Metodos_Base.sh` (para los métodos clásicos de la Fase 2) y posteriormente `pruebaTOTAL.sh` (para las combinaciones complejas de CutMix y CutMix+FMix de la Fase 3).
+* **Fase 4 (Vision Transformers)**: En `Codigos_VIT/`, ejecute el script `pruebaTOTAL_VIT.sh` para lanzar las pruebas del modelo ViT (base y con aumentos).
 
 
-5. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizado el proceso, ejecute los *Jupyter Notebooks* interactivos de la raíz (`creacionTablas.ipynb`, `ComparacionMetodosPytorch.ipynb`, `ComparacionMetodosPyTorch_CUTMIX+FMIX.ipynb`, `comparacionMetodosVIT.ipynb` y `comparacionFinal.ipynb`) para procesar los Logs y generar las tablas y gráficas necesarias para visualizar los resultados.
+5. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizados los entrenamientos, abra y ejecute los cuadernos interactivos para procesar las métricas y generar las gráficas comparativas definitivas según su ubicación:
+* En la **raíz**: Ejecute `Analisis_Fase1.ipynb`, `Analisis_Fase2.ipynb` y `comparacionFinal.ipynb`.
+* En **carpetas de origen**: Ejecute `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb` y `Codigos_VIT/Analisis_Fase4.ipynb`.
+
+
 
 ---
 
@@ -134,3 +135,4 @@ Invoque los siguientes scripts desde sus respectivos directorios:
 * [Daniel Berdullas Rey](https://github.com/DBR5823)
 
 *Trabajo desarrollado en el marco de la investigación con la Universidade de Santiago de Compostela (USC).*
+
