@@ -15,6 +15,8 @@ Los resultados demuestran que el aumentado de datos, combinado con el *oversampl
 
 Por motivos de confidencialidad y derechos de propiedad intelectual pertenecientes a la **Universidade de Santiago de Compostela (USC)**, el directorio `datosEntrada/` (y sus respectivos subdirectorios con archivos `.pgm` y `.raw`) no se incluye en este repositorio público. Estos datos conforman las imágenes de teledetección de alta resolución correspondientes a los ecosistemas fluviales y cuencas hidrográficas de Galicia empleados en este trabajo.
 
+Tampoco se incluyen los segmentos de ejemplo extraídos de los datasets, empleados en la memoria para ejemplificar los diversos métodos de aumentado.
+
 Adicionalmente, para la segmentación y visualización de estas imágenes, se ha hecho uso de **HTOOL**, una herramienta de *software* propiedad de la USC. El trabajo se basa en los ficheros de datos proporcionados por este entorno, los cuales son empleados en los códigos `.py` desarrollados específicamente para los experimentos de este TFG. Por tanto, la reproducción completa de los experimentos requiere disponer de las licencias y accesos pertinentes a estos datos y herramientas.
 
 ---
@@ -43,9 +45,9 @@ Para aislar las dependencias y asegurar un entorno reproducible y ligero, el pro
 ### Requisitos Previos e Instalación
 
 1. **Clonar el repositorio y acceder al directorio:**
-   ```bash
-   git clone [https://github.com/DBR5823/TFG_AumentadoDatos.git](https://github.com/DBR5823/TFG_AumentadoDatos.git)
-   cd TFG_AumentadoDatos
+```bash
+git clone [https://github.com/DBR5823/TFG_DanielBerdullasRey.git](https://github.com/DBR5823/TFG_DanielBerdullasRey.git)
+cd TFG_DanielBerdullasRey
 
 ```
 
@@ -114,17 +116,17 @@ cd Codigos_VIT && chmod +x *.sh && cd ..
 
 ```
 
+4. **Configuración de rutas del entorno virtual (`venv`)**: Antes de ejecutar los experimentos, se deben modificar los scripts `.sh` para que apunten al entorno virtual de la máquina local. Para ello, abre los scripts de pruebas totales (como `pruebaTOTAL.sh` y `pruebaTOTAL_VIT.sh`) presentes en sus respectivas carpetas, así como el archivo `Codigos_AumentadosPyTorch/Prueba_Metodos_Base.sh`, y edita la línea correspondiente a la activación del entorno virtual sustituyendo la ruta original por la ruta local donde hayas creado tu `venv`.
+5. **Lanzamiento de pruebas y Generación de Logs**: Invoca los siguientes scripts desde sus respectivos directorios para generar los archivos `.log`:
 
-4. **Lanzamiento de pruebas y Generación de Logs**:
-Invoque los siguientes scripts desde sus respectivos directorios para generar los archivos `.log`:
-* **Fase 1 (Clase Minoritaria)**: En `Codigos_AumentadoClaseMinoritaria/`, ejecute el script `pruebaTOTAL.sh` para evaluar de manera secuencial cada tipo de aumentado sobre los 8 datasets.
-* **Fase 2 y 3 (Aumentado Clásico y Combinaciones)**: En `Codigos_AumentadosPyTorch/`, ejecute `Prueba_Metodos_Base.sh` (para los métodos clásicos de la Fase 2) y posteriormente `pruebaTOTAL.sh` (para las combinaciones complejas de CutMix y CutMix+FMix de la Fase 3).
-* **Fase 4 (Vision Transformers)**: En `Codigos_VIT/`, ejecute el script `pruebaTOTAL_VIT.sh` para lanzar las pruebas del modelo ViT (base y con aumentos).
+    * **Fase 1 (Clase Minoritaria)**: En `Codigos_AumentadoClaseMinoritaria/`, ejecuta el script `pruebaTOTAL.sh` para evaluar de manera secuencial cada tipo de aumentado sobre los 8 datasets.
+    * **Fase 2 y 3 (Aumentado Clásico y Combinaciones)**: En `Codigos_AumentadosPyTorch/`, ejecuta `Prueba_Metodos_Base.sh` (para los métodos clásicos de la Fase 2) y posteriormente `pruebaTOTAL.sh` (para las combinaciones complejas de CutMix y CutMix+FMix de la Fase 3).
+    * **Fase 4 (Vision Transformers)**: En `Codigos_VIT/`, ejecuta el script `pruebaTOTAL_VIT.sh` para lanzar las pruebas del modelo ViT (base y con aumentos).
 
+6. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizados los entrenamientos, abre y ejecuta los cuadernos interactivos para procesar las métricas y generar las gráficas comparativas definitivas según su ubicación:
 
-5. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizados los entrenamientos, abra y ejecute los cuadernos interactivos para procesar las métricas y generar las gráficas comparativas definitivas según su ubicación:
-* En la **raíz**: Ejecute `Analisis_Fase1.ipynb`, `Analisis_Fase2.ipynb` y `comparacionFinal.ipynb`.
-* En **carpetas de origen**: Ejecute `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb` y `Codigos_VIT/Analisis_Fase4.ipynb`.
+    * En la **raíz**: Ejecuta `Analisis_Fase1.ipynb`, `Analisis_Fase2.ipynb` y `comparacionFinal.ipynb`.
+    * En **carpetas de origen**: Ejecuta `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb` y `Codigos_VIT/Analisis_Fase4.ipynb`.
 
 
 
