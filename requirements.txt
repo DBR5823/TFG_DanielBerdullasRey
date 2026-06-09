@@ -2,7 +2,7 @@ torch==2.7.1
 torchvision==0.22.1
 timm==1.0.25
 torchbearer==0.5.5
-numpy==2.3.3
+numpy<2.3.3
 pandas==2.3.2
 scikit-learn==1.7.2
 matplotlib==3.10.8

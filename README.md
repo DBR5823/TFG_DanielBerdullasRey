@@ -3,7 +3,7 @@
 
 El uso de sensores multiespectrales de alta resolución facilita la monitorización de ecosistemas complejos como los fluviales con un gran nivel de detalle. Sin embargo, la aplicación de modelos de aprendizaje profundo en este ámbito se enfrenta a un desafío principal: la escasez de datos etiquetados a nivel de segmento. Esta falta de muestras etiquetadas suele provocar problemas de sobreajuste (*overfitting*), donde los modelos memorizan los datos de entrenamiento en lugar de aprender características generalizables, reduciendo su precisión ante nuevas imágenes.
 
-Este Trabajo de Fin de Grado (TFG) aborda este problema mediante el análisis y la implementación de diversas técnicas de aumentado de datos (*Data Augmentation*). Se ha diseñado un marco experimental que evalúa métodos tradicionales frente a algoritmos avanzados: **MixUp**, **CutMix** y **FMix**. Estas estrategias se han probado y comparado sobre las dos arquitecturas de referencia dentro del campo de visión artificial: Redes Neuronales Convolucionales (CNN) y *Vision Transformers* (ViT).
+Este Trabajo de Fin de Grado (TFG) aborda este problema mediante el análisis y la implementación de diversas técnicas de aumentado de datos (*Data Augmentation*). Se ha diseñado un marco experimental que evalúa métodos tradicionales junto a algoritmos avanzados: **MixUp**, **CutMix** y **FMix**. Estas estrategias se han probado, comparado y combinado sobre las dos arquitecturas de referencia dentro del campo de visión artificial: Redes Neuronales Convolucionales (CNN) y *Vision Transformers* (ViT).
 
 Los resultados demuestran que el aumentado de datos, combinado con el *oversampling* de clases minoritarias, es una herramienta esencial para regularizar el entrenamiento en estos escenarios. En concreto, la hibridación de **FMix** (basado en máscaras fractales) con **CutMix** (basado en el reemplazo de parches), aplicados a nivel de *batch*, sobre técnicas de aumentado clásicas (rotación, zoom y borrado aleatorio de parches), aplicadas a nivel de *patch*, se consolidó como la estrategia óptima. Esta combinación logró el mejor rendimiento de clasificación en ambas redes y consiguió equilibrar el aprendizaje en las clases minoritarias del ecosistema, mejorando la robustez general del modelo.
 
@@ -19,7 +19,7 @@ Adicionalmente, para la segmentación y visualización de estas imágenes, se ha
 
 ---
 
-## 📂 Estructura Detallada del Repositorio
+## Estructura Detallada del Repositorio
 
 El directorio de trabajo está diseñado de manera modular, dividiendo los diferentes enfoques experimentales y la recopilación de resultados:
 
