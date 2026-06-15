@@ -1,5 +1,5 @@
 # Trabajo de Fin de Grado de Daniel Berdullas Rey
-## Optimización de CNNs y Vision Transformers mediante Técnicas de Regularización y Aumento de Datos Espaciales
+## Aumentado de datos basado en máscaras para la clasificación mediante técnicas de aprendizaje profundo de imágenes de teledetección
 
 El uso de sensores multiespectrales de alta resolución facilita la monitorización de ecosistemas complejos como los fluviales con un gran nivel de detalle. Sin embargo, la aplicación de modelos de aprendizaje profundo en este ámbito se enfrenta a un desafío principal: la escasez de datos etiquetados a nivel de segmento. Esta falta de muestras etiquetadas suele provocar problemas de sobreajuste (*overfitting*), donde los modelos memorizan los datos de entrenamiento en lugar de aprender características generalizables, reduciendo su precisión ante nuevas imágenes.
 
@@ -46,7 +46,7 @@ Para aislar las dependencias y asegurar un entorno reproducible y ligero, el pro
 
 1. **Clonar el repositorio y acceder al directorio:**
 ```bash
-git clone [https://github.com/DBR5823/TFG_DanielBerdullasRey.git](https://github.com/DBR5823/TFG_DanielBerdullasRey.git)
+git clone https://github.com/DBR5823/TFG_DanielBerdullasRey.git
 cd TFG_DanielBerdullasRey
 
 ```
