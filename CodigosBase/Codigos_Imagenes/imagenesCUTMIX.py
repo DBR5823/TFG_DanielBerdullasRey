@@ -85,10 +85,10 @@ if __name__ == '__main__':
     print("Leyendo Dataset...")
     datos_raw, H, V, B = read_raw(DATASET)
     
-    # Buscamos dos parches diferentes para mezclar
+    # Buscamos dos parches diferentes para mezclar (COORDENADAS ACTUALIZADAS)
     print("Extrayendo parches de control...")
-    patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
-    patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
+    patch_a = select_patch(datos_raw, sizex, sizey, 4500, 3000) 
+    patch_b = select_patch(datos_raw, sizex, sizey, 4450, 2700) 
     
     #Guardar originales para comparar
     save_patch(patch_a, sizex, sizey, B, os.path.join(carpeta_salida, "0_Original_A.raw"))
@@ -105,4 +105,3 @@ if __name__ == '__main__':
             nombre = f"CutMix_alpha{alpha}_ej{i}.raw"
             save_patch(mezcla, sizex, sizey, B, os.path.join(carpeta_salida, nombre))
             print(f"    Guardado {nombre} | Recorte en: {coords}")
-

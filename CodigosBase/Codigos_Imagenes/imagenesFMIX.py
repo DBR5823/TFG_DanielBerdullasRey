@@ -55,8 +55,9 @@ if __name__ == '__main__':
     datos_raw, H, V, B = read_raw(DATASET)
     
 
-    patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
-    patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
+    # Buscamos dos parches diferentes para mezclar (COORDENADAS ACTUALIZADAS)
+    patch_a = select_patch(datos_raw, sizex, sizey, 4500, 3000) 
+    patch_b = select_patch(datos_raw, sizex, sizey, 4450, 2700) 
 
     #Creamos un batch de solo 2 parches distintos
     inputs = torch.stack([patch_a, patch_b]) 

@@ -82,18 +82,13 @@ def read_raw(fichero):
   #Se leen todos los datos contenidos en el dataset (un total de B*H*V enteros de 32 bits)
   #Se saltan los primeros 12 bytes correspondientes a la cabecera B,H,V
   datos=np.fromfile(fichero,count=B*H*V,offset=3*4,dtype=np.int32).astype(np.float32)
-  #Se imprime información sobre el dataset leído
-  #print('Lectura del dataset*********')
-  #print('* Leyendo dataset:',fichero)
-  #print('  B (bandas):',B,'H (anchura):',H,'V (altura):',V)
-  #print('  Píxeles leídos:',len(datos))
-  # esta red no necesita realmente normalizar
+  
+  # normalizar
   #Se realiza el normalizado de los datos empleando la escala Min-Max para transformar todos los valores al rango [0,1]
   d_min = datos.min()
   d_max = datos.max()
   datos -= d_min
   datos /= (d_max - d_min)
-  #print('  Normalización: Valor min:',datos.min(),'Valor max:',datos.max())
 
   #Se reestructura el array de datos leídos del fichero en un bloque con 3 dimensiones, el alto (V), el ancho (H) y la banda (B)
   datos=datos.reshape(V,H,B)
@@ -170,8 +165,8 @@ if __name__ == '__main__':
     
     sizex, sizey = 32, 32
     
-    #Obtenemos el patch sobre el que realizaremos las transformaciones
-    patch_original = select_patch(datos_tensor, sizex, sizey, 4100, 3200)
+    #Obtenemos el patch sobre el que realizaremos las transformaciones (COORDENADAS ACTUALIZADAS)
+    patch_original = select_patch(datos_tensor, sizex, sizey, 4500, 3000)
 
     #Creamos la lista de aumentado base con flips horizontales y verticales (en este caso con probabilidad 1 para que se apliquen sí o sí a las imágenes)
     flips_list = [v2.RandomHorizontalFlip(p=1.0), v2.RandomVerticalFlip(p=1.0)]

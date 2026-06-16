@@ -48,7 +48,6 @@ def save_patch(datos, sizex, sizey, B, filename):
     save_raw(datos_copy, sizex, sizey, B, filename)
 
 
-
 #Función MIXUP para aplicar la mezcla MIXUP de dos patches
 def aplicar_mixup_visual(patch_a, patch_b, alpha=1.0):
     if alpha > 0:
@@ -72,9 +71,9 @@ if __name__ == '__main__':
     datos_raw, H, V, B = read_raw(DATASET)
     
 
-    #Parche A y B
-    patch_a = select_patch(datos_raw, sizex, sizey, 4100, 3200) 
-    patch_b = select_patch(datos_raw, sizex, sizey, 5500, 5500) 
+    # Parche A y B (COORDENADAS ACTUALIZADAS)
+    patch_a = select_patch(datos_raw, sizex, sizey, 4500, 3000) 
+    patch_b = select_patch(datos_raw, sizex, sizey, 4450, 2700) 
     
     save_patch(patch_a, sizex, sizey, B, os.path.join(carpeta_salida, "0_Original_A.raw"))
     save_patch(patch_b, sizex, sizey, B, os.path.join(carpeta_salida, "0_Original_B.raw"))
@@ -89,4 +88,3 @@ if __name__ == '__main__':
             nombre = f"Mixup_alpha{alpha}_ej{i}.raw"
             save_patch(mezcla, sizex, sizey, B, os.path.join(carpeta_salida, nombre))
             print(f"    Guardado {nombre} | Lambda: {lam:.4f} (A al {lam*100:.1f}%)")
-
