@@ -1,20 +1,5 @@
 #!/usr/bin/env python3
-# https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials (pytorch-tutorial-master.zip)
-# Adapted to multi/hyperspectral images: F. Arguello
-# CNN21: 2 capas convolucionales, 1 completamente conectada
-# oitaven WP (15%, texturas+fv+3kelm, t=3m44s): OA=93.03, OA=87.18
-# CNN21 SEG EXP: 5 EPOCHS: 100 SAMPLES: [0.15, 0.05] ADA: 3 AUM: 1
-# Class 01: 96.66+0.33
-# Class 02: 80.72+2.00
-# Class 03: 75.76+4.18
-# Class 04: 87.01+3.79
-# Class 05: 86.18+1.77
-# Class 06: 92.11+1.21
-# Class 07: 96.46+0.15
-# Class 08: 95.77+0.21
-# Class 09: 98.66+0.56
-# Class 10: 90.81+0.62
-# OA=94.77+0.20, AA=90.01+0.66, t=60 s
+
   
 import math, random, struct, signal, time
 import numpy as np

@@ -1,32 +1,5 @@
 #!/usr/bin/env python3
-# https://github.com/BobMcDear/vit-pytorch
-# ViT DE LA LIBRERIA TIMM
-# ViT SEG EXP: 5 EPOCHS: 100 SAMPLES: [0.15, 0.05] AUM: 1
-# Means and deviations (5 exp):
-# * ViT
-# Class 01: 96.21+0.42
-# Class 02: 84.82+1.39
-# Class 03: 80.34+1.92
-# Class 04: 92.22+2.97
-# Class 05: 88.92+2.91
-# Class 06: 96.80+1.67
-# Class 07: 97.09+0.27
-# Class 08: 96.51+0.42
-# Class 09: 99.63+0.11
-# Class 10: 94.84+0.57
-# OA=96.05+0.21, AA=92.74+0.59
-# * SWIN
-# Class 01: 95.79+1.04
-# Class 02: 79.80+1.40
-# Class 03: 76.95+2.26
-# Class 04: 91.53+1.32
-# Class 05: 83.58+2.17
-# Class 06: 93.53+2.24
-# Class 07: 96.42+0.52
-# Class 08: 95.38+0.28
-# Class 09: 98.64+0.43
-# Class 10: 92.17+0.62
-# OA=94.75+0.21, AA=90.38+0.36
+
 
 import math, random, struct, signal, time
 import numpy as np
