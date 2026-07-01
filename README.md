@@ -95,21 +95,22 @@ matplotlib==3.10.8
 
 ### Compatibilidad de Hardware y Soporte CUDA
 
-El código fuente se adapta automáticamente a las capacidades de cómputo del sistema donde se despliegue:
+El código fuente se adapta automáticamente a la configuración del sistema donde se despliegue:
 
 * **Ejecución en CPU**: Redirige automáticamente la carga a la CPU en equipos sin gráfica dedicada para tareas de depuración, análisis o pruebas con datasets reducidos entre los diversos núcleos.
 * **Ejecución en Mono-GPU**: Si el sistema cuenta con soporte CUDA, `PyTorch` aprovechará la aceleración por hardware de forma nativa. Permite realizar experimentos en paralelo empleando varios procesos sobre una única GPU.
-* **Ejecución Multi-GPU**: Para entornos de alto rendimiento o servidores, el repositorio incluye scripts optimizados y versiones paralelizadas que distribuyen eficientemente los lotes de datos y los modelos empleando todas las GPUs disponibles.
+* **Ejecución Multi-GPU**: Para entornos de alto rendimiento o servidores, los scripts distribuyen automáticamente las repeticiones de la experimentación empleando todas las GPUs disponibles.
 
 ---
 
 ## Manual de Ejecución de los Experimentos
 
-El procedimiento secuencial para replicar los experimentos y generar las métricas de rendimiento es el siguiente:
+El procedimiento para replicar los experimentos y generar las métricas de rendimiento es el siguiente:
 
-1. **Configuración inicial**: Active el entorno virtual de `Python` e instale los requerimientos del sistema con `pip install -r requirements.txt`.
-2. **Disposición de datos**: Asegúrese de que las imágenes propietarias de la USC, junto a sus datos de segmentación y etiquetas de los segmentos, se encuentren correctamente ubicadas en el directorio `datosEntrada/`. *(Nota: Estos conjuntos de datos no son de acceso libre)*.
-3. **Permisos de ejecución**: Es necesario navegar a los directorios de ejecución específicos y habilitar los permisos sobre los scripts bash mediante el comando:
+1. **Configuración inicial**: Activa el entorno virtual de `Python` e instala los requerimientos del sistema con `pip install -r requirements.txt`.
+2. **Disposición de datos**: Asegúrate de que las imágenes propietarias de la USC, junto a sus datos de segmentación y etiquetas de los segmentos, se encuentren correctamente ubicadas en el directorio `datosEntrada/`. *(Estos conjuntos de datos no son de acceso libre)*.
+3. **Permisos de ejecución**: Navega a los directorios de ejecución específicos y habilita los permisos sobre los scripts bash mediante el comando:
+
 ```bash
 cd Codigos_AumentadoClaseMinoritaria && chmod +x *.sh && cd ..
 cd Codigos_AumentadosPyTorch && chmod +x *.sh && cd ..
@@ -117,17 +118,16 @@ cd Codigos_VIT && chmod +x *.sh && cd ..
 
 ```
 
-4. **Configuración de rutas del entorno virtual (`venv`)**: Antes de ejecutar los experimentos, se deben modificar los scripts `.sh` para que apunten al entorno virtual de la máquina local. Para ello, abre los scripts de pruebas totales (como `pruebaTOTAL.sh` y `pruebaTOTAL_VIT.sh`) presentes en sus respectivas carpetas, así como el archivo `Codigos_AumentadosPyTorch/Prueba_Metodos_Base.sh`, y edita la línea correspondiente a la activación del entorno virtual sustituyendo la ruta original por la ruta local donde hayas creado tu `venv`.
+4. **Configuración de rutas del entorno virtual (`venv`)**: Antes de ejecutar los experimentos, modifica los scripts `.sh` para que apunten al entorno virtual de tu máquina local. Para ello, abre los scripts de pruebas totales (como `pruebaTOTAL.sh` y `pruebaTOTAL_VIT.sh`) presentes en sus respectivas carpetas, así como el archivo `Codigos_AumentadosPyTorch/Prueba_Metodos_Base.sh`, y edita la línea correspondiente a la activación del entorno virtual sustituyendo la ruta original por la ruta local donde hayas creado tu `venv`.
 5. **Lanzamiento de pruebas y Generación de Logs**: Invoca los siguientes scripts desde sus respectivos directorios para generar los archivos `.log`:
+* **Fase 1 (Clase Minoritaria)**: En `Codigos_AumentadoClaseMinoritaria/`, ejecuta el script `pruebaTOTAL.sh` para evaluar de manera secuencial cada tipo de aumentado sobre los 8 datasets.
+* **Fase 2 y 3 (Aumentado Clásico y Combinaciones)**: En `Codigos_AumentadosPyTorch/`, ejecuta `Prueba_Metodos_Base.sh` (para los métodos clásicos de la Fase 2) y posteriormente `pruebaTOTAL.sh` (para las combinaciones complejas de CutMix y CutMix+FMix de la Fase 3).
+* **Fase 4 (Vision Transformers)**: En `Codigos_VIT/`, ejecuta el script `pruebaTOTAL_VIT.sh` para lanzar las pruebas del modelo ViT (base y con aumentos).
 
-    * **Fase 1 (Clase Minoritaria)**: En `Codigos_AumentadoClaseMinoritaria/`, ejecuta el script `pruebaTOTAL.sh` para evaluar de manera secuencial cada tipo de aumentado sobre los 8 datasets.
-    * **Fase 2 y 3 (Aumentado Clásico y Combinaciones)**: En `Codigos_AumentadosPyTorch/`, ejecuta `Prueba_Metodos_Base.sh` (para los métodos clásicos de la Fase 2) y posteriormente `pruebaTOTAL.sh` (para las combinaciones complejas de CutMix y CutMix+FMix de la Fase 3).
-    * **Fase 4 (Vision Transformers)**: En `Codigos_VIT/`, ejecuta el script `pruebaTOTAL_VIT.sh` para lanzar las pruebas del modelo ViT (base y con aumentos).
 
 6. **Consolidación y Resultados (Jupyter Notebooks)**: Una vez finalizados los entrenamientos, abre y ejecuta los cuadernos interactivos para procesar las métricas y generar las gráficas comparativas definitivas según su ubicación:
-
-    * En la **raíz**: Ejecuta `Analisis_Fase1.ipynb`, `Analisis_Fase2.ipynb` y `comparacionFinal.ipynb`.
-    * En **carpetas de origen**: Ejecuta `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb` y `Codigos_VIT/Analisis_Fase4.ipynb`.
+* En la **raíz**: Ejecuta `Analisis_Fase1.ipynb`, `Analisis_Fase2.ipynb` y `comparacionFinal.ipynb`.
+* En **carpetas de origen**: Ejecuta `Codigos_AumentadosPyTorch/Analisis_Fase3.ipynb` y `Codigos_VIT/Analisis_Fase4.ipynb`.
 
 
 
@@ -137,5 +137,4 @@ cd Codigos_VIT && chmod +x *.sh && cd ..
 
 * [Daniel Berdullas Rey](https://github.com/DBR5823)
 
-*Trabajo desarrollado en el marco de la investigación con la Universidade de Santiago de Compostela (USC).*
 
